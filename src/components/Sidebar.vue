@@ -23,9 +23,9 @@
     <v-divider></v-divider>
 
     <v-list density="compact" nav>
-      <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" @click="this.$router.push({name: 'Home'})"></v-list-item>
+      <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" @click="this.$router.push({name: 'Dashboard'})"></v-list-item>
       <v-list-item prepend-icon="mdi-account" title="My Account" value="account" @click="this.$router.push({name: 'About'})"></v-list-item>
-      <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users" @click="this.$router.push({name: 'Dashboard'})"></v-list-item>
+      <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users" @click="this.$router.push({name: 'Users'})"></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -34,12 +34,6 @@
 export default {
   data() {
     return{
-      links: [
-        ['mdi-inbox-arrow-down', 'Inbox'],
-        ['mdi-send', 'Send'],
-        ['mdi-delete', 'Trash'],
-        ['mdi-alert-octagon', 'Spam'],
-      ],
       drawer: true,
       rail: true
     }
