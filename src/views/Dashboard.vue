@@ -1,18 +1,18 @@
 <template>
   <v-app id="inspire">
 
-    <v-main app>
+    <v-main app >
       <v-container
         class="py-8 px-6"
         fluid
       >
-        <v-row>
+        <v-row >
           <v-col
             v-for="card in cards"
             :key="card"
             cols="12"
           >
-            <v-card>
+            <v-card class="elevation-2">
               <v-list lines="two">
                 <v-list-subheader :title="card"></v-list-subheader>
 

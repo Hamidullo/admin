@@ -5,15 +5,19 @@
     elevation="4"
     color="white">
 
-    <v-app-bar-title>Home</v-app-bar-title>
+    <v-app-bar-title>
+      <h4>
+        Namangan muhandislik-texnologiya instituti
+      </h4>
+    </v-app-bar-title>
 
     <v-spacer/>
 
-    <v-col lg="6" cols="12">
+<!--    <v-col lg="6" cols="12">
       <v-form class="mt-5">
         <v-text-field variant="outlined" rounded dense placeholder="Search..." append-inner-icon="mdi-magnify"/>
       </v-form>
-    </v-col>
+    </v-col>-->
 
     <v-spacer/>
 
@@ -87,7 +91,6 @@ export default {
     return{
       menus: [
         {title: 'Profile', icon: 'mdi-account'},
-        { icon: 'mdi-key', title: 'Change Password'},
         { icon: 'mdi-cog', title: 'Settings'},
         { icon: 'mdi-logout', title: 'Logout'},
       ],
