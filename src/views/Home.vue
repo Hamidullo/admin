@@ -1,12 +1,10 @@
 <template>
   <v-app id="inspire">
 
-    <Sidebar  />
+    <Sidebar />
     <Header />
-    <v-main>
-      <v-container class="py-8 px-6" fluid>
-        <router-view />
-      </v-container>
+    <v-main class="bg-grey-lighten-2" style="min-height: 300px;">
+      <router-view />
     </v-main>
   </v-app>
 </template>

@@ -1,9 +1,11 @@
 <template>
   <v-navigation-drawer
+    app
     v-model="drawer"
     :rail="rail"
     permanent
     @click="rail = false"
+    width="350"
   >
     <v-list-item
       class="ma-1"
