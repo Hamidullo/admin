@@ -5,19 +5,13 @@
     elevation="4"
     color="white">
 
-    <v-app-bar-title>
+    <v-app-bar-title >
       <h4>
         Namangan muhandislik-texnologiya instituti
       </h4>
     </v-app-bar-title>
 
     <v-spacer/>
-
-<!--    <v-col lg="6" cols="12">
-      <v-form class="mt-5">
-        <v-text-field variant="outlined" rounded dense placeholder="Search..." append-inner-icon="mdi-magnify"/>
-      </v-form>
-    </v-col>-->
 
     <v-spacer/>
 
@@ -103,7 +97,7 @@
           <template v-slot:prepend>
             <v-icon :icon="menu.icon"></v-icon>
           </template>
-          <v-list-item-title v-text="menu.title"></v-list-item-title>
+          <v-list-item-title v-text="menu.title" @click="drawer(menu.rout)"></v-list-item-title>
         </v-list-item>
       </v-list>
 
@@ -118,9 +112,9 @@ export default {
   data() {
     return{
       menus: [
-        {title: 'Profile', icon: 'mdi-account'},
-        { icon: 'mdi-cog', title: 'Settings'},
-        { icon: 'mdi-logout', title: 'Logout'},
+        {title: 'Profile', icon: 'mdi-account', rout: 'About'},
+        { icon: 'mdi-cog', title: 'Settings', rout: 'Settings'},
+        { icon: 'mdi-logout', title: 'Logout', rout: 'login'},
       ],
       items: [
         { type: 'subheader', title: 'Today' },
@@ -169,8 +163,14 @@ export default {
     }
   },
   methods: {
-    drawer(){
-      this.$emit('handDrawer')
+    drawer(rout){
+      if(rout !== 'logout'){
+        this.$router.push({name: rout})
+      } else {
+
+        this.$router.push({name: 'Login'})
+      }
+      
     }
   }
 
