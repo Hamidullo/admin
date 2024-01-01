@@ -3,7 +3,7 @@
 
     <Sidebar />
     <Header />
-    <v-main class="bg-grey-lighten-2" style="min-height: 300px;">
+    <v-main class="bg-grey-lighten-2">
       <router-view />
     </v-main>
   </v-app>

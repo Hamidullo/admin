@@ -37,7 +37,7 @@
     </v-list>
     
     <template v-slot:append>
-      <div>
+      <div class="ma-2">
         <v-list-item prepend-icon="mdi-cog" title="SOZLAMALAR" value="settings" @click="this.$router.push({name: 'Settings'})"></v-list-item>
       </div>
     </template>

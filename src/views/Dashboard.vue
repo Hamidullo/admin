@@ -2,7 +2,6 @@
   <v-container
     class="py-8 px-6 bg-grey-lighten-2"
     fluid
-    style="min-height: 300px"
   >
     <v-row >
       <v-col
