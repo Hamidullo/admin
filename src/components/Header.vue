@@ -87,7 +87,7 @@ export default {
       menus: [
         {title: 'Profile', icon: 'mdi-account', rout: 'About'},
         { icon: 'mdi-cog', title: 'Settings', rout: 'Settings'},
-        { icon: 'mdi-logout', title: 'Logout', rout: 'login'},
+        { icon: 'mdi-logout', title: 'Logout', rout: 'Login'},
       ],
       items: [
         { type: 'subheader', title: 'Today' },

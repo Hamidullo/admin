@@ -25,7 +25,7 @@
     <v-divider></v-divider>
 
     <v-list density="compact" nav>
-      <v-list-item prepend-icon="mdi-home" title="BOSH OYNA" value="home" @click="this.$router.push({name: 'Dashboard'})"></v-list-item>
+      <v-list-item prepend-icon="mdi-home" title="STATISTIKA" value="home" @click="this.$router.push({name: 'Dashboard'})"></v-list-item>
       <v-list-item prepend-icon="mdi-account" title="SHAXSIY MA’LUMOTLAR" value="account" @click="this.$router.push({name: 'About'})"></v-list-item>
       <v-list-item prepend-icon="mdi-briefcase" title="O’QUV-USLUBIY ISHLAR" value="works" @click="this.$router.push({name: 'Users'})"></v-list-item>
       <v-list-item prepend-icon="mdi-brain" title="ILMIY ISHLAR" value="brain" @click="this.$router.push({name: 'Brain'})"></v-list-item>
@@ -34,14 +34,9 @@
       <v-list-item prepend-icon="mdi-bag-suitcase" title="XALQARO XAMKORLIK MASALALARI" value="international" @click="this.$router.push({name: 'International'})"></v-list-item>
       <v-list-item prepend-icon="mdi-human-male-board-poll" title="USTOZ-SHOGIRD TIZIMI" value="teacher" @click="this.$router.push({name: 'Teacher'})"></v-list-item>
       <v-list-item prepend-icon="mdi-trophy" title="ERISHGAN YUTUQLARI" value="achievement" @click="this.$router.push({name: 'Achievement'})"></v-list-item>
+      <v-list-item prepend-icon="mdi-cog" title="SOZLAMALAR" value="settings" @click="this.$router.push({name: 'Settings'})"></v-list-item>
     </v-list>
     
-    <template v-slot:append>
-      <div class="">
-        <v-list-item prepend-icon="mdi-cog" title="SOZLAMALAR" value="settings" @click="this.$router.push({name: 'Settings'})"></v-list-item>
-      </div>
-    </template>
-
   </v-navigation-drawer>
 </template>
 

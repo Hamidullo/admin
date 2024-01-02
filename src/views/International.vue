@@ -3,6 +3,7 @@
   fluid>
 
     <v-row>
+
       <v-col>
         <v-card
         flat
@@ -17,7 +18,6 @@
             hide-details
           ></v-text-field>
         </template>
-    
         <v-data-table
           :headers="headers"
           :items="desserts"
@@ -37,7 +37,7 @@
           item-value="name">
         <template v-slot:top>
           <v-text-field
-            v-model="searchS"
+            v-model="searchC"
             label="Qidiruv.."
             class="px-3 pb-4"
             prepend-inner-icon="mdi-magnify"
@@ -49,8 +49,8 @@
       </v-data-table>
         </v-card>
       </v-col>
-    </v-row>
 
+    </v-row>
   </v-container>
 </template>
 
@@ -64,207 +64,183 @@ export default {
             align: 'start',
             key: 'name',
             sortable: false,
-            title: 'Dessert (100g serving)',
+            title: 'Xorijiy OTM yoki ITM nomi',
           },
-          { key: 'calories', title: 'Calories' },
-          { key: 'fat', title: 'Fat (g)' },
-          { key: 'carbs', title: 'Carbs (g)' },
-          { key: 'protein', title: 'Protein (g)' },
-          { key: 'iron', title: 'Iron (%)' },
+          { key: 'davlati', title: 'Davlati' },
+          { key: 'kunlar', title: 'Mashg’ulot olib borilgan kunlar' },
+          { key: 'hajmi', title: 'Mashg’ulot xajmi' },
+          { key: 'sertifikat', title: 'Sertifikat yuklanadi' },
         ],
         desserts: [
           {
             name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: 1,
+            davlati: 159,
+            kunlar: 6.0,
+            hajmi: 24,
+            sertifikat: 4.0,
           },
           {
             name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: 1,
+            davlati: 237,
+            kunlar: 9.0,
+            hajmi: 37,
+            sertifikat: 4.3,
           },
           {
             name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: 7,
+            davlati: 262,
+            kunlar: 16.0,
+            hajmi: 23,
+            sertifikat: 6.0,
           },
           {
             name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: 8,
+            davlati: 305,
+            kunlar: 3.7,
+            hajmi: 67,
+            sertifikat: 4.3,
           },
           {
             name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: 16,
+            davlati: 356,
+            kunlar: 16.0,
+            hajmi: 49,
+            sertifikat: 3.9,
           },
           {
             name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: 0,
+            davlati: 375,
+            kunlar: 0.0,
+            hajmi: 94,
+            sertifikat: 0.0,
           },
           {
             name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: 2,
+            davlati: 392,
+            kunlar: 0.2,
+            hajmi: 98,
+            sertifikat: 0,
           },
           {
             name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: 45,
+            davlati: 408,
+            kunlar: 3.2,
+            hajmi: 87,
+            sertifikat: 6.5,
           },
           {
             name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: 22,
+            davlati: 452,
+            kunlar: 25.0,
+            hajmi: 51,
+            sertifikat: 4.9,
           },
           {
             name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: 6,
+            davlati: 518,
+            kunlar: 26.0,
+            hajmi: 65,
+            sertifikat: 7,
           },
         ],
         searchC: '',
         headersC: [
         {
-          title: 'CPU Model',
+          title: 'Xorijiy OTM yoki ITM nomi',
           align: 'start',
           key: 'name',
         },
         {
-          title: 'Cores',
+          title: 'Davlati',
           align: 'end',
-          key: 'cores',
+          key: 'davlati',
         },
         {
-          title: 'Threads',
+          title: 'Stajirovka va malaka oshirilgan kunlar',
           align: 'end',
-          key: 'threads',
+          key: 'kunlar',
         },
         {
-          title: 'Base Clock',
+          title: 'Stajirovka xajmi',
           align: 'end',
-          key: 'baseClock',
+          key: 'hajmi',
         },
         {
-          title: 'Boost Clock',
+          title: 'Sertifikat yuklanadi',
           align: 'end',
-          key: 'boostClock',
-        },
-        {
-          title: 'TDP (W)',
-          align: 'end',
-          key: 'tdp',
+          key: 'sertifikat',
         },
         ],
         itemsC: [
         {
           name: 'Intel Core i9-11900K',
-          cores: 8,
-          threads: 16,
-          baseClock: '3.5 GHz',
-          boostClock: '5.3 GHz',
-          tdp: '125W',
+          davlati: 8,
+          kunlar: 16,
+          hajmi: '3.5 GHz',
+          sertifikat: '5.3 GHz',
         },
         {
           name: 'AMD Ryzen 9 5950X',
-          cores: 16,
-          threads: 32,
-          baseClock: '3.4 GHz',
-          boostClock: '4.9 GHz',
-          tdp: '105W',
+          davlati: 8,
+          kunlar: 16,
+          hajmi: '3.5 GHz',
+          sertifikat: '5.3 GHz',
         },
         {
           name: 'Intel Core i7-10700K',
-          cores: 8,
-          threads: 16,
-          baseClock: '3.8 GHz',
-          boostClock: '5.1 GHz',
-          tdp: '125W',
+          davlati: 8,
+          kunlar: 16,
+          hajmi: '3.5 GHz',
+          sertifikat: '5.3 GHz',
         },
         {
           name: 'AMD Ryzen 5 5600X',
-          cores: 6,
-          threads: 12,
-          baseClock: '3.7 GHz',
-          boostClock: '4.6 GHz',
-          tdp: '65W',
+          davlati: 8,
+          kunlar: 16,
+          hajmi: '3.5 GHz',
+          sertifikat: '5.3 GHz',
         },
         {
           name: 'Intel Core i5-10600K',
-          cores: 6,
-          threads: 12,
-          baseClock: '4.1 GHz',
-          boostClock: '4.8 GHz',
-          tdp: '125W',
+          davlati: 8,
+          kunlar: 16,
+          hajmi: '3.5 GHz',
+          sertifikat: '5.3 GHz',
         },
         {
           name: 'AMD Ryzen 7 5800X',
-          cores: 8,
-          threads: 16,
-          baseClock: '3.8 GHz',
-          boostClock: '4.7 GHz',
-          tdp: '105W',
+          davlati: 8,
+          kunlar: 16,
+          hajmi: '3.5 GHz',
+          sertifikat: '5.3 GHz',
         },
         {
           name: 'Intel Core i3-10100',
-          cores: 4,
-          threads: 8,
-          baseClock: '3.6 GHz',
-          boostClock: '4.3 GHz',
-          tdp: '65W',
+          davlati: 8,
+          kunlar: 16,
+          hajmi: '3.5 GHz',
+          sertifikat: '5.3 GHz',
         },
         {
           name: 'AMD Ryzen 3 3300X',
-          cores: 4,
-          threads: 8,
-          baseClock: '3.8 GHz',
-          boostClock: '4.3 GHz',
-          tdp: '65W',
+          davlati: 8,
+          kunlar: 16,
+          hajmi: '3.5 GHz',
+          sertifikat: '5.3 GHz',
         },
         {
           name: 'Intel Pentium Gold G6400',
-          cores: 2,
-          threads: 4,
-          baseClock: '4.0 GHz',
-          tdp: '58W',
+          davlati: 8,
+          kunlar: 16,
+          hajmi: '3.5 GHz',
+          sertifikat: '5.3 GHz',
         },
         {
           name: 'AMD Athlon 3000G',
-          cores: 2,
-          threads: 4,
-          baseClock: '3.5 GHz',
-          tdp: '35W',
+          davlati: 8,
+          kunlar: 16,
+          hajmi: '3.5 GHz',
+          sertifikat: '5.3 GHz',
         },
         ]
       }
@@ -274,7 +250,7 @@ export default {
         return value != null &&
           query != null &&
           typeof value === 'string' &&
-          value.toString().toLocaleUpperCase().indexOf(query) !== -1
+          value.toString().toLocaleLowerCase().indexOf(query) !== -1
       },
     },
   }

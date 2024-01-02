@@ -29,17 +29,50 @@
         <v-col cols="12" sm="4" class="mb-6">
             Language
         </v-col>
-        <v-col cols="12" sm="4" >
+        <v-col cols="12" sm="4"  class="mb-4">
           <v-select
+          v-model="select"
+          :hint="`${select.state}, ${select.abbr}`"
+          :items="items"
+          item-title="state"
+          item-value="abbr"
           label="Select"
-          :items="languages"
-          variant="outlined"
+          persistent-hint
+          return-object
+          single-line
         ></v-select>
         </v-col>
       </v-row>
 
+      <v-divider>
+      </v-divider>
+
+      <v-card
+       class="mx-auto my-8"
+       max-width="344"
+       title="Change Paswword"
+       prepend-icon="mdi-lock"
+       append-icon="mdi-open-in-new"
+       @click="changePassword"
+       target="_blank"
+       rel="noopener">
+      </v-card>
+
+      <v-divider>
+      </v-divider>
+
+      <v-card
+       class="mx-auto my-8"
+       max-width="344"
+       title="Log out"
+       prepend-icon="mdi-lock"
+       append-icon="mdi-open-in-new"
+       @click="logOut"
+       target="_blank"
+      rel="noopener">
     </v-card>
 
+    </v-card>
 </v-container>
 </template>
   
@@ -47,23 +80,22 @@
   export default {
     data() {
       return{
-        languages: [
-          {
-            text: "Uzbek",
-            value: "1",
-            selected: true,
-          },
-          {
-            text: 'Russion',
-            value: "2"
-          },
-          {
-            text: 'English',
-            value: "3"
-          }
-        ]
+        select: { state: 'Uzbek', abbr: 'uzb' },
+        items: [
+          { state: 'Uzbek', abbr: 'uzb' },
+          { state: 'Russion', abbr: 'rus' },
+          { state: 'English', abbr: 'eng' },
+        ],
       }
-    }
+    },
+    methods: {
+      changePassword(){
+
+      },
+      logOut(){
+        this.$router.push({name: 'Login'})
+      }
+    },
   }
   </script>
   

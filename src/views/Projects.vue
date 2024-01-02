@@ -17,38 +17,106 @@
             hide-details
           ></v-text-field>
         </template>
-    
         <v-data-table
           :headers="headers"
-          :items="desserts"
+          :items="items"
           :search="search"
         ></v-data-table>
       </v-card>
       </v-col>
 
       <v-col>
-        <v-card flat
-        title="Qo’shma loyihalardagi ishtiroki ">
-        <v-data-table
-          :custom-filter="filterOnlyCapsText"
-          :headers="headersC"
-          :items="itemsC"
-          :search="searchC"
-          item-value="name">
-        <template v-slot:top>
+        <v-card
+        flat
+        title="Qo’shma loyihalardagi ishtiroki">
+        <template v-slot:text>
           <v-text-field
-            v-model="searchS"
-            label="Qidiruv.."
-            class="px-3 pb-4"
+            v-model="searchM"
+            label="Qidiruv..."
             prepend-inner-icon="mdi-magnify"
             single-line
             variant="outlined"
-            hide-details>
-          </v-text-field>
+            hide-details
+          ></v-text-field>
         </template>
-      </v-data-table>
-        </v-card>
+        <v-data-table
+          :headers="headersM"
+          :items="itemsM"
+          :search="searchM"
+        ></v-data-table>
+      </v-card>
       </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col>
+        <v-card
+        flat
+        title="Respublik aloyihalaridagi ishtiroki">
+        <template v-slot:text>
+          <v-text-field
+            v-model="searchY"
+            label="Qidiruv..."
+            prepend-inner-icon="mdi-magnify"
+            single-line
+            variant="outlined"
+            hide-details
+          ></v-text-field>
+        </template>
+        <v-data-table
+          :headers="headersY"
+          :items="itemsY"
+          :search="searchY"
+        ></v-data-table>
+      </v-card>
+      </v-col>
+
+      <v-col>
+        <v-card
+        flat
+        title="Startaplardagi ishtiroki">
+        <template v-slot:text>
+          <v-text-field
+            v-model="searchN"
+            label="Qidiruv..."
+            prepend-inner-icon="mdi-magnify"
+            single-line
+            variant="outlined"
+            hide-details
+          ></v-text-field>
+        </template>
+        <v-data-table
+          :headers="headersN"
+          :items="itemsN"
+          :search="searchN"
+        ></v-data-table>
+      </v-card>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col>
+        <v-card
+        flat
+        title="Xo’jalik shartnomalari">
+        <template v-slot:text>
+          <v-text-field
+            v-model="searchA"
+            label="Qidiruv..."
+            prepend-inner-icon="mdi-magnify"
+            single-line
+            variant="outlined"
+            hide-details
+          ></v-text-field>
+        </template>
+        <v-data-table
+          :headers="headersA"
+          :items="itemsA"
+          :search="searchA"
+        ></v-data-table>
+      </v-card>
+      </v-col>
+
     </v-row>
 
   </v-container>
@@ -64,219 +132,315 @@ export default {
             align: 'start',
             key: 'name',
             sortable: false,
-            title: 'Dessert (100g serving)',
+            title: 'Loyiha nomi',
           },
-          { key: 'calories', title: 'Calories' },
-          { key: 'fat', title: 'Fat (g)' },
-          { key: 'carbs', title: 'Carbs (g)' },
-          { key: 'protein', title: 'Protein (g)' },
-          { key: 'iron', title: 'Iron (%)' },
+          { key: 'raqami', title: 'Loyiha turi' },
+          { key: 'mSoni', title: 'Loyiha bajariladigan yillar' },
+          { key: 'mNomi', title: 'Loyihani moliyalashtirish xajmi' },
+          { key: 'sana', title: 'Loyihadagi lavozim' },
         ],
-        desserts: [
+        items: [
           {
             name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: 1,
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
           },
           {
             name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: 1,
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
           },
           {
             name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: 7,
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
           },
           {
             name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: 8,
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
           },
           {
             name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: 16,
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
           },
           {
             name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: 0,
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
           },
           {
             name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: 2,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: 45,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: 22,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: 6,
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
           },
         ],
-        searchC: '',
-        headersC: [
-        {
-          title: 'CPU Model',
-          align: 'start',
-          key: 'name',
-        },
-        {
-          title: 'Cores',
-          align: 'end',
-          key: 'cores',
-        },
-        {
-          title: 'Threads',
-          align: 'end',
-          key: 'threads',
-        },
-        {
-          title: 'Base Clock',
-          align: 'end',
-          key: 'baseClock',
-        },
-        {
-          title: 'Boost Clock',
-          align: 'end',
-          key: 'boostClock',
-        },
-        {
-          title: 'TDP (W)',
-          align: 'end',
-          key: 'tdp',
-        },
+        searchM: '',
+        headersM: [
+          {
+            align: 'start',
+            key: 'name',
+            sortable: false,
+            title: 'Loyiha nomi',
+          },
+          { key: 'raqami', title: 'Loyiha turi' },
+          { key: 'mSoni', title: 'Loyiha bajariladigan yillar' },
+          { key: 'mNomi', title: 'Loyihani moliyalashtirish xajmi' },
+          { key: 'sana', title: 'Loyihadagi lavozim' },
         ],
-        itemsC: [
-        {
-          name: 'Intel Core i9-11900K',
-          cores: 8,
-          threads: 16,
-          baseClock: '3.5 GHz',
-          boostClock: '5.3 GHz',
-          tdp: '125W',
-        },
-        {
-          name: 'AMD Ryzen 9 5950X',
-          cores: 16,
-          threads: 32,
-          baseClock: '3.4 GHz',
-          boostClock: '4.9 GHz',
-          tdp: '105W',
-        },
-        {
-          name: 'Intel Core i7-10700K',
-          cores: 8,
-          threads: 16,
-          baseClock: '3.8 GHz',
-          boostClock: '5.1 GHz',
-          tdp: '125W',
-        },
-        {
-          name: 'AMD Ryzen 5 5600X',
-          cores: 6,
-          threads: 12,
-          baseClock: '3.7 GHz',
-          boostClock: '4.6 GHz',
-          tdp: '65W',
-        },
-        {
-          name: 'Intel Core i5-10600K',
-          cores: 6,
-          threads: 12,
-          baseClock: '4.1 GHz',
-          boostClock: '4.8 GHz',
-          tdp: '125W',
-        },
-        {
-          name: 'AMD Ryzen 7 5800X',
-          cores: 8,
-          threads: 16,
-          baseClock: '3.8 GHz',
-          boostClock: '4.7 GHz',
-          tdp: '105W',
-        },
-        {
-          name: 'Intel Core i3-10100',
-          cores: 4,
-          threads: 8,
-          baseClock: '3.6 GHz',
-          boostClock: '4.3 GHz',
-          tdp: '65W',
-        },
-        {
-          name: 'AMD Ryzen 3 3300X',
-          cores: 4,
-          threads: 8,
-          baseClock: '3.8 GHz',
-          boostClock: '4.3 GHz',
-          tdp: '65W',
-        },
-        {
-          name: 'Intel Pentium Gold G6400',
-          cores: 2,
-          threads: 4,
-          baseClock: '4.0 GHz',
-          tdp: '58W',
-        },
-        {
-          name: 'AMD Athlon 3000G',
-          cores: 2,
-          threads: 4,
-          baseClock: '3.5 GHz',
-          tdp: '35W',
-        },
-        ]
+        itemsM: [
+          {
+            name: 'Frozen Yogurt',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Ice cream sandwich',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Eclair',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Cupcake',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Gingerbread',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Jelly bean',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Lollipop',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+        ],
+        searchY: '',
+        headersY: [
+          {
+            align: 'start',
+            key: 'name',
+            sortable: false,
+            title: 'Loyiha nomi',
+          },
+          { key: 'raqami', title: 'Loyiha turi' },
+          { key: 'mSoni', title: 'Loyiha bajariladigan yillar' },
+          { key: 'mNomi', title: 'Loyihani moliyalashtirish xajmi' },
+          { key: 'sana', title: 'Loyihadagi lavozim' },
+        ],
+        itemsY: [
+          {
+            name: 'Frozen Yogurt',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Ice cream sandwich',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Eclair',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Cupcake',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Gingerbread',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Jelly bean',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Lollipop',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+        ],
+        searchN: '',
+        headersN: [
+          {
+            align: 'start',
+            key: 'name',
+            sortable: false,
+            title: 'Loyiha nomi',
+          },
+          { key: 'raqami', title: 'Loyiha turi' },
+          { key: 'mSoni', title: 'Loyiha bajariladigan yillar' },
+          { key: 'mNomi', title: 'Loyihani moliyalashtirish xajmi' },
+          { key: 'sana', title: 'Loyihadagi lavozim' },
+        ],
+        itemsN: [
+          {
+            name: 'Frozen Yogurt',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Ice cream sandwich',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Eclair',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Cupcake',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Gingerbread',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Jelly bean',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+          {
+            name: 'Lollipop',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+            sana: 4.0,
+          },
+        ],
+        searchA: '',
+        headersA: [
+          {
+            align: 'start',
+            key: 'name',
+            sortable: false,
+            title: 'Shartnoma nomi',
+          },
+          { key: 'raqami', title: 'Shartnoma bajariladigan yil' },
+          { key: 'mSoni', title: 'Shartnoma  xajmi' },
+          { key: 'mNomi', title: 'Shartnoma tuzsilgan tashkilot' },
+        ],
+        itemsA: [
+          {
+            name: 'Frozen Yogurt',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+          },
+          {
+            name: 'Ice cream sandwich',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+          },
+          {
+            name: 'Eclair',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+          },
+          {
+            name: 'Cupcake',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+          },
+          {
+            name: 'Gingerbread',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+          },
+          {
+            name: 'Jelly bean',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+          },
+          {
+            name: 'Lollipop',
+            raqami: 159,
+            mSoni: 6.0,
+            mNomi: 24,
+          },
+        ],
       }
     },
-    methods: {
-      filterOnlyCapsText (value, query, item) {
-        return value != null &&
-          query != null &&
-          typeof value === 'string' &&
-          value.toString().toLocaleUpperCase().indexOf(query) !== -1
-      },
-    },
+    
   }
 </script>
 
