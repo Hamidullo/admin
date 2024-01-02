@@ -1,10 +1,11 @@
 <template>
+  <Sidebar />
+  <Header />
   <v-app id="inspire">
-
-    <Sidebar />
-    <Header />
     <v-main class="bg-grey-lighten-2">
-      <router-view />
+      <v-layout>
+        <router-view />
+      </v-layout>
     </v-main>
   </v-app>
 </template>

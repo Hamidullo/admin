@@ -11,37 +11,11 @@
       </h4>
     </v-app-bar-title>
 
-    <v-spacer/>
+    <!-- <v-spacer/>
 
-    <v-spacer/>
-
-    <v-menu
-      open-on-hover
-      transition="fab-transition"
-    >
-
-      <template v-slot:activator="{ props }" >
-        <v-btn
-          color="primary"
-          v-bind="props"
-        >
-          {{languages[2].language}}
-        </v-btn>
-      </template>
-
-      <v-list>
-        <v-list-item
-          style="cursor: pointer"
-          v-for="(item, i) in languages"
-          :key="i"
-        >
-          <v-list-item-title v-text="item.language"></v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+    <v-spacer/>  -->
 
     <v-menu
-      transition="fab-transition"
       open-on-hover>
       <template v-slot:activator="{ props }">
        <span v-bind="props" style="cursor: pointer" class="mx-5 mr-10">
@@ -67,14 +41,13 @@
     </v-menu>
 
     <v-menu
-      transition="fab-transition"
       open-on-hover>
       <template v-slot:activator="{ props }">
-       <span v-bind="props" style="cursor: pointer" class="mr-10">
+       <span v-bind="props" class="mr-10">
          <v-chip link>
            <v-badge dot bottom offset-x="1" offset-y="1" color="green" class="mt-1 me-1">
              <v-avatar size="30">
-               <v-img src="https://randomuser.me/api/portraits/men/85.jpg" alt=""></v-img>
+               <v-img src="https://randomuser.me/api/portraits/men/85.jpg" alt="menu avatar"></v-img>
              </v-avatar>
            </v-badge>
            <span>
@@ -148,18 +121,7 @@ export default {
           subtitle: '<span class="text-primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
         },
       ],
-      languages:
-        [
-          {
-            language: 'English'
-          },
-          {
-            language: 'Russian'
-          },
-          {
-            language: 'Uzbek'
-          }
-        ]
+      
     }
   },
   methods: {
