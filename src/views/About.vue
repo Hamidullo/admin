@@ -28,7 +28,19 @@
           <h4 class="my-4">
             Doimiy yashash manzili
           </h4>
-          <div class="font-weight-bold">
+          <strong class="">
+            Lavozimi:
+          </strong>
+          <div class="ml-2 mb-4">
+            assistant, katta o’qituvchi, v.b.dotsent
+          </div>
+          <strong class="">
+            h-index:
+          </strong>
+          <div class="ml-2">
+            scopus/google scholar/boshqalar
+          </div>
+          <div class="font-weight-bold mt-4">
             Bog’lanish malumotlari:
           </div>
           <v-timeline density="compact" align="start">
@@ -46,6 +58,7 @@
             </v-timeline-item>
           </v-timeline>
         </v-card-text>
+        <my-dialog class="mb-3"></my-dialog>
       </v-card>
     </v-col>
 
@@ -74,6 +87,7 @@
                 Tamomlagan OTM va yili, Mutaxasisligi
               </div>
             </v-card-text>  
+            <my-dialog class="mb-4 mt-2"></my-dialog>
           </v-card>
         </v-col>
 
@@ -99,6 +113,7 @@
                 Ximoya qilgan OTM va yili, Ixtisoslik shifri va nomi 
               </div>
             </v-card-text>  
+            <my-dialog class="mb-4 mt-2"></my-dialog>
           </v-card>
         </v-col>
       </v-row>
@@ -134,6 +149,7 @@
                 unvor berilgan yil va Ixtisoslik shifri va nomi
               </div>
             </v-card-text>  
+            <my-dialog class="mb-4 mt-2"></my-dialog>
           </v-card>
         </v-col>
 
@@ -145,22 +161,6 @@
            rounded="5">
             <v-card-text>
               <strong class="ml-2">
-                Lavozimi:
-              </strong>
-              <div class="ml-4">
-                assistant, katta o’qituvchi, v.b.dotsent
-              </div>
-            </v-card-text> 
-            <v-card-text>
-              <strong class="ml-2">
-                h-index:
-              </strong>
-              <div class="ml-4">
-                scopus/google scholar/boshqalar
-              </div>
-            </v-card-text>  
-            <v-card-text>
-              <strong class="ml-2">
                 O’quv yiliga belgilangan dars mashg’ulotlari:
               </strong>
               <div class="ml-4">
@@ -170,6 +170,7 @@
                 Auditoriyasiz mashg’ulotlar (----)
               </div>
             </v-card-text>  
+            <my-dialog class="mb-4 mt-2"></my-dialog>
           </v-card>
         </v-col>
       </v-row>
@@ -181,7 +182,11 @@
 </template>
 
 <script>
+  import MyDialog from '@/components/MyDialog.vue';
   export default {
+    components:{
+      MyDialog
+    },
     data: () => ({
       messages: [
         {
