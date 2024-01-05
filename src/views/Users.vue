@@ -3,26 +3,125 @@
   fluid>
 
     <v-row>
+
       <v-col>
         <v-card
         flat
         title="Darsliklar">
-        <template v-slot:text>
-          <v-text-field
-            v-model="search"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details
-          ></v-text-field>
-        </template>
-        <v-data-table
-          :headers="headers"
-          :items="items"
-          :search="search"
-        ></v-data-table>
-      </v-card>
+          <template v-slot:append>
+            <!-- Dialog start -->
+        <v-row justify="center" class="mr-2">
+          <v-dialog
+            v-model="dialog"
+            persistent
+            width="1024">
+            <template v-slot:activator="{ props }">
+              <v-btn
+                color="primary"
+                v-bind="props">
+                Qo'shish
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="text-h5">Yangi darslik qo'shish:</span>
+              </v-card-title>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4">
+                      <v-text-field
+                        label="Nomi"
+                        required>
+                    </v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4">
+                      <v-text-field
+                        label="Mualliflar soni">
+                    </v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4">
+                      <v-text-field
+                        label="Mualliflar F.I.SH"
+                        persistent-hint
+                        required>
+                    </v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4">
+                      <v-text-field
+                        label="Nashr etilgan yil"
+                        required>
+                    </v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4">
+                      <v-text-field
+                        label="Guvoxnoma raqami">
+                    </v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4">
+                      <v-text-field
+                        label="Darslikni yuklash"
+                        persistent-hint
+                        required>
+                    </v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="blue-darken-1"
+                  variant="text"
+                  @click="dialog = false">
+                  Yopish
+                </v-btn>
+                <v-btn
+                  color="blue-darken-1"
+                  variant="text"
+                  @click="dialog = false">
+                  Saqlash
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-row>
+        <!-- Dialog end -->
+          </template>
+          <template v-slot:text>
+            <v-text-field
+             v-model="search"
+             label="Qidiruv..."
+             prepend-inner-icon="mdi-magnify"
+             single-line
+             variant="outlined"
+             hide-details>
+            </v-text-field>
+          </template>
+          <v-data-table
+           :headers="headers"
+           :items="items"
+           :search="search">
+          </v-data-table>
+        </v-card>
       </v-col>
 
       <v-col>
@@ -92,6 +191,7 @@
         ></v-data-table>
       </v-card>
       </v-col>
+
     </v-row>
 
   </v-container>
@@ -389,6 +489,7 @@ export default {
             darslik: 4.0,
           },
         ],
+        dialog: false,
       }
     },
     
