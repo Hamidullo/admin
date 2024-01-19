@@ -20,24 +20,49 @@
         density="compact" placeholder="Hemis parol" prepend-inner-icon="mdi-lock" variant="outlined"
         @click:append-inner="visible = !visible"></v-text-field>
 
-      <v-btn block class="mb-8" color="blue" size="large" variant="tonal">
+      <v-btn block class="mb-4" color="blue" size="large" variant="tonal" @click="login">
         Kirish
       </v-btn>
 
-      <v-card-text class="text-center">
-        <a class="text-blue text-decoration-none" href="#" rel="noopener noreferrer" target="_blank">
-          Sign up now <v-icon icon="mdi-chevron-right"></v-icon>
-        </a>
-      </v-card-text>
+      <v-btn block class="mb-2" color="blue" size="large" variant="tonal">
+        Hemis orqali kirish
+      </v-btn>
     </v-card>
+
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
     visible: false,
+    email: '',
+    password: '',
   }),
+  methods: {
+    async login(){
+      if (this.email.length > 0 && this.password.length > 0){
+        let result = await axios.get(`http://localhost:5000/users/api/user-login?userId=${this.email}&password=${this.password}`);
+
+        if (result.status === 200 && result.data.length > 0){
+          localStorage.setItem("user-info", JSON.stringify( result.data[0]))
+
+          await this.$router.push({name: "Home"})
+        }
+      } else {
+
+      }
+
+    }
+  },
+  mounted() {
+    let user = localStorage.getItem("user-info")
+    if (user){
+      this.$router.push({name: "Home"})
+    }
+  }
 }
 </script>
 
