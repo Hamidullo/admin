@@ -50,7 +50,7 @@ export default {
         if (result.status === 200 && result.data.length > 0){
           localStorage.setItem("user-info", JSON.stringify( result.data[0]))
 
-          await this.$router.push({name: "Home"})
+          await this.$router.push({name: "Dashboard"})
         }
       } else {
 
@@ -61,7 +61,7 @@ export default {
   mounted() {
     let user = localStorage.getItem("user-info")
     if (user){
-      this.$router.push({name: "Home"})
+      this.$router.push({name: "Dashboard"})
     }
   }
 }

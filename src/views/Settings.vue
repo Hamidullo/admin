@@ -88,16 +88,9 @@
         ],
       }
     },
-    methods: {
-      changePassword(){
-
-      },
-      logOut(){
-        this.$router.push({name: 'Login'})
-      }
-    },
+    
   }
-  </script>
+</script>
   
   <style scoped>
   

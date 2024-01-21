@@ -23,7 +23,20 @@ export default {
   methods: {
     draw() {
       this.drawer = !this.drawer
-    }
+    },
+    async loadData() {
+        let user = localStorage.getItem("user-info")
+        if (!user){
+          //this.name = JSON.parse(user).name
+          await this.$router.push({name: "Login"})
+        }
+
+        //let result = await axios.get("http://localhost:3000/restaurants");
+        //this.restaurants = result.data
+      }
+  },
+  async mounted() {
+    await this.loadData()
   }
 }
 </script>

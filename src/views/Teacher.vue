@@ -237,7 +237,6 @@ export default {
             sport: 7,
           },
         ],
-        
       }
     },
     

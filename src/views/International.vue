@@ -425,8 +425,9 @@ export default {
           query != null &&
           typeof value === 'string' &&
           value.toString().toLocaleLowerCase().indexOf(query) !== -1
-      },
+      },   
     },
+    
   }
 </script>
 

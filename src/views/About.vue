@@ -772,7 +772,7 @@
       dialogI: false,
       dialogU: false,
       dialogO: false,
-    })
+    }),
   }
 </script>
 
