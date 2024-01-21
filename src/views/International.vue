@@ -7,7 +7,93 @@
       <v-col>
         <v-card
         flat
-        title="Top – 1000 da o’quv mashg’ulotlari olib borish">
+        title="Top – 1000-da o’quv mashg’ulotlari olib borish">
+        <template v-slot:append>
+          <!-- Dialog start -->
+          <v-row justify="center" class="mr-2">
+            <v-dialog
+              v-model="dialogS"
+              persistent
+              width="1024">
+              <template v-slot:activator="{ props }">
+                <v-btn
+                  color="primary"
+                  v-bind="props">
+                  Qo'shish
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5">Top – 1000-da o’quv mashg’ulotlari qo'shish:</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Xorijiy OTM yoki ITM nomi"
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Davlati">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12">
+                        <v-text-field
+                          label="Mashg’ulot olib borilgan kunlar">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Mashg’ulot xajmi"
+                          persistent-hint
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Sertifikat yuklanadi"
+                          required>
+                      </v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue-darken-1"
+                    variant="text"
+                    @click="dialogS = false">
+                    Yopish
+                  </v-btn>
+                  <v-btn
+                    color="blue-darken-1"
+                    variant="text"
+                    @click="dialogS = false">
+                    Saqlash
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+          <!-- Dialog end -->
+        </template>
         <template v-slot:text>
           <v-text-field
             v-model="search"
@@ -29,6 +115,92 @@
       <v-col>
         <v-card flat
         title="Stajirovka va malaka oshirish">
+        <template v-slot:append>
+          <!-- Dialog start -->
+          <v-row justify="center" class="mr-2">
+            <v-dialog
+              v-model="dialogA"
+              persistent
+              width="1024">
+              <template v-slot:activator="{ props }">
+                <v-btn
+                  color="primary"
+                  v-bind="props">
+                  Qo'shish
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5">Stajirovka va malaka oshirish qo'shish:</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Xorijiy OTM yoki ITM nomi"
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Davlati">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12">
+                        <v-text-field
+                          label="Stajirovka va malaka oshirilgan kunlar">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Stajirovka xajmi"
+                          persistent-hint
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Sertifikat yuklanadi"
+                          required>
+                      </v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue-darken-1"
+                    variant="text"
+                    @click="dialogA = false">
+                    Yopish
+                  </v-btn>
+                  <v-btn
+                    color="blue-darken-1"
+                    variant="text"
+                    @click="dialogA = false">
+                    Saqlash
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+          <!-- Dialog end -->
+        </template>
         <v-data-table
           :custom-filter="filterOnlyCapsText"
           :headers="headersC"
@@ -58,6 +230,8 @@
 export default {
     data () {
       return {
+        dialogS: false,
+        dialogA: false,
         search: '',
         headers: [
           {

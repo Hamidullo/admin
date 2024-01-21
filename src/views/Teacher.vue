@@ -7,6 +7,122 @@
         <v-card
         flat
         title="Tayyorlagan shogirdlar">
+        <template v-slot:append>
+          <!-- Dialog start -->
+          <v-row justify="center" class="mr-2">
+            <v-dialog
+              v-model="dialogS"
+              persistent
+              width="1024">
+              <template v-slot:activator="{ props }">
+                <v-btn
+                  color="primary"
+                  v-bind="props">
+                  Qo'shish
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5">Tayyorlagan shogird qo'shish:</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Tayyorlagan shogird"
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Fan doktori">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Falsafa doktori">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Olimpiada g'olibi"
+                          persistent-hint
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Sport ustalari"
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Jurnal nashr etilgan davlat">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Maqola joylashgan havola"
+                          persistent-hint
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Maqola fayli"
+                          persistent-hint
+                          required>
+                      </v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue-darken-1"
+                    variant="text"
+                    @click="dialogS = false">
+                    Yopish
+                  </v-btn>
+                  <v-btn
+                    color="blue-darken-1"
+                    variant="text"
+                    @click="dialogS = false">
+                    Saqlash
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+          <!-- Dialog end -->
+        </template>
         <template v-slot:text>
           <v-text-field
             v-model="search"
@@ -35,6 +151,7 @@
 export default {
     data () {
       return {
+        dialogS: false,
         search: '',
         headers: [
           {

@@ -7,6 +7,94 @@
         <v-card
         flat
         title="Davlat mukofotlari">
+        <template v-slot:append>
+          <!-- Dialog start -->
+          <v-row justify="center" class="mr-2">
+            <v-dialog
+              v-model="dialogS"
+              persistent
+              width="1024">
+              <template v-slot:activator="{ props }">
+                <v-btn
+                  color="primary"
+                  v-bind="props">
+                  Qo'shish
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5">Davlat mukofotini qo'shish:</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Davlat mukofoti"
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Turi">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Berilgan yili">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Seriya raqami"
+                          persistent-hint
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Sertifikat yuklanadi"
+                          required>
+                      </v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue-darken-1"
+                    variant="text"
+                    @click="dialogS = false">
+                    Yopish
+                  </v-btn>
+                  <v-btn
+                    color="blue-darken-1"
+                    variant="text"
+                    @click="dialogS = false">
+                    Saqlash
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+          <!-- Dialog end -->
+        </template>
         <template v-slot:text>
           <v-text-field
             v-model="search"
@@ -29,12 +117,101 @@
       <v-col>
         <v-card flat
         title="Diplomlar">
+        <template v-slot:append>
+          <!-- Dialog start -->
+          <v-row justify="center" class="mr-2">
+            <v-dialog
+              v-model="dialogD"
+              persistent
+              width="1024">
+              <template v-slot:activator="{ props }">
+                <v-btn
+                  color="primary"
+                  v-bind="props">
+                  Qo'shish
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5">Diplom qo'shish:</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Diplom"
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Turi">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Maqsadi">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Berilgan yili"
+                          persistent-hint
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Diplom yuklanadi"
+                          required>
+                      </v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue-darken-1"
+                    variant="text"
+                    @click="dialogD = false">
+                    Yopish
+                  </v-btn>
+                  <v-btn
+                    color="blue-darken-1"
+                    variant="text"
+                    @click="dialogD = false">
+                    Saqlash
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+          <!-- Dialog end -->
+        </template>
         <v-data-table
           :custom-filter="filterOnlyCapsText"
           :headers="headersD"
           :items="itemsD"
           :search="searchD"
           item-value="name">
+          
         <template v-slot:top>
           <v-text-field
             v-model="searchD"
@@ -57,6 +234,94 @@
         <v-card
         flat
         title="Sertifikatlar">
+        <template v-slot:append>
+          <!-- Dialog start -->
+          <v-row justify="center" class="mr-2">
+            <v-dialog
+              v-model="dialogA"
+              persistent
+              width="1024">
+              <template v-slot:activator="{ props }">
+                <v-btn
+                  color="primary"
+                  v-bind="props">
+                  Qo'shish
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5">Sertifikat qo'shish:</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Sertifikat"
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Turi">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Maqsadi">
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Berilgan yili"
+                          persistent-hint
+                          required>
+                      </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          label="Sertifikat yuklanadi"
+                          required>
+                      </v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue-darken-1"
+                    variant="text"
+                    @click="dialogA = false">
+                    Yopish
+                  </v-btn>
+                  <v-btn
+                    color="blue-darken-1"
+                    variant="text"
+                    @click="dialogA = false">
+                    Saqlash
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+          <!-- Dialog end -->
+        </template>
         <template v-slot:text>
           <v-text-field
             v-model="searchS"
@@ -84,6 +349,9 @@
 export default {
     data () {
       return {
+        dialogS: false,
+        dialogD: false,
+        dialogA: false,
         search: '',
         headers: [
           {
@@ -95,7 +363,7 @@ export default {
           { key: 'turi', title: 'Turi' },
           { key: 'yili', title: 'Berilgan yili' },
           { key: 'seriya', title: 'Seriya raqami' },
-          { key: 'sertifikat', title: 'Sertifikat yuklanadi' },
+          { key: 'sertifikat', title: 'Sertifikat yuklandi' },
         ],
         items: [
           {
@@ -157,7 +425,7 @@ export default {
           key: 'yili',
         },
         {
-          title: 'Diplom yuklanadi',
+          title: 'Diplom yuklandi',
           align: 'start',
           key: 'diplom',
         },
@@ -215,7 +483,7 @@ export default {
           { key: 'turi', title: 'Turi' },
           { key: 'yili', title: 'Berilgan yili' },
           { key: 'maqsadi', title: 'Maqsadi' },
-          { key: 'sertifikat', title: 'Sertifikat yuklanadi' },
+          { key: 'sertifikat', title: 'Sertifikat yuklandi' },
         ],
         itemsS: [
           {
