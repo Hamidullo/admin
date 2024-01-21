@@ -44,6 +44,7 @@ export default {
   methods: {
     async login(){
       if (this.email.length > 0 && this.password.length > 0){
+        
         let result = await axios.get(`http://localhost:5000/users/api/user-login?userId=${this.email}&password=${this.password}`);
 
         if (result.status === 200 && result.data.length > 0){
