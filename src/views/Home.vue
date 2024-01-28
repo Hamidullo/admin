@@ -36,7 +36,7 @@ export default {
       }
   },
   async mounted() {
-    await this.loadData()
+    //await this.loadData()
   }
 }
 </script>

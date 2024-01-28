@@ -2,99 +2,129 @@
   <v-container class="py-8 px-6 bg-grey-lighten-2" align="center" justify="center"
   fluid>
 
-    <v-row>
-      <v-col>
-        <v-card
-        flat
-        title="Institut bo’yicha reyting">
-        <template v-slot:text>
-          <v-text-field
-            v-model="search"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details
-          ></v-text-field>
-        </template>
-        <v-data-table
-          :headers="headers"
-          :items="desserts"
-          :search="search"
-        ></v-data-table>
-      </v-card>
-      </v-col>
+  <v-row align="center" justify="center">
 
-      <v-col>
-        <v-card
+    <v-col cols="4">
+      <v-card
         flat
-        title="Fakultetlar bo’yicha reyting">
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchC"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details
-          ></v-text-field>
+        title="Icons"
+        subtitle="prepend and append">
+        <template v-slot:prepend>
+          <v-icon icon="mdi-account" color="primary"></v-icon>
         </template>
-        <v-data-table
-          :headers="headersC"
-          :items="itemsC"
-          :search="searchC"
-        ></v-data-table>
+        <template v-slot:append>
+          <v-icon icon="mdi-check" color="success"></v-icon>
+        </template>
+        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</v-card-text>
       </v-card>
-      </v-col>
-    </v-row>
+    </v-col>
 
-    <v-row>
-      <v-col>
-        <v-card
-        flat
-        title="Kaferalar bo’yicha reyting">
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchR"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details
-          ></v-text-field>
-        </template>
-    
-        <v-data-table
-          :headers="headersR"
-          :items="dessertsR"
-          :search="searchR"
-        ></v-data-table>
+    <v-col cols="4">
+      <v-card
+      flat
+        title="Avatars"
+        subtitle="prepend-avatar and append-avatar"
+        prepend-avatar="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
+        append-avatar="https://cdn.vuetifyjs.com/images/john.jpg">
+        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</v-card-text>
       </v-card>
-      </v-col>
+    </v-col>
 
-      <v-col>
-        <v-card
-        flat
-        title="Professor-o’qituvchilar bo’yicha reyting">
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchT"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details
-          ></v-text-field>
+    <v-col cols="4">
+      <v-card
+      flat
+        title="Avatars"
+        subtitle="prepend and append">
+        <template v-slot:prepend>
+          <v-avatar color="blue-darken-2">
+            <v-icon icon="mdi-alarm"></v-icon>
+          </v-avatar>
         </template>
-    
-        <v-data-table
-          :headers="headersT"
-          :items="dessertsT"
-          :search="searchT"
-        ></v-data-table>
+        <template v-slot:append>
+          <v-avatar size="24">
+            <v-img
+              src="https://cdn.vuetifyjs.com/images/john.png"
+              alt="John"
+            ></v-img>
+          </v-avatar>
+        </template>
+        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</v-card-text>
       </v-card>
-      </v-col>
-    </v-row>
+    </v-col>
+
+  </v-row>
+
+  <v-row>
+    <v-col>
+      <v-card
+      flat
+      title="Institut bo’yicha reyting">
+      <template v-slot:text>
+        <v-text-field
+          v-model="search"
+          label="Qidiruv..."
+          prepend-inner-icon="mdi-magnify"
+          single-line
+          variant="outlined"
+          hide-details
+        ></v-text-field>
+      </template>
+      <v-data-table
+        :headers="headers"
+        :items="desserts"
+        :search="search"
+      ></v-data-table>
+    </v-card>
+    </v-col>
+
+    <v-col>
+      <v-card
+      flat
+      title="Fakultetlar bo’yicha reyting">
+      <template v-slot:text>
+        <v-text-field
+          v-model="searchC"
+          label="Qidiruv..."
+          prepend-inner-icon="mdi-magnify"
+          single-line
+          variant="outlined"
+          hide-details
+        ></v-text-field>
+      </template>
+      <v-data-table
+        :headers="headersC"
+        :items="itemsC"
+        :search="searchC"
+      ></v-data-table>
+    </v-card>
+    </v-col>
+  </v-row>
+
+  <v-row>
+    <v-col>
+      <v-card
+      flat
+      title="Kaferalar bo’yicha reyting">
+      <template v-slot:text>
+        <v-text-field
+          v-model="searchR"
+          label="Qidiruv..."
+          prepend-inner-icon="mdi-magnify"
+          single-line
+          variant="outlined"
+          hide-details
+        ></v-text-field>
+      </template>
+  
+      <v-data-table
+        :headers="headersR"
+        :items="dessertsR"
+        :search="searchR"
+      ></v-data-table>
+    </v-card>
+    </v-col>
+
+  </v-row>
 
   </v-container>
 </template>

@@ -77,29 +77,10 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          label="Jurnal nashr etilgan davlat">
+                          label="Stipendiant">
                       </v-text-field>
                       </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          label="Maqola joylashgan havola"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          label="Maqola fayli"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
+
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -164,6 +145,7 @@ export default {
           { key: 'falsafa', title: 'Falsafa doktori' },
           { key: 'olimpiyada', title: 'Olimpiada g’olibi' },
           { key: 'sport', title: 'Sport ustalari' },
+          { key: 'stipendia', title: 'Stipendiant' },
         ],
         desserts: [
           {
@@ -172,6 +154,7 @@ export default {
             falsafa: 6.0,
             olimpiyada: 24,
             sport: 4.0,
+            stipendia: 4.0,
           },
           {
             name: 'Ice cream sandwich',
@@ -179,6 +162,7 @@ export default {
             falsafa: 9.0,
             olimpiyada: 37,
             sport: 4.3,
+            stipendia: 4.3,
           },
           {
             name: 'Eclair',
@@ -186,6 +170,7 @@ export default {
             falsafa: 16.0,
             olimpiyada: 23,
             sport: 6.0,
+            stipendia: 6.0,
           },
           {
             name: 'Cupcake',
@@ -193,6 +178,7 @@ export default {
             falsafa: 3.7,
             olimpiyada: 67,
             sport: 4.3,
+            stipendia: 4.3,
           },
           {
             name: 'Gingerbread',
@@ -200,6 +186,7 @@ export default {
             falsafa: 16.0,
             olimpiyada: 49,
             sport: 3.9,
+            stipendia: 3.9,
           },
           {
             name: 'Jelly bean',
@@ -207,6 +194,7 @@ export default {
             falsafa: 0.0,
             olimpiyada: 94,
             sport: 0.0,
+            stipendia: 0.0,
           },
           {
             name: 'Lollipop',
@@ -214,6 +202,7 @@ export default {
             falsafa: 0.2,
             olimpiyada: 98,
             sport: 0,
+            stipendia: 0,
           },
           {
             name: 'Honeycomb',
@@ -221,6 +210,7 @@ export default {
             falsafa: 3.2,
             olimpiyada: 87,
             sport: 6.5,
+            stipendia: 6.5,
           },
           {
             name: 'Donut',
@@ -228,6 +218,7 @@ export default {
             falsafa: 25.0,
             olimpiyada: 51,
             sport: 4.9,
+            sporstipendiat: 4.9,
           },
           {
             name: 'KitKat',
@@ -235,6 +226,7 @@ export default {
             falsafa: 26.0,
             olimpiyada: 65,
             sport: 7,
+            stipendia: 7,
           },
         ],
       }

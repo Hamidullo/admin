@@ -64,6 +64,18 @@ const routes = [
     name: 'Login',
     component: () => import('@/views/Login.vue'),
   },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('@/views/Admin.vue'),
+    children: [
+      {
+        path: '',
+        name: 'AdminDash',
+        component: () => import('@/views/AdminDash.vue'),
+      },
+    ]
+  },
 ]
 
 const router = createRouter({
