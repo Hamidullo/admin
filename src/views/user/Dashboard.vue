@@ -104,7 +104,7 @@
     <v-col>
       <v-card
       flat
-      title="Kaferalar bo’yicha reyting">
+      title="Kafedralar bo’yicha reyting">
       <template v-slot:text>
         <v-text-field
           v-model="searchR"

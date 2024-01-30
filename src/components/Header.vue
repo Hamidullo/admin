@@ -31,9 +31,7 @@
         :items="items"
         item-props
         lines="three"
-        width="250"
-
-      >
+        width="250">
         <template v-slot:subtitle="{ subtitle }" >
           <div v-html="subtitle" ></div>
         </template>
@@ -81,7 +79,6 @@
 
 <script>
 export default {
-
   data() {
     return{
       menus: [
