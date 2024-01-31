@@ -1,9 +1,9 @@
 <template>
     <v-container class="py-8 px-6 bg-grey-lighten-2" align="center" justify="center"
     fluid>
-  
+
     <v-row align="center" justify="center">
-  
+
       <v-col cols="4">
         <v-card
           flat
@@ -18,7 +18,7 @@
           <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</v-card-text>
         </v-card>
       </v-col>
-  
+
       <v-col cols="4">
         <v-card
         flat
@@ -29,7 +29,7 @@
           <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</v-card-text>
         </v-card>
       </v-col>
-  
+
       <v-col cols="4">
         <v-card
         flat
@@ -51,9 +51,9 @@
           <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</v-card-text>
         </v-card>
       </v-col>
-  
+
     </v-row>
-  
+
     <v-row>
       <v-col>
         <v-card
@@ -97,7 +97,7 @@
       </v-data-table>
       </v-card>
       </v-col>
-  
+
       <v-col>
         <v-card
         flat
@@ -120,7 +120,7 @@
       </v-card>
       </v-col>
     </v-row>
-  
+
     <v-row>
       <v-col>
         <v-card
@@ -136,7 +136,7 @@
             hide-details
           ></v-text-field>
         </template>
-    
+
         <v-data-table
           :headers="headersR"
           :items="dessertsR"
@@ -144,13 +144,19 @@
         ></v-data-table>
       </v-card>
       </v-col>
-  
+
     </v-row>
-  
+
     </v-container>
   </template>
-  
+
   <script>
+
+  import { useRoute } from 'vue-router'
+
+  const route = useRoute()
+  console.log(route.query)
+
   export default {
       data () {
         return {
@@ -458,11 +464,10 @@
           ],
         }
       },
-      
+
     }
   </script>
-  
+
   <style scoped>
-  
+
   </style>
-  
