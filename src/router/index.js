@@ -18,9 +18,9 @@ const routes = [
         component: () => import('@/views/user/About.vue'),
       },
       {
-        path: 'users',
-        name: 'Users',
-        component: () => import('@/views/user/Users.vue'),
+        path: 'textbook',
+        name: 'Textbook',
+        component: () => import('@/views/user/Textbook.vue'),
       },
       {
         path: 'brain',
@@ -55,7 +55,7 @@ const routes = [
       {
         path: 'settings',
         name: 'Settings',
-        component: () => import('@/views/user/Settings.vue'),
+        component: () => import('@/views/Settings.vue'),
       },
     ]
   },
@@ -63,6 +63,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import('@/views/login/Login.vue'),
+  },
+  {
+    path: '/change',
+    name: 'Change',
+    component: () => import('@/views/login/ChangePassword.vue'),
   },
   {
     path: '/admin',
@@ -73,6 +78,41 @@ const routes = [
         path: '',
         name: 'AdminDash',
         component: () => import('@/views/admin/AdminDash.vue'),
+      },
+      {
+        path: 'item/:userId',
+        name: 'AdminItem',
+        component: () => import('@/views/admin/AdminItem.vue'),
+      },
+      {
+        path: 'about',
+        name: 'AdminAbout',
+        component: () => import('@/views/admin/AdminAbout.vue'),
+      },
+      {
+        path: 'users',
+        name: 'AdminUsers',
+        component: () => import('@/views/admin/AdminUsers.vue'),
+      },
+      {
+        path: 'user/:userId',
+        name: 'AdminUser',
+        component: () => import('@/views/admin/AdminUser.vue'),
+      },
+      {
+        path: 'news',
+        name: 'AdminNews',
+        component: () => import('@/views/admin/AdminNews.vue'),
+      },
+      {
+        path: 'new/:userId',
+        name: 'AdminNew',
+        component: () => import('@/views/admin/AdminNew.vue'),
+      },
+      {
+        path: 'settings',
+        name: 'Settings',
+        component: () => import('@/views/Settings.vue'),
       },
     ]
   },

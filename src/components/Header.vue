@@ -15,7 +15,7 @@
 
     <v-spacer/>  -->
 
-    <v-menu
+<!--    <v-menu
       open-on-hover>
       <template v-slot:activator="{ props }">
        <span v-bind="props" style="cursor: pointer" class="mx-5 mr-10">
@@ -36,7 +36,7 @@
           <div v-html="subtitle" ></div>
         </template>
       </v-list>
-    </v-menu>
+    </v-menu>-->
 
     <v-menu
       open-on-hover>
@@ -118,7 +118,7 @@ export default {
           subtitle: '<span class="text-primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
         },
       ],
-      
+
     }
   },
   methods: {
@@ -129,7 +129,7 @@ export default {
 
         this.$router.push({name: 'Login'})
       }
-      
+
     }
   }
 

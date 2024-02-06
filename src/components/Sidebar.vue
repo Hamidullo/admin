@@ -39,7 +39,7 @@
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item>
     </v-list>
-    
+
   </v-navigation-drawer>
 </template>
 
@@ -70,7 +70,7 @@ export default {
           icon: 'mdi-briefcase',
           title: 'O’QUV-USLUBIY ISHLAR' ,
           action: this.openWorkPage,
-          routeName: "Users"
+          routeName: "Textbook"
         },
         {
           value: 4,
@@ -135,7 +135,7 @@ export default {
       this.$router.push({name: 'About'})
     },
     openWorkPage(){
-      this.$router.push({name: 'Users'})
+      this.$router.push({name: 'Textbook'})
     },
     openBrainPage(){
       this.$router.push({name: 'Brain'})

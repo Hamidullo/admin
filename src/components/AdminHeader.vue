@@ -4,18 +4,18 @@
       elevate-on-scroll
       elevation="4"
       color="white">
-  
+
       <v-app-bar-title >
         <h4>
           Namangan muhandislik-texnologiya instituti
         </h4>
       </v-app-bar-title>
-  
+
       <!-- <v-spacer/>
-  
+
       <v-spacer/>  -->
-  
-      <v-menu
+
+<!--      <v-menu
         open-on-hover>
         <template v-slot:activator="{ props }">
          <span v-bind="props" style="cursor: pointer" class="mx-5 mr-10">
@@ -26,7 +26,7 @@
           </v-badge>
          </span>
         </template>
-  
+
         <v-list
           :items="items"
           item-props
@@ -36,8 +36,8 @@
             <div v-html="subtitle" ></div>
           </template>
         </v-list>
-      </v-menu>
-  
+      </v-menu>-->
+
       <v-menu
         open-on-hover>
         <template v-slot:activator="{ props }">
@@ -54,14 +54,14 @@
            </v-chip>
          </span>
         </template>
-  
+
         <v-list width="250" class="py-0">
           <v-list-item
             class="ma-2"
             prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
             title="Sharli Chin"
             subtitle="john@google.com">
-  
+
           </v-list-item>
           <v-divider/>
           <v-list-item v-for="(menu, i) in menus" :key="i" link>
@@ -71,12 +71,12 @@
             <v-list-item-title v-text="menu.title" @click="drawer(menu.rout)"></v-list-item-title>
           </v-list-item>
         </v-list>
-  
+
       </v-menu>
-  
+
     </v-app-bar>
   </template>
-  
+
   <script>
   export default {
     data() {
@@ -118,7 +118,7 @@
             subtitle: '<span class="text-primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
           },
         ],
-        
+
       }
     },
     methods: {
@@ -126,17 +126,16 @@
         if(rout !== 'logout'){
           this.$router.push({name: rout})
         } else {
-  
+
           this.$router.push({name: 'Login'})
         }
-        
+
       }
     }
-  
+
   }
   </script>
-  
+
   <style scoped>
-  
+
   </style>
-  

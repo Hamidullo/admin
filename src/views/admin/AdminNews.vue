@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1>Admin Dashboard</h1>
+    <h1>Admin news list</h1>
   </v-container>
 </template>
 
