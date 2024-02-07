@@ -15,7 +15,7 @@
 
       <v-spacer/>  -->
 
-<!--      <v-menu
+      <v-menu
         open-on-hover>
         <template v-slot:activator="{ props }">
          <span v-bind="props" style="cursor: pointer" class="mx-5 mr-10">
@@ -36,7 +36,7 @@
             <div v-html="subtitle" ></div>
           </template>
         </v-list>
-      </v-menu>-->
+      </v-menu>
 
       <v-menu
         open-on-hover>

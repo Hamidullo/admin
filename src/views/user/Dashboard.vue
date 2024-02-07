@@ -1,6 +1,5 @@
 <template>
-  <v-container class="py-8 px-6 bg-grey-lighten-2" align="center" justify="center"
-  fluid>
+  <v-container class="py-8 px-6 bg-grey-lighten-2" align="center" justify="center" fluid>
 
   <v-row align="center" justify="center">
 
@@ -115,7 +114,7 @@
           hide-details
         ></v-text-field>
       </template>
-  
+
       <v-data-table
         :headers="headersR"
         :items="dessertsR"
@@ -431,7 +430,7 @@ export default {
         ],
       }
     },
-    
+
   }
 </script>
 
