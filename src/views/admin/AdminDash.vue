@@ -114,13 +114,11 @@
 
 <script>
 import PlanetChart from '@/components/PlanetChart.vue'
-import PlChart from '@/components/PlChart.vue'
-import PChart from '@/components/PChart.vue'
 import UChart from '@/components/UChart.vue'
 
 export default {
   components: {
-    PlanetChart,PlChart,PChart,UChart
+    PlanetChart,UChart
   },
   data() {
     return {
