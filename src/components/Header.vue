@@ -6,8 +6,8 @@
     color="white">
 
     <v-app-bar-title >
-      <h4>
-        Namangan muhandislik-texnologiya instituti
+      <h4 >
+        <v-btn @click="openDash"><strong>Namangan muhandislik-texnologiya instituti</strong></v-btn>
       </h4>
     </v-app-bar-title>
 
@@ -129,7 +129,9 @@ export default {
 
         this.$router.push({name: 'Login'})
       }
-
+    },
+    openDash(){
+      this.$router.push({name: 'Dashboard'})
     }
   }
 

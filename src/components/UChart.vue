@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <canvas id="u-chart"></canvas>
   </div>
 </template>
@@ -14,7 +14,6 @@ export default {
   },
   data() {
     return{
-
       planets: this.planetData
     }
   },

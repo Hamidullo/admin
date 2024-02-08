@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 420px;">
     <canvas id="pl-chart"></canvas>
   </div>
 </template>
