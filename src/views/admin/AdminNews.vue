@@ -8,7 +8,7 @@
         <template v-slot:top>
           <v-toolbar
             flat>
-            <v-toolbar-title>Yangi qo'shilganlar</v-toolbar-title>
+            <v-toolbar-title>YANGI QO’SHILGANLAR HUJATLAR</v-toolbar-title>
             <v-divider
               class="mx-4"
               inset
@@ -31,7 +31,7 @@
                         md="4">
                         <v-text-field
                           v-model="editedItem.name"
-                          label="Dessert name">
+                          label="User name">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -40,7 +40,7 @@
                         md="4">
                         <v-text-field
                           v-model="editedItem.calories"
-                          label="Calories">
+                          label="Type Document">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -49,7 +49,7 @@
                         md="4">
                         <v-text-field
                           v-model="editedItem.fat"
-                          label="Fat (g)">
+                          label="Count of Authors">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -58,29 +58,24 @@
                         md="4">
                         <v-text-field
                           v-model="editedItem.carbs"
-                          label="Carbs (g)">
+                          label="Name of Authors">
                         </v-text-field>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
                         md="4">
-                        <v-text-field
-                          v-model="editedItem.protein"
-                          label="Protein (g)">
-                        </v-text-field>
+                        <v-btn class="bg-grey-lighten-4" block rounded="0" size="x-large">Hujjatni yuklash</v-btn>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
                         md="4">
-                        <v-checkbox
-                          v-model="editedItem.check"
-                          label="Tasdiqlash"
-                          color="success"
-                          value="success"
-                          hide-details
-                        ></v-checkbox>
+                        <v-select
+                          label="Amal"
+                          v-model="select"
+                          :items="['Rad etish', 'Tasdiqlash']"
+                        ></v-select>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -144,6 +139,7 @@
 export default {
   data() {
     return{
+      select: "",
       dialog: false,
       dialogDelete: false,
       headers: [

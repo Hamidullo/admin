@@ -7,7 +7,7 @@
 
       <v-app-bar-title >
         <h4 >
-          <v-btn @click="openDash"><strong>Namangan muhandislik-texnologiya instituti</strong></v-btn>
+          <v-btn @click="openDashAdmin"><strong>Namangan muhandislik-texnologiya instituti</strong></v-btn>
         </h4>
       </v-app-bar-title>
 
@@ -131,8 +131,8 @@
         }
 
       },
-      openDash(){
-        this.$router.push({name: 'Dashboard'})
+      openDashAdmin(){
+        this.$router.push({name: 'AdminDash'})
       }
     }
 

@@ -81,6 +81,7 @@
         </v-col>
         <v-col  cols="6">
           <v-select
+            readonly
             label="Role"
             :items="['User', 'Admin', 'Super-Admin']">
 

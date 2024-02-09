@@ -66,14 +66,14 @@
           },
           {
             value: 3,
-            icon: 'mdi-briefcase',
-            title: 'YANGI QO’SHILGANLAR' ,
+            icon: 'mdi-bell',
+            title: 'YANGI QO’SHILGAN HUJATLAR' ,
             action: this.openAdminNewsPage,
             routeName: "AdminNews"
           },
           {
             value: 4,
-            icon: 'mdi-brain',
+            icon: 'mdi-account-multiple-plus',
             title: 'FOYDALANUVCHILAR' ,
             action: this.openAdminUsersPage,
             routeName: "AdminUsers"
