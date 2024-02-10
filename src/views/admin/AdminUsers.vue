@@ -24,7 +24,7 @@
                   dark
                   class="mb-2"
                   v-bind="props">
-                  Yangi foydalanuvchi
+                  Yangi foydalanuvchi qo'shish
                 </v-btn>
               </template>
               <v-card>
@@ -41,7 +41,8 @@
                         md="4">
                         <v-text-field
                           v-model="editedItem.name"
-                          label="Dessert name">
+                          clearable
+                          label="F.I.SH">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -49,8 +50,9 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedItem.calories"
-                          label="Calories">
+                          v-model="editedItem.id"
+                          clearable
+                          label="Hemis ID">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -58,8 +60,9 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedItem.fat"
-                          label="Fat (g)">
+                          v-model="editedItem.position"
+                          clearable
+                          label="Lavozimi">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -67,8 +70,19 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedItem.carbs"
-                          label="Carbs (g)">
+                          v-model="editedItem.department"
+                          clearable
+                          label="Kafedrasi">
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-text-field
+                          v-model="editedItem.faculty"
+                          clearable
+                          label="Fakulteti">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -77,7 +91,8 @@
                         md="4">
                         <v-text-field
                           v-model="editedItem.protein"
-                          label="Protein (g)">
+                          clearable
+                          label="Parol">
                         </v-text-field>
                       </v-col>
                     </v-row>
@@ -146,32 +161,32 @@ export default {
       dialogDelete: false,
       headers: [
         {
-          title: 'Dessert (100g serving)',
+          title: 'F.I.SH',
           align: 'start',
           sortable: false,
           key: 'name',
         },
-        { title: 'Calories',align: 'center', key: 'calories' },
-        { title: 'Fat (g)',align: 'center', key: 'fat' },
-        { title: 'Carbs (g)',align: 'center', key: 'carbs' },
-        { title: 'Protein (g)',align: 'center', key: 'protein' },
+        { title: 'Hemis Id',align: 'center', key: 'id' },
+        { title: 'Lavozimi',align: 'center', key: 'position' },
+        { title: 'Kafedrasi',align: 'center', key: 'department' },
+        { title: 'Fakulteti',align: 'center', key: 'faculty' },
         { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
       desserts: [],
       editedIndex: -1,
       editedItem: {
         name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
+        id: 0,
+        position: 0,
+        department: 0,
+        faculty: 0,
       },
       defaultItem: {
         name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
+        id: 0,
+        position: 0,
+        department: 0,
+        faculty: 0,
       },
     }
   },
@@ -200,91 +215,35 @@ export default {
         {
           name: 'Frozen Yogurt',
           id: 1,
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
+          position: 159,
+          department: 6.0,
+          faculty: 24,
           protein: 4.0,
         },
         {
           name: 'Frozen Yogurt',
           id: 2,
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
+          position: 159,
+          department: 6.0,
+          faculty: 24,
           protein: 4.0,
         },
         {
           name: 'Ice cream sandwich',
           id: 3,
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
+          position: 237,
+          department: 9.0,
+          faculty: 37,
           protein: 4.3,
         },
         {
           name: 'Eclair',
           id: 4,
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
+          position: 262,
+          department: 16.0,
+          faculty: 23,
           protein: 6.0,
-        },
-        {
-          name: 'Cupcake',
-          id: 5,
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-        },
-        {
-          name: 'Gingerbread',
-          id: 6,
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-        },
-        {
-          name: 'Jelly bean',
-          id: 7,
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-        },
-        {
-          name: 'Lollipop',
-          id: 8,
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-        },
-        {
-          name: 'Honeycomb',
-          id: 9,
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-        },
-        {
-          name: 'Donut',
-          id: 10,
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-        },
-        {
-          name: 'KitKat',
-          id: 11,
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-        },
+        }
       ]
     },
 

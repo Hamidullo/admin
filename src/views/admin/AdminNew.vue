@@ -9,7 +9,7 @@
       <v-row>
         <v-col cols="6">
           <v-text-field
-            label="First Name"
+            label="F.I.SH"
             readonly
             clearable
             outlined
@@ -20,77 +20,70 @@
         </v-col>
         <v-col  cols="6">
           <v-text-field
-            label="Last Name"
+            label="Hujjat nomi"
             readonly
             clearable
             outlined
             shaped
-            prepend-inner-icon="mdi-account">
+            prepend-inner-icon="mdi-file-document">
 
           </v-text-field>
         </v-col>
         <v-col  cols="6">
           <v-text-field
-            label="Username"
+            label="Mualliflar soni"
             readonly
             clearable
             outlined
             shaped
-            prepend-inner-icon="mdi-account">
+            prepend-inner-icon="mdi-account-group">
 
           </v-text-field>
         </v-col>
         <v-col  cols="6">
           <v-text-field
-            label="Email"
+            label="Ham mualliflar"
             readonly
             clearable
             outlined
             shaped
-            prepend-inner-icon="mdi-email">
+            prepend-inner-icon="mdi-account-multiple-check">
 
           </v-text-field>
         </v-col>
         <v-col  cols="6">
           <v-text-field
-            label="Address"
+            label="Nashr etilgan yil"
             readonly
             clearable
             outlined
             shaped
-            prepend-inner-icon="mdi-map-marker">
+            prepend-inner-icon="mdi-calendar-multiple-check">
 
           </v-text-field>
         </v-col>
         <v-col  cols="6">
           <v-text-field
-            label="Phone Number"
+            label="Guvohnoma raqami"
             readonly
             clearable
             outlined
             shaped
-            prepend-inner-icon="mdi-phone">
+            prepend-inner-icon="mdi-numeric">
 
           </v-text-field>
         </v-col>
         <v-col  cols="6">
           <v-select
             readonly
-            label="Role"
-            :items="['User', 'Admin', 'Super-Admin']">
-
+            prepend-inner-icon="mdi-file-arrow-up-down"
+            label="Hujjat holati"
+            :items="['Rad etilgan', 'Tasdiqlangan']">
           </v-select>
         </v-col>
         <v-col  cols="6">
-          <v-text-field
-            label="Telegram"
-            readonly
-            clearable
-            outlined
-            shaped
-            prepend-inner-icon="mdi-send">
+          <v-btn size="x-large" rounded="sm" block class="bg-grey-lighten-4" prepend-icon="mdi-download-circle">Hujjatni yuklash</v-btn>
 
-          </v-text-field>
         </v-col>
       </v-row>
 
@@ -102,7 +95,7 @@
 export default {
   data (){
     return{
-      name: "Name",
+      name: "Hujjat turi",
       snack: 0,
       search: '',
       headers: [

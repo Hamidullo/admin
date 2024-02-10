@@ -80,7 +80,7 @@ const routes = [
         component: () => import('@/views/admin/AdminDash.vue'),
       },
       {
-        path: 'item/:userId',
+        path: 'item/:id',
         name: 'AdminItem',
         component: () => import('@/views/admin/AdminItem.vue'),
       },

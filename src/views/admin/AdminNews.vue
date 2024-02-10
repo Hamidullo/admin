@@ -8,7 +8,7 @@
         <template v-slot:top>
           <v-toolbar
             flat>
-            <v-toolbar-title>YANGI QO’SHILGANLAR HUJATLAR</v-toolbar-title>
+            <v-toolbar-title>YANGI QO’SHILGAN HUJATLAR</v-toolbar-title>
             <v-divider
               class="mx-4"
               inset
@@ -31,7 +31,7 @@
                         md="4">
                         <v-text-field
                           v-model="editedItem.name"
-                          label="User name">
+                          label="F.I.Sh">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -40,7 +40,7 @@
                         md="4">
                         <v-text-field
                           v-model="editedItem.calories"
-                          label="Type Document">
+                          label="Hujjat turi">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -49,7 +49,7 @@
                         md="4">
                         <v-text-field
                           v-model="editedItem.fat"
-                          label="Count of Authors">
+                          label="Mualliflar soni">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -58,7 +58,7 @@
                         md="4">
                         <v-text-field
                           v-model="editedItem.carbs"
-                          label="Name of Authors">
+                          label="Ham mualliflar">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -143,17 +143,12 @@ export default {
       dialog: false,
       dialogDelete: false,
       headers: [
-        {
-          title: 'Dessert (100g serving)',
-          align: 'start',
-          sortable: false,
-          key: 'name',
-        },
-        { title: 'Calories',align: 'center', key: 'calories' },
-        { title: 'Fat (g)',align: 'center', key: 'fat' },
-        { title: 'Carbs (g)',align: 'center', key: 'carbs' },
-        { title: 'Protein (g)',align: 'center', key: 'protein' },
-        { title: 'Actions',align: 'center', key: 'actions', sortable: false },
+        { title: 'F.I.SH', align: 'start', sortable: false, key: 'name',},
+        { title: 'Hujjat turi',align: 'center', key: 'type' },
+        { title: 'Mualliflar soni',align: 'center', key: 'count' },
+        { title: 'Ham mualliflar',align: 'center', key: 'authors' },
+        { title: 'Hujjat yuklangan',align: 'center', key: 'doc' },
+        { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
       desserts: [],
       editedIndex: -1,
@@ -194,91 +189,19 @@ export default {
         {
           name: 'Frozen Yogurt',
           id: 1,
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
+          type: 159,
+          count: 6.0,
+          authors: 24,
+          doc: 4.0,
         },
         {
           name: 'Frozen Yogurt',
           id: 2,
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-        },
-        {
-          name: 'Ice cream sandwich',
-          id: 3,
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-        },
-        {
-          name: 'Eclair',
-          id: 4,
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-        },
-        {
-          name: 'Cupcake',
-          id: 5,
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-        },
-        {
-          name: 'Gingerbread',
-          id: 6,
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-        },
-        {
-          name: 'Jelly bean',
-          id: 7,
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-        },
-        {
-          name: 'Lollipop',
-          id: 8,
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-        },
-        {
-          name: 'Honeycomb',
-          id: 9,
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-        },
-        {
-          name: 'Donut',
-          id: 10,
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-        },
-        {
-          name: 'KitKat',
-          id: 11,
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-        },
+          type: 159,
+          count: 6.0,
+          authors: 24,
+          doc: 4.0,
+        }
       ]
     },
 

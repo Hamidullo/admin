@@ -102,7 +102,7 @@
         <v-card
           flat
           align="center"
-          title="O’QUV -USLUBIY ISHLAR">
+          title="O’QUV - USLUBIY ISHLAR">
           <template v-slot:text>
             <v-text-field
               v-model="search"
@@ -118,6 +118,13 @@
             :headers="headers"
             :items="desserts"
             :search="search">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="large"
+                @click="openItem(item)">
+                mdi-open-in-new
+              </v-icon>
+            </template>
           </v-data-table>
         </v-card>
       </v-col>
@@ -277,17 +284,17 @@
 export default {
   data (){
     return{
-      name: "Name",
+      name: "F.I.SH",
       snack: 0,
 
       search: '',
       headers: [
-        { align: 'start', key: 'name', sortable: false, title: 'Dessert (100g serving)' },
-        { key: 'calories',align: 'center', title: 'Calories' },
+        { align: 'start', key: 'name', sortable: false, title: 'Nomi' },
+        { key: 'type',align: 'center', title: 'Turi' },
         { key: 'fat',align: 'center', title: 'Fat (g)' },
         { key: 'carbs',align: 'center', title: 'Carbs (g)' },
         { key: 'protein',align: 'center', title: 'Protein (g)' },
-        { key: 'iron',align: 'center', title: 'Iron (%)' },
+        { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
       desserts: [
         {
@@ -924,6 +931,12 @@ export default {
         },
       ],
     }
+  },
+  methods: {
+    openItem (item) {
+      const id = item.fat;
+      this.$router.push({path: `/admin/item/${id}` })
+    },
   }
 };
 </script>
