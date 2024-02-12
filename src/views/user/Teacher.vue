@@ -4,14 +4,13 @@
 
     <v-row>
       <v-col>
-        <v-card
-        flat
+        <v-card flat
         title="Tayyorlagan shogirdlar">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
             <v-dialog
-              v-model="dialogS"
+              v-model="dialog"
               persistent
               width="1024">
               <template v-slot:activator="{ props }">
@@ -23,7 +22,7 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="text-h5">Tayyorlagan shogird qo'shish:</span>
+                  <span class="text-h5">{{formTitle}}</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container>
@@ -33,6 +32,8 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedItem.name"
+                          clearable
                           label="Tayyorlagan shogird"
                           required>
                       </v-text-field>
@@ -42,6 +43,8 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedItem.name"
+                          clearable
                           label="Fan doktori">
                       </v-text-field>
                       </v-col>
@@ -50,6 +53,8 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedItem.name"
+                          clearable
                           label="Falsafa doktori">
                       </v-text-field>
                       </v-col>
@@ -58,6 +63,8 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedItem.name"
+                          clearable
                           label="Olimpiada g'olibi"
                           persistent-hint
                           required>
@@ -68,6 +75,8 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedItem.name"
+                          clearable
                           label="Sport ustalari"
                           required>
                       </v-text-field>
@@ -77,6 +86,8 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedItem.name"
+                          clearable
                           label="Stipendiant">
                       </v-text-field>
                       </v-col>
@@ -89,15 +100,26 @@
                   <v-btn
                     color="blue-darken-1"
                     variant="text"
-                    @click="dialogS = false">
+                    @click="close">
                     Yopish
                   </v-btn>
                   <v-btn
                     color="blue-darken-1"
                     variant="text"
-                    @click="dialogS = false">
+                    @click="save">
                     Saqlash
                   </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+            <v-dialog v-model="dialogDelete" width="auto">
+              <v-card>
+                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Shogirdni o'chirishni hohlaysizmi?</v-card-title>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue-darken-1" variant="text" @click="closeDelete">Bekor qilish</v-btn>
+                  <v-btn color="red" variant="text" @click="deleteItemConfirm">O'chirish</v-btn>
+                  <v-spacer></v-spacer>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -111,15 +133,28 @@
             prepend-inner-icon="mdi-magnify"
             single-line
             variant="outlined"
-            hide-details
-          ></v-text-field>
+            hide-details>
+          </v-text-field>
         </template>
-    
+
         <v-data-table
           :headers="headers"
-          :items="desserts"
-          :search="search"
-        ></v-data-table>
+          :items="items"
+          :search="search">
+          <template v-slot:item.actions="{ item }">
+            <v-icon
+              size="small"
+              class="me-2"
+              @click="editItem(item)">
+              mdi-pencil
+            </v-icon>
+            <v-icon
+              size="small"
+              @click="deleteItem(item)">
+              mdi-delete
+            </v-icon>
+          </template>
+        </v-data-table>
       </v-card>
       </v-col>
 
@@ -130,24 +165,36 @@
 
 <script>
 export default {
-    data () {
+  data () {
       return {
-        dialogS: false,
+        dialog: false,
+        dialogDelete: false,
+        editedIndex: -1,
+        editedItem: {
+          name: '',
+          id: 0,
+          position: 0,
+          department: 0,
+          faculty: 0,
+        },
+        defaultItem: {
+          name: '',
+          id: 0,
+          position: 0,
+          department: 0,
+          faculty: 0,
+        },
         search: '',
         headers: [
-          {
-            align: 'start',
-            key: 'name',
-            sortable: false,
-            title: 'Tayyorlagan shogird',
-          },
+          { align: 'start', key: 'name', sortable: false, title: 'Tayyorlagan shogird',},
           { key: 'fan', title: 'Fan doktori' },
           { key: 'falsafa', title: 'Falsafa doktori' },
           { key: 'olimpiyada', title: 'Olimpiada g’olibi' },
           { key: 'sport', title: 'Sport ustalari' },
           { key: 'stipendia', title: 'Stipendiant' },
+          { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
         ],
-        desserts: [
+        items: [
           {
             name: 'Frozen Yogurt',
             fan: 159,
@@ -231,8 +278,67 @@ export default {
         ],
       }
     },
-    
+
+  computed: {
+    formTitle () {
+      return this.editedIndex === -1 ? 'Tayyorlagan shogird qo`shish' : 'Tayyorlagan shogirdni taxrirlash'
+    },
+  },
+
+  watch: {
+    dialog (val) {
+      val || this.close()
+    },
+    dialogDelete (val) {
+      val || this.closeDelete()
+    },
+  },
+
+  methods: {
+    editItem (item) {
+      this.editedIndex = this.items.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
+    },
+
+    deleteItem (item) {
+      this.editedIndex = this.items.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialogDelete = true
+    },
+
+    close () {
+      this.dialog = false
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      })
+    },
+
+    closeDelete () {
+      this.dialogDelete = false
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      })
+    },
+
+    deleteItemConfirm () {
+      this.items.splice(this.editedIndex, 1)
+      this.closeDelete()
+    },
+
+    save () {
+      if (this.editedIndex > -1) {
+        Object.assign(this.items[this.editedIndex], this.editedItem)
+      } else {
+        this.items.push(this.editedItem)
+      }
+      this.close()
+    },
   }
+
+}
 </script>
 
 <style scoped>

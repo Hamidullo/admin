@@ -1,18 +1,15 @@
 <template>
-  <v-container class="py-8 px-6 bg-grey-lighten-2"
-  fluid>
+  <v-container class="py-8 px-6 bg-grey-lighten-2" fluid>
 
     <v-row>
-
       <v-col>
-        <v-card
-        flat
+        <v-card flat
         title="Top – 1000-da o’quv mashg’ulotlari olib borish">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
             <v-dialog
-              v-model="dialogS"
+              v-model="dialog"
               persistent
               width="1024">
               <template v-slot:activator="{ props }">
@@ -24,7 +21,7 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="text-h5">Top – 1000-da o’quv mashg’ulotlari qo'shish:</span>
+                  <span class="text-h5">{{formTitle}}</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container>
@@ -34,6 +31,8 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedItem.name"
+                          clearable
                           label="Xorijiy OTM yoki ITM nomi"
                           required>
                       </v-text-field>
@@ -43,12 +42,16 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedItem.name"
+                          clearable
                           label="Davlati">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
+                          v-model="editedItem.name"
+                          clearable
                           label="Mashg’ulot olib borilgan kunlar">
                       </v-text-field>
                       </v-col>
@@ -57,6 +60,8 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedItem.name"
+                          clearable
                           label="Mashg’ulot xajmi"
                           persistent-hint
                           required>
@@ -66,10 +71,10 @@
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
-                          label="Sertifikat yuklanadi"
-                          required>
-                      </v-text-field>
+                        <v-file-input
+                          show-size
+                          label="Sertifikatni yuklash">
+                        </v-file-input>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -79,15 +84,26 @@
                   <v-btn
                     color="blue-darken-1"
                     variant="text"
-                    @click="dialogS = false">
+                    @click="close">
                     Yopish
                   </v-btn>
                   <v-btn
                     color="blue-darken-1"
                     variant="text"
-                    @click="dialogS = false">
+                    @click="save">
                     Saqlash
                   </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+            <v-dialog v-model="dialogDelete" width="auto">
+              <v-card>
+                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Top – 1000-da o’quv mashg’ulotlari olib borish o'chirishni hohlaysizmi?</v-card-title>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue-darken-1" variant="text" @click="closeDelete">Bekor qilish</v-btn>
+                  <v-btn color="red" variant="text" @click="deleteItemConfirm">O'chirish</v-btn>
+                  <v-spacer></v-spacer>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -101,26 +117,38 @@
             prepend-inner-icon="mdi-magnify"
             single-line
             variant="outlined"
-            hide-details
-          ></v-text-field>
+            hide-details>
+          </v-text-field>
         </template>
         <v-data-table
           :headers="headers"
-          :items="desserts"
-          :search="search"
-        ></v-data-table>
+          :items="items"
+          :search="search">
+          <template v-slot:item.actions="{ item }">
+            <v-icon
+              size="small"
+              class="me-2"
+              @click="editItem(item)">
+              mdi-pencil
+            </v-icon>
+            <v-icon
+              size="small"
+              @click="deleteItem(item)">
+              mdi-delete
+            </v-icon>
+          </template>
+        </v-data-table>
       </v-card>
       </v-col>
 
       <v-col>
         <v-card flat
         title="Stajirovka va malaka oshirish">
-        <template v-slot:append>
-          <!-- Dialog start -->
-          <v-row justify="center" class="mr-2">
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
             <v-dialog
-              v-model="dialogA"
-              persistent
+              v-model="dialogC" persistent
               width="1024">
               <template v-slot:activator="{ props }">
                 <v-btn
@@ -131,7 +159,7 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="text-h5">Stajirovka va malaka oshirish qo'shish:</span>
+                  <span class="text-h5">{{ formCTitle }}</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container>
@@ -141,6 +169,8 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedCItem.name"
+                          clearable
                           label="Xorijiy OTM yoki ITM nomi"
                           required>
                       </v-text-field>
@@ -150,12 +180,16 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedCItem.name"
+                          clearable
                           label="Davlati">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
+                          v-model="editedCItem.name"
+                          clearable
                           label="Stajirovka va malaka oshirilgan kunlar">
                       </v-text-field>
                       </v-col>
@@ -164,6 +198,8 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedCItem.name"
+                          clearable
                           label="Stajirovka xajmi"
                           persistent-hint
                           required>
@@ -173,10 +209,10 @@
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
-                          label="Sertifikat yuklanadi"
-                          required>
-                      </v-text-field>
+                        <v-file-input
+                          show-size
+                          label="Sertifikatni yuklash">
+                        </v-file-input>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -186,42 +222,63 @@
                   <v-btn
                     color="blue-darken-1"
                     variant="text"
-                    @click="dialogA = false">
+                    @click="closeC">
                     Yopish
                   </v-btn>
                   <v-btn
                     color="blue-darken-1"
                     variant="text"
-                    @click="dialogA = false">
+                    @click="saveC">
                     Saqlash
                   </v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
+              <v-dialog v-model="dialogCDelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Stajirovka va malaka oshirish o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeCDelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteCItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
           </v-row>
-          <!-- Dialog end -->
-        </template>
+            <!-- Dialog end -->
+          </template>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchC"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details>
+            </v-text-field>
+          </template>
         <v-data-table
-          :custom-filter="filterOnlyCapsText"
           :headers="headersC"
           :items="itemsC"
           :search="searchC"
           item-value="name">
-        <template v-slot:top>
-          <v-text-field
-            v-model="searchC"
-            label="Qidiruv.."
-            class="px-3 pb-4"
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details>
-          </v-text-field>
-        </template>
+          <template v-slot:item.actions="{ item }">
+            <v-icon
+              size="small"
+              class="me-2"
+              @click="editCItem(item)">
+              mdi-pencil
+            </v-icon>
+            <v-icon
+              size="small"
+              @click="deleteCItem(item)">
+              mdi-delete
+            </v-icon>
+          </template>
       </v-data-table>
         </v-card>
       </v-col>
-
     </v-row>
   </v-container>
 </template>
@@ -230,22 +287,52 @@
 export default {
     data () {
       return {
-        dialogS: false,
-        dialogA: false,
+        dialog: false,
+        dialogDelete: false,
+        editedIndex: -1,
+        editedItem: {
+          name: '',
+          id: 0,
+          position: 0,
+          department: 0,
+          faculty: 0,
+        },
+        defaultItem: {
+          name: '',
+          id: 0,
+          position: 0,
+          department: 0,
+          faculty: 0,
+        },
+
+        dialogC: false,
+        dialogCDelete: false,
+        editedCIndex: -1,
+        editedCItem: {
+          name: '',
+          id: 0,
+          position: 0,
+          department: 0,
+          faculty: 0,
+        },
+        defaultCItem: {
+          name: '',
+          id: 0,
+          position: 0,
+          department: 0,
+          faculty: 0,
+        },
+
         search: '',
         headers: [
-          {
-            align: 'start',
-            key: 'name',
-            sortable: false,
-            title: 'Xorijiy OTM yoki ITM nomi',
-          },
+          { align: 'start', key: 'name', sortable: false, title: 'Xorijiy OTM yoki ITM nomi',},
           { key: 'davlati', title: 'Davlati' },
           { key: 'kunlar', title: 'Mashg’ulot olib borilgan kunlar' },
           { key: 'hajmi', title: 'Mashg’ulot xajmi' },
           { key: 'sertifikat', title: 'Sertifikat yuklanadi' },
+          { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
         ],
-        desserts: [
+        items: [
           {
             name: 'Frozen Yogurt',
             davlati: 159,
@@ -317,33 +404,15 @@ export default {
             sertifikat: 7,
           },
         ],
+
         searchC: '',
         headersC: [
-        {
-          title: 'Xorijiy OTM yoki ITM nomi',
-          align: 'start',
-          key: 'name',
-        },
-        {
-          title: 'Davlati',
-          align: 'end',
-          key: 'davlati',
-        },
-        {
-          title: 'Stajirovka va malaka oshirilgan kunlar',
-          align: 'end',
-          key: 'kunlar',
-        },
-        {
-          title: 'Stajirovka xajmi',
-          align: 'end',
-          key: 'hajmi',
-        },
-        {
-          title: 'Sertifikat yuklanadi',
-          align: 'end',
-          key: 'sertifikat',
-        },
+          { align: 'start', sortable: false, key: 'name', title: 'Xorijiy OTM yoki ITM nomi',},
+          { title: 'Davlati', align: 'center', key: 'davlati',},
+          { title: 'Stajirovka va malaka oshirilgan kunlar', align: 'center', key: 'kunlar',},
+          { title: 'Stajirovka xajmi', align: 'end', key: 'hajmi',},
+          { title: 'Sertifikat yuklanadi', align: 'end', key: 'sertifikat',},
+          { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
         ],
         itemsC: [
         {
@@ -419,16 +488,116 @@ export default {
         ]
       }
     },
-    methods: {
-      filterOnlyCapsText (value, query, item) {
-        return value != null &&
-          query != null &&
-          typeof value === 'string' &&
-          value.toString().toLocaleLowerCase().indexOf(query) !== -1
-      },   
+  methods: {
+    editItem (item) {
+      this.editedIndex = this.items.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
     },
-    
+
+    editCItem (item) {
+      this.editedCIndex = this.itemsC.indexOf(item)
+      this.editedCItem = Object.assign({}, item)
+      this.dialogC = true
+    },
+
+    deleteItem (item) {
+      this.editedIndex = this.items.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialogDelete = true
+    },
+
+    deleteCItem (item) {
+      this.editedCIndex = this.itemsC.indexOf(item)
+      this.editedCItem = Object.assign({}, item)
+      this.dialogCDelete = true
+    },
+
+    deleteItemConfirm () {
+      this.items.splice(this.editedIndex, 1)
+      this.closeDelete()
+    },
+
+    deleteCItemConfirm () {
+      this.itemsC.splice(this.editedCIndex, 1)
+      this.closeCDelete()
+    },
+
+    close () {
+      this.dialog = false
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      })
+    },
+
+    closeC () {
+      this.dialogC = false
+      this.$nextTick(() => {
+        this.editedCItem = Object.assign({}, this.defaultCItem)
+        this.editedCIndex = -1
+      })
+    },
+
+    closeDelete () {
+      this.dialogDelete = false
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      })
+    },
+
+    closeCDelete () {
+      this.dialogCDelete = false
+      this.$nextTick(() => {
+        this.editedCItem = Object.assign({}, this.defaultCItem)
+        this.editedCIndex = -1
+      })
+    },
+
+    save () {
+      if (this.editedIndex > -1) {
+        Object.assign(this.items[this.editedIndex], this.editedItem)
+      } else {
+        this.items.push(this.editedItem)
+      }
+      this.close()
+    },
+
+    saveC () {
+      if (this.editedCIndex > -1) {
+        Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
+      } else {
+        this.itemsC.push(this.editedCItem)
+      }
+      this.closeC()
+    },
+  },
+
+  computed: {
+    formTitle () {
+      return this.editedIndex === -1 ? 'Top – 1000-da o’quv mashg’ulotlari olib borish qo`shish' : 'Top – 1000-da o’quv mashg’ulotlari olib borish taxrirlash'
+    },
+    formCTitle () {
+      return this.editedQIndex === -1 ? 'Stajirovka va malaka oshirish qo`shish' : 'Stajirovka va malaka oshirish taxrirlash'
+    },
+  },
+
+  watch: {
+    dialog (val) {
+      val || this.close()
+    },
+    dialogDelete (val) {
+      val || this.closeDelete()
+    },
+    dialogC (val) {
+      val || this.closeC()
+    },
+    dialogCDelete (val) {
+      val || this.closeCDelete()
+    },
   }
+}
 </script>
 
 <style scoped>

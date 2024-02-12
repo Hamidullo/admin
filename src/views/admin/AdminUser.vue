@@ -149,6 +149,13 @@
             :headers="headersI"
             :items="dessertsI"
             :search="searchI">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="large"
+                @click="openItem(item)">
+                mdi-open-in-new
+              </v-icon>
+            </template>
           </v-data-table>
         </v-card>
       </v-col>
@@ -175,6 +182,13 @@
             :headers="headersL"
             :items="dessertsL"
             :search="searchL">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="large"
+                @click="openItem(item)">
+                mdi-open-in-new
+              </v-icon>
+            </template>
           </v-data-table>
         </v-card>
       </v-col>
@@ -199,6 +213,13 @@
             :headers="headersIX"
             :items="dessertsIX"
             :search="searchIX">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="large"
+                @click="openItem(item)">
+                mdi-open-in-new
+              </v-icon>
+            </template>
           </v-data-table>
         </v-card>
       </v-col>
@@ -225,6 +246,13 @@
             :headers="headersX"
             :items="dessertsX"
             :search="searchX">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="large"
+                @click="openItem(item)">
+                mdi-open-in-new
+              </v-icon>
+            </template>
           </v-data-table>
         </v-card>
       </v-col>
@@ -249,6 +277,13 @@
             :headers="headersU"
             :items="dessertsU"
             :search="searchU">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="large"
+                @click="openItem(item)">
+                mdi-open-in-new
+              </v-icon>
+            </template>
           </v-data-table>
         </v-card>
       </v-col>
@@ -273,6 +308,13 @@
             :headers="headersE"
             :items="dessertsE"
             :search="searchE">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="large"
+                @click="openItem(item)">
+                mdi-open-in-new
+              </v-icon>
+            </template>
           </v-data-table>
         </v-card>
       </v-col>
@@ -312,71 +354,7 @@ export default {
           carbs: 37,
           protein: 4.3,
           iron: 1,
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: 7,
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: 8,
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: 16,
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: 0,
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: 2,
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: 45,
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: 22,
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: 6,
-        },
+        }
       ],
 
       searchI: '',
@@ -386,7 +364,7 @@ export default {
         { key: 'fat',align: 'center', title: 'Fat (g)' },
         { key: 'carbs',align: 'center', title: 'Carbs (g)' },
         { key: 'protein',align: 'center', title: 'Protein (g)' },
-        { key: 'iron',align: 'center', title: 'Iron (%)' },
+        { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
       dessertsI: [
         {
@@ -404,71 +382,7 @@ export default {
           carbs: 37,
           protein: 4.3,
           iron: 1,
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: 7,
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: 8,
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: 16,
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: 0,
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: 2,
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: 45,
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: 22,
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: 6,
-        },
+        }
       ],
 
       searchL: '',
@@ -478,7 +392,7 @@ export default {
         { key: 'fat',align: 'center', title: 'Fat (g)' },
         { key: 'carbs',align: 'center', title: 'Carbs (g)' },
         { key: 'protein',align: 'center', title: 'Protein (g)' },
-        { key: 'iron',align: 'center', title: 'Iron (%)' },
+        { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
       dessertsL: [
         {
@@ -496,71 +410,7 @@ export default {
           carbs: 37,
           protein: 4.3,
           iron: 1,
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: 7,
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: 8,
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: 16,
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: 0,
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: 2,
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: 45,
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: 22,
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: 6,
-        },
+        }
       ],
 
       searchIX: '',
@@ -570,7 +420,7 @@ export default {
         { key: 'fat',align: 'center', title: 'Fat (g)' },
         { key: 'carbs',align: 'center', title: 'Carbs (g)' },
         { key: 'protein',align: 'center', title: 'Protein (g)' },
-        { key: 'iron',align: 'center', title: 'Iron (%)' },
+        { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
       dessertsIX: [
         {
@@ -588,71 +438,7 @@ export default {
           carbs: 37,
           protein: 4.3,
           iron: 1,
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: 7,
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: 8,
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: 16,
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: 0,
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: 2,
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: 45,
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: 22,
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: 6,
-        },
+        }
       ],
 
       searchX: '',
@@ -662,7 +448,7 @@ export default {
         { key: 'fat',align: 'center', title: 'Fat (g)' },
         { key: 'carbs',align: 'center', title: 'Carbs (g)' },
         { key: 'protein',align: 'center', title: 'Protein (g)' },
-        { key: 'iron',align: 'center', title: 'Iron (%)' },
+        { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
       dessertsX: [
         {
@@ -680,71 +466,7 @@ export default {
           carbs: 37,
           protein: 4.3,
           iron: 1,
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: 7,
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: 8,
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: 16,
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: 0,
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: 2,
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: 45,
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: 22,
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: 6,
-        },
+        }
       ],
 
       searchU: '',
@@ -754,7 +476,7 @@ export default {
         { key: 'fat',align: 'center', title: 'Fat (g)' },
         { key: 'carbs',align: 'center', title: 'Carbs (g)' },
         { key: 'protein',align: 'center', title: 'Protein (g)' },
-        { key: 'iron',align: 'center', title: 'Iron (%)' },
+        { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
       dessertsU: [
         {
@@ -772,71 +494,7 @@ export default {
           carbs: 37,
           protein: 4.3,
           iron: 1,
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: 7,
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: 8,
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: 16,
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: 0,
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: 2,
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: 45,
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: 22,
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: 6,
-        },
+        }
       ],
 
       searchE: '',
@@ -846,7 +504,7 @@ export default {
         { key: 'fat',align: 'center', title: 'Fat (g)' },
         { key: 'carbs',align: 'center', title: 'Carbs (g)' },
         { key: 'protein',align: 'center', title: 'Protein (g)' },
-        { key: 'iron',align: 'center', title: 'Iron (%)' },
+        { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
       dessertsE: [
         {
@@ -864,71 +522,7 @@ export default {
           carbs: 37,
           protein: 4.3,
           iron: 1,
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: 7,
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: 8,
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: 16,
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: 0,
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: 2,
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: 45,
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: 22,
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: 6,
-        },
+        }
       ],
     }
   },
