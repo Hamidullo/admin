@@ -83,7 +83,7 @@
             icon: 'mdi-cog',
             title: 'SOZLAMALAR' ,
             action: this.openSettingsPage,
-            routeName: "Settings"
+            routeName: "AdminSettings"
           },
         ],
       }
@@ -123,7 +123,7 @@
         this.$router.push({name: 'AdminUsers'})
       },
       openSettingsPage(){
-        this.$router.push({name: 'Settings'})
+        this.$router.push({name: 'AdminSettings'})
       },
 
     }

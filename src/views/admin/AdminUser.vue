@@ -1,5 +1,5 @@
 <template>
-  <v-container  >
+  <v-container  class="bg-grey-lighten-2" align="center" justify="center" fluid>
     <v-card rounded="5" class="pt-10 pl-10 pb-10 pr-10">
       <!-- name -->
       <v-row class="justify-center pb-5">
@@ -941,6 +941,5 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
 </style>

@@ -55,7 +55,7 @@ const routes = [
       {
         path: 'settings',
         name: 'Settings',
-        component: () => import('@/views/Settings.vue'),
+        component: () => import('@/views/user/Settings.vue'),
       },
     ]
   },
@@ -111,8 +111,8 @@ const routes = [
       },
       {
         path: 'settings',
-        name: 'Settings',
-        component: () => import('@/views/Settings.vue'),
+        name: 'AdminSettings',
+        component: () => import('@/views/admin/AdminSettings.vue'),
       },
     ]
   },

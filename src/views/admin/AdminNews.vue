@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="bg-grey-lighten-2" align="center" justify="center" fluid>
     <v-card class="px-6 py-6">
       <v-data-table
         :headers="headers"

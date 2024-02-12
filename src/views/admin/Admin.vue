@@ -3,7 +3,7 @@
   <AdminHeader/>
   <v-app>
     <v-main class="bg-grey-lighten-2">
-      <v-layout>
+      <v-layout style="z-index: 0;">
         <router-view />
       </v-layout>
     </v-main>
