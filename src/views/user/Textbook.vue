@@ -30,8 +30,8 @@
                       <v-text-field
                         v-model="editedItem.name"
                         clearable
-                        label="Nomi"
-                        required>
+                        required
+                        label="Nomi">
                     </v-text-field>
                     </v-col>
                     <v-col
@@ -41,6 +41,7 @@
                       <v-text-field
                         v-model="editedItem.department"
                         clearable
+                        required
                         label="Mualliflar soni">
                     </v-text-field>
                     </v-col>
@@ -71,6 +72,7 @@
                       md="4">
                       <v-text-field
                         clearable
+                        required
                         v-model="editedItem.id"
                         label="Guvoxnoma raqami">
                     </v-text-field>
@@ -977,19 +979,16 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
-
     editQItem (item) {
       this.editedQIndex = this.itemsQ.indexOf(item)
       this.editedQItem = Object.assign({}, item)
       this.dialogQ = true
     },
-
     editMItem (item) {
       this.editedMIndex = this.itemsM.indexOf(item)
       this.editedMItem = Object.assign({}, item)
       this.dialogM = true
     },
-
     editKItem (item) {
       this.editedKIndex = this.itemsK.indexOf(item)
       this.editedKItem = Object.assign({}, item)
@@ -1001,19 +1000,16 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
-
     deleteQItem (item) {
       this.editedQIndex = this.itemsQ.indexOf(item)
       this.editedQItem = Object.assign({}, item)
       this.dialogQDelete = true
     },
-
     deleteMItem (item) {
       this.editedMIndex = this.itemsM.indexOf(item)
       this.editedMItem = Object.assign({}, item)
       this.dialogMDelete = true
     },
-
     deleteKItem (item) {
       this.editedKIndex = this.itemsK.indexOf(item)
       this.editedKItem = Object.assign({}, item)
@@ -1024,17 +1020,14 @@ export default {
       this.items.splice(this.editedIndex, 1)
       this.closeDelete()
     },
-
     deleteQItemConfirm () {
       this.itemsQ.splice(this.editedQIndex, 1)
       this.closeQDelete()
     },
-
     deleteMItemConfirm () {
       this.itemsM.splice(this.editedMIndex, 1)
       this.closeMDelete()
     },
-
     deleteKItemConfirm () {
       this.itemsK.splice(this.editedKIndex, 1)
       this.closeKDelete()
@@ -1047,7 +1040,6 @@ export default {
         this.editedIndex = -1
       })
     },
-
     closeQ () {
       this.dialogQ = false
       this.$nextTick(() => {
@@ -1055,7 +1047,6 @@ export default {
         this.editedQIndex = -1
       })
     },
-
     closeM () {
       this.dialogM = false
       this.$nextTick(() => {
@@ -1063,7 +1054,6 @@ export default {
         this.editedMIndex = -1
       })
     },
-
     closeK () {
       this.dialogK = false
       this.$nextTick(() => {
@@ -1079,7 +1069,6 @@ export default {
         this.editedIndex = -1
       })
     },
-
     closeQDelete () {
       this.dialogQDelete = false
       this.$nextTick(() => {
@@ -1087,7 +1076,6 @@ export default {
         this.editedQIndex = -1
       })
     },
-
     closeMDelete () {
       this.dialogMDelete = false
       this.$nextTick(() => {
@@ -1095,7 +1083,6 @@ export default {
         this.editedMIndex = -1
       })
     },
-
     closeKDelete () {
       this.dialogKDelete = false
       this.$nextTick(() => {
@@ -1112,7 +1099,6 @@ export default {
       }
       this.close()
     },
-
     saveQ () {
       if (this.editedQIndex > -1) {
         Object.assign(this.itemsQ[this.editedQIndex], this.editedQItem)
@@ -1121,7 +1107,6 @@ export default {
       }
       this.closeQ()
     },
-
     saveM () {
       if (this.editedMIndex > -1) {
         Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
@@ -1130,7 +1115,6 @@ export default {
       }
       this.closeM()
     },
-
     saveK () {
       if (this.editedKIndex > -1) {
         Object.assign(this.itemsK[this.editedKIndex], this.editedKItem)

@@ -1,14 +1,12 @@
 <template>
-  <v-container 
-  class="px-6 mx-6 py-6 my-6"
-  fluid>
+  <v-container class="px-6 mx-6 py-6 my-6" fluid>
 
   <v-row >
 
     <v-col class="mr-4" cols="4">
-      <v-card 
+      <v-card
        class="mx-auto"
-       max-width="400"
+       max-width="500"
        rounded="5">
         <v-img
          height="350"
@@ -193,12 +191,12 @@
     </v-col>
 
     <v-col >
-      
+
       <v-row >
         <v-col>
-          <v-card 
+          <v-card
            class="mx-auto"
-           max-width="400"
+           max-width="500"
            title="Diplomlar:"
            rounded="5">
             <v-card-text>
@@ -208,7 +206,7 @@
               <div class="ml-4">
                 Tamomlagan OTM va yili, ta’lim yo’nalishi
               </div>
-            </v-card-text> 
+            </v-card-text>
             <v-card-text>
               <strong class="ml-2">
                 Magistartura:
@@ -216,7 +214,7 @@
               <div class="ml-4">
                 Tamomlagan OTM va yili, Mutaxasisligi
               </div>
-            </v-card-text>  
+            </v-card-text>
 
             <!-- Dialog start -->
             <v-row justify="center" class="mb-4 mt-2">
@@ -315,9 +313,9 @@
         </v-col>
 
         <v-col>
-          <v-card 
+          <v-card
            class="mx-auto"
-           max-width="400"
+           max-width="500"
            title="Ilmiy darajasi:"
            rounded="5">
             <v-card-text>
@@ -327,16 +325,16 @@
               <div class="ml-4">
                 Ximoya qilgan OTM va yili, Ixtisoslik shifri va nomi
               </div>
-            </v-card-text> 
+            </v-card-text>
             <v-card-text>
               <strong class="ml-2">
                 Doktorantura:
               </strong>
               <div class="ml-4">
-                Ximoya qilgan OTM va yili, Ixtisoslik shifri va nomi 
+                Ximoya qilgan OTM va yili, Ixtisoslik shifri va nomi
               </div>
-            </v-card-text>  
-            
+            </v-card-text>
+
             <!-- Dialog start -->
             <v-row justify="center" class="mb-4 mt-2">
               <v-dialog
@@ -436,9 +434,9 @@
 
       <v-row>
         <v-col>
-          <v-card 
+          <v-card
            class="mx-auto"
-           max-width="400"
+           max-width="500"
            title="Ilmiy unvoni:"
            rounded="5">
             <v-card-text>
@@ -448,7 +446,7 @@
               <div class="ml-4">
                 unvor berilgan yil va Ixtisoslik shifri va nomi
               </div>
-            </v-card-text> 
+            </v-card-text>
             <v-card-text>
               <strong class="ml-2">
                 Professor:
@@ -456,7 +454,7 @@
               <div class="ml-4">
                 unvor berilgan yil va Ixtisoslik shifri va nomi
               </div>
-            </v-card-text>  
+            </v-card-text>
             <v-card-text>
               <strong class="ml-2">
                 Akademik:
@@ -464,8 +462,8 @@
               <div class="ml-4">
                 unvor berilgan yil va Ixtisoslik shifri va nomi
               </div>
-            </v-card-text>  
-            
+            </v-card-text>
+
             <!-- Dialog start -->
             <v-row justify="center" class="mb-4 mt-2">
               <v-dialog
@@ -602,14 +600,14 @@
               </v-dialog>
             </v-row>
             <!-- Dialog end -->
-            
+
           </v-card>
         </v-col>
 
         <v-col>
-          <v-card 
+          <v-card
            class="mx-auto"
-           max-width="400"
+           max-width="500"
            title=""
            rounded="5">
             <v-card-text>
@@ -622,7 +620,7 @@
               <div class="ml-4">
                 Auditoriyasiz mashg’ulotlar (----)
               </div>
-            </v-card-text>  
+            </v-card-text>
 
             <!-- Dialog start -->
             <v-row justify="center" class="mb-4 mt-2">
