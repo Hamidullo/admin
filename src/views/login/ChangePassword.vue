@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   data: () => ({
@@ -50,19 +49,9 @@ export default {
   }),
   methods: {
     async login(){
-
-      console.log(this.password)
-      console.log(this.confirmPassword)
-
       if (this.email.length > 0 && this.password.length > 0){
 
-        let result = await axios.get(`http://localhost:5000/users/api/user-login?userId=${this.email}&password=${this.password}`);
 
-        if (result.status === 200 && result.data.length > 0){
-          localStorage.setItem("user-info", JSON.stringify( result.data[0]))
-
-          await this.$router.push({name: "Dashboard"})
-        }
       } else {
 
       }
@@ -70,10 +59,7 @@ export default {
     }
   },
   mounted() {
-    let user = localStorage.getItem("user-info")
-    if (user){
-      this.$router.push({name: "Dashboard"})
-    }
+
   }
 }
 </script>

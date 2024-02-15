@@ -76,55 +76,62 @@ export default {
         },
         {
           value: 3,
+          icon: 'mdi-school',
+          title: 'ILMIY DARAJA' ,
+          action: this.openAcademicPage,
+          routeName: "Academic"
+        },
+        {
+          value: 4,
           icon: 'mdi-briefcase',
           title: 'O’QUV-USLUBIY ISHLAR' ,
           action: this.openWorkPage,
           routeName: "Textbook"
         },
         {
-          value: 4,
+          value: 5,
           icon: 'mdi-brain',
           title: 'ILMIY ISHLAR' ,
           action: this.openBrainPage,
           routeName: "Brain"
         },
         {
-          value: 5,
+          value: 6,
           icon: 'mdi-calculator',
           title: 'LOYIHALAR VA TIJORATLASHTIRISH' ,
           action: this.openProjectPage,
           routeName: "Projects"
         },
         {
-          value: 6,
+          value: 7,
           icon: 'mdi-star-box-multiple',
           title: 'IXTIROCHILIK VA RATSIONALIZATORLIK' ,
           action: this.openInventionPage,
           routeName: "Invention"
         },
         {
-          value: 7,
+          value: 8,
           icon: 'mdi-bag-suitcase',
           title: 'XALQARO XAMKORLIK MASALALARI' ,
           action: this.openInternationalPage,
           routeName: "International"
         },
         {
-          value: 8,
+          value: 9,
           icon: 'mdi-human-male-board-poll',
           title: 'USTOZ-SHOGIRD TIZIMI' ,
           action: this.openTeacherPage,
           routeName: "Teacher"
         },
         {
-          value: 9,
+          value: 10,
           icon: 'mdi-trophy',
           title: 'ERISHGAN YUTUQLARI' ,
           action: this.openAchievementPage,
           routeName: "Achievement"
         },
         {
-          value: 10,
+          value: 11,
           icon: 'mdi-cog',
           title: 'SOZLAMALAR' ,
           action: this.openSettingsPage,
@@ -142,6 +149,9 @@ export default {
     },
     openAccountPage(){
       this.$router.push({name: 'About'})
+    },
+    openAcademicPage(){
+      this.$router.push({name: 'Academic'})
     },
     openWorkPage(){
       this.$router.push({name: 'Textbook'})

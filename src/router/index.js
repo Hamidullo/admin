@@ -18,6 +18,11 @@ const routes = [
         component: () => import('@/views/user/About.vue'),
       },
       {
+        path: 'academic',
+        name: 'Academic',
+        component: () => import('@/views/user/Academic.vue'),
+      },
+      {
         path: 'textbook',
         name: 'Textbook',
         component: () => import('@/views/user/Textbook.vue'),
