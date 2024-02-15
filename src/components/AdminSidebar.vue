@@ -8,8 +8,8 @@
       width="350">
       <v-list-item
         class="ma-1"
-        prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-        title="John Leider"
+        :prepend-avatar="avatar"
+        :title="name"
         nav>
         <template v-slot:append>
           <v-btn
@@ -43,9 +43,13 @@
   </template>
 
   <script>
+
   export default {
+
     data() {
       return{
+        name: localStorage.getItem("user-name"),
+        avatar: localStorage.getItem("user-avatar"),
         drawer: true,
         rail: true,
         model: 1,

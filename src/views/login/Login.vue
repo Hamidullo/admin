@@ -54,16 +54,17 @@
 
 <script>
 import UserDataService from "@/services/UserDataService";
-import { useUsersStore } from '@/stores/user-data';
 
 export default {
-  data: () => ({
-    visible: false,
-    snackF: false,
-    snackS: false,
-    hemisId: '',
-    password: '',
-  }),
+  data() {
+    return {
+      visible: false,
+      snackF: false,
+      snackS: false,
+      hemisId: '',
+      password: '',
+    }
+  },
   methods: {
     async login(){
       if (this.hemisId.length > 0 && this.password.length > 0){
@@ -73,12 +74,31 @@ export default {
         }
         UserDataService.get(data).then(response => {
           this.snackS = true;
-
-          if (response.data.name !== null){
-
-            this.$router.push({name: "Dashboard"})
+          localStorage.setItem("user-logged", JSON.stringify( true))
+          let data = response.data
+          console.log(data)
+          if (data.name){
+            localStorage.setItem("user-id", JSON.stringify(response.data.id))
+            localStorage.setItem("user-hemisId", JSON.stringify(response.data.hemisId))
+            localStorage.setItem("user-name", JSON.stringify(response.data.name))
+            localStorage.setItem("user-avatar", JSON.stringify(response.data.avatar))
+            localStorage.setItem("user-position", JSON.stringify(response.data.position))
+            if (response.data.admin){
+              this.$router.push({name: "AdminDash"})
+              localStorage.setItem("user-admin", JSON.stringify(response.data.admin))
+            } else {
+              this.$router.push({name: "Dashboard"})
+            }
           } else {
-            this.$router.push({name: "About"})
+            localStorage.setItem("user-id", JSON.stringify(response.data.id))
+            localStorage.setItem("user-hemisId", JSON.stringify(response.data.hemisId))
+            if (response.data.admin){
+              this.$router.push({name: "AdminAbout"})
+              localStorage.setItem("user-admin", JSON.stringify(response.data.admin))
+            } else {
+              this.$router.push({name: "About"})
+            }
+
           }
         }).catch(e => {
           console.log(e);
@@ -92,22 +112,21 @@ export default {
     }
   },
   mounted() {
-    let user = localStorage.getItem("user-info")
+    let user = localStorage.getItem("user-logged")
     if (user){
-      this.$router.push({name: "Dashboard"})
+      let userData = localStorage.getItem("user-admin")
+      if (userData){
+        this.$router.push({name: "AdminDash"})
+      } else {
+        this.$router.push({name: "Dashboard"})
+      }
+
     }
   }
+
 }
 </script>
 
-<script setup>
-import { storeToRefs } from 'pinia'
-import { watch } from 'vue'
-import { useUsersStore } from '@/stores/user-data'
-
-const userStore = useUsersStore()
-const { user } = storeToRefs(userStore)
-</script>
 
 <style scoped>
 

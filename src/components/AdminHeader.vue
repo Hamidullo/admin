@@ -45,11 +45,11 @@
            <v-chip link>
              <v-badge dot bottom offset-x="1" offset-y="1" color="green" class="mt-1 me-1">
                <v-avatar size="30">
-                 <v-img src="https://randomuser.me/api/portraits/men/85.jpg" alt="menu avatar"></v-img>
+                 <v-img :src="avatar" alt="menu avatar"></v-img>
                </v-avatar>
              </v-badge>
              <span>
-               Sharli Chin
+               {{name}}
              </span>
            </v-chip>
          </span>
@@ -58,9 +58,9 @@
         <v-list width="250" class="py-0">
           <v-list-item
             class="ma-2"
-            prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-            title="Sharli Chin"
-            subtitle="john@google.com">
+            :prepend-avatar="avatar"
+            :title="name"
+            :subtitle="position">
 
           </v-list-item>
           <v-divider/>
@@ -78,12 +78,16 @@
   </template>
 
   <script>
+
   export default {
     data() {
       return{
+        name: localStorage.getItem("user-name"),
+        avatar: localStorage.getItem("user-avatar"),
+        position: localStorage.getItem("user-position"),
         menus: [
-          {title: 'Profile', icon: 'mdi-account', rout: 'About'},
-          { icon: 'mdi-cog', title: 'Settings', rout: 'Settings'},
+          { icon: 'mdi-account',title: 'Profile', rout: 'AdminAbout'},
+          { icon: 'mdi-cog', title: 'Settings', rout: 'AdminSettings'},
           { icon: 'mdi-logout', title: 'Logout', rout: 'Login'},
         ],
         items: [
@@ -124,10 +128,10 @@
     methods: {
       drawer(rout){
         if(rout !== 'logout'){
+          localStorage.clear()
           this.$router.push({name: rout})
         } else {
-
-          this.$router.push({name: 'Login'})
+          this.$router.push({name: rout})
         }
 
       },

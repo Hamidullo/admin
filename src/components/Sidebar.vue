@@ -5,20 +5,26 @@
     :rail="rail"
     permanent
     @click="rail = false"
-    width="350"
-  >
+    width="350">
     <v-list-item
       class="ma-1"
-      prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-      title="John Leider"
-      nav
-    >
+      :title="name"
+      nav>
+      <template v-slot:prepend>
+        <v-avatar >
+          <v-img
+            :src="avatar"
+            alt="avatar">
+          </v-img>
+        </v-avatar>
+      </template>
+
       <template v-slot:append>
         <v-btn
           variant="text"
           icon="mdi-chevron-left"
-          @click.stop="rail = !rail"
-        ></v-btn>
+          @click.stop="rail = !rail">
+        </v-btn>
       </template>
     </v-list-item>
 
@@ -35,7 +41,6 @@
             <template v-slot:prepend>
               <v-icon :icon="item.icon"></v-icon>
             </template>
-
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item>
     </v-list>
@@ -44,11 +49,15 @@
 </template>
 
 <script>
+
 export default {
+
   data() {
     return{
       drawer: true,
       rail: true,
+      avatar: localStorage.getItem("user-avatar"),
+      name: localStorage.getItem("user-name"),
       model: 1,
       menus: [
         {
