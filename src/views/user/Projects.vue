@@ -2,7 +2,7 @@
   <v-container class="py-8 px-6 bg-grey-lighten-2" fluid>
 
     <v-row>
-      <v-col>
+      <v-col cols="12">
         <v-card flat title="Xalqaro loyihalardagi ishtiroki">
         <template v-slot:append>
           <!-- Dialog start -->
@@ -28,7 +28,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedItem.name"
                           clearable
@@ -39,9 +39,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.projectType"
                           clearable
                           required
                           label="Loyiha turi">
@@ -50,9 +50,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.projectYears"
                           clearable
                           required
                           label="Loyiha bajariladigon yillar">
@@ -63,7 +63,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.projectSum"
                           clearable
                           label="Loyihani moliyalashtirish xajmi"
                           required>
@@ -74,11 +74,23 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.projectPosition"
                           clearable
                           required
                           label="Loyihadagi lavozim">
                       </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-file-input
+                          v-if="!editedItem.doc"
+                          v-model="editedItem.doc"
+                          show-size
+                          label="Chek yuklash">
+                        </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Chekni yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -145,7 +157,7 @@
       </v-card>
       </v-col>
 
-      <v-col>
+      <v-col  cols="12">
         <v-card
         flat
         title="Qo’shma loyihalardagi ishtiroki">
@@ -173,9 +185,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedMItem.name"
                           clearable
                           label="Loyiha nomi"
                           required>
@@ -184,9 +196,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedMItem.projectType"
                           clearable
                           required
                           label="Loyiha turi">
@@ -195,9 +207,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedMItem.projectYears"
                           clearable
                           required
                           label="Loyiha bajariladigon yillar">
@@ -208,7 +220,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedMItem.projectSum"
                           clearable
                           label="Loyihani moliyalashtirish xajmi"
                           required>
@@ -219,11 +231,23 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedMItem.projectPosition"
                           clearable
                           required
                           label="Loyihadagi lavozim">
                       </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-file-input
+                          v-if="!editedMItem.doc"
+                          v-model="editedMItem.doc"
+                          show-size
+                          label="Chek yuklash">
+                        </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Chek yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -292,7 +316,7 @@
     </v-row>
 
     <v-row>
-      <v-col>
+      <v-col  cols="12">
         <v-card
         flat
         title="Respublik loyihalaridagi ishtiroki">
@@ -320,9 +344,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedYItem.name"
                           clearable
                           label="Loyiha nomi"
                           required>
@@ -331,9 +355,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedYItem.projectType"
                           clearable
                           required
                           label="Loyiha turi">
@@ -342,9 +366,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedYItem.projectYears"
                           clearable
                           required
                           label="Loyiha bajariladigon yillar">
@@ -355,7 +379,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedYItem.projectSum"
                           clearable
                           label="Loyihani moliyalashtirish xajmi"
                           required>
@@ -366,11 +390,23 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedYItem.projectPosition"
                           clearable
                           required
                           label="Loyihadagi lavozim">
                       </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-file-input
+                          v-if="!editedYItem.doc"
+                          v-model="editedYItem.doc"
+                          show-size
+                          label="Chek yuklash">
+                        </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedYItem)">Chek yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -437,7 +473,7 @@
       </v-card>
       </v-col>
 
-      <v-col>
+      <v-col  cols="12">
         <v-card
         flat
         title="Startaplardagi ishtiroki">
@@ -465,9 +501,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedNItem.name"
                           clearable
                           label="Loyiha nomi"
                           required>
@@ -476,9 +512,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedNItem.projectType"
                           clearable
                           required
                           label="Loyiha turi">
@@ -487,9 +523,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedNItem.projectYears"
                           clearable
                           required
                           label="Loyiha bajariladigon yillar">
@@ -500,7 +536,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedNItem.projectSum"
                           clearable
                           label="Loyihani moliyalashtirish xajmi"
                           required>
@@ -511,11 +547,23 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedNItem.projectPosition"
                           clearable
                           required
                           label="Loyihadagi lavozim">
                       </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-file-input
+                          v-if="!editedNItem.doc"
+                          v-model="editedNItem.doc"
+                          show-size
+                          label="Darslik yuklash">
+                        </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedNItem)">Darslikni yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -581,141 +629,150 @@
         </v-data-table>
       </v-card>
       </v-col>
-    </v-row>
 
-    <v-row>
-      <v-col>
+      <v-col  cols="12">
         <v-card
-        flat
-        title="Xo’jalik shartnomalari">
-        <template v-slot:append>
-          <!-- Dialog start -->
-          <v-row justify="center" class="mr-2">
-            <v-dialog
-              v-model="dialogA"
-              persistent
-              width="1024">
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props">
-                  Qo'shish
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{ formATitle }}</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedItem.name"
-                          clearable
-                          label="Shatnoma nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedItem.name"
-                          clearable
-                          required
-                          label="Shartnoma bajariladigan yil">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedItem.name"
-                          clearable
-                          required
-                          label="Shatnoma xajmi">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          v-model="editedItem.name"
-                          clearable
-                          label="Shartnoma tuzulgan tashkilot"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+          flat
+          title="Xo’jalik shartnomalari">
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog
+                v-model="dialogA"
+                persistent
+                width="1024">
+                <template v-slot:activator="{ props }">
                   <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="closeA">
-                    Yopish
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
                   </v-btn>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="saveA">
-                    Saqlash
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="dialogADelete" width="auto">
-              <v-card>
-                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Xo’jalik shartnomani o'chirishni hohlaysizmi?</v-card-title>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue-darken-1" variant="text" @click="closeADelete">Bekor qilish</v-btn>
-                  <v-btn color="red" variant="text" @click="deleteAItemConfirm">O'chirish</v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-          <!-- Dialog end -->
-        </template>
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchA"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details
-          ></v-text-field>
-        </template>
-        <v-data-table
-          :headers="headersA"
-          :items="itemsA"
-          :search="searchA">
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              size="small"
-              class="me-2"
-              @click="editAItem(item)">
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              size="small"
-              @click="deleteAItem(item)">
-              mdi-delete
-            </v-icon>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formATitle }}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedAItem.name"
+                            clearable
+                            label="Shatnoma nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedAItem.projectYears"
+                            clearable
+                            required
+                            label="Shartnoma bajariladigan yil">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedAItem.projectSize"
+                            clearable
+                            required
+                            label="Shatnoma xajmi">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedAItem.projectCompany"
+                            clearable
+                            label="Shartnoma tuzulgan tashkilot"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-file-input
+                            v-if="!editedAItem.doc"
+                            v-model="editedAItem.doc"
+                            show-size
+                            label="Chek yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Chekni yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeA">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveA">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogADelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Xo’jalik shartnomani o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeADelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteAItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <!-- Dialog end -->
           </template>
-        </v-data-table>
-      </v-card>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchA"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details
+            ></v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersA"
+            :items="itemsA"
+            :search="searchA">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editAItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteAItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
       </v-col>
-
     </v-row>
 
   </v-container>
@@ -729,99 +786,30 @@ export default {
       dialogDelete: false,
       editedIndex: -1,
       editedItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        projectType: '',
+        projectYears: '',
+        projectSum: '',
+        projectPosition: '',
+        doc: null
       },
       defaultItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-
-      dialogM: false,
-      dialogMDelete: false,
-      editedMIndex: -1,
-      editedMItem: {
         name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        projectType: '',
+        projectYears: '',
+        projectSum: '',
+        projectPosition: '',
+        doc: null
       },
-      defaultMItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-
-      dialogY: false,
-      dialogYDelete: false,
-      editedYIndex: -1,
-      editedYItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-      defaultYItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-
-      dialogN: false,
-      dialogNDelete: false,
-      editedNIndex: -1,
-      editedNItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-      defaultNItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-
-      dialogA: false,
-      dialogADelete: false,
-      editedAIndex: -1,
-      editedAItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-      defaultAItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-
       search: '',
       headers: [
-        { align: 'start', key: 'name', sortable: false, title: 'Loyiha nomi',},
-        { key: 'raqami', title: 'Loyiha turi' },
-        { key: 'mSoni', title: 'Loyiha bajariladigan yillar' },
-        { key: 'mNomi', title: 'Loyihani moliyalashtirish xajmi' },
-        { key: 'sana', title: 'Loyihadagi lavozim' },
+        { key: 'name',  title: 'Loyiha nomi',align: 'start', sortable: false,},
+        { key: 'projectType', title: 'Loyiha turi' },
+        { key: 'projectYears', title: 'Loyiha bajariladigan yillar' },
+        { key: 'projectSum', title: 'Loyihani moliyalashtirish xajmi' },
+        { key: 'projectPosition', title: 'Loyihadagi lavozim' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       items: [
@@ -876,13 +864,35 @@ export default {
         },
       ],
 
+
+      dialogM: false,
+      dialogMDelete: false,
+      editedMIndex: -1,
+      editedMItem: {
+        id: 0,
+        name: '',
+        projectType: '',
+        projectYears: '',
+        projectSum: '',
+        projectPosition: '',
+        doc: null
+      },
+      defaultMItem: {
+        id: 0,
+        name: '',
+        projectType: '',
+        projectYears: '',
+        projectSum: '',
+        projectPosition: '',
+        doc: null
+      },
       searchM: '',
       headersM: [
-        { align: 'start', key: 'name', sortable: false, title: 'Loyiha nomi',},
-        { key: 'raqami', title: 'Loyiha turi' },
-        { key: 'mSoni', title: 'Loyiha bajariladigan yillar' },
-        { key: 'mNomi', title: 'Loyihani moliyalashtirish xajmi' },
-        { key: 'sana', title: 'Loyihadagi lavozim' },
+        { key: 'name',  title: 'Loyiha nomi',align: 'start', sortable: false,},
+        { key: 'projectType', title: 'Loyiha turi' },
+        { key: 'projectYears', title: 'Loyiha bajariladigan yillar' },
+        { key: 'projectSum', title: 'Loyihani moliyalashtirish xajmi' },
+        { key: 'projectPosition', title: 'Loyihadagi lavozim' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       itemsM: [
@@ -937,13 +947,34 @@ export default {
         },
       ],
 
+      dialogY: false,
+      dialogYDelete: false,
+      editedYIndex: -1,
+      editedYItem: {
+        id: 0,
+        name: '',
+        projectType: '',
+        projectYears: '',
+        projectSum: '',
+        projectPosition: '',
+        doc: null
+      },
+      defaultYItem: {
+        id: 0,
+        name: '',
+        projectType: '',
+        projectYears: '',
+        projectSum: '',
+        projectPosition: '',
+        doc: null
+      },
       searchY: '',
       headersY: [
-        { align: 'start', key: 'name', sortable: false, title: 'Loyiha nomi',},
-        { key: 'raqami', title: 'Loyiha turi' },
-        { key: 'mSoni', title: 'Loyiha bajariladigan yillar' },
-        { key: 'mNomi', title: 'Loyihani moliyalashtirish xajmi' },
-        { key: 'sana', title: 'Loyihadagi lavozim' },
+        { key: 'name',  title: 'Loyiha nomi',align: 'start', sortable: false,},
+        { key: 'projectType', title: 'Loyiha turi' },
+        { key: 'projectYears', title: 'Loyiha bajariladigan yillar' },
+        { key: 'projectSum', title: 'Loyihani moliyalashtirish xajmi' },
+        { key: 'projectPosition', title: 'Loyihadagi lavozim' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       itemsY: [
@@ -998,13 +1029,34 @@ export default {
         },
       ],
 
+      dialogN: false,
+      dialogNDelete: false,
+      editedNIndex: -1,
+      editedNItem: {
+        id: 0,
+        name: '',
+        projectType: '',
+        projectYears: '',
+        projectSum: '',
+        projectPosition: '',
+        doc: null
+      },
+      defaultNItem: {
+        id: 0,
+        name: '',
+        projectType: '',
+        projectYears: '',
+        projectSum: '',
+        projectPosition: '',
+        doc: null
+      },
       searchN: '',
       headersN: [
-        { align: 'start', key: 'name', sortable: false, title: 'Loyiha nomi',},
-        { key: 'raqami', title: 'Loyiha turi' },
-        { key: 'mSoni', title: 'Loyiha bajariladigan yillar' },
-        { key: 'mNomi', title: 'Loyihani moliyalashtirish xajmi' },
-        { key: 'sana', title: 'Loyihadagi lavozim' },
+        { key: 'name',  title: 'Loyiha nomi',align: 'start', sortable: false,},
+        { key: 'projectType', title: 'Loyiha turi' },
+        { key: 'projectYears', title: 'Loyiha bajariladigan yillar' },
+        { key: 'projectSum', title: 'Loyihani moliyalashtirish xajmi' },
+        { key: 'projectPosition', title: 'Loyihadagi lavozim' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       itemsN: [
@@ -1059,12 +1111,31 @@ export default {
         },
       ],
 
+      dialogA: false,
+      dialogADelete: false,
+      editedAIndex: -1,
+      editedAItem: {
+        id: 0,
+        name: '',
+        projectYears: '',
+        projectSize: '',
+        projectCompany: '',
+        doc: null
+      },
+      defaultAItem: {
+        id: 0,
+        name: '',
+        projectYears: '',
+        projectSize: '',
+        projectCompany: '',
+        doc: null
+      },
       searchA: '',
       headersA: [
-        { align: 'start', key: 'name', sortable: false, title: 'Shartnoma nomi',},
-        { key: 'raqami', title: 'Shartnoma bajariladigan yil' },
-        { key: 'mSoni', title: 'Shartnoma  xajmi' },
-        { key: 'mNomi', title: 'Shartnoma tuzilgan tashkilot' },
+        { key: 'name', title: 'Shartnoma nomi', align: 'start', sortable: false,},
+        { key: 'projectYears', title: 'Shartnoma bajariladigan yil' },
+        { key: 'projectSize', title: 'Shartnoma  xajmi' },
+        { key: 'projectCompany', title: 'Shartnoma tuzilgan tashkilot' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       itemsA: [
@@ -1111,6 +1182,7 @@ export default {
           mNomi: 24,
         },
       ],
+
     }
   },
 
@@ -1300,6 +1372,10 @@ export default {
       }
       this.closeA()
     },
+
+    downloadDoc(item){
+
+    }
 
   },
 

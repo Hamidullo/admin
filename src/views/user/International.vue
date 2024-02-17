@@ -42,16 +42,18 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.country"
                           clearable
+                          required
                           label="Davlati">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.days"
                           clearable
+                          required
                           label="Mashg’ulot olib borilgan kunlar">
                       </v-text-field>
                       </v-col>
@@ -60,7 +62,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.size"
                           clearable
                           label="Mashg’ulot xajmi"
                           persistent-hint
@@ -72,9 +74,12 @@
                         sm="6"
                         md="6">
                         <v-file-input
+                          v-if="!editedItem.doc"
+                          v-model="editedItem.doc"
                           show-size
-                          label="Sertifikatni yuklash">
+                          label="Sertifikat yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Sertifikatni yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -180,16 +185,18 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedCItem.name"
+                          v-model="editedCItem.country"
                           clearable
+                          required
                           label="Davlati">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedCItem.name"
+                          v-model="editedCItem.days"
                           clearable
+                          required
                           label="Stajirovka va malaka oshirilgan kunlar">
                       </v-text-field>
                       </v-col>
@@ -198,7 +205,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedCItem.name"
+                          v-model="editedCItem.size"
                           clearable
                           label="Stajirovka xajmi"
                           persistent-hint
@@ -210,9 +217,12 @@
                         sm="6"
                         md="6">
                         <v-file-input
+                          v-if="!editedCItem.doc"
+                          v-model="editedCItem.doc"
                           show-size
-                          label="Sertifikatni yuklash">
+                          label="Darslik yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedCItem)">Darslikni yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -291,46 +301,49 @@ export default {
         dialogDelete: false,
         editedIndex: -1,
         editedItem: {
-          name: '',
           id: 0,
-          position: 0,
-          department: 0,
-          faculty: 0,
+          name: '',
+          country: '',
+          days: '',
+          size: 0,
+          doc: null,
         },
         defaultItem: {
-          name: '',
           id: 0,
-          position: 0,
-          department: 0,
-          faculty: 0,
+          name: '',
+          country: '',
+          days: '',
+          size: 0,
+          doc: null,
         },
 
         dialogC: false,
         dialogCDelete: false,
         editedCIndex: -1,
         editedCItem: {
-          name: '',
           id: 0,
-          position: 0,
-          department: 0,
-          faculty: 0,
+          name: '',
+          country: '',
+          days: '',
+          size: 0,
+          doc: null,
         },
         defaultCItem: {
-          name: '',
           id: 0,
-          position: 0,
-          department: 0,
-          faculty: 0,
+          name: '',
+          country: '',
+          days: '',
+          size: 0,
+          doc: null,
         },
 
         search: '',
         headers: [
-          { align: 'start', key: 'name', sortable: false, title: 'Xorijiy OTM yoki ITM nomi',},
-          { key: 'davlati', title: 'Davlati' },
-          { key: 'kunlar', title: 'Mashg’ulot olib borilgan kunlar' },
-          { key: 'hajmi', title: 'Mashg’ulot xajmi' },
-          { key: 'sertifikat', title: 'Sertifikat yuklanadi' },
-          { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+          { key: 'name', title: 'Xorijiy OTM yoki ITM nomi',align: 'start', sortable: false, },
+          { key: 'country', title: 'Davlati' },
+          { key: 'days', title: 'Mashg’ulot olib borilgan kunlar' },
+          { key: 'siz', title: 'Mashg’ulot xajmi' },
+          { key: 'actions', title: 'Amallar',align: 'start',  sortable: false },
         ],
         items: [
           {
@@ -407,12 +420,11 @@ export default {
 
         searchC: '',
         headersC: [
-          { align: 'start', sortable: false, key: 'name', title: 'Xorijiy OTM yoki ITM nomi',},
-          { title: 'Davlati', align: 'center', key: 'davlati',},
-          { title: 'Stajirovka va malaka oshirilgan kunlar', align: 'center', key: 'kunlar',},
-          { title: 'Stajirovka xajmi', align: 'end', key: 'hajmi',},
-          { title: 'Sertifikat yuklanadi', align: 'end', key: 'sertifikat',},
-          { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+          { key: 'name', title: 'Xorijiy OTM yoki ITM nomi',align: 'start', sortable: false, },
+          { key: 'country', title: 'Davlati', align: 'center', },
+          { title: 'Stajirovka va malaka oshirilgan kunlar', align: 'center', key: 'days',},
+          { title: 'Stajirovka xajmi', align: 'end', key: 'size',},
+          { key: 'actions', title: 'Amallar',align: 'start',  sortable: false },
         ],
         itemsC: [
         {
@@ -572,6 +584,11 @@ export default {
       }
       this.closeC()
     },
+
+    downloadDoc(item){
+
+    }
+
   },
 
   computed: {

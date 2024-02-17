@@ -7,12 +7,9 @@
           <template v-slot:append>
             <!-- Dialog start -->
             <v-row justify="center" class="mr-2">
-            <v-dialog
-            v-model="dialog" persistent width="1024">
+            <v-dialog v-model="dialog" persistent width="1024">
             <template v-slot:activator="{ props }">
-              <v-btn
-                color="primary"
-                v-bind="props">
+              <v-btn color="primary" v-bind="props">
                 Qo'shish
               </v-btn>
             </template>
@@ -28,7 +25,7 @@
                       sm="6"
                       md="6">
                       <v-text-field
-                        v-model="editedItem.name"
+                        v-model="editedItem.mName"
                         clearable
                         required
                         label="Nomi">
@@ -39,7 +36,8 @@
                       sm="6"
                       md="6">
                       <v-text-field
-                        v-model="editedItem.department"
+                        v-model="editedItem.mSoni"
+                        type="number"
                         clearable
                         required
                         label="Mualliflar soni">
@@ -49,7 +47,7 @@
                       cols="12">
                       <v-text-field
                         label="Ham mualliflar F.I.SH"
-                        v-model="editedItem.faculty"
+                        v-model="editedItem.mNomi"
                         clearable
                         persistent-hint
                         required>
@@ -60,7 +58,7 @@
                       sm="6"
                       md="4">
                       <v-text-field
-                        v-model="editedItem.position"
+                        v-model="editedItem.sana"
                         clearable
                         label="Nashr etilgan yil"
                         required>
@@ -73,7 +71,7 @@
                       <v-text-field
                         clearable
                         required
-                        v-model="editedItem.id"
+                        v-model="editedItem.raqam"
                         label="Guvoxnoma raqami">
                     </v-text-field>
                     </v-col>
@@ -82,9 +80,12 @@
                       sm="6"
                       md="4">
                       <v-file-input
+                        v-if="!editedItem.doc"
+                        v-model="editedItem.doc"
                         show-size
-                        label="Darslikni yuklash">
+                        label="Darslik yuklash">
                       </v-file-input>
+                      <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Darslikni yuklash</v-btn>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -178,10 +179,10 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedQItem.name"
-                          label="Nomi"
+                          v-model="editedQItem.mName"
                           clearable
-                          required>
+                          required
+                          label="Nomi">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -189,8 +190,10 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedQItem.department"
+                          v-model="editedQItem.mSoni"
+                          type="number"
                           clearable
+                          required
                           label="Mualliflar soni">
                         </v-text-field>
                       </v-col>
@@ -198,7 +201,7 @@
                         cols="12">
                         <v-text-field
                           label="Ham mualliflar F.I.SH"
-                          v-model="editedQItem.faculty"
+                          v-model="editedQItem.mNomi"
                           clearable
                           persistent-hint
                           required>
@@ -209,7 +212,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedQItem.position"
+                          v-model="editedQItem.sana"
                           clearable
                           label="Nashr etilgan yil"
                           required>
@@ -221,7 +224,8 @@
                         md="4">
                         <v-text-field
                           clearable
-                          v-model="editedQItem.id"
+                          required
+                          v-model="editedQItem.raqam"
                           label="Guvoxnoma raqami">
                         </v-text-field>
                       </v-col>
@@ -230,9 +234,12 @@
                         sm="6"
                         md="4">
                         <v-file-input
+                          v-if="!editedQItem.doc"
+                          v-model="editedQItem.doc"
                           show-size
-                          label="Darslikni yuklash"
-                        ></v-file-input>
+                          label="O'quv qo'llanma yuklash">
+                        </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedQItem)">O'quv qo'llanmani yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -275,8 +282,8 @@
             prepend-inner-icon="mdi-magnify"
             single-line
             variant="outlined"
-            hide-details
-          ></v-text-field>
+            hide-details>
+          </v-text-field>
         </template>
         <v-data-table
           :headers="headersQ"
@@ -328,7 +335,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.name"
+                          v-model="editedMItem.mName"
                           label="Nomi"
                           clearable
                           required>
@@ -339,7 +346,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.department"
+                          v-model="editedMItem.mSoni"
                           clearable
                           label="Mualliflar soni">
                         </v-text-field>
@@ -348,7 +355,7 @@
                         cols="12">
                         <v-text-field
                           label="Ham mualliflar F.I.SH"
-                          v-model="editedMItem.faculty"
+                          v-model="editedMItem.mNomi"
                           clearable
                           persistent-hint
                           required>
@@ -359,7 +366,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedMItem.position"
+                          v-model="editedMItem.sana"
                           clearable
                           label="Nashr etilgan yil"
                           required>
@@ -371,8 +378,8 @@
                         md="4">
                         <v-text-field
                           clearable
-                          v-model="editedMItem.id"
-                          label="Guvoxnoma raqami">
+                          v-model="editedMItem.raqam"
+                          label="Grif raqami">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -380,9 +387,12 @@
                         sm="6"
                         md="4">
                         <v-file-input
+                          v-if="!editedMItem.doc"
+                          v-model="editedMItem.doc"
                           show-size
-                          label="Darslikni yuklash"
-                        ></v-file-input>
+                          label="Monografiya yuklash">
+                        </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Monografiyani yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -476,7 +486,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedKItem.name"
+                          v-model="editedKItem.mName"
                           label="Nomi"
                           clearable
                           required>
@@ -487,8 +497,9 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedKItem.department"
+                          v-model="editedKItem.mSoni"
                           clearable
+                          required
                           label="Mualliflar soni">
                         </v-text-field>
                       </v-col>
@@ -496,7 +507,7 @@
                         cols="12">
                         <v-text-field
                           label="Ham mualliflar F.I.SH"
-                          v-model="editedKItem.faculty"
+                          v-model="editedKItem.mNomi"
                           clearable
                           persistent-hint
                           required>
@@ -507,7 +518,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedKItem.position"
+                          v-model="editedKItem.sana"
                           clearable
                           label="Nashr etilgan yil"
                           required>
@@ -519,8 +530,8 @@
                         md="4">
                         <v-text-field
                           clearable
-                          v-model="editedKItem.id"
-                          label="Guvoxnoma raqami">
+                          v-model="editedKItem.raqam"
+                          label="Uslubiy kengash qarori raqami">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -529,8 +540,11 @@
                         md="4">
                         <v-file-input
                           show-size
-                          label="Darslikni yuklash"
-                        ></v-file-input>
+                          v-if="!editedKItem.doc"
+                          v-model="editedKItem.doc"
+                          label="Uslubiy ko'rsatma yuklash">
+                        </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedKItem)">Uslubiy ko'rsatmani yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -608,13 +622,12 @@ export default {
     return {
       search: '',
       headers: [
-        { align: 'start', key: 'name', sortable: false, title: 'Nomi',},
+        { key: 'name', title: 'Nomi', align: 'start', sortable: false, },
         { key: 'mSoni', title: 'Mualliflar soni' },
         { key: 'mNomi', title: 'Ham mualliflar F.I.Sh' },
         { key: 'sana', title: 'Nashr etilgan yili' },
         { key: 'raqam', title: 'Guvoxnoma raqami' },
-        { key: 'darslik', title: 'Darslik yuklanadi' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       items: [
         {
@@ -682,7 +695,6 @@ export default {
         { key: 'mNomi', title: 'Ham mualliflar F.I.Sh' },
         { key: 'sana', title: 'Nashr etilgan yili' },
         { key: 'raqam', title: 'Guvoxnoma raqami' },
-        { key: 'darslik', title: 'O’quv qo’llanma' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
       itemsQ: [
@@ -751,7 +763,6 @@ export default {
         { key: 'mNomi', title: 'Ham mualliflar F.I.Sh' },
         { key: 'sana', title: 'Nashr etilgan yili' },
         { key: 'raqam', title: 'Grif raqami' },
-        { key: 'darslik', title: 'Monografiya yuklanadi' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
       itemsM: [
@@ -820,7 +831,6 @@ export default {
         { key: 'mNomi', title: 'Ham mualliflar F.I.Sh' },
         { key: 'sana', title: 'Nashr etilgan yili' },
         { key: 'raqam', title: 'Uslubiy kengash qarori raqami' },
-        { key: 'darslik', title: 'Monografiya yuklanadi' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
       itemsK: [
@@ -886,72 +896,88 @@ export default {
       dialogDelete: false,
       editedIndex: -1,
       editedItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        mName: '',
+        mSoni: 0,
+        mNomi: '',
+        sana: '',
+        raqam: '',
+        doc: null
       },
       defaultItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        mName: '',
+        mSoni: 0,
+        mNomi: '',
+        sana: '',
+        raqam: '',
+        doc: null
       },
 
       dialogQ: false,
       dialogQDelete: false,
       editedQIndex: -1,
       editedQItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        mName: '',
+        mSoni: 0,
+        mNomi: '',
+        sana: '',
+        raqam: '',
+        doc: null
       },
       defaultQItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        mName: '',
+        mSoni: 0,
+        mNomi: '',
+        sana: '',
+        raqam: '',
+        doc: null
       },
 
       dialogM: false,
       dialogMDelete: false,
       editedMIndex: -1,
       editedMItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        mName: '',
+        mSoni: 0,
+        mNomi: '',
+        sana: '',
+        raqam: '',
+        doc: null
       },
       defaultMItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        mName: '',
+        mSoni: 0,
+        mNomi: '',
+        sana: '',
+        raqam: '',
+        doc: null
       },
 
       dialogK: false,
       dialogKDelete: false,
       editedKIndex: -1,
       editedKItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        mName: '',
+        mSoni: 0,
+        mNomi: '',
+        sana: '',
+        raqam: '',
+        doc: null
       },
       defaultKItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        mName: '',
+        mSoni: 0,
+        mNomi: '',
+        sana: '',
+        raqam: '',
+        doc: null
       },
 
     }
@@ -1123,6 +1149,10 @@ export default {
       }
       this.closeK()
     },
+
+    downloadDoc(item) {
+
+    }
   },
 
   watch: {

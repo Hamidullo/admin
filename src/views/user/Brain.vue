@@ -3,7 +3,7 @@
   fluid>
 
     <v-row>
-      <v-col>
+      <v-col cols="12">
         <v-card flat
         title="“Scopus” bazalaridagi maqolalar">
         <template v-slot:append>
@@ -30,6 +30,8 @@
                         sm="6"
                         md="4">
                         <v-text-field
+                          v-model="editedSItem.name"
+                          clearable
                           label="Nomi"
                           required>
                       </v-text-field>
@@ -39,8 +41,9 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedSItem.name"
+                          v-model="editedSItem.quotesCount"
                           clearable
+                          required
                           label="Iqtiboslar soni">
                       </v-text-field>
                       </v-col>
@@ -49,15 +52,16 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedSItem.department"
+                          v-model="editedSItem.authorsCount"
                           clearable
+                          required
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedSItem.department"
+                          v-model="editedSItem.authorsName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -69,7 +73,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedSItem.department"
+                          v-model="editedSItem.magazineName"
                           clearable
                           label="Nashr etilgan jurnal nomi"
                           required>
@@ -80,8 +84,9 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedSItem.department"
+                          v-model="editedSItem.magazineCountry"
                           clearable
+                          required
                           label="Jurnal nashr etilgan davlat">
                       </v-text-field>
                       </v-col>
@@ -90,7 +95,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedSItem.department"
+                          v-model="editedSItem.articleUrl"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -98,13 +103,14 @@
                       </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
+                        cols="12">
                         <v-file-input
+                          v-if="!editedSItem.doc"
+                          v-model="editedSItem.doc"
                           show-size
-                          label="Maqolani yuklash">
+                          label="Maqola yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedSItem)">Maqolani yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -172,7 +178,7 @@
       </v-col>
 
 
-      <v-col>
+      <v-col cols="12">
         <v-card flat
         title="“Web of sciense” bazalaridagi maqolalar">
         <template v-slot:append>
@@ -212,7 +218,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedWItem.name"
+                          v-model="editedWItem.quotesCount"
                           clearable
                           label="Iqtiboslar soni">
                       </v-text-field>
@@ -222,7 +228,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedWItem.name"
+                          v-model="editedWItem.authorsCount"
                           clearable
                           label="Mualliflar soni">
                       </v-text-field>
@@ -230,7 +236,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedWItem.name"
+                          v-model="editedWItem.authorsName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -242,7 +248,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedWItem.name"
+                          v-model="editedWItem.magazineName"
                           clearable
                           label="Nashr etilgan jurnal nomi"
                           required>
@@ -253,7 +259,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedWItem.name"
+                          v-model="editedWItem.magazineCountry"
                           clearable
                           label="Jurnal nashr etilgan davlat">
                       </v-text-field>
@@ -263,7 +269,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedWItem.name"
+                          v-model="editedWItem.articleDoc"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -271,16 +277,14 @@
                       </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedWItem.name"
-                          clearable
-                          label="Maqola fayli"
-                          persistent-hint
-                          required>
-                      </v-text-field>
+                        cols="12">
+                        <v-file-input
+                          v-if="!editedWItem.doc"
+                          v-model="editedWItem.doc"
+                          show-size
+                          label="Maqola yuklash">
+                        </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedWItem)">Maqolani yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -350,7 +354,7 @@
 
 
     <v-row>
-      <v-col>
+      <v-col cols="12">
         <v-card flat
         title="Xorijiy jurnallardagi maqolalar (OAK ro’yxatidagi)">
         <template v-slot:append>
@@ -377,6 +381,8 @@
                         sm="6"
                         md="4">
                         <v-text-field
+                          clearable
+                          v-model="editedXItem.name"
                           label="Nomi"
                           required>
                       </v-text-field>
@@ -386,8 +392,9 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedXItem.name"
+                          v-model="editedXItem.quotesCount"
                           clearable
+                          required
                           label="Iqtiboslar soni">
                       </v-text-field>
                       </v-col>
@@ -396,15 +403,16 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedXItem.name"
+                          v-model="editedXItem.authorsCount"
                           clearable
+                          required
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedXItem.name"
+                          v-model="editedXItem.authorsName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -416,7 +424,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedXItem.name"
+                          v-model="editedXItem.magazineName"
                           clearable
                           label="Nashr etilgan jurnal nomi"
                           required>
@@ -427,8 +435,9 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedXItem.name"
+                          v-model="editedXItem.magazineCountry"
                           clearable
+                          required
                           label="Jurnal nashr etilgan davlat">
                       </v-text-field>
                       </v-col>
@@ -437,7 +446,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedXItem.name"
+                          v-model="editedXItem.articleUrl"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -445,13 +454,14 @@
                       </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
+                        cols="12">
                         <v-file-input
+                          v-if="!editedXItem.doc"
+                          v-model="editedXItem.doc"
                           show-size
-                          label="Maqolani yuklash"
-                        ></v-file-input>
+                          label="Maqola yuklash">
+                        </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedXItem)">Maqolani yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -519,7 +529,7 @@
       </v-col>
 
 
-      <v-col>
+      <v-col cols="12">
         <v-card
         flat
         title="Respublika jurnallaridagi maqolalar (OAK ro’yxatidagi)">
@@ -560,8 +570,9 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedRItem.name"
+                          v-model="editedRItem.quotesCount"
                           clearable
+                          required
                           label="Iqtiboslar soni">
                       </v-text-field>
                       </v-col>
@@ -570,15 +581,16 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedRItem.name"
+                          v-model="editedRItem.authorsCount"
                           clearable
+                          required
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedRItem.name"
+                          v-model="editedRItem.authorsName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -590,7 +602,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedRItem.name"
+                          v-model="editedRItem.magazineName"
                           clearable
                           label="Nashr etilgan jurnal nomi"
                           required>
@@ -601,7 +613,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedRItem.name"
+                          v-model="editedRItem.magazineCountry"
                           clearable
                           label="Jurnal nashr etilgan davlat">
                       </v-text-field>
@@ -611,7 +623,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedRItem.name"
+                          v-model="editedRItem.articleUrl"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -619,13 +631,14 @@
                       </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
+                        cols="12">
                         <v-file-input
+                          v-if="!editedRItem.doc"
+                          v-model="editedRItem.doc"
                           show-size
-                          label="Maqolani yuklash">
+                          label="Maqola yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedRItem)">Maqolani yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -695,7 +708,7 @@
 
 
     <v-row>
-      <v-col>
+      <v-col cols="12">
         <v-card flat
         title="Xalqaro miqyosdagi anjumanlar">
         <template v-slot:append>
@@ -735,9 +748,10 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedMItem.name"
+                          v-model="editedMItem.conventionName"
                           clearable
-                          label="Iqtiboslar soni">
+                          required
+                          label="Nashr etilgan anjuman nomi">
                       </v-text-field>
                       </v-col>
                       <v-col
@@ -745,15 +759,16 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedMItem.name"
+                          v-model="editedMItem.authorsCount"
                           clearable
+                          required
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedMItem.name"
+                          v-model="editedMItem.authorsName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -765,9 +780,9 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedMItem.name"
+                          v-model="editedMItem.datePublishing"
                           clearable
-                          label="Nashr etilgan jurnal nomi"
+                          label="Nashr etilgan sana"
                           required>
                       </v-text-field>
                       </v-col>
@@ -776,9 +791,10 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedMItem.name"
+                          v-model="editedMItem.conventionCountry"
                           clearable
-                          label="Jurnal nashr etilgan davlat">
+                          required
+                          label="Anjuman o'tkazilgan OTM, yoki davlat">
                       </v-text-field>
                       </v-col>
                       <v-col
@@ -786,7 +802,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedMItem.name"
+                          v-model="editedMItem.articleUrl"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -794,13 +810,14 @@
                       </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
+                        cols="12">
                         <v-file-input
+                          v-if="!editedMItem.doc"
+                          v-model="editedMItem.doc"
                           show-size
-                          label="Maqolani yuklash">
+                          label="Maqola yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Maqolani yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -868,7 +885,7 @@
       </v-col>
 
 
-      <v-col>
+      <v-col cols="12">
         <v-card
         flat
         title="Respublika miqyosidagi anjumanlar">
@@ -909,9 +926,10 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedAItem.name"
+                          v-model="editedAItem.conventionName"
                           clearable
-                          label="Iqtiboslar soni">
+                          required
+                          label="Nashr etilgan anjuman nomi">
                       </v-text-field>
                       </v-col>
                       <v-col
@@ -919,15 +937,16 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedAItem.name"
+                          v-model="editedAItem.authorsCount"
                           clearable
+                          required
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedAItem.name"
+                          v-model="editedAItem.authorsName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -939,9 +958,9 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedAItem.name"
+                          v-model="editedAItem.datePublishing"
                           clearable
-                          label="Nashr etilgan jurnal nomi"
+                          label="Nashr etilgan sana"
                           required>
                       </v-text-field>
                       </v-col>
@@ -950,9 +969,10 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedAItem.name"
+                          v-model="editedAItem.conventionCountry"
                           clearable
-                          label="Jurnal nashr etilgan davlat">
+                          required
+                          label="Anjuman o'tkazilgan OTM, yoki davlat">
                       </v-text-field>
                       </v-col>
                       <v-col
@@ -960,7 +980,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedAItem.name"
+                          v-model="editedAItem.articleUrl"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -968,13 +988,14 @@
                       </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
+                        cols="12">
                         <v-file-input
+                          v-if="!editedAItem.doc"
+                          v-model="editedAItem.doc"
                           show-size
-                          label="Anjumanni yuklash">
+                          label="Maqola yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Maqola yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -1051,16 +1072,40 @@ export default {
     return {
       searchS: '',
       headersS: [
-        { align: 'start', key: 'name', sortable: false, title: 'Nomi',},
-        { key: 'raqami', title: 'Iqtiboslari soni' },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'jNomi', title: 'Nashr etilgan jurnal nomi' },
-        { key: 'jurnal', title: 'Jurnal nashr etiladigan davlat' },
-        { key: 'havola', title: 'Maqola joylashgan havola' },
-        { key: 'fayil', title: 'Maqola fayli' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
+        { key: 'quotesCount', title: 'Iqtiboslari soni' },
+        { key: 'authorsCount', title: 'Mualliflar soni' },
+        { key: 'authorsName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'magazineName', title: 'Nashr etilgan jurnal nomi' },
+        { key: 'magazineCountry', title: 'Jurnal nashr etiladigan davlat' },
+        { key: 'articleUrl', title: 'Maqola joylashgan havola' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
+      dialogS: false,
+      dialogSDelete: false,
+      editedSIndex: -1,
+      editedSItem: {
+        id: 0,
+        name: '',
+        quotesCount: 0,
+        authorsCount: 0,
+        authorsName: '',
+        magazineName: '',
+        magazineCountry: '',
+        articleUrl: '',
+        doc: null,
+      },
+      defaultSItem: {
+        id: 0,
+        name: '',
+        quotesCount: 0,
+        authorsCount: 0,
+        authorsName: '',
+        magazineName: '',
+        magazineCountry: '',
+        articleUrl: '',
+        doc: null,
+      },
       itemsS: [
         {
           name: 'Frozen Yogurt',
@@ -1136,16 +1181,40 @@ export default {
 
       searchW: '',
       headersW: [
-        { align: 'start', key: 'name', sortable: false, title: 'Nomi',},
-        { key: 'raqami', title: 'Iqtiboslari soni' },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'jNomi', title: 'Nashr etilgan jurnal nomi' },
-        { key: 'jurnal', title: 'Jurnal nashr etiladigan davlat' },
-        { key: 'havola', title: 'Maqola joylashgan havola' },
-        { key: 'fayil', title: 'Maqola fayli' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
+        { key: 'quotesCount', title: 'Iqtiboslari soni' },
+        { key: 'authorsCount', title: 'Mualliflar soni' },
+        { key: 'authorsName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'magazineName', title: 'Nashr etilgan jurnal nomi' },
+        { key: 'magazineCountry', title: 'Jurnal nashr etiladigan davlat' },
+        { key: 'articleUrl', title: 'Maqola joylashgan havola' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
+      dialogW: false,
+      dialogWDelete: false,
+      editedWIndex: -1,
+      editedWItem: {
+        id: 0,
+        name: '',
+        quotesCount: 0,
+        authorsCount: 0,
+        authorsName: '',
+        magazineName: '',
+        magazineCountry: '',
+        articleUrl: '',
+        doc: null,
+      },
+      defaultWItem: {
+        id: 0,
+        name: '',
+        quotesCount: 0,
+        authorsCount: 0,
+        authorsName: '',
+        magazineName: '',
+        magazineCountry: '',
+        articleUrl: '',
+        doc: null,
+      },
       itemsW: [
         {
           name: 'Frozen Yogurt',
@@ -1221,16 +1290,40 @@ export default {
 
       searchX: '',
       headersX: [
-        { align: 'start', key: 'name', sortable: false, title: 'Nomi',},
-        { key: 'raqami', title: 'Iqtiboslari soni' },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'jNomi', title: 'Nashr etilgan jurnal nomi' },
-        { key: 'jurnal', title: 'Jurnal nashr etiladigan davlat' },
-        { key: 'havola', title: 'Maqola joylashgan havola' },
-        { key: 'fayil', title: 'Maqola fayli' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
+        { key: 'quotesCount', title: 'Iqtiboslari soni' },
+        { key: 'authorsCount', title: 'Mualliflar soni' },
+        { key: 'authorsName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'magazineName', title: 'Nashr etilgan jurnal nomi' },
+        { key: 'magazineCountry', title: 'Jurnal nashr etiladigan davlat' },
+        { key: 'articleUrl', title: 'Maqola joylashgan havola' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
+      dialogX: false,
+      dialogXDelete: false,
+      editedXIndex: -1,
+      editedXItem: {
+        id: 0,
+        name: '',
+        quotesCount: 0,
+        authorsCount: 0,
+        authorsName: '',
+        magazineName: '',
+        magazineCountry: '',
+        articleUrl: '',
+        doc: null,
+      },
+      defaultXItem: {
+        id: 0,
+        name: '',
+        quotesCount: 0,
+        authorsCount: 0,
+        authorsName: '',
+        magazineName: '',
+        magazineCountry: '',
+        articleUrl: '',
+        doc: null,
+      },
       itemsX: [
         {
           name: 'Frozen Yogurt',
@@ -1306,16 +1399,40 @@ export default {
 
       searchR: '',
       headersR: [
-        { align: 'start', key: 'name', sortable: false, title: 'Nomi', },
-        { key: 'raqami', title: 'Iqtiboslari soni' },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Mualliflar F.I.Sh' },
-        { key: 'jNomi', title: 'Nashr etilgan jurnal nomi' },
-        { key: 'jurnal', title: 'Jurnal nashr etiladigan davlat' },
-        { key: 'havola', title: 'Maqola joylashgan havola' },
-        { key: 'fayil', title: 'Maqola fayli' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
+        { key: 'quotesCount', title: 'Iqtiboslari soni' },
+        { key: 'authorsCount', title: 'Mualliflar soni' },
+        { key: 'authorsName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'magazineName', title: 'Nashr etilgan jurnal nomi' },
+        { key: 'magazineCountry', title: 'Jurnal nashr etiladigan davlat' },
+        { key: 'articleUrl', title: 'Maqola joylashgan havola' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
+      dialogR: false,
+      dialogRDelete: false,
+      editedRIndex: -1,
+      editedRItem: {
+        id: 0,
+        name: '',
+        quotesCount: 0,
+        authorsCount: 0,
+        authorsName: '',
+        magazineName: '',
+        magazineCountry: '',
+        articleUrl: '',
+        doc: null,
+      },
+      defaultRItem: {
+        id: 0,
+        name: '',
+        quotesCount: 0,
+        authorsCount: 0,
+        authorsName: '',
+        magazineName: '',
+        magazineCountry: '',
+        articleUrl: '',
+        doc: null,
+      },
       itemsR: [
         {
           name: 'Frozen Yogurt',
@@ -1391,16 +1508,40 @@ export default {
 
       searchM: '',
       headersM: [
-        { align: 'start', key: 'name', sortable: false, title: 'Nomi',},
-        { key: 'raqami', title: 'Nashr etilgan anjuman  nomi' },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Mualliflar F.I.Sh' },
-        { key: 'jNomi', title: 'Nashr etilgan sana' },
-        { key: 'jurnal', title: 'Anjuman o’tkazilgan OTM, ITM yoki davlat' },
-        { key: 'havola', title: 'Maqola joylashgan havola' },
-        { key: 'fayil', title: 'Maqola fayli' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
+        { key: 'conventionName', title: 'Nashr etilgan anjuman nomi' },
+        { key: 'authorsCount', title: 'Mualliflar soni' },
+        { key: 'authorsName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'datePublishing', title: 'Nashr etilgan sana' },
+        { key: 'conventionCountry', title: 'Anjuman o’tkazilgan OTM, ITM yoki davlat' },
+        { key: 'articleUrl', title: 'Maqola joylashgan havola' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
+      dialogM: false,
+      dialogMDelete: false,
+      editedMIndex: -1,
+      editedMItem: {
+        id: 0,
+        name: '',
+        conventionName: '',
+        authorsCount: 0,
+        authorsName: '',
+        datePublishing: '',
+        conventionCountry: '',
+        articleUrl: '',
+        doc: null,
+      },
+      defaultMItem: {
+        id: 0,
+        name: '',
+        conventionName: '',
+        authorsCount: 0,
+        authorsName: '',
+        datePublishing: '',
+        conventionCountry: '',
+        articleUrl: '',
+        doc: null,
+      },
       itemsM: [
         {
           name: 'Frozen Yogurt',
@@ -1476,16 +1617,40 @@ export default {
 
       searchA: '',
       headersA: [
-        { align: 'start',  key: 'name',  sortable: false,  title: 'Nomi',},
-        { key: 'raqami', title: 'Nashr etilgan anjuman  nomi' },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'jNomi', title: 'Nashr etilgan sana' },
-        { key: 'jurnal', title: 'Anjuman o’tkazilgan OTM, ITM yoki davlat' },
-        { key: 'havola', title: 'Maqola joylashgan havola' },
-        { key: 'fayil', title: 'Maqola fayli' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
+        { key: 'conventionName', title: 'Nashr etilgan anjuman nomi' },
+        { key: 'authorsCount', title: 'Mualliflar soni' },
+        { key: 'authorsName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'datePublishing', title: 'Nashr etilgan sana' },
+        { key: 'conventionCountry', title: 'Anjuman o’tkazilgan OTM, ITM yoki davlat' },
+        { key: 'articleUrl', title: 'Maqola joylashgan havola' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
+      dialogA: false,
+      dialogADelete: false,
+      editedAIndex: -1,
+      editedAItem: {
+        id: 0,
+        name: '',
+        conventionName: '',
+        authorsCount: 0,
+        authorsName: '',
+        datePublishing: '',
+        conventionCountry: '',
+        articleUrl: '',
+        doc: null,
+      },
+      defaultAItem: {
+        id: 0,
+        name: '',
+        conventionName: '',
+        authorsCount: 0,
+        authorsName: '',
+        datePublishing: '',
+        conventionCountry: '',
+        articleUrl: '',
+        doc: null,
+      },
       itemsA: [
         {
           name: 'Frozen Yogurt',
@@ -1559,113 +1724,6 @@ export default {
         },
       ],
 
-      dialogS: false,
-      dialogSDelete: false,
-      editedSIndex: -1,
-      editedSItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-      defaultSItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-
-      dialogW: false,
-      dialogWDelete: false,
-      editedWIndex: -1,
-      editedWItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-      defaultWItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-
-      dialogX: false,
-      dialogXDelete: false,
-      editedXIndex: -1,
-      editedXItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-      defaultXItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-
-      dialogR: false,
-      dialogRDelete: false,
-      editedRIndex: -1,
-      editedRItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-      defaultRItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-
-      dialogM: false,
-      dialogMDelete: false,
-      editedMIndex: -1,
-      editedMItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-      defaultMItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-
-      dialogA: false,
-      dialogADelete: false,
-      editedAIndex: -1,
-      editedAItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
-      defaultAItem: {
-        name: '',
-        id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
-      },
     }
   },
 
@@ -1952,6 +2010,10 @@ export default {
       }
       this.close()
     },
+
+    downloadDoc(item){
+
+    }
 
   },
 

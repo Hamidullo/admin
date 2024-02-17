@@ -2,9 +2,8 @@
   <v-container class="py-8 px-6 bg-grey-lighten-2" fluid>
 
     <v-row>
-      <v-col>
-        <v-card flat
-        title="Top–1000-da o’quv mashg’ulotlari olib borish">
+      <v-col cols="12">
+        <v-card flat title="Ilmiy daraja yoki unvonlari">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -30,11 +29,22 @@
                         cols="12"
                         sm="6"
                         md="6">
+                        <v-select
+                          v-model="editedItem.type"
+                          label="Unvonni tanlang"
+                          required
+                          :items="['Fan doktorlik (DSc) diplomi', 'Fan nomzodi (PhD) diplomi', 'Professor yoki dotsent - ilmiy unvoni',]">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.seriesNumber"
                           clearable
-                          label="Xorijiy OTM yoki ITM nomi"
-                          required>
+                          required
+                          label="Seriyasi">
                       </v-text-field>
                       </v-col>
                       <v-col
@@ -42,27 +52,9 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.docNumber"
                           clearable
-                          label="Davlati">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          v-model="editedItem.name"
-                          clearable
-                          label="Mashg’ulot olib borilgan kunlar">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedItem.name"
-                          clearable
-                          label="Mashg’ulot xajmi"
+                          label="Raqami"
                           persistent-hint
                           required>
                       </v-text-field>
@@ -71,10 +63,57 @@
                         cols="12"
                         sm="6"
                         md="6">
+                        <v-text-field
+                          v-model="editedItem.dateGiven"
+                          clearable
+                          label="Berilgan sanasi"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          v-model="editedItem.specialtyNumber"
+                          clearable
+                          label="Ixtisoslik raqami va nomi"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          v-model="editedItem.departmentName"
+                          clearable
+                          label="Mutaxassisligi nomi"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12">
+                        <v-text-field
+                          v-model="editedItem.workStartND"
+                          clearable
+                          label="Ishga qabul qilinganligi to‘g‘risidagi buyruq raqami va sanasi"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12">
                         <v-file-input
                           show-size
-                          label="Sertifikatni yuklash">
+                          v-if="!editedItem.docDownload"
+                          v-model="editedItem.docDownload"
+                          label="Diplom yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Diplom yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -98,7 +137,7 @@
             </v-dialog>
             <v-dialog v-model="dialogDelete" width="auto">
               <v-card>
-                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Top – 1000-da o’quv mashg’ulotlari olib borish o'chirishni hohlaysizmi?</v-card-title>
+                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Ilmiy daraja yoki unvonni o'chirishni hohlaysizmi?</v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue-darken-1" variant="text" @click="closeDelete">Bekor qilish</v-btn>
@@ -141,9 +180,9 @@
       </v-card>
       </v-col>
 
-      <v-col>
+      <v-col cols="12">
         <v-card flat
-        title="Stajirovka va malaka oshirish">
+        title="“TOP-1000” ro‘yxatiga kiruvchi xorijiy oliy ta’lim tashkilotlarida himoya qilgan">
           <template v-slot:append>
             <!-- Dialog start -->
             <v-row justify="center" class="mr-2">
@@ -169,10 +208,10 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedCItem.name"
+                          v-model="editedCItem.country"
                           clearable
-                          label="Xorijiy OTM yoki ITM nomi"
-                          required>
+                          required
+                          label="Davlat">
                       </v-text-field>
                       </v-col>
                       <v-col
@@ -180,39 +219,77 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedCItem.name"
+                          v-model="editedCItem.university"
                           clearable
-                          label="Davlati">
+                          required
+                          label="OTM">
                       </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-select
+                          label="Diplom turi"
+                          required
+                          :items="['PhD (falsafa doktori yoki fan nomzodi)', 'DSc (fan doktori)', 'Magistratura diplom',]">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          v-model="editedCItem.series"
+                          clearable
+                          label="Diplom seriyasi"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          v-model="editedCItem.number"
+                          clearable
+                          label="Diplom raqami"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          v-model="editedCItem.typeNumber"
+                          clearable
+                          label="Mutaxassisligi raqami va nomi"
+                          persistent-hint
+                          required>
+                        </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedCItem.name"
+                          v-model="editedCItem.workStartND"
                           clearable
-                          label="Stajirovka va malaka oshirilgan kunlar">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedCItem.name"
-                          clearable
-                          label="Stajirovka xajmi"
+                          label="Ishga qabul qilinganligi to‘g‘risidagi buyruq raqami va sanasi"
                           persistent-hint
                           required>
-                      </v-text-field>
+                        </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
+                        cols="12">
                         <v-file-input
                           show-size
-                          label="Sertifikatni yuklash">
+                          v-if="!editedCItem.docDownload"
+                          v-model="editedCItem.docDownload"
+                          label="Diplom yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedCItem)">Diplom yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -236,7 +313,7 @@
             </v-dialog>
               <v-dialog v-model="dialogCDelete" width="auto">
                 <v-card>
-                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Stajirovka va malaka oshirish o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">“TOP-1000” ro‘yxatiga kiruvchi xorijiy oliy ta’lim tashkilotlarida himoya qilgan o'chirishni hohlaysizmi?</v-card-title>
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="blue-darken-1" variant="text" @click="closeCDelete">Bekor qilish</v-btn>
@@ -279,6 +356,174 @@
       </v-data-table>
         </v-card>
       </v-col>
+
+      <v-col cols="12">
+        <v-card flat title="“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥ 5 dan yuqoriligi">
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog
+                v-model="dialogS" persistent
+                width="1024">
+                <template v-slot:activator="{ props }">
+                  <v-btn
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formSTitle }}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedSItem.magazineName"
+                            clearable
+                            required
+                            label="Jurnal nomi">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedSItem.datePublishing"
+                            clearable
+                            required
+                            label="Jurnal nasher etilgan sana">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedSItem.articleName"
+                            clearable
+                            label="Maqola nomi"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedSItem.articleUrl"
+                            clearable
+                            label="«Scopus» qidiruv tizimlardagi internet manzili (giper xavolasi)"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedSItem.articleLanguage"
+                            clearable
+                            label="Maqola chop etilgan til"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedSItem.hIndex"
+                            clearable
+                            label="h-index"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-file-input
+                            show-size
+                            v-if="!editedSItem.docDownload"
+                            v-model="editedSItem.docDownload"
+                            label="Diplom yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedSItem)">Diplomni yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeS">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveS">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogSDelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥ 5 dan yuqoriligi o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeSDelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteSItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <!-- Dialog end -->
+          </template>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchS"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details>
+            </v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersS"
+            :items="itemsS"
+            :search="searchS"
+            item-value="name">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editSItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteSItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -291,46 +536,93 @@ export default {
         dialogDelete: false,
         editedIndex: -1,
         editedItem: {
-          name: '',
           id: 0,
-          position: 0,
-          department: 0,
-          faculty: 0,
+          name: '',
+          type: '',
+          seriesNumber: '',
+          docNumber: '',
+          dateGiven: '',
+          specialtyNumber: '',
+          departmentName: '',
+          workStartND: '',
+          docDownload: null
         },
         defaultItem: {
-          name: '',
           id: 0,
-          position: 0,
-          department: 0,
-          faculty: 0,
+          name: '',
+          type: '',
+          seriesNumber: '',
+          docNumber: '',
+          dateGiven: '',
+          specialtyNumber: '',
+          departmentName: '',
+          workStartND: '',
+          docDownload: null
         },
 
         dialogC: false,
         dialogCDelete: false,
         editedCIndex: -1,
         editedCItem: {
-          name: '',
           id: 0,
-          position: 0,
-          department: 0,
-          faculty: 0,
+          name: '',
+          country: '',
+          university: '',
+          type: '',
+          series: '',
+          number: '',
+          typeNumber: '',
+          workStartND: '',
+          docDownload: null
         },
         defaultCItem: {
-          name: '',
           id: 0,
-          position: 0,
-          department: 0,
-          faculty: 0,
+          name: '',
+          country: '',
+          university: '',
+          type: '',
+          series: '',
+          number: '',
+          typeNumber: '',
+          workStartND: '',
+          docDownload: null
+        },
+
+        dialogS: false,
+        dialogSDelete: false,
+        editedSIndex: -1,
+        editedSItem: {
+          id: 0,
+          name: '',
+          magazineName: '',
+          datePublishing: '',
+          articleName: '',
+          articleLanguage: '',
+          articleUrl: '',
+          hIndex: '',
+          docDownload: null
+        },
+        defaultSItem: {
+          id: 0,
+          name: '',
+          magazineName: '',
+          datePublishing: '',
+          articleName: '',
+          articleLanguage: '',
+          articleUrl: '',
+          hIndex: '',
+          docDownload: null
         },
 
         search: '',
         headers: [
-          { align: 'start', key: 'name', sortable: false, title: 'Xorijiy OTM yoki ITM nomi',},
-          { key: 'davlati', title: 'Davlati' },
-          { key: 'kunlar', title: 'Mashg’ulot olib borilgan kunlar' },
-          { key: 'hajmi', title: 'Mashg’ulot xajmi' },
-          { key: 'sertifikat', title: 'Sertifikat yuklanadi' },
-          { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+          { key: 'type', title: 'Turi', align: 'start', sortable: false, },
+          { key: 'seriesNumber', title: 'Seriyasi' },
+          { key: 'dateGiven', title: 'Raqami' },
+          { key: 'docNumber', title: 'Berilgan sana' },
+          { key: 'specialtyNumber', title: 'Ixtisoslik raqami va nomi' },
+          { key: 'departmentName', title: 'Mutaxassisligi nomi' },
+          { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
         ],
         items: [
           {
@@ -407,12 +699,13 @@ export default {
 
         searchC: '',
         headersC: [
-          { align: 'start', sortable: false, key: 'name', title: 'Xorijiy OTM yoki ITM nomi',},
-          { title: 'Davlati', align: 'center', key: 'davlati',},
-          { title: 'Stajirovka va malaka oshirilgan kunlar', align: 'center', key: 'kunlar',},
-          { title: 'Stajirovka xajmi', align: 'end', key: 'hajmi',},
-          { title: 'Sertifikat yuklanadi', align: 'end', key: 'sertifikat',},
-          { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+          { title: 'Xorijiy davlat nomi', align: 'start', key: 'country',},
+          { title: 'OTM nomi', align: 'start', key: 'university',},
+          { title: 'Turi', align: 'start', key: 'type',},
+          { key: 'seriesNumber', title: 'Seriyasi' },
+          { key: 'dateGiven', title: 'Raqami' },
+          { title: 'Mutaxassisligi nomi', align: 'start', key: 'typeNumber',},
+          { title: 'Amallar',align: 'start', sortable: false, key: 'actions', },
         ],
         itemsC: [
         {
@@ -485,7 +778,90 @@ export default {
           hajmi: '3.5 GHz',
           sertifikat: '5.3 GHz',
         },
-        ]
+        ],
+
+        searchS: '',
+        headersS: [
+          { key: 'magazineName', title: 'Jurnal nomi' },
+          { key: 'datePublishing', title: 'Jurnalning nashr etilgan sanasi' },
+          { key: 'articleName', title: 'Maqola nomi' },
+          { key: 'articleLanguage', title: 'Maqola chop etilgan til' },
+          { key: 'articleUrl', title: 'Maqolani giper Xavolasi' },
+          { key: 'hIndex', title: 'h-index' },
+          {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
+        ],
+        itemsS: [
+          {
+            name: 'Frozen Yogurt',
+            davlati: 159,
+            kunlar: 6.0,
+            hajmi: 24,
+            sertifikat: 4.0,
+          },
+          {
+            name: 'Ice cream sandwich',
+            davlati: 237,
+            kunlar: 9.0,
+            hajmi: 37,
+            sertifikat: 4.3,
+          },
+          {
+            name: 'Eclair',
+            davlati: 262,
+            kunlar: 16.0,
+            hajmi: 23,
+            sertifikat: 6.0,
+          },
+          {
+            name: 'Cupcake',
+            davlati: 305,
+            kunlar: 3.7,
+            hajmi: 67,
+            sertifikat: 4.3,
+          },
+          {
+            name: 'Gingerbread',
+            davlati: 356,
+            kunlar: 16.0,
+            hajmi: 49,
+            sertifikat: 3.9,
+          },
+          {
+            name: 'Jelly bean',
+            davlati: 375,
+            kunlar: 0.0,
+            hajmi: 94,
+            sertifikat: 0.0,
+          },
+          {
+            name: 'Lollipop',
+            davlati: 392,
+            kunlar: 0.2,
+            hajmi: 98,
+            sertifikat: 0,
+          },
+          {
+            name: 'Honeycomb',
+            davlati: 408,
+            kunlar: 3.2,
+            hajmi: 87,
+            sertifikat: 6.5,
+          },
+          {
+            name: 'Donut',
+            davlati: 452,
+            kunlar: 25.0,
+            hajmi: 51,
+            sertifikat: 4.9,
+          },
+          {
+            name: 'KitKat',
+            davlati: 518,
+            kunlar: 26.0,
+            hajmi: 65,
+            sertifikat: 7,
+          },
+        ],
       }
     },
   methods: {
@@ -494,11 +870,15 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
-
     editCItem (item) {
       this.editedCIndex = this.itemsC.indexOf(item)
       this.editedCItem = Object.assign({}, item)
       this.dialogC = true
+    },
+    editSItem (item) {
+      this.editedSIndex = this.itemsS.indexOf(item)
+      this.editedSItem = Object.assign({}, item)
+      this.dialogS = true
     },
 
     deleteItem (item) {
@@ -506,21 +886,28 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
-
     deleteCItem (item) {
       this.editedCIndex = this.itemsC.indexOf(item)
       this.editedCItem = Object.assign({}, item)
       this.dialogCDelete = true
+    },
+    deleteSItem (item) {
+      this.editedSIndex = this.itemsS.indexOf(item)
+      this.editedSItem = Object.assign({}, item)
+      this.dialogSDelete = true
     },
 
     deleteItemConfirm () {
       this.items.splice(this.editedIndex, 1)
       this.closeDelete()
     },
-
     deleteCItemConfirm () {
       this.itemsC.splice(this.editedCIndex, 1)
       this.closeCDelete()
+    },
+    deleteSItemConfirm () {
+      this.itemsS.splice(this.editedSIndex, 1)
+      this.closeSDelete()
     },
 
     close () {
@@ -530,12 +917,18 @@ export default {
         this.editedIndex = -1
       })
     },
-
     closeC () {
       this.dialogC = false
       this.$nextTick(() => {
         this.editedCItem = Object.assign({}, this.defaultCItem)
         this.editedCIndex = -1
+      })
+    },
+    closeS () {
+      this.dialogS = false
+      this.$nextTick(() => {
+        this.editedSItem = Object.assign({}, this.defaultSItem)
+        this.editedSIndex = -1
       })
     },
 
@@ -546,12 +939,18 @@ export default {
         this.editedIndex = -1
       })
     },
-
     closeCDelete () {
       this.dialogCDelete = false
       this.$nextTick(() => {
         this.editedCItem = Object.assign({}, this.defaultCItem)
         this.editedCIndex = -1
+      })
+    },
+    closeSDelete () {
+      this.dialogSDelete = false
+      this.$nextTick(() => {
+        this.editedSItem = Object.assign({}, this.defaultSItem)
+        this.editedSIndex = -1
       })
     },
 
@@ -563,7 +962,6 @@ export default {
       }
       this.close()
     },
-
     saveC () {
       if (this.editedCIndex > -1) {
         Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
@@ -572,14 +970,29 @@ export default {
       }
       this.closeC()
     },
+    saveS () {
+      if (this.editedSIndex > -1) {
+        Object.assign(this.itemsS[this.editedSIndex], this.editedSItem)
+      } else {
+        this.itemsS.push(this.editedSItem)
+      }
+      this.closeS()
+    },
+
+    downloadDoc(item) {
+
+    }
   },
 
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'Top – 1000-da o’quv mashg’ulotlari olib borish qo`shish' : 'Top – 1000-da o’quv mashg’ulotlari olib borish taxrirlash'
+      return this.editedIndex === -1 ? 'Ilmiy daraja yoki unvonini qo`shish' : 'Ilmiy daraja yoki unvonini taxrirlash'
     },
     formCTitle () {
-      return this.editedQIndex === -1 ? 'Stajirovka va malaka oshirish qo`shish' : 'Stajirovka va malaka oshirish taxrirlash'
+      return this.editedQIndex === -1 ? '“TOP-1000” ro‘yxatiga kiruvchi xorijiy oliy ta’lim tashkilotlarida himoya qilganligi qo`shish' : '“TOP-1000” ro‘yxatiga kiruvchi xorijiy oliy ta’lim tashkilotlarida himoya qilganligi taxrirlash'
+    },
+    formSTitle () {
+      return this.editedSIndex === -1 ? '“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥5 dan yuqoriligi qo`shish' : '“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥5 dan yuqoriligi taxrirlash'
     },
   },
 
@@ -595,6 +1008,12 @@ export default {
     },
     dialogCDelete (val) {
       val || this.closeCDelete()
+    },
+    dialogS (val) {
+      val || this.closeS()
+    },
+    dialogSDelete (val) {
+      val || this.closeSDelete()
     },
   }
 }

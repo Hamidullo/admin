@@ -40,8 +40,9 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.number"
                           clearable
+                          required
                           label="Patent raqami">
                       </v-text-field>
                       </v-col>
@@ -50,15 +51,16 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.authorCount"
                           clearable
+                          required
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.authorName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -70,7 +72,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.datePublished"
                           clearable
                           label="Nashr etilgan sana"
                           required>
@@ -81,9 +83,12 @@
                         sm="6"
                         md="6">
                         <v-file-input
+                          v-if="!editedItem.doc"
+                          v-model="editedItem.doc"
                           show-size
-                          label="Patentni yuklash">
+                          label="Patent yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">patentni yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -176,7 +181,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedMItem.name"
                           clearable
                           label="Patent nomi"
                           required>
@@ -187,8 +192,9 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedMItem.number"
                           clearable
+                          required
                           label="Patent raqami">
                       </v-text-field>
                       </v-col>
@@ -197,15 +203,16 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedMItem.authorCount"
                           clearable
+                          required
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedMItem.authorName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -217,7 +224,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedMItem.datePublished"
                           clearable
                           label="Nashr etilgan sana"
                           required>
@@ -228,9 +235,12 @@
                         sm="6"
                         md="6">
                         <v-file-input
+                          v-if="!editedMItem.doc"
+                          v-model="editedMItem.doc"
                           show-size
-                          label="Patentni yuklash">
+                          label="Patent yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Patentni yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -325,7 +335,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedYItem.name"
                           clearable
                           label="Patent nomi"
                           required>
@@ -336,8 +346,9 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedYItem.number"
                           clearable
+                          required
                           label="Patent raqami">
                       </v-text-field>
                       </v-col>
@@ -346,15 +357,16 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedYItem.authorCount"
                           clearable
+                          required
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedYItem.authorName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -366,7 +378,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedYItem.datePublished"
                           clearable
                           label="Nashr etilgan sana"
                           required>
@@ -377,9 +389,12 @@
                         sm="6"
                         md="6">
                         <v-file-input
+                          v-if="!editedYItem.doc"
+                          v-model="editedYItem.doc"
                           show-size
-                          label="Patentni yuklash">
+                          label="Patent yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedYItem)">Patentni yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -473,7 +488,7 @@
                         cols="12">
                         <v-text-field
                           clearable
-                          v-model="editedItem.name"
+                          v-model="editedNItem.name"
                           label="Patent nomi"
                           required>
                       </v-text-field>
@@ -484,7 +499,8 @@
                         md="6">
                         <v-text-field
                           clearable
-                          v-model="editedItem.name"
+                          required
+                          v-model="editedNItem.number"
                           label="Patent raqami">
                       </v-text-field>
                       </v-col>
@@ -494,7 +510,8 @@
                         md="6">
                         <v-text-field
                           clearable
-                          v-model="editedItem.name"
+                          required
+                          v-model="editedNItem.authorCount"
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
@@ -502,7 +519,7 @@
                         cols="12">
                         <v-text-field
                           clearable
-                          v-model="editedItem.name"
+                          v-model="editedNItem.authorName"
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
                           required>
@@ -514,7 +531,7 @@
                         md="6">
                         <v-text-field
                           clearable
-                          v-model="editedItem.name"
+                          v-model="editedNItem.datePublished"
                           label="Nashr etilgan sana"
                           required>
                       </v-text-field>
@@ -523,11 +540,13 @@
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
-                          clearable
-                          v-model="editedItem.name"
-                          label="Patent yuklandi">
-                      </v-text-field>
+                        <v-file-input
+                          v-if="!editedNItem.doc"
+                          v-model="editedNItem.doc"
+                          show-size
+                          label="Patent yuklash">
+                        </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedNItem)">Patentni yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -623,7 +642,7 @@
                         cols="12">
                         <v-text-field
                           clearable
-                          v-model="editedItem.name"
+                          v-model="editedAItem.name"
                           label="Guvoxnoma nomi"
                           required>
                       </v-text-field>
@@ -634,7 +653,8 @@
                         md="6">
                         <v-text-field
                           clearable
-                          v-model="editedItem.name"
+                          required
+                          v-model="editedAItem.number"
                           label="Guvoxnoma raqami">
                       </v-text-field>
                       </v-col>
@@ -644,7 +664,8 @@
                         md="6">
                         <v-text-field
                           clearable
-                          v-model="editedItem.name"
+                          required
+                          v-model="editedAItem.authorCount"
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
@@ -652,7 +673,7 @@
                         cols="12">
                         <v-text-field
                           clearable
-                          v-model="editedItem.name"
+                          v-model="editedAItem.authorName"
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
                           required>
@@ -664,7 +685,7 @@
                         md="6">
                         <v-text-field
                           clearable
-                          v-model="editedItem.name"
+                          v-model="editedAItem.datePublished"
                           label="Nashr etilgan sana"
                           required>
                       </v-text-field>
@@ -674,9 +695,12 @@
                         sm="6"
                         md="6">
                         <v-file-input
+                          v-if="!editedItem.doc"
+                          v-model="editedItem.doc"
                           show-size
                           label="Guvohnoma yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Guvohnomani yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -769,7 +793,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedGItem.name"
                           clearable
                           label="Guvoxnoma nomi"
                           required>
@@ -780,8 +804,9 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedGItem.number"
                           clearable
+                          required
                           label="Guvoxnoma raqami">
                       </v-text-field>
                       </v-col>
@@ -790,15 +815,16 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedGItem.authorCount"
                           clearable
+                          required
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedGItem.authorName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -810,7 +836,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedGItem.datePublished"
                           clearable
                           label="Nashr etilgan sana"
                           required>
@@ -821,9 +847,12 @@
                         sm="6"
                         md="6">
                         <v-file-input
+                          v-if="!editedGItem.doc"
+                          v-model="editedGItem.doc"
                           show-size
                           label="Guvohnoma yuklash">
                         </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedGItem)">Guvohnomani yuklash</v-btn>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -902,119 +931,142 @@ export default {
       dialogDelete: false,
       editedIndex: -1,
       editedItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        number: '',
+        authorCount: 0,
+        authorName: '',
+        datePublished: '',
+        doc: null
       },
       defaultItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        number: '',
+        authorCount: 0,
+        authorName: '',
+        datePublished: '',
+        doc: null
       },
 
       dialogM: false,
       dialogMDelete: false,
       editedMIndex: -1,
       editedMItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        number: '',
+        authorCount: 0,
+        authorName: '',
+        datePublished: '',
+        doc: null
       },
       defaultMItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        number: '',
+        authorCount: 0,
+        authorName: '',
+        datePublished: '',
+        doc: null
       },
 
       dialogY: false,
       dialogYDelete: false,
       editedYIndex: -1,
       editedYItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        number: '',
+        authorCount: 0,
+        authorName: '',
+        datePublished: '',
+        doc: null
       },
       defaultYItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        number: '',
+        authorCount: 0,
+        authorName: '',
+        datePublished: '',
+        doc: null
       },
 
       dialogN: false,
       dialogNDelete: false,
       editedNIndex: -1,
       editedNItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        number: '',
+        authorCount: 0,
+        authorName: '',
+        datePublished: '',
+        doc: null
       },
       defaultNItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        number: '',
+        authorCount: 0,
+        authorName: '',
+        datePublished: '',
+        doc: null
       },
 
       dialogA: false,
       dialogADelete: false,
       editedAIndex: -1,
       editedAItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        number: '',
+        authorCount: 0,
+        authorName: '',
+        datePublished: '',
+        doc: null
       },
       defaultAItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        number: '',
+        authorCount: 0,
+        authorName: '',
+        datePublished: '',
+        doc: null
       },
 
       dialogG: false,
       dialogGDelete: false,
       editedGIndex: -1,
       editedGItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        number: '',
+        authorCount: 0,
+        authorName: '',
+        datePublished: '',
+        doc: null
       },
       defaultGItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        number: '',
+        authorCount: 0,
+        authorName: '',
+        datePublished: '',
+        doc: null
       },
 
       search: '',
       headers: [
-        { align: 'start', key: 'name', sortable: false, title: 'Patent nomi',},
-        { key: 'raqami', title: 'Patent raqami' },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Mualliflar F.I.Sh' },
-        { key: 'sana', title: 'Nashr etilgan sana' },
-        { key: 'patent', title: 'Patent yuklanadi' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        { key: 'name', title: 'Patent nomi', align: 'start', sortable: false, },
+        { key: 'number', title: 'Patent raqami' },
+        { key: 'authorCount', title: 'Mualliflar soni' },
+        { key: 'authorName', title: 'Mualliflar F.I.Sh' },
+        { key: 'datePublished', title: 'Nashr etilgan sana' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       items: [
         {
@@ -1077,13 +1129,12 @@ export default {
 
       searchM: '',
       headersM: [
-        { align: 'start', key: 'name', sortable: false, title: 'Patent nomi',},
-        { key: 'raqami', title: 'Patent raqami' },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Mualliflar F.I.Sh' },
-        { key: 'sana', title: 'Nashr etilgan sana' },
-        { key: 'patent', title: 'Patent yuklanadi' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        { key: 'name', title: 'Patent nomi', align: 'start', sortable: false, },
+        { key: 'number', title: 'Patent raqami' },
+        { key: 'authorCount', title: 'Mualliflar soni' },
+        { key: 'authorName', title: 'Mualliflar F.I.Sh' },
+        { key: 'datePublished', title: 'Nashr etilgan sana' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       itemsM: [
         {
@@ -1146,13 +1197,12 @@ export default {
 
       searchY: '',
       headersY: [
-        { align: 'start', key: 'name', sortable: false, title: 'Patent nomi',},
-        { key: 'raqami', title: 'Patent raqami' },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Mualliflar F.I.Sh' },
-        { key: 'sana', title: 'Nashr etilgan sana' },
-        { key: 'patent', title: 'Patent yuklanadi' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        { key: 'name', title: 'Patent nomi', align: 'start', sortable: false, },
+        { key: 'number', title: 'Patent raqami' },
+        { key: 'authorCount', title: 'Mualliflar soni' },
+        { key: 'authorName', title: 'Mualliflar F.I.Sh' },
+        { key: 'datePublished', title: 'Nashr etilgan sana' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       itemsY: [
         {
@@ -1215,13 +1265,12 @@ export default {
 
       searchN: '',
       headersN: [
-        { align: 'start', key: 'name', sortable: false, title: 'Patent nomi',},
-        { key: 'raqami', title: 'Patent raqami' },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Mualliflar F.I.Sh' },
-        { key: 'sana', title: 'Nashr etilgan sana' },
-        { key: 'patent', title: 'Patent yuklanadi' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        { key: 'name', title: 'Patent nomi', align: 'start', sortable: false, },
+        { key: 'number', title: 'Patent raqami' },
+        { key: 'authorCount', title: 'Mualliflar soni' },
+        { key: 'authorName', title: 'Mualliflar F.I.Sh' },
+        { key: 'datePublished', title: 'Nashr etilgan sana' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       itemsN: [
         {
@@ -1284,13 +1333,12 @@ export default {
 
       searchA: '',
       headersA: [
-        { align: 'start', key: 'name', sortable: false, title: 'Guvoxnoma nomi',},
-        { key: 'raqami', title: 'Guvoxnoma raqami' },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Mualliflar F.I.Sh' },
-        { key: 'sana', title: 'Nashr etilgan sana' },
-        { key: 'patent', title: 'Guvoxnoma yuklanadi' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        { key: 'name', title: 'Patent nomi', align: 'start', sortable: false, },
+        { key: 'number', title: 'Guvohnoma raqami' },
+        { key: 'authorCount', title: 'Mualliflar soni' },
+        { key: 'authorName', title: 'Mualliflar F.I.Sh' },
+        { key: 'datePublished', title: 'Nashr etilgan sana' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       itemsA: [
         {
@@ -1353,13 +1401,12 @@ export default {
 
       searchG: '',
       headersG: [
-        { align: 'start', key: 'name', sortable: false, title: 'Guvoxnoma nomi',},
-        { key: 'raqami', title: 'Guvoxnoma raqami' },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Mualliflar F.I.Sh' },
-        { key: 'sana', title: 'Nashr etilgan sana' },
-        { key: 'patent', title: 'Guvoxnoma yuklanadi' },
-        { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+        { key: 'name', title: 'Patent nomi', align: 'start', sortable: false, },
+        { key: 'number', title: 'Guvohnoma raqami' },
+        { key: 'authorCount', title: 'Mualliflar soni' },
+        { key: 'authorName', title: 'Mualliflar F.I.Sh' },
+        { key: 'datePublished', title: 'Nashr etilgan sana' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       itemsG: [
         {
@@ -1644,6 +1691,10 @@ export default {
       }
       this.closeG()
     },
+
+    downloadDoc(item){
+
+    }
   },
 
   computed: {

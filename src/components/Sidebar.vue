@@ -77,7 +77,7 @@ export default {
         {
           value: 3,
           icon: 'mdi-school',
-          title: 'ILMIY DARAJA' ,
+          title: 'SIFAT(SALOHIYAT) KO‘RSATKICHI' ,
           action: this.openAcademicPage,
           routeName: "Academic"
         },

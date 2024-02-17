@@ -43,8 +43,9 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.position"
                           clearable
+                          required
                           label="Fan doktori">
                       </v-text-field>
                       </v-col>
@@ -53,8 +54,9 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.department"
                           clearable
+                          required
                           label="Falsafa doktori">
                       </v-text-field>
                       </v-col>
@@ -63,7 +65,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.faculty"
                           clearable
                           label="Olimpiada g'olibi"
                           persistent-hint
@@ -74,22 +76,24 @@
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
-                          v-model="editedItem.name"
-                          clearable
-                          label="Sport ustalari"
-                          required>
-                      </v-text-field>
+                        <v-select
+                          label="Shogird yutug'ini tanlang"
+                          required
+                          v-model="editedItem.type"
+                          :items="['Fan doktori', 'Falsafa doktori', 'Stipendiant', 'Olimpiada g’olibi', 'Sport ustalari ']">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
-                          v-model="editedItem.name"
-                          clearable
-                          label="Stipendiant">
-                      </v-text-field>
+                        <v-file-input
+                          v-if="!editedItem.doc"
+                          v-model="editedItem.doc"
+                          show-size
+                          label="Hujjat yuklash">
+                        </v-file-input>
+                        <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Hujjatni yuklash</v-btn>
                       </v-col>
 
                     </v-row>
@@ -171,28 +175,31 @@ export default {
         dialogDelete: false,
         editedIndex: -1,
         editedItem: {
-          name: '',
           id: 0,
-          position: 0,
-          department: 0,
-          faculty: 0,
+          name: '',
+          position: '',
+          department: '0',
+          faculty: '',
+          type: '',
+          doc: null
         },
         defaultItem: {
-          name: '',
           id: 0,
-          position: 0,
-          department: 0,
-          faculty: 0,
+          name: '',
+          position: '',
+          department: '0',
+          faculty: '',
+          type: '',
+          doc: null
         },
         search: '',
         headers: [
-          { align: 'start', key: 'name', sortable: false, title: 'Tayyorlagan shogird',},
-          { key: 'fan', title: 'Fan doktori' },
-          { key: 'falsafa', title: 'Falsafa doktori' },
-          { key: 'olimpiyada', title: 'Olimpiada g’olibi' },
-          { key: 'sport', title: 'Sport ustalari' },
-          { key: 'stipendia', title: 'Stipendiant' },
-          { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
+          { key: 'name', title: 'Tayyorlagan shogird', align: 'start', sortable: false, },
+          { key: 'position', title: 'Lavozimi' },
+          { key: 'department', title: 'Kafedrasi' },
+          { key: 'faculty', title: 'Fakulteti' },
+          { key: 'type', title: 'Turi' },
+          {  key: 'actions', title: 'Amallar',align: 'start',sortable: false },
         ],
         items: [
           {
@@ -336,6 +343,10 @@ export default {
       }
       this.close()
     },
+
+    downloadDoc(item){
+
+    }
   }
 
 }
