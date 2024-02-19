@@ -3,8 +3,7 @@
 
     <v-row>
       <v-col>
-        <v-card flat
-        title="Top – 1000-da o’quv mashg’ulotlari olib borish">
+        <v-card flat title="Top – 1000-da o’quv mashg’ulotlari olib borish">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">

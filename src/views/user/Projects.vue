@@ -73,12 +73,12 @@
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
+                        <v-select
+                          label="Lavozimni tanlang"
                           v-model="editedItem.projectPosition"
-                          clearable
                           required
-                          label="Loyihadagi lavozim">
-                      </v-text-field>
+                          :items="['Raxbar', 'Opponent']">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -230,12 +230,12 @@
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
+                        <v-select
+                          label="Lavozimni tanlang"
                           v-model="editedMItem.projectPosition"
-                          clearable
                           required
-                          label="Loyihadagi lavozim">
-                      </v-text-field>
+                          :items="['Raxbar', 'Opponent']">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -317,9 +317,7 @@
 
     <v-row>
       <v-col  cols="12">
-        <v-card
-        flat
-        title="Respublik loyihalaridagi ishtiroki">
+        <v-card flat title="Respublik loyihalaridagi ishtiroki">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -389,12 +387,12 @@
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
+                        <v-select
+                          label="Lavozimni tanlang"
                           v-model="editedYItem.projectPosition"
-                          clearable
                           required
-                          label="Loyihadagi lavozim">
-                      </v-text-field>
+                          :items="['Raxbar', 'Opponent']">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -546,12 +544,12 @@
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
+                        <v-select
+                          label="Lavozimni tanlang"
                           v-model="editedNItem.projectPosition"
-                          clearable
                           required
-                          label="Loyihadagi lavozim">
-                      </v-text-field>
+                          :items="['Raxbar', 'Opponent']">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -631,9 +629,7 @@
       </v-col>
 
       <v-col  cols="12">
-        <v-card
-          flat
-          title="Xo’jalik shartnomalari">
+        <v-card flat title="Xo’jalik shartnomalari">
           <template v-slot:append>
             <!-- Dialog start -->
             <v-row justify="center" class="mr-2">
@@ -681,12 +677,12 @@
                           cols="12"
                           sm="6"
                           md="6">
-                          <v-text-field
+                          <v-select
+                            label="Shatnoma xajmi"
                             v-model="editedAItem.projectSize"
-                            clearable
                             required
-                            label="Shatnoma xajmi">
-                          </v-text-field>
+                            :items="['Fan doktori 5-mln', 'Fan nomzodi 4-mln', 'Darajasiz PO` 3-mln' ]">
+                          </v-select>
                         </v-col>
                         <v-col
                           cols="12"

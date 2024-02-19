@@ -125,13 +125,6 @@ export default {
         },
         {
           value: 10,
-          icon: 'mdi-trophy',
-          title: 'ERISHGAN YUTUQLARI' ,
-          action: this.openAchievementPage,
-          routeName: "Achievement"
-        },
-        {
-          value: 11,
           icon: 'mdi-cog',
           title: 'SOZLAMALAR' ,
           action: this.openSettingsPage,

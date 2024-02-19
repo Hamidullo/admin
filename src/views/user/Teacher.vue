@@ -1,11 +1,9 @@
 <template>
-  <v-container class="py-8 px-6 bg-grey-lighten-2"
-  fluid>
+  <v-container class="py-8 px-6 bg-grey-lighten-2" fluid>
 
     <v-row>
-      <v-col>
-        <v-card flat
-        title="Tayyorlagan shogirdlar">
+      <v-col cols="6">
+        <v-card flat title="Tayyorlagan shogirdlar">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -162,6 +160,144 @@
       </v-card>
       </v-col>
 
+      <v-col cols="6">
+        <v-card flat title="Davlat mukofotlari">
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog v-model="dialogD" persistent width="1024">
+                <template v-slot:activator="{ props }">
+                  <v-btn color="primary" v-bind="props">
+                    Qo'shish
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formDTitle }}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedDItem.name"
+                            clearable
+                            required
+                            label="Davlat mukofoti">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedDItem.type"
+                            clearable
+                            required
+                            label="Turi">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedDItem.year"
+                            clearable
+                            required
+                            label="Berilgan yili">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedDItem.number"
+                            clearable
+                            label="Seriya raqami"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-file-input
+                            v-if="!editedDItem.doc"
+                            v-model="editedDItem.doc"
+                            show-size
+                            label="Sertifikat yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedDItem)">Sertifikatni yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeD">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveD">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogDDelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Davlat mukofotini o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeDDelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteDItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <!-- Dialog end -->
+          </template>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchD"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details
+            ></v-text-field>
+          </template>
+
+          <v-data-table
+            :headers="headersD"
+            :items="itemsD"
+            :search="searchD">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editDItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteDItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
+      </v-col>
     </v-row>
 
   </v-container>
@@ -283,6 +419,71 @@ export default {
             stipendia: 7,
           },
         ],
+
+        dialogD: false,
+        dialogDDelete: false,
+        editedDIndex: -1,
+        editedDItem: {
+          id: 0,
+          name: '',
+          type: '',
+          year: '',
+          number: '',
+          doc: null
+        },
+        defaultDItem: {
+          id: 0,
+          name: '',
+          type: '',
+          year: '',
+          number: '',
+          doc: null
+        },
+        searchD: '',
+        headersD: [
+          { key: 'name', title: 'Davlat mukofotlari', align: 'start', sortable: false, },
+          { key: 'type', title: 'Turi' },
+          { key: 'year', title: 'Berilgan yili' },
+          { key: 'number', title: 'Seriya raqami' },
+          {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
+        ],
+        itemsD: [
+          {
+            name: 'Frozen Yogurt',
+            turi: 159,
+            yili: 6.0,
+            seriya: 24,
+            sertifikat: 4.0,
+          },
+          {
+            name: 'Ice cream sandwich',
+            turi: 159,
+            yili: 6.0,
+            seriya: 24,
+            sertifikat: 4.0,
+          },
+          {
+            name: 'Eclair',
+            turi: 159,
+            yili: 6.0,
+            seriya: 24,
+            sertifikat: 4.0,
+          },
+          {
+            name: 'Cupcake',
+            turi: 159,
+            yili: 6.0,
+            seriya: 24,
+            sertifikat: 4.0,
+          },
+          {
+            name: 'Gingerbread',
+            turi: 159,
+            yili: 6.0,
+            seriya: 24,
+            sertifikat: 4.0,
+          },
+        ],
       }
     },
 
@@ -307,11 +508,21 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
+    editDItem (item) {
+      this.editedDIndex = this.itemsD.indexOf(item)
+      this.editedDItem = Object.assign({}, item)
+      this.dialogD = true
+    },
 
     deleteItem (item) {
       this.editedIndex = this.items.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
+    },
+    deleteDItem (item) {
+      this.editedDIndex = this.itemsD.indexOf(item)
+      this.editedDItem = Object.assign({}, item)
+      this.dialogDDelete = true
     },
 
     close () {
@@ -319,6 +530,13 @@ export default {
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
+      })
+    },
+    closeD () {
+      this.dialogD = false
+      this.$nextTick(() => {
+        this.editedDItem = Object.assign({}, this.defaultDItem)
+        this.editedDIndex = -1
       })
     },
 
@@ -329,10 +547,21 @@ export default {
         this.editedIndex = -1
       })
     },
+    closeDDelete () {
+      this.dialogDDelete = false
+      this.$nextTick(() => {
+        this.editedDItem = Object.assign({}, this.defaultDItem)
+        this.editedDIndex = -1
+      })
+    },
 
     deleteItemConfirm () {
       this.items.splice(this.editedIndex, 1)
       this.closeDelete()
+    },
+    deleteDItemConfirm () {
+      this.itemsD.splice(this.editedDIndex, 1)
+      this.closeDDelete()
     },
 
     save () {
@@ -342,6 +571,14 @@ export default {
         this.items.push(this.editedItem)
       }
       this.close()
+    },
+    saveD () {
+      if (this.editedDIndex > -1) {
+        Object.assign(this.itemsD[this.editedDIndex], this.editedDItem)
+      } else {
+        this.itemsD.push(this.editedDItem)
+      }
+      this.closeD()
     },
 
     downloadDoc(item){

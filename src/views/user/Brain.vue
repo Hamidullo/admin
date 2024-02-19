@@ -4,8 +4,7 @@
 
     <v-row>
       <v-col cols="12">
-        <v-card flat
-        title="“Scopus” bazalaridagi maqolalar">
+        <v-card flat title="“Scopus” bazalaridagi maqolalar">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -46,6 +45,16 @@
                           required
                           label="Iqtiboslar soni">
                       </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-select
+                          label="Kvartalni tanlang"
+                          v-model="editedSItem.quarter"
+                          :items="['Q1', 'Q2', 'Q3', 'Q4']">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -269,7 +278,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedWItem.articleDoc"
+                          v-model="editedWItem.articleUrl"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -1088,6 +1097,7 @@ export default {
         id: 0,
         name: '',
         quotesCount: 0,
+        quarter: '',
         authorsCount: 0,
         authorsName: '',
         magazineName: '',
@@ -1099,6 +1109,7 @@ export default {
         id: 0,
         name: '',
         quotesCount: 0,
+        quarter: '',
         authorsCount: 0,
         authorsName: '',
         magazineName: '',

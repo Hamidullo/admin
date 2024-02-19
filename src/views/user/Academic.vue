@@ -224,6 +224,17 @@
                           required
                           label="OTM">
                       </v-text-field>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-select
+                            label="OTM reytingi"
+                            required
+                            v-model="editedCItem.rating"
+                            :items="['TOP-500', 'TOP-1000', 'TOP-1000 magistratura',]">
+                          </v-select>
+                        </v-col>
                       </v-col>
                       <v-col
                         cols="12"
@@ -232,6 +243,7 @@
                         <v-select
                           label="Diplom turi"
                           required
+                          v-model="editedCItem.type"
                           :items="['PhD (falsafa doktori yoki fan nomzodi)', 'DSc (fan doktori)', 'Magistratura diplom',]">
                         </v-select>
                       </v-col>
@@ -554,6 +566,7 @@ export default {
           seriesNumber: '',
           docNumber: '',
           dateGiven: '',
+          univerType: '',
           specialtyNumber: '',
           departmentName: '',
           workStartND: '',
@@ -568,6 +581,7 @@ export default {
           name: '',
           country: '',
           university: '',
+          rating: '',
           type: '',
           series: '',
           number: '',
@@ -580,6 +594,7 @@ export default {
           name: '',
           country: '',
           university: '',
+          rating: '',
           type: '',
           series: '',
           number: '',
