@@ -82,6 +82,17 @@
                         cols="12"
                         sm="6"
                         md="6">
+                        <v-text-field
+                          v-model="editedItem.year"
+                          clearable
+                          label="Nashr etilgan yil"
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-file-input
                           v-if="!editedItem.doc"
                           v-model="editedItem.doc"
@@ -229,6 +240,17 @@
                           label="Nashr etilgan sana"
                           required>
                       </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          v-model="editedMItem.year"
+                          clearable
+                          label="Nashr etilgan yil"
+                          required>
+                        </v-text-field>
                       </v-col>
                       <v-col
                         cols="12"
@@ -388,6 +410,17 @@
                         cols="12"
                         sm="6"
                         md="6">
+                        <v-text-field
+                          v-model="editedYItem.year"
+                          clearable
+                          label="Nashr etilgan yil"
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-file-input
                           v-if="!editedYItem.doc"
                           v-model="editedYItem.doc"
@@ -535,6 +568,17 @@
                           label="Nashr etilgan sana"
                           required>
                       </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          clearable
+                          v-model="editedNItem.year"
+                          label="Nashr etilgan yil"
+                          required>
+                        </v-text-field>
                       </v-col>
                       <v-col
                         cols="12"
@@ -694,6 +738,17 @@
                         cols="12"
                         sm="6"
                         md="6">
+                        <v-text-field
+                          clearable
+                          v-model="editedAItem.year"
+                          label="Nashr etilgan yil"
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-file-input
                           v-if="!editedItem.doc"
                           v-model="editedItem.doc"
@@ -846,6 +901,17 @@
                         cols="12"
                         sm="6"
                         md="6">
+                        <v-text-field
+                          v-model="editedGItem.year"
+                          clearable
+                          label="Nashr etilgan yil"
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-file-input
                           v-if="!editedGItem.doc"
                           v-model="editedGItem.doc"
@@ -937,6 +1003,7 @@ export default {
         authorCount: 0,
         authorName: '',
         datePublished: '',
+        year: '',
         doc: null
       },
       defaultItem: {
@@ -946,6 +1013,7 @@ export default {
         authorCount: 0,
         authorName: '',
         datePublished: '',
+        year: '',
         doc: null
       },
 
@@ -959,6 +1027,7 @@ export default {
         authorCount: 0,
         authorName: '',
         datePublished: '',
+        year: '',
         doc: null
       },
       defaultMItem: {
@@ -968,6 +1037,7 @@ export default {
         authorCount: 0,
         authorName: '',
         datePublished: '',
+        year: '',
         doc: null
       },
 
@@ -981,6 +1051,7 @@ export default {
         authorCount: 0,
         authorName: '',
         datePublished: '',
+        year: '',
         doc: null
       },
       defaultYItem: {
@@ -990,6 +1061,7 @@ export default {
         authorCount: 0,
         authorName: '',
         datePublished: '',
+        year: '',
         doc: null
       },
 
@@ -1003,6 +1075,7 @@ export default {
         authorCount: 0,
         authorName: '',
         datePublished: '',
+        year: '',
         doc: null
       },
       defaultNItem: {
@@ -1012,6 +1085,7 @@ export default {
         authorCount: 0,
         authorName: '',
         datePublished: '',
+        year: '',
         doc: null
       },
 
@@ -1025,6 +1099,7 @@ export default {
         authorCount: 0,
         authorName: '',
         datePublished: '',
+        year: '',
         doc: null
       },
       defaultAItem: {
@@ -1034,6 +1109,7 @@ export default {
         authorCount: 0,
         authorName: '',
         datePublished: '',
+        year: '',
         doc: null
       },
 
@@ -1047,6 +1123,7 @@ export default {
         authorCount: 0,
         authorName: '',
         datePublished: '',
+        year: '',
         doc: null
       },
       defaultGItem: {
@@ -1056,6 +1133,7 @@ export default {
         authorCount: 0,
         authorName: '',
         datePublished: '',
+        year: '',
         doc: null
       },
 
@@ -1084,47 +1162,7 @@ export default {
           mNomi: 24,
           sana: 4.0,
           patent: 1,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
+        }
       ],
 
       searchM: '',
@@ -1152,47 +1190,7 @@ export default {
           mNomi: 24,
           sana: 4.0,
           patent: 1,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
+        }
       ],
 
       searchY: '',
@@ -1220,47 +1218,7 @@ export default {
           mNomi: 24,
           sana: 4.0,
           patent: 1,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
+        }
       ],
 
       searchN: '',
@@ -1288,47 +1246,7 @@ export default {
           mNomi: 24,
           sana: 4.0,
           patent: 1,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
+        }
       ],
 
       searchA: '',
@@ -1356,47 +1274,7 @@ export default {
           mNomi: 24,
           sana: 4.0,
           patent: 1,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
+        }
       ],
 
       searchG: '',
@@ -1424,47 +1302,7 @@ export default {
           mNomi: 24,
           sana: 4.0,
           patent: 1,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
+        }
       ],
     }
   },

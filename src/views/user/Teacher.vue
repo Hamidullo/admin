@@ -32,7 +32,7 @@
                         <v-text-field
                           v-model="editedItem.name"
                           clearable
-                          label="Tayyorlagan shogird"
+                          label="Tayyorlagan shogird F.I.SH"
                           required>
                       </v-text-field>
                       </v-col>
@@ -44,7 +44,7 @@
                           v-model="editedItem.position"
                           clearable
                           required
-                          label="Fan doktori">
+                          label="Shogird lavozimi">
                       </v-text-field>
                       </v-col>
                       <v-col
@@ -55,7 +55,7 @@
                           v-model="editedItem.department"
                           clearable
                           required
-                          label="Falsafa doktori">
+                          label="Shogird kafedrasi">
                       </v-text-field>
                       </v-col>
                       <v-col
@@ -65,7 +65,7 @@
                         <v-text-field
                           v-model="editedItem.faculty"
                           clearable
-                          label="Olimpiada g'olibi"
+                          label="Shogird fakulteti"
                           persistent-hint
                           required>
                       </v-text-field>
@@ -80,6 +80,18 @@
                           v-model="editedItem.type"
                           :items="['Fan doktori', 'Falsafa doktori', 'Stipendiant', 'Olimpiada g’olibi', 'Sport ustalari ']">
                         </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          v-model="editedItem.year"
+                          clearable
+                          label="Shogird tayorlangan yil"
+                          persistent-hint
+                          required>
+                        </v-text-field>
                       </v-col>
                       <v-col
                         cols="12"
@@ -317,6 +329,7 @@ export default {
           department: '0',
           faculty: '',
           type: '',
+          year: '',
           doc: null
         },
         defaultItem: {
@@ -326,6 +339,7 @@ export default {
           department: '0',
           faculty: '',
           type: '',
+          year: '',
           doc: null
         },
         search: '',
@@ -353,71 +367,7 @@ export default {
             olimpiyada: 37,
             sport: 4.3,
             stipendia: 4.3,
-          },
-          {
-            name: 'Eclair',
-            fan: 262,
-            falsafa: 16.0,
-            olimpiyada: 23,
-            sport: 6.0,
-            stipendia: 6.0,
-          },
-          {
-            name: 'Cupcake',
-            fan: 305,
-            falsafa: 3.7,
-            olimpiyada: 67,
-            sport: 4.3,
-            stipendia: 4.3,
-          },
-          {
-            name: 'Gingerbread',
-            fan: 356,
-            falsafa: 16.0,
-            olimpiyada: 49,
-            sport: 3.9,
-            stipendia: 3.9,
-          },
-          {
-            name: 'Jelly bean',
-            fan: 375,
-            falsafa: 0.0,
-            olimpiyada: 94,
-            sport: 0.0,
-            stipendia: 0.0,
-          },
-          {
-            name: 'Lollipop',
-            fan: 392,
-            falsafa: 0.2,
-            olimpiyada: 98,
-            sport: 0,
-            stipendia: 0,
-          },
-          {
-            name: 'Honeycomb',
-            fan: 408,
-            falsafa: 3.2,
-            olimpiyada: 87,
-            sport: 6.5,
-            stipendia: 6.5,
-          },
-          {
-            name: 'Donut',
-            fan: 452,
-            falsafa: 25.0,
-            olimpiyada: 51,
-            sport: 4.9,
-            sporstipendiat: 4.9,
-          },
-          {
-            name: 'KitKat',
-            fan: 518,
-            falsafa: 26.0,
-            olimpiyada: 65,
-            sport: 7,
-            stipendia: 7,
-          },
+          }
         ],
 
         dialogD: false,
@@ -454,35 +404,7 @@ export default {
             yili: 6.0,
             seriya: 24,
             sertifikat: 4.0,
-          },
-          {
-            name: 'Ice cream sandwich',
-            turi: 159,
-            yili: 6.0,
-            seriya: 24,
-            sertifikat: 4.0,
-          },
-          {
-            name: 'Eclair',
-            turi: 159,
-            yili: 6.0,
-            seriya: 24,
-            sertifikat: 4.0,
-          },
-          {
-            name: 'Cupcake',
-            turi: 159,
-            yili: 6.0,
-            seriya: 24,
-            sertifikat: 4.0,
-          },
-          {
-            name: 'Gingerbread',
-            turi: 159,
-            yili: 6.0,
-            seriya: 24,
-            sertifikat: 4.0,
-          },
+          }
         ],
       }
     },
@@ -490,6 +412,9 @@ export default {
   computed: {
     formTitle () {
       return this.editedIndex === -1 ? 'Tayyorlagan shogird qo`shish' : 'Tayyorlagan shogirdni taxrirlash'
+    },
+    formDTitle () {
+      return this.editedDIndex === -1 ? 'Yangi davlat mukofoti qo`shish' : 'Davlat mukofotini taxrirlash'
     },
   },
 
@@ -499,6 +424,13 @@ export default {
     },
     dialogDelete (val) {
       val || this.closeDelete()
+    },
+
+    dialogD (val) {
+      val || this.closeD()
+    },
+    dialogDDelete (val) {
+      val || this.closeDDelete()
     },
   },
 

@@ -25,7 +25,7 @@
                       sm="6"
                       md="6">
                       <v-text-field
-                        v-model="editedItem.mName"
+                        v-model="editedItem.name"
                         clearable
                         required
                         label="Nomi">
@@ -36,7 +36,7 @@
                       sm="6"
                       md="6">
                       <v-text-field
-                        v-model="editedItem.mSoni"
+                        v-model="editedItem.mCount"
                         type="number"
                         clearable
                         required
@@ -47,7 +47,7 @@
                       cols="12">
                       <v-text-field
                         label="Ham mualliflar F.I.SH"
-                        v-model="editedItem.mNomi"
+                        v-model="editedItem.mName"
                         clearable
                         persistent-hint
                         required>
@@ -58,7 +58,7 @@
                       sm="6"
                       md="4">
                       <v-text-field
-                        v-model="editedItem.sana"
+                        v-model="editedItem.date"
                         clearable
                         label="Nashr etilgan yil"
                         required>
@@ -71,9 +71,20 @@
                       <v-text-field
                         clearable
                         required
-                        v-model="editedItem.raqam"
+                        v-model="editedItem.number"
                         label="Guvoxnoma raqami">
                     </v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4">
+                      <v-text-field
+                        clearable
+                        required
+                        v-model="editedItem.year"
+                        label="Guvoxnoma olingan yil">
+                      </v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
@@ -179,7 +190,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedQItem.mName"
+                          v-model="editedQItem.name"
                           clearable
                           required
                           label="Nomi">
@@ -190,7 +201,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedQItem.mSoni"
+                          v-model="editedQItem.mCount"
                           type="number"
                           clearable
                           required
@@ -201,7 +212,7 @@
                         cols="12">
                         <v-text-field
                           label="Ham mualliflar F.I.SH"
-                          v-model="editedQItem.mNomi"
+                          v-model="editedQItem.mName"
                           clearable
                           persistent-hint
                           required>
@@ -212,7 +223,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedQItem.sana"
+                          v-model="editedQItem.date"
                           clearable
                           label="Nashr etilgan yil"
                           required>
@@ -225,8 +236,19 @@
                         <v-text-field
                           clearable
                           required
-                          v-model="editedQItem.raqam"
+                          v-model="editedQItem.number"
                           label="Guvoxnoma raqami">
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-text-field
+                          clearable
+                          required
+                          v-model="editedQItem.year"
+                          label="Guvoxnoma olingan yil">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -335,7 +357,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.mName"
+                          v-model="editedMItem.name"
                           label="Nomi"
                           clearable
                           required>
@@ -346,7 +368,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.mSoni"
+                          v-model="editedMItem.mCount"
                           clearable
                           label="Mualliflar soni">
                         </v-text-field>
@@ -355,7 +377,7 @@
                         cols="12">
                         <v-text-field
                           label="Ham mualliflar F.I.SH"
-                          v-model="editedMItem.mNomi"
+                          v-model="editedMItem.mName"
                           clearable
                           persistent-hint
                           required>
@@ -366,7 +388,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedMItem.sana"
+                          v-model="editedMItem.date"
                           clearable
                           label="Nashr etilgan yil"
                           required>
@@ -378,8 +400,18 @@
                         md="4">
                         <v-text-field
                           clearable
-                          v-model="editedMItem.raqam"
+                          v-model="editedMItem.number"
                           label="Grif raqami">
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-text-field
+                          clearable
+                          v-model="editedMItem.year"
+                          label="Monografiya olingan yil">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -486,7 +518,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedKItem.mName"
+                          v-model="editedKItem.name"
                           label="Nomi"
                           clearable
                           required>
@@ -497,7 +529,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedKItem.mSoni"
+                          v-model="editedKItem.mCount"
                           clearable
                           required
                           label="Mualliflar soni">
@@ -507,7 +539,7 @@
                         cols="12">
                         <v-text-field
                           label="Ham mualliflar F.I.SH"
-                          v-model="editedKItem.mNomi"
+                          v-model="editedKItem.mName"
                           clearable
                           persistent-hint
                           required>
@@ -518,7 +550,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedKItem.sana"
+                          v-model="editedKItem.date"
                           clearable
                           label="Nashr etilgan yil"
                           required>
@@ -530,8 +562,18 @@
                         md="4">
                         <v-text-field
                           clearable
-                          v-model="editedKItem.raqam"
+                          v-model="editedKItem.number"
                           label="Uslubiy kengash qarori raqami">
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-text-field
+                          clearable
+                          v-model="editedKItem.year"
+                          label="Uslubiy ko’rsatma va majmualar olingan yil">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -645,47 +687,7 @@ export default {
           sana: 24,
           raqam: 4.0,
           darslik: 4.0,
-        },
-        {
-          name: 'Eclair',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Cupcake',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Gingerbread',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Jelly bean',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Lollipop',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
+        }
       ],
 
       searchQ: '',
@@ -721,39 +723,7 @@ export default {
           sana: 24,
           raqam: 4.0,
           darslik: 4.0,
-        },
-        {
-          name: 'Cupcake',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Gingerbread',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Jelly bean',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Lollipop',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
+        }
       ],
 
       searchM: '',
@@ -781,47 +751,7 @@ export default {
           sana: 24,
           raqam: 4.0,
           darslik: 4.0,
-        },
-        {
-          name: 'Eclair',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Cupcake',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Gingerbread',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Jelly bean',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Lollipop',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
+        }
       ],
 
       searchK: '',
@@ -849,47 +779,7 @@ export default {
           sana: 24,
           raqam: 4.0,
           darslik: 4.0,
-        },
-        {
-          name: 'Eclair',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Cupcake',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Gingerbread',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Jelly bean',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Lollipop',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
+        }
       ],
 
       dialog: false,
@@ -897,20 +787,22 @@ export default {
       editedIndex: -1,
       editedItem: {
         id: 0,
+        name: '',
+        mCount: 0,
         mName: '',
-        mSoni: 0,
-        mNomi: '',
-        sana: '',
-        raqam: '',
+        date: '',
+        number: '',
+        year: '',
         doc: null
       },
       defaultItem: {
         id: 0,
+        name: '',
+        mCount: 0,
         mName: '',
-        mSoni: 0,
-        mNomi: '',
-        sana: '',
-        raqam: '',
+        date: '',
+        number: '',
+        year: '',
         doc: null
       },
 
@@ -919,20 +811,22 @@ export default {
       editedQIndex: -1,
       editedQItem: {
         id: 0,
+        name: '',
+        mCount: 0,
         mName: '',
-        mSoni: 0,
-        mNomi: '',
-        sana: '',
-        raqam: '',
+        date: '',
+        number: '',
+        year: '',
         doc: null
       },
       defaultQItem: {
         id: 0,
+        name: '',
+        mCount: 0,
         mName: '',
-        mSoni: 0,
-        mNomi: '',
-        sana: '',
-        raqam: '',
+        date: '',
+        number: '',
+        year: '',
         doc: null
       },
 
@@ -941,20 +835,22 @@ export default {
       editedMIndex: -1,
       editedMItem: {
         id: 0,
+        name: '',
+        mCount: 0,
         mName: '',
-        mSoni: 0,
-        mNomi: '',
-        sana: '',
-        raqam: '',
+        date: '',
+        number: '',
+        year: '',
         doc: null
       },
       defaultMItem: {
         id: 0,
+        name: '',
+        mCount: 0,
         mName: '',
-        mSoni: 0,
-        mNomi: '',
-        sana: '',
-        raqam: '',
+        date: '',
+        number: '',
+        year: '',
         doc: null
       },
 
@@ -963,23 +859,24 @@ export default {
       editedKIndex: -1,
       editedKItem: {
         id: 0,
+        name: '',
+        mCount: 0,
         mName: '',
-        mSoni: 0,
-        mNomi: '',
-        sana: '',
-        raqam: '',
+        date: '',
+        number: '',
+        year: '',
         doc: null
       },
       defaultKItem: {
         id: 0,
+        name: '',
+        mCount: 0,
         mName: '',
-        mSoni: 0,
-        mNomi: '',
-        sana: '',
-        raqam: '',
+        date: '',
+        number: '',
+        year: '',
         doc: null
       },
-
     }
   },
 

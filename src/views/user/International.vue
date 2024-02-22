@@ -72,6 +72,18 @@
                         cols="12"
                         sm="6"
                         md="6">
+                        <v-text-field
+                          v-model="editedItem.year"
+                          clearable
+                          label="Mashg’ulot tasdiqlangan yil"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-file-input
                           v-if="!editedItem.doc"
                           v-model="editedItem.doc"
@@ -215,6 +227,18 @@
                         cols="12"
                         sm="6"
                         md="6">
+                        <v-text-field
+                          v-model="editedCItem.year"
+                          clearable
+                          label="Stajirovka tasdiqlangan yil"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-file-input
                           v-if="!editedCItem.doc"
                           v-model="editedCItem.doc"
@@ -305,6 +329,7 @@ export default {
           country: '',
           days: '',
           size: 0,
+          year: '',
           doc: null,
         },
         defaultItem: {
@@ -313,6 +338,7 @@ export default {
           country: '',
           days: '',
           size: 0,
+          year: '',
           doc: null,
         },
 
@@ -325,6 +351,7 @@ export default {
           country: '',
           days: '',
           size: 0,
+          year: '',
           doc: null,
         },
         defaultCItem: {
@@ -333,6 +360,7 @@ export default {
           country: '',
           days: '',
           size: 0,
+          year: '',
           doc: null,
         },
 
@@ -358,63 +386,7 @@ export default {
             kunlar: 9.0,
             hajmi: 37,
             sertifikat: 4.3,
-          },
-          {
-            name: 'Eclair',
-            davlati: 262,
-            kunlar: 16.0,
-            hajmi: 23,
-            sertifikat: 6.0,
-          },
-          {
-            name: 'Cupcake',
-            davlati: 305,
-            kunlar: 3.7,
-            hajmi: 67,
-            sertifikat: 4.3,
-          },
-          {
-            name: 'Gingerbread',
-            davlati: 356,
-            kunlar: 16.0,
-            hajmi: 49,
-            sertifikat: 3.9,
-          },
-          {
-            name: 'Jelly bean',
-            davlati: 375,
-            kunlar: 0.0,
-            hajmi: 94,
-            sertifikat: 0.0,
-          },
-          {
-            name: 'Lollipop',
-            davlati: 392,
-            kunlar: 0.2,
-            hajmi: 98,
-            sertifikat: 0,
-          },
-          {
-            name: 'Honeycomb',
-            davlati: 408,
-            kunlar: 3.2,
-            hajmi: 87,
-            sertifikat: 6.5,
-          },
-          {
-            name: 'Donut',
-            davlati: 452,
-            kunlar: 25.0,
-            hajmi: 51,
-            sertifikat: 4.9,
-          },
-          {
-            name: 'KitKat',
-            davlati: 518,
-            kunlar: 26.0,
-            hajmi: 65,
-            sertifikat: 7,
-          },
+          }
         ],
 
         searchC: '',
@@ -426,76 +398,20 @@ export default {
           { key: 'actions', title: 'Amallar',align: 'start',  sortable: false },
         ],
         itemsC: [
-        {
-          name: 'Intel Core i9-11900K',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'AMD Ryzen 9 5950X',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'Intel Core i7-10700K',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'AMD Ryzen 5 5600X',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'Intel Core i5-10600K',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'AMD Ryzen 7 5800X',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'Intel Core i3-10100',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'AMD Ryzen 3 3300X',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'Intel Pentium Gold G6400',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'AMD Athlon 3000G',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
+          {
+            name: 'Intel Core i9-11900K',
+            davlati: 8,
+            kunlar: 16,
+            hajmi: '3.5 GHz',
+            sertifikat: '5.3 GHz',
+          },
+          {
+            name: 'AMD Ryzen 9 5950X',
+            davlati: 8,
+            kunlar: 16,
+            hajmi: '3.5 GHz',
+            sertifikat: '5.3 GHz',
+          }
         ]
       }
     },

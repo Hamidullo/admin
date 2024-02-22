@@ -73,6 +73,17 @@
                         cols="12"
                         sm="6"
                         md="6">
+                        <v-text-field
+                          v-model="editedItem.year"
+                          clearable
+                          label="Loyihani gubohnomasi olingan yil"
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-select
                           label="Lavozimni tanlang"
                           v-model="editedItem.projectPosition"
@@ -225,6 +236,17 @@
                           label="Loyihani moliyalashtirish xajmi"
                           required>
                       </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
+                          v-model="editedMItem.year"
+                          clearable
+                          label="Loyihani guvohnomasi olingan yil"
+                          required>
+                        </v-text-field>
                       </v-col>
                       <v-col
                         cols="12"
@@ -387,6 +409,17 @@
                         cols="12"
                         sm="6"
                         md="6">
+                        <v-text-field
+                          v-model="editedYItem.year"
+                          clearable
+                          label="Loyihani guvohnomasi olingan yil"
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-select
                           label="Lavozimni tanlang"
                           v-model="editedYItem.projectPosition"
@@ -544,6 +577,17 @@
                         cols="12"
                         sm="6"
                         md="6">
+                        <v-text-field
+                          v-model="editedNItem.year"
+                          clearable
+                          label="Loyiha guvohnomasi olingan yil"
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-select
                           label="Lavozimni tanlang"
                           v-model="editedNItem.projectPosition"
@@ -696,6 +740,17 @@
                           </v-text-field>
                         </v-col>
                         <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedAItem.year"
+                            clearable
+                            label="Shartnoma yakunlangan yil"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
                           cols="12">
                           <v-file-input
                             v-if="!editedAItem.doc"
@@ -788,6 +843,7 @@ export default {
         projectYears: '',
         projectSum: '',
         projectPosition: '',
+        year: '',
         doc: null
       },
       defaultItem: {
@@ -797,6 +853,7 @@ export default {
         projectYears: '',
         projectSum: '',
         projectPosition: '',
+        year: '',
         doc: null
       },
       search: '',
@@ -822,42 +879,7 @@ export default {
           mSoni: 6.0,
           mNomi: 24,
           sana: 4.0,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
+        }
       ],
 
 
@@ -871,6 +893,7 @@ export default {
         projectYears: '',
         projectSum: '',
         projectPosition: '',
+        year: '',
         doc: null
       },
       defaultMItem: {
@@ -880,6 +903,7 @@ export default {
         projectYears: '',
         projectSum: '',
         projectPosition: '',
+        year: '',
         doc: null
       },
       searchM: '',
@@ -905,42 +929,7 @@ export default {
           mSoni: 6.0,
           mNomi: 24,
           sana: 4.0,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
+        }
       ],
 
       dialogY: false,
@@ -953,6 +942,7 @@ export default {
         projectYears: '',
         projectSum: '',
         projectPosition: '',
+        year: '',
         doc: null
       },
       defaultYItem: {
@@ -962,6 +952,7 @@ export default {
         projectYears: '',
         projectSum: '',
         projectPosition: '',
+        year: '',
         doc: null
       },
       searchY: '',
@@ -987,42 +978,7 @@ export default {
           mSoni: 6.0,
           mNomi: 24,
           sana: 4.0,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
+        }
       ],
 
       dialogN: false,
@@ -1035,6 +991,7 @@ export default {
         projectYears: '',
         projectSum: '',
         projectPosition: '',
+        year: '',
         doc: null
       },
       defaultNItem: {
@@ -1044,6 +1001,7 @@ export default {
         projectYears: '',
         projectSum: '',
         projectPosition: '',
+        year: '',
         doc: null
       },
       searchN: '',
@@ -1069,42 +1027,7 @@ export default {
           mSoni: 6.0,
           mNomi: 24,
           sana: 4.0,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
+        }
       ],
 
       dialogA: false,
@@ -1116,6 +1039,7 @@ export default {
         projectYears: '',
         projectSize: '',
         projectCompany: '',
+        year: '',
         doc: null
       },
       defaultAItem: {
@@ -1124,6 +1048,7 @@ export default {
         projectYears: '',
         projectSize: '',
         projectCompany: '',
+        year: '',
         doc: null
       },
       searchA: '',
@@ -1146,37 +1071,7 @@ export default {
           raqami: 159,
           mSoni: 6.0,
           mNomi: 24,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-        },
+        }
       ],
 
     }

@@ -64,6 +64,18 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedItem.year"
+                          clearable
+                          label="Diplom olingan yil"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
                           v-model="editedItem.dateGiven"
                           clearable
                           label="Berilgan sanasi"
@@ -276,6 +288,18 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedCItem.year"
+                          clearable
+                          label="Diplom olingan yil"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
                           v-model="editedCItem.typeNumber"
                           clearable
                           label="Mutaxassisligi raqami va nomi"
@@ -462,6 +486,18 @@
                           </v-text-field>
                         </v-col>
                         <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedSItem.year"
+                            clearable
+                            label="Diplom olingan yil"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
                           cols="12">
                           <v-file-input
                             show-size
@@ -557,6 +593,7 @@ export default {
           specialtyNumber: '',
           departmentName: '',
           workStartND: '',
+          year: '',
           docDownload: null
         },
         defaultItem: {
@@ -570,6 +607,7 @@ export default {
           specialtyNumber: '',
           departmentName: '',
           workStartND: '',
+          year: '',
           docDownload: null
         },
 
@@ -587,6 +625,7 @@ export default {
           number: '',
           typeNumber: '',
           workStartND: '',
+          year: '',
           docDownload: null
         },
         defaultCItem: {
@@ -600,6 +639,7 @@ export default {
           number: '',
           typeNumber: '',
           workStartND: '',
+          year: '',
           docDownload: null
         },
 
@@ -615,6 +655,7 @@ export default {
           articleLanguage: '',
           articleUrl: '',
           hIndex: '',
+          year: '',
           docDownload: null
         },
         defaultSItem: {
@@ -626,6 +667,7 @@ export default {
           articleLanguage: '',
           articleUrl: '',
           hIndex: '',
+          year: '',
           docDownload: null
         },
 
@@ -653,63 +695,7 @@ export default {
             kunlar: 9.0,
             hajmi: 37,
             sertifikat: 4.3,
-          },
-          {
-            name: 'Eclair',
-            davlati: 262,
-            kunlar: 16.0,
-            hajmi: 23,
-            sertifikat: 6.0,
-          },
-          {
-            name: 'Cupcake',
-            davlati: 305,
-            kunlar: 3.7,
-            hajmi: 67,
-            sertifikat: 4.3,
-          },
-          {
-            name: 'Gingerbread',
-            davlati: 356,
-            kunlar: 16.0,
-            hajmi: 49,
-            sertifikat: 3.9,
-          },
-          {
-            name: 'Jelly bean',
-            davlati: 375,
-            kunlar: 0.0,
-            hajmi: 94,
-            sertifikat: 0.0,
-          },
-          {
-            name: 'Lollipop',
-            davlati: 392,
-            kunlar: 0.2,
-            hajmi: 98,
-            sertifikat: 0,
-          },
-          {
-            name: 'Honeycomb',
-            davlati: 408,
-            kunlar: 3.2,
-            hajmi: 87,
-            sertifikat: 6.5,
-          },
-          {
-            name: 'Donut',
-            davlati: 452,
-            kunlar: 25.0,
-            hajmi: 51,
-            sertifikat: 4.9,
-          },
-          {
-            name: 'KitKat',
-            davlati: 518,
-            kunlar: 26.0,
-            hajmi: 65,
-            sertifikat: 7,
-          },
+          }
         ],
 
         searchC: '',
@@ -736,63 +722,7 @@ export default {
           kunlar: 16,
           hajmi: '3.5 GHz',
           sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'Intel Core i7-10700K',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'AMD Ryzen 5 5600X',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'Intel Core i5-10600K',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'AMD Ryzen 7 5800X',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'Intel Core i3-10100',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'AMD Ryzen 3 3300X',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'Intel Pentium Gold G6400',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
-        {
-          name: 'AMD Athlon 3000G',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
-        },
+        }
         ],
 
         searchS: '',
@@ -819,63 +749,7 @@ export default {
             kunlar: 9.0,
             hajmi: 37,
             sertifikat: 4.3,
-          },
-          {
-            name: 'Eclair',
-            davlati: 262,
-            kunlar: 16.0,
-            hajmi: 23,
-            sertifikat: 6.0,
-          },
-          {
-            name: 'Cupcake',
-            davlati: 305,
-            kunlar: 3.7,
-            hajmi: 67,
-            sertifikat: 4.3,
-          },
-          {
-            name: 'Gingerbread',
-            davlati: 356,
-            kunlar: 16.0,
-            hajmi: 49,
-            sertifikat: 3.9,
-          },
-          {
-            name: 'Jelly bean',
-            davlati: 375,
-            kunlar: 0.0,
-            hajmi: 94,
-            sertifikat: 0.0,
-          },
-          {
-            name: 'Lollipop',
-            davlati: 392,
-            kunlar: 0.2,
-            hajmi: 98,
-            sertifikat: 0,
-          },
-          {
-            name: 'Honeycomb',
-            davlati: 408,
-            kunlar: 3.2,
-            hajmi: 87,
-            sertifikat: 6.5,
-          },
-          {
-            name: 'Donut',
-            davlati: 452,
-            kunlar: 25.0,
-            hajmi: 51,
-            sertifikat: 4.9,
-          },
-          {
-            name: 'KitKat',
-            davlati: 518,
-            kunlar: 26.0,
-            hajmi: 65,
-            sertifikat: 7,
-          },
+          }
         ],
       }
     },

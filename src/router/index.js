@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/',
+    path: '/dashboard',
     name: 'Home',
     component: () => import('@/views/user/Home.vue'),
     children: [
@@ -73,6 +73,11 @@ const routes = [
     path: '/change',
     name: 'Change',
     component: () => import('@/views/login/ChangePassword.vue'),
+  },
+  {
+    path: '/',
+    name: 'Common',
+    component: () => import('@/views/common/Common.vue'),
   },
   {
     path: '/admin',

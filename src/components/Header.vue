@@ -12,7 +12,9 @@
     </v-app-bar-title>
 
     <v-menu
-      open-on-hover>
+      open-on-hover
+      v-model="menu"
+      @click="openMenu">
       <template v-slot:activator="{ props }">
        <span v-bind="props" class="mr-10">
          <v-chip link>
@@ -37,8 +39,8 @@
             <v-avatar >
               <v-img
                 :src="avatar"
-                alt="avatar"
-              ></v-img>
+                alt="avatar">
+              </v-img>
             </v-avatar>
           </template>
         </v-list-item>
@@ -68,7 +70,8 @@ export default {
         { icon: 'mdi-account', title: 'Profile',  rout: 'About'},
         { icon: 'mdi-cog', title: 'Settings', rout: 'Settings'},
         { icon: 'mdi-logout', title: 'Logout', rout: 'Login'},
-      ]
+      ],
+      menu: null
 
     }
   },
@@ -80,6 +83,9 @@ export default {
       } else {
         this.$router.push({name: rout})
       }
+    },
+    openMenu(){
+      this.menu = "open"
     },
     openDash(){
       this.$router.push({name: 'Dashboard'})

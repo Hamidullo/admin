@@ -112,6 +112,18 @@
                       </v-text-field>
                       </v-col>
                       <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-text-field
+                          v-model="editedSItem.year"
+                          clearable
+                          label="Maqola chiqarilgan yil"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
                         cols="12">
                         <v-file-input
                           v-if="!editedSItem.doc"
@@ -284,6 +296,18 @@
                           persistent-hint
                           required>
                       </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-text-field
+                          v-model="editedWItem.year"
+                          clearable
+                          label="Maqola chiqarilgan yil"
+                          persistent-hint
+                          required>
+                        </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
@@ -463,6 +487,18 @@
                       </v-text-field>
                       </v-col>
                       <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-text-field
+                          v-model="editedXItem.year"
+                          clearable
+                          label="Maqola chiqarilgan yil"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
                         cols="12">
                         <v-file-input
                           v-if="!editedXItem.doc"
@@ -638,6 +674,18 @@
                           persistent-hint
                           required>
                       </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-text-field
+                          v-model="editedRItem.year"
+                          clearable
+                          label="Maqola chiqarilgan yil"
+                          persistent-hint
+                          required>
+                        </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
@@ -819,6 +867,18 @@
                       </v-text-field>
                       </v-col>
                       <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-text-field
+                          v-model="editedMItem.year"
+                          clearable
+                          label="Maqola chiqarilgan yil"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
                         cols="12">
                         <v-file-input
                           v-if="!editedMItem.doc"
@@ -997,6 +1057,18 @@
                       </v-text-field>
                       </v-col>
                       <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-text-field
+                          v-model="editedAItem.year"
+                          clearable
+                          label="Maqola chiqarilgan yil"
+                          persistent-hint
+                          required>
+                        </v-text-field>
+                      </v-col>
+                      <v-col
                         cols="12">
                         <v-file-input
                           v-if="!editedAItem.doc"
@@ -1103,6 +1175,7 @@ export default {
         magazineName: '',
         magazineCountry: '',
         articleUrl: '',
+        year: '',
         doc: null,
       },
       defaultSItem: {
@@ -1115,6 +1188,7 @@ export default {
         magazineName: '',
         magazineCountry: '',
         articleUrl: '',
+        year: '',
         doc: null,
       },
       itemsS: [
@@ -1137,57 +1211,7 @@ export default {
           jurnal: 1,
           havola: 1,
           fayil: 1,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
+        }
       ],
 
       searchW: '',
@@ -1213,6 +1237,7 @@ export default {
         magazineName: '',
         magazineCountry: '',
         articleUrl: '',
+        year: '',
         doc: null,
       },
       defaultWItem: {
@@ -1224,6 +1249,7 @@ export default {
         magazineName: '',
         magazineCountry: '',
         articleUrl: '',
+        year: '',
         doc: null,
       },
       itemsW: [
@@ -1246,57 +1272,7 @@ export default {
           jurnal: 1,
           havola: 1,
           fayil: 1,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
+        }
       ],
 
       searchX: '',
@@ -1322,6 +1298,7 @@ export default {
         magazineName: '',
         magazineCountry: '',
         articleUrl: '',
+        year: '',
         doc: null,
       },
       defaultXItem: {
@@ -1333,6 +1310,7 @@ export default {
         magazineName: '',
         magazineCountry: '',
         articleUrl: '',
+        year: '',
         doc: null,
       },
       itemsX: [
@@ -1355,57 +1333,7 @@ export default {
           jurnal: 1,
           havola: 1,
           fayil: 1,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
+        }
       ],
 
       searchR: '',
@@ -1431,6 +1359,7 @@ export default {
         magazineName: '',
         magazineCountry: '',
         articleUrl: '',
+        year: '',
         doc: null,
       },
       defaultRItem: {
@@ -1442,6 +1371,7 @@ export default {
         magazineName: '',
         magazineCountry: '',
         articleUrl: '',
+        year: '',
         doc: null,
       },
       itemsR: [
@@ -1464,57 +1394,7 @@ export default {
           jurnal: 1,
           havola: 1,
           fayil: 1,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
+        }
       ],
 
       searchM: '',
@@ -1540,6 +1420,7 @@ export default {
         datePublishing: '',
         conventionCountry: '',
         articleUrl: '',
+        year: '',
         doc: null,
       },
       defaultMItem: {
@@ -1551,6 +1432,7 @@ export default {
         datePublishing: '',
         conventionCountry: '',
         articleUrl: '',
+        year: '',
         doc: null,
       },
       itemsM: [
@@ -1573,57 +1455,7 @@ export default {
           jurnal: 1,
           havola: 1,
           fayil: 1,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
+        }
       ],
 
       searchA: '',
@@ -1649,6 +1481,7 @@ export default {
         datePublishing: '',
         conventionCountry: '',
         articleUrl: '',
+        year: '',
         doc: null,
       },
       defaultAItem: {
@@ -1660,6 +1493,7 @@ export default {
         datePublishing: '',
         conventionCountry: '',
         articleUrl: '',
+        year: '',
         doc: null,
       },
       itemsA: [
@@ -1682,57 +1516,7 @@ export default {
           jurnal: 1,
           havola: 1,
           fayil: 1,
-        },
-        {
-          name: 'Eclair',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Cupcake',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Gingerbread',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Jelly bean',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Lollipop',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
+        }
       ],
 
     }
