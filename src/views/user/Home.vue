@@ -25,11 +25,11 @@ export default {
     },
   },
   mounted() {
-    let user = localStorage.getItem("user-logged")
+    /*let user = localStorage.getItem("user-logged")
 
     if (!user){
       this.$router.push({name: "Login"})
-    }
+    }*/
   }
 }
 </script>

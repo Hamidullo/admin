@@ -11,7 +11,7 @@
         <v-img
           height="350"
           cover
-          src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg">
+          src="http://localhost:8080/uploads/photos/1706783689836-fff.png">
         </v-img>
         <v-card-text>
           <strong>
