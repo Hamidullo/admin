@@ -96,9 +96,7 @@
                         </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
+                        cols="12">
                         <v-text-field
                           v-model="editedItem.departmentName"
                           clearable
@@ -236,18 +234,17 @@
                           required
                           label="OTM">
                       </v-text-field>
-                        <v-col
+                      </v-col>
+                      <v-col
                           cols="12"
                           sm="6"
                           md="6">
                           <v-select
                             label="OTM reytingi"
-                            required
                             v-model="editedCItem.rating"
                             :items="['TOP-500', 'TOP-1000', 'TOP-1000 magistratura',]">
                           </v-select>
                         </v-col>
-                      </v-col>
                       <v-col
                         cols="12"
                         sm="6"
@@ -498,7 +495,9 @@
                           </v-text-field>
                         </v-col>
                         <v-col
-                          cols="12">
+                          cols="12"
+                          sm="6"
+                          md="6">
                           <v-file-input
                             show-size
                             v-if="!editedSItem.docDownload"
