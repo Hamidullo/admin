@@ -25,7 +25,7 @@
                       sm="6"
                       md="6">
                       <v-text-field
-                        v-model="editedItem.name"
+                        v-model="editedItem.workName"
                         clearable
                         required
                         label="Nomi">
@@ -36,7 +36,7 @@
                       sm="6"
                       md="6">
                       <v-text-field
-                        v-model="editedItem.mCount"
+                        v-model="editedItem.workAuthorCount"
                         type="number"
                         clearable
                         required
@@ -47,7 +47,7 @@
                       cols="12">
                       <v-text-field
                         label="Ham mualliflar F.I.SH"
-                        v-model="editedItem.mName"
+                        v-model="editedItem.workAuthorName"
                         clearable
                         persistent-hint
                         required>
@@ -58,7 +58,7 @@
                       sm="6"
                       md="4">
                       <v-text-field
-                        v-model="editedItem.date"
+                        v-model="editedItem.workYear"
                         clearable
                         label="Nashr etilgan yil"
                         required>
@@ -67,32 +67,21 @@
                     <v-col
                       cols="12"
                       sm="6"
-                      md="4">
+                      md="6">
                       <v-text-field
                         clearable
                         required
-                        v-model="editedItem.number"
+                        v-model="editedItem.workNumber"
                         label="Guvoxnoma raqami">
                     </v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
                       sm="6"
-                      md="4">
-                      <v-text-field
-                        clearable
-                        required
-                        v-model="editedItem.year"
-                        label="Guvoxnoma olingan yil">
-                      </v-text-field>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4">
+                      md="6">
                       <v-file-input
-                        v-if="!editedItem.doc"
-                        v-model="editedItem.doc"
+                        v-if="!editedItem.workDownload"
+                        v-model="editedItem.workDownload"
                         show-size
                         label="Darslik yuklash">
                       </v-file-input>
@@ -658,6 +647,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
 
   data () {
@@ -665,30 +656,13 @@ export default {
       search: '',
       headers: [
         { key: 'name', title: 'Nomi', align: 'start', sortable: false, },
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'sana', title: 'Nashr etilgan yili' },
-        { key: 'raqam', title: 'Guvoxnoma raqami' },
+        { key: 'workName', title: 'Mualliflar soni' },
+        { key: 'workType', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'workYear', title: 'Nashr etilgan yili' },
+        { key: 'workNumber', title: 'Guvoxnoma raqami' },
         {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      items: [
-        {
-          name: 'Frozen Yogurt',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Ice cream sandwich',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        }
-      ],
+      items: [],
 
       searchQ: '',
       headersQ: [
@@ -787,23 +761,29 @@ export default {
       editedIndex: -1,
       editedItem: {
         id: 0,
-        name: '',
-        mCount: 0,
-        mName: '',
-        date: '',
-        number: '',
-        year: '',
-        doc: null
+        workName: '',
+        workType: '1',
+        workAuthorCount: 0,
+        workAuthorName: '',
+        workNumber: '',
+        workYear: '',
+        userName: "alisher",//localStorage.getItem("user-name"),
+        department: "dasdasd",//localStorage.getItem("user-department"),
+        faculty: "asdasdasd",//localStorage.getItem("user-faculty"),
+        workDownload: null
       },
       defaultItem: {
         id: 0,
-        name: '',
-        mCount: 0,
-        mName: '',
-        date: '',
-        number: '',
-        year: '',
-        doc: null
+        workName: '',
+        workType: '1',
+        workAuthorCount: 0,
+        workAuthorName: '',
+        workNumber: '',
+        workYear: '',
+        userName: "alisher",//localStorage.getItem("user-name"),
+        department: "dasdasd",//localStorage.getItem("user-department"),
+        faculty: "asdasdasd",//localStorage.getItem("user-faculty"),
+        workDownload: null
       },
 
       dialogQ: false,
@@ -1018,7 +998,32 @@ export default {
       if (this.editedIndex > -1) {
         Object.assign(this.items[this.editedIndex], this.editedItem)
       } else {
-        this.items.push(this.editedItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.editedItem.userId)
+        formData.append('name', this.editedItem.name)
+        formData.append('userName', this.editedItem.userName)
+        formData.append('type', this.editedItem.type)
+        formData.append('authorCount', this.editedItem.mCount)
+        formData.append('authorName', this.editedItem.authorName)
+        formData.append('year', this.editedItem.year)
+        formData.append('department', this.editedItem.department)
+        formData.append('faculty', this.editedItem.faculty)
+        console.log(this.editedItem.doc)
+        // files
+        for (let file of this.editedItem.doc) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/works/create?userId=123456", formData)
+          .then(response => {
+            this.items.push(this.editedItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.close()
     },
@@ -1047,9 +1052,50 @@ export default {
       this.closeK()
     },
 
-    downloadDoc(item) {
+    forceFileDownload(response, title) {
 
+      console.log(title)
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', title)
+      document.body.appendChild(link)
+      link.click()
+    },
+    downloadWithAxios(url, title) {
+      console.log(url)
+      console.log("Download con")
+      axios({
+        method: 'get',
+        url,
+        responseType: 'arraybuffer',
+      })
+        .then((response) => {
+          console.log("Download end")
+          this.forceFileDownload(response, title)
+        })
+        .catch(() => console.log('error occured'))
+    },
+
+    downloadDoc(item) {
+      console.log("Download start")
+      this.downloadWithAxios("http://localhost:8080/api/works/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+    },
+
+    getWorks(){
+      axios
+        .get('http://localhost:8080/api/works/all?limit=10&offset=0')
+        .then(response => {
+          console.log(response.data)
+          const data  = response.data.items
+          for (const dataKey in data) {
+            this.items.push(data[dataKey])
+          }
+        });
+      return this.items
     }
+
+
   },
 
   watch: {
@@ -1078,6 +1124,18 @@ export default {
       val || this.closeKDelete()
     },
   },
+
+  mounted() {
+    axios
+      .get('http://localhost:8080/api/works/all?limit=10&offset=0')
+      .then(response => {
+        console.log(response.data)
+        const data  = response.data.items
+        for (const dataKey in data) {
+          this.items.push(data[dataKey])
+        }
+      });
+  }
 
 }
 </script>

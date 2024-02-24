@@ -11,7 +11,7 @@
         <v-img
           height="350"
           cover
-          src="http://localhost:8080/uploads/photos/1706783689836-fff.png">
+          src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg">
         </v-img>
         <v-card-text>
           <strong>

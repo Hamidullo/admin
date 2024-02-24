@@ -96,9 +96,7 @@
                         </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
+                        cols="12">
                         <v-text-field
                           v-model="editedItem.departmentName"
                           clearable
@@ -573,13 +571,28 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-overlay
+      :model-value="overlay"
+      class="align-center justify-center">
+      <v-progress-circular
+        color="primary"
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </v-container>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     data () {
       return {
+        overlay: false,
+        position: localStorage.getItem("user-position"),
+
         dialog: false,
         dialogDelete: false,
         editedIndex: -1,
@@ -594,6 +607,9 @@ export default {
           departmentName: '',
           workStartND: '',
           year: '',
+          userName: localStorage.getItem("user-name"),
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
           docDownload: null
         },
         defaultItem: {
@@ -608,6 +624,9 @@ export default {
           departmentName: '',
           workStartND: '',
           year: '',
+          userName: localStorage.getItem("user-name"),
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
           docDownload: null
         },
 
@@ -847,7 +866,24 @@ export default {
       if (this.editedIndex > -1) {
         Object.assign(this.items[this.editedIndex], this.editedItem)
       } else {
-        this.items.push(this.editedItem)
+        this.overlay = true
+        if(this.editedItem.type === "Fan doktorlik (DSc) diplomi"){
+          this.editedItem.type = '1'
+        } else if(this.editedItem.type === "Fan nomzodi (PhD) diplomi"){
+          this.editedItem.type = '2'
+        } else {
+          this.editedItem.type = '3'
+        }
+        axios.post("http://localhost:8080/api/academics/create?userId=123456", this.editedItem)
+          .then(response => {
+            this.items.push(this.editedItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.close()
     },
