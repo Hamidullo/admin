@@ -74,27 +74,27 @@ export default {
         }
         UserDataService.get(data).then(response => {
           this.snackS = true;
-          localStorage.setItem("user-logged", JSON.stringify( true))
+          localStorage.setItem("user-logged", true)
           let data = response.data
-          console.log(data)
           if (data.name){
-            localStorage.setItem("user-id", JSON.stringify(response.data.id))
-            localStorage.setItem("user-hemisId", JSON.stringify(response.data.hemisId))
-            localStorage.setItem("user-name", JSON.stringify(response.data.name))
-            localStorage.setItem("user-avatar", JSON.stringify(response.data.avatar))
-            localStorage.setItem("user-position", JSON.stringify(response.data.position))
+            localStorage.setItem("user-id", response.data.id)
+            localStorage.setItem("user-hemisId", response.data.hemisId)
+            localStorage.setItem("user-name", response.data.name)
+            localStorage.setItem("user-avatar", response.data.avatar)
+            console.log(response.data.avatar)
+            localStorage.setItem("user-position", response.data.position)
             if (response.data.admin){
               this.$router.push({name: "AdminDash"})
-              localStorage.setItem("user-admin", JSON.stringify(response.data.admin))
+              localStorage.setItem("user-admin", response.data.admin)
             } else {
               this.$router.push({name: "Dashboard"})
             }
           } else {
-            localStorage.setItem("user-id", JSON.stringify(response.data.id))
-            localStorage.setItem("user-hemisId", JSON.stringify(response.data.hemisId))
+            localStorage.setItem("user-id", response.data.id)
+            localStorage.setItem("user-hemisId", response.data.hemisId)
             if (response.data.admin){
               this.$router.push({name: "AdminAbout"})
-              localStorage.setItem("user-admin", JSON.stringify(response.data.admin))
+              localStorage.setItem("user-admin", response.data.admin)
             } else {
               this.$router.push({name: "About"})
             }

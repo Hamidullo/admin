@@ -89,7 +89,7 @@ export default {
                 36,
                 39,
                 4,
-              ],
+              ].sort(function(a, b){return a - b}),
               backgroundColor: [
                 'rgb(234,6,40)',
                 'rgb(250,58,98)',

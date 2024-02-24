@@ -6,34 +6,34 @@
     <v-col cols="4">
       <v-card
         flat
-        title="Icons"
-        subtitle="prepend and append">
+        title="Institut"
+        subtitle="reytingidagi o'rningiz">
         <template v-slot:prepend>
           <v-icon icon="mdi-account" color="primary"></v-icon>
         </template>
         <template v-slot:append>
           <v-icon icon="mdi-check" color="success"></v-icon>
         </template>
-        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</v-card-text>
+        <v-card-text>Siz 12 ni o'rindasiz</v-card-text>
       </v-card>
     </v-col>
 
     <v-col cols="4">
       <v-card
       flat
-        title="Avatars"
-        subtitle="prepend-avatar and append-avatar"
+        title="Fakultet"
+        subtitle="reytingidagi o'rningiz"
         prepend-avatar="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
-        append-avatar="https://cdn.vuetifyjs.com/images/john.jpg">
-        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</v-card-text>
+        :append-avatar="avatar">
+        <v-card-text>Siz 6 ni o'rindasiz.</v-card-text>
       </v-card>
     </v-col>
 
     <v-col cols="4">
       <v-card
       flat
-        title="Avatars"
-        subtitle="prepend and append">
+        title="Kafedra"
+        subtitle="reytingidagi o'rningiz">
         <template v-slot:prepend>
           <v-avatar color="blue-darken-2">
             <v-icon icon="mdi-alarm"></v-icon>
@@ -42,12 +42,12 @@
         <template v-slot:append>
           <v-avatar size="24">
             <v-img
-              src="https://cdn.vuetifyjs.com/images/john.png"
+              :src="avatar"
               alt="John"
             ></v-img>
           </v-avatar>
         </template>
-        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</v-card-text>
+        <v-card-text>Siz 2 ni o'rindasiz.</v-card-text>
       </v-card>
     </v-col>
 
@@ -132,6 +132,7 @@
 export default {
     data () {
       return {
+        avatar: "http://localhost:8080/uploads/photos/" + localStorage.getItem("user-avatar"),
         search: '',
         headers: [
           {

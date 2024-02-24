@@ -56,7 +56,7 @@ export default {
     return{
       drawer: true,
       rail: true,
-      avatar: localStorage.getItem("user-avatar"),
+      avatar: "http://localhost:8080/uploads/photos/" + localStorage.getItem("user-avatar"),
       name: localStorage.getItem("user-name"),
       model: 1,
       menus: [

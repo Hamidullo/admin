@@ -11,15 +11,25 @@
         <v-img
           height="350"
           cover
+          v-if="editText.avatar"
+          :src="editText.avatar">
+        </v-img>
+        <v-img
+          height="350"
+          cover
+          v-else
           src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg">
         </v-img>
         <v-card-text>
           <strong>
-            <h2 class="my-4">
-              F.I.Sh (passport bo’yicha)
+            <h2 class="my-4" v-if="editText.name">
+              {{ editText.name }}
+            </h2>
+            <h2 class="my-4" v-else>
+              F.I.SH
             </h2>
           </strong>
-          <h3>
+          <h3 >
             Tug’ilgan yili va joyi
           </h3>
           <h4 class="my-4">
@@ -71,9 +81,7 @@
                 <v-container>
                   <v-row>
                     <v-col
-                      cols="12"
-                      sm="6"
-                      md="4">
+                      cols="12">
                       <v-text-field
                         label="F.I.SH. (passport bo’yicha)"
                         required>
@@ -90,7 +98,7 @@
                     <v-col
                       cols="12"
                       sm="6"
-                      md="4">
+                      md="8">
                       <v-text-field
                         label="Tug’ilgan joyi"
                         persistent-hint
@@ -452,25 +460,19 @@
       MyDialog
     },
     data: () => ({
+      name: localStorage.getItem("user-name"),
+      avatar: "http://localhost:8080/uploads/photos/" + localStorage.getItem("user-avatar"),
+      userId: localStorage.getItem("user-hemisId"),
       messages: [
-        {
-          from: 'Tel:',
-          message: `+998901234567`,
-          time: '10:42am',
-          color: 'deep-purple-lighten-1',
-        },
-        {
-          from: 'Email:',
-          message: 'test@mail.com',
-          time: '10:37am',
-          color: 'green',
-        }
+        { from: 'Tel:',  message: `+998901234567`,   color: 'deep-purple-lighten-1',},
+        {from: 'Email:', message: 'test@mail.com',  color: 'green',},
+        {from: 'Telegram:', message: '@admin',  color: 'blue',},
+        {from: 'Bog`lanish vaqti:', message: 'Dushanba ~ Juma (10:00~17:00)',  color: 'red',}
       ],
       dialog: false,
       dialogD: false,
-      dialogI: false,
-      dialogU: false,
       dialogO: false,
+
     }),
   }
 </script>

@@ -56,7 +56,7 @@
                     <v-col
                       cols="12"
                       sm="6"
-                      md="4">
+                      md="6">
                       <v-text-field
                         v-model="editedItem.workYear"
                         clearable
@@ -76,9 +76,7 @@
                     </v-text-field>
                     </v-col>
                     <v-col
-                      cols="12"
-                      sm="6"
-                      md="6">
+                      cols="12">
                       <v-file-input
                         v-if="!editedItem.workDownload"
                         v-model="editedItem.workDownload"
@@ -653,11 +651,14 @@ export default {
 
   data () {
     return {
+      userId: localStorage.getItem("user-hemisId"),
+      userName: localStorage.getItem("user-name"),
+
       search: '',
       headers: [
-        { key: 'name', title: 'Nomi', align: 'start', sortable: false, },
-        { key: 'workName', title: 'Mualliflar soni' },
-        { key: 'workType', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'workName', title: 'Nomi', align: 'start', sortable: false, },
+        { key: 'workAuthorCount', title: 'Mualliflar soni' },
+        { key: 'workAuthorName', title: 'Ham mualliflar F.I.Sh' },
         { key: 'workYear', title: 'Nashr etilgan yili' },
         { key: 'workNumber', title: 'Guvoxnoma raqami' },
         {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
@@ -767,9 +768,9 @@ export default {
         workAuthorName: '',
         workNumber: '',
         workYear: '',
-        userName: "alisher",//localStorage.getItem("user-name"),
-        department: "dasdasd",//localStorage.getItem("user-department"),
-        faculty: "asdasdasd",//localStorage.getItem("user-faculty"),
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
         workDownload: null
       },
       defaultItem: {
@@ -1000,23 +1001,25 @@ export default {
       } else {
         this.overlay = true
         let formData = new FormData();
-        formData.append('userId', this.editedItem.userId)
-        formData.append('name', this.editedItem.name)
-        formData.append('userName', this.editedItem.userName)
-        formData.append('type', this.editedItem.type)
-        formData.append('authorCount', this.editedItem.mCount)
-        formData.append('authorName', this.editedItem.authorName)
-        formData.append('year', this.editedItem.year)
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedItem.workName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedItem.workType)
+        formData.append('authorCount', this.editedItem.workAuthorCount)
+        formData.append('authorName', this.editedItem.workAuthorName)
+        formData.append('number', this.editedItem.workNumber)
+        formData.append('year', this.editedItem.workYear)
         formData.append('department', this.editedItem.department)
         formData.append('faculty', this.editedItem.faculty)
-        console.log(this.editedItem.doc)
+
         // files
-        for (let file of this.editedItem.doc) {
+        for (let file of this.editedItem.workDownload) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/works/create?userId=123456", formData)
+        axios.post("http://localhost:8080/api/works/create?userId="+this.userId, formData)
           .then(response => {
-            this.items.push(this.editedItem)
+            console.log(response.data)
+            this.items.push(response.data)
             this.overlay = false
           })
           .catch(error => {
@@ -1053,7 +1056,6 @@ export default {
     },
 
     forceFileDownload(response, title) {
-
       console.log(title)
       const url = window.URL.createObjectURL(new Blob([response.data]))
       const link = document.createElement('a')
