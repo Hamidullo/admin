@@ -11,21 +11,11 @@
         <v-img
           height="350"
           cover
-          v-if="editText.avatar"
-          :src="editText.avatar">
-        </v-img>
-        <v-img
-          height="350"
-          cover
-          v-else
           src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg">
         </v-img>
         <v-card-text>
           <strong>
-            <h2 class="my-4" v-if="editText.name">
-              {{ editText.name }}
-            </h2>
-            <h2 class="my-4" v-else>
+            <h2 class="my-4" >
               F.I.SH
             </h2>
           </strong>

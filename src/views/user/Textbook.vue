@@ -661,100 +661,50 @@ export default {
         { key: 'workAuthorName', title: 'Ham mualliflar F.I.Sh' },
         { key: 'workYear', title: 'Nashr etilgan yili' },
         { key: 'workNumber', title: 'Guvoxnoma raqami' },
+        { key: 'workNew', title: 'Hujjat holati' },
         {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       items: [],
 
       searchQ: '',
       headersQ: [
-        { align: 'start', key: 'name', sortable: false, title: 'Nomi',},
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'sana', title: 'Nashr etilgan yili' },
-        { key: 'raqam', title: 'Guvoxnoma raqami' },
+        { key: 'workName', title: 'Nomi', align: 'start', sortable: false, },
+        { key: 'workAuthorCount', title: 'Mualliflar soni' },
+        { key: 'workAuthorName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'workYear', title: 'Nashr etilgan yili' },
+        { key: 'workNumber', title: 'Guvoxnoma raqami' },
+        { key: 'workNew', title: 'Hujjat holati' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
       itemsQ: [
-        {
-          name: 'Frozen Yogurt',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Ice cream sandwich',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Eclair',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        }
       ],
 
       searchM: '',
       headersM: [
-        { align: 'start', key: 'name', sortable: false, title: 'Nomi',},
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'sana', title: 'Nashr etilgan yili' },
-        { key: 'raqam', title: 'Grif raqami' },
+        { key: 'workName', title: 'Nomi', align: 'start', sortable: false, },
+        { key: 'workAuthorCount', title: 'Mualliflar soni' },
+        { key: 'workAuthorName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'workYear', title: 'Nashr etilgan yili' },
+        { key: 'workNumber', title: 'Grif raqami' },
+        { key: 'workNew', title: 'Hujjat holati' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
       itemsM: [
-        {
-          name: 'Frozen Yogurt',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Ice cream sandwich',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        }
+        
       ],
 
       searchK: '',
       headersK: [
-        { align: 'start', key: 'name', sortable: false, title: 'Nomi',},
-        { key: 'mSoni', title: 'Mualliflar soni' },
-        { key: 'mNomi', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'sana', title: 'Nashr etilgan yili' },
-        { key: 'raqam', title: 'Uslubiy kengash qarori raqami' },
+        { key: 'workName', title: 'Nomi', align: 'start', sortable: false, },
+        { key: 'workAuthorCount', title: 'Mualliflar soni' },
+        { key: 'workAuthorName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'workYear', title: 'Nashr etilgan yili' },
+        { key: 'workNumber', title: 'Uslubiy kengash qarori raqami' },
+        { key: 'workNew', title: 'Hujjat holati' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
       itemsK: [
-        {
-          name: 'Frozen Yogurt',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        },
-        {
-          name: 'Ice cream sandwich',
-          mSoni: 159,
-          mNomi: 6.0,
-          sana: 24,
-          raqam: 4.0,
-          darslik: 4.0,
-        }
+      
       ],
 
       dialog: false,
@@ -771,6 +721,8 @@ export default {
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
         faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
         workDownload: null
       },
       defaultItem: {
@@ -781,9 +733,9 @@ export default {
         workAuthorName: '',
         workNumber: '',
         workYear: '',
-        userName: "alisher",//localStorage.getItem("user-name"),
-        department: "dasdasd",//localStorage.getItem("user-department"),
-        faculty: "asdasdasd",//localStorage.getItem("user-faculty"),
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
         workDownload: null
       },
 
@@ -792,23 +744,33 @@ export default {
       editedQIndex: -1,
       editedQItem: {
         id: 0,
-        name: '',
-        mCount: 0,
-        mName: '',
-        date: '',
-        number: '',
-        year: '',
-        doc: null
+        workName: '',
+        workType: '1',
+        workAuthorCount: 0,
+        workAuthorName: '',
+        workNumber: '',
+        workYear: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        workDownload: null
       },
       defaultQItem: {
         id: 0,
-        name: '',
-        mCount: 0,
-        mName: '',
-        date: '',
-        number: '',
-        year: '',
-        doc: null
+        workName: '',
+        workType: '1',
+        workAuthorCount: 0,
+        workAuthorName: '',
+        workNumber: '',
+        workYear: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        workDownload: null
       },
 
       dialogM: false,
@@ -816,23 +778,33 @@ export default {
       editedMIndex: -1,
       editedMItem: {
         id: 0,
-        name: '',
-        mCount: 0,
-        mName: '',
-        date: '',
-        number: '',
-        year: '',
-        doc: null
+        workName: '',
+        workType: '1',
+        workAuthorCount: 0,
+        workAuthorName: '',
+        workNumber: '',
+        workYear: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        workDownload: null
       },
       defaultMItem: {
         id: 0,
-        name: '',
-        mCount: 0,
-        mName: '',
-        date: '',
-        number: '',
-        year: '',
-        doc: null
+        workName: '',
+        workType: '1',
+        workAuthorCount: 0,
+        workAuthorName: '',
+        workNumber: '',
+        workYear: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        workDownload: null
       },
 
       dialogK: false,
@@ -840,23 +812,33 @@ export default {
       editedKIndex: -1,
       editedKItem: {
         id: 0,
-        name: '',
-        mCount: 0,
-        mName: '',
-        date: '',
-        number: '',
-        year: '',
-        doc: null
+        workName: '',
+        workType: '1',
+        workAuthorCount: 0,
+        workAuthorName: '',
+        workNumber: '',
+        workYear: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        workDownload: null
       },
       defaultKItem: {
         id: 0,
-        name: '',
-        mCount: 0,
-        mName: '',
-        date: '',
-        number: '',
-        year: '',
-        doc: null
+        workName: '',
+        workType: '1',
+        workAuthorCount: 0,
+        workAuthorName: '',
+        workNumber: '',
+        workYear: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        workDownload: null
       },
     }
   },
@@ -921,19 +903,59 @@ export default {
     },
 
     deleteItemConfirm () {
-      this.items.splice(this.editedIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedItem.id}`)
+      .then(response => {
+        console.log(`Deleteditem with ID ${this.editItem.id}`);
+        this.items.splice(this.editedIndex, 1)
+        this.overlay = false
+      })
+      .catch(error => {
+        console.error(error);
+        this.overlay = false
+      });
       this.closeDelete()
     },
     deleteQItemConfirm () {
-      this.itemsQ.splice(this.editedQIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedQItem.id}`)
+      .then(response => {
+        console.log(`Deleteditem with ID ${this.editedQItem.id}`);
+        this.itemsQ.splice(this.editedQIndex, 1)
+        this.overlay = false
+      })
+      .catch(error => {
+        console.error(error);
+        this.overlay = false
+      });
       this.closeQDelete()
     },
     deleteMItemConfirm () {
-      this.itemsM.splice(this.editedMIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedMItem.id}`)
+      .then(response => {
+        console.log(`Deleteditem with ID ${this.editedMItem.id}`);
+        this.itemsM.splice(this.editedMIndex, 1)
+        this.overlay = false
+      })
+      .catch(error => {
+        console.error(error);
+        this.overlay = false
+      });
       this.closeMDelete()
     },
     deleteKItemConfirm () {
-      this.itemsK.splice(this.editedKIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedKItem.id}`)
+      .then(response => {
+        console.log(`Deleteditem with ID ${this.editedKItem.id}`);
+        this.itemsK.splice(this.editedKIndex, 1)
+        this.overlay = false
+      })
+      .catch(error => {
+        console.error(error);
+        this.overlay = false
+      });
       this.closeKDelete()
     },
 
@@ -997,8 +1019,32 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.items[this.editedIndex], this.editedItem)
-      } else {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedItem.workName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedItem.workType)
+        formData.append('authorCount', this.editedItem.workAuthorCount)
+        formData.append('authorName', this.editedItem.workAuthorName)
+        formData.append('number', this.editedItem.workNumber)
+        formData.append('year', this.editedItem.workYear)
+        formData.append('statId', this.editedItem.statId)
+        formData.append('newId', this.editedItem.newId)
+
+        axios.put("http://localhost:8080/api/works/update?id="+this.editedItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.items[this.editedIndex], this.editedItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+       {
         this.overlay = true
         let formData = new FormData();
         formData.append('userId', this.userId)
@@ -1032,25 +1078,175 @@ export default {
     },
     saveQ () {
       if (this.editedQIndex > -1) {
-        Object.assign(this.itemsQ[this.editedQIndex], this.editedQItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedQItem.workName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedQItem.workType)
+        formData.append('authorCount', this.editedQItem.workAuthorCount)
+        formData.append('authorName', this.editedQItem.workAuthorName)
+        formData.append('number', this.editedQItem.workNumber)
+        formData.append('year', this.editedQItem.workYear)
+        formData.append('statId', this.editedQItem.statId)
+        formData.append('newId', this.editedQItem.newId)
+
+        axios.put("http://localhost:8080/api/works/update?id="+this.editedQItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.items[this.editedIndex], this.editedQItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       } else {
-        this.itemsQ.push(this.editedQItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedQItem.workName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedQItem.workType)
+        formData.append('authorCount', this.editedQItem.workAuthorCount)
+        formData.append('authorName', this.editedQItem.workAuthorName)
+        formData.append('number', this.editedQItem.workNumber)
+        formData.append('year', this.editedQItem.workYear)
+        formData.append('department', this.editedQItem.department)
+        formData.append('faculty', this.editedQItem.faculty)
+
+        // files
+        for (let file of this.editedQItem.workDownload) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/works/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsQ.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeQ()
     },
     saveM () {
       if (this.editedMIndex > -1) {
-        Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedMItem.workName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedMItem.workType)
+        formData.append('authorCount', this.editedMItem.workAuthorCount)
+        formData.append('authorName', this.editedMItem.workAuthorName)
+        formData.append('number', this.editedMItem.workNumber)
+        formData.append('year', this.editedMItem.workYear)
+        formData.append('statId', this.editedMItem.statId)
+        formData.append('newId', this.editedMItem.newId)
+
+        axios.put("http://localhost:8080/api/works/update?id="+this.editedMItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.items[this.editedIndex], this.editedMItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       } else {
-        this.itemsM.push(this.editedMItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedMItem.workName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedMItem.workType)
+        formData.append('authorCount', this.editedIMtem.workAuthorCount)
+        formData.append('authorName', this.editedMItem.workAuthorName)
+        formData.append('number', this.editedMItem.workNumber)
+        formData.append('year', this.editedMItem.workYear)
+        formData.append('department', this.editedMItem.department)
+        formData.append('faculty', this.editedMItem.faculty)
+
+        // files
+        for (let file of this.editedMItem.workDownload) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/works/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsM.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeM()
     },
     saveK () {
       if (this.editedKIndex > -1) {
-        Object.assign(this.itemsK[this.editedKIndex], this.editedKItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedKItem.workName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedKItem.workType)
+        formData.append('authorCount', this.editedKItem.workAuthorCount)
+        formData.append('authorName', this.editedKItem.workAuthorName)
+        formData.append('number', this.editedKItem.workNumber)
+        formData.append('year', this.editedKItem.workYear)
+        formData.append('statId', this.editedKItem.statId)
+        formData.append('newId', this.editedKItem.newId)
+
+        axios.put("http://localhost:8080/api/works/update?id="+this.editedKItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.items[this.editedIndex], this.editedKItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       } else {
-        this.itemsK.push(this.editedKItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedKItem.workName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedKItem.workType)
+        formData.append('authorCount', this.editedKItem.workAuthorCount)
+        formData.append('authorName', this.editedKItem.workAuthorName)
+        formData.append('number', this.editedKItem.workNumber)
+        formData.append('year', this.editedKItem.workYear)
+        formData.append('department', this.editedKItem.department)
+        formData.append('faculty', this.editedKItem.faculty)
+
+        // files
+        for (let file of this.editedKItem.workDownload) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/works/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsK.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeK()
     },
@@ -1083,21 +1279,6 @@ export default {
       console.log("Download start")
       this.downloadWithAxios("http://localhost:8080/api/works/download?userId="+item.userId+"&file="+item.workDownload,item.name)
     },
-
-    getWorks(){
-      axios
-        .get('http://localhost:8080/api/works/all?limit=10&offset=0')
-        .then(response => {
-          console.log(response.data)
-          const data  = response.data.items
-          for (const dataKey in data) {
-            this.items.push(data[dataKey])
-          }
-        });
-      return this.items
-    }
-
-
   },
 
   watch: {
@@ -1129,12 +1310,42 @@ export default {
 
   mounted() {
     axios
-      .get('http://localhost:8080/api/works/all?limit=10&offset=0')
+      .get(`http://localhost:8080/api/works/type?userId=${this.userId}limit=10&offset=0&type="Darslik"`)
       .then(response => {
         console.log(response.data)
         const data  = response.data.items
         for (const dataKey in data) {
           this.items.push(data[dataKey])
+        }
+      });
+
+      axios
+      .get(`http://localhost:8080/api/works/type?userId=${this.userId}limit=10&offset=0&type="O'quv qo'llanma"`)
+      .then(response => {
+        console.log(response.data)
+        const data  = response.data.items
+        for (const dataKey in data) {
+          this.itemsQ.push(data[dataKey])
+        }
+      });
+
+      axios
+      .get(`http://localhost:8080/api/works/type?userId=${this.userId}limit=10&offset=0&type="Monografiya"`)
+      .then(response => {
+        console.log(response.data)
+        const data  = response.data.items
+        for (const dataKey in data) {
+          this.itemsM.push(data[dataKey])
+        }
+      });
+
+      axios
+      .get(`http://localhost:8080/api/works/type?userId=${this.userId}limit=10&offset=0&type="Uslubiy ko'rsatma"`)
+      .then(response => {
+        console.log(response.data)
+        const data  = response.data.items
+        for (const dataKey in data) {
+          this.itemsK.push(data[dataKey])
         }
       });
   }
