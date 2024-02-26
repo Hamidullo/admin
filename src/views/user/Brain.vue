@@ -68,7 +68,9 @@
                       </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12">
+                        cols="12"
+                        sm="6"
+                        md="8">
                         <v-text-field
                           v-model="editedSItem.authorsName"
                           clearable
@@ -80,7 +82,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedSItem.magazineName"
                           clearable
@@ -91,7 +93,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedSItem.magazineCountry"
                           clearable
@@ -102,7 +104,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedSItem.articleUrl"
                           clearable
@@ -114,7 +116,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedSItem.year"
                           clearable
@@ -267,7 +269,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedWItem.magazineName"
                           clearable
@@ -278,7 +280,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedWItem.magazineCountry"
                           clearable
@@ -288,7 +290,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedWItem.articleUrl"
                           clearable
@@ -300,7 +302,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedWItem.year"
                           clearable
@@ -455,7 +457,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedXItem.magazineName"
                           clearable
@@ -466,7 +468,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedXItem.magazineCountry"
                           clearable
@@ -477,7 +479,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedXItem.articleUrl"
                           clearable
@@ -489,7 +491,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedXItem.year"
                           clearable
@@ -645,7 +647,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedRItem.magazineName"
                           clearable
@@ -656,7 +658,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedRItem.magazineCountry"
                           clearable
@@ -666,7 +668,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedRItem.articleUrl"
                           clearable
@@ -678,7 +680,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedRItem.year"
                           clearable
@@ -835,7 +837,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedMItem.datePublishing"
                           clearable
@@ -846,7 +848,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedMItem.conventionCountry"
                           clearable
@@ -857,7 +859,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedMItem.articleUrl"
                           clearable
@@ -869,7 +871,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedMItem.year"
                           clearable

@@ -177,7 +177,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedQItem.name"
+                          v-model="editedQItem.workName"
                           clearable
                           required
                           label="Nomi">
@@ -188,7 +188,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedQItem.mCount"
+                          v-model="editedQItem.workAuthorCount"
                           type="number"
                           clearable
                           required
@@ -199,7 +199,7 @@
                         cols="12">
                         <v-text-field
                           label="Ham mualliflar F.I.SH"
-                          v-model="editedQItem.mName"
+                          v-model="editedQItem.workAuthorName"
                           clearable
                           persistent-hint
                           required>
@@ -210,7 +210,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedQItem.date"
+                          v-model="editedQItem.workYear"
                           clearable
                           label="Nashr etilgan yil"
                           required>
@@ -223,7 +223,7 @@
                         <v-text-field
                           clearable
                           required
-                          v-model="editedQItem.number"
+                          v-model="editedQItem.workNumber"
                           label="Guvoxnoma raqami">
                         </v-text-field>
                       </v-col>
@@ -231,20 +231,9 @@
                         cols="12"
                         sm="6"
                         md="4">
-                        <v-text-field
-                          clearable
-                          required
-                          v-model="editedQItem.year"
-                          label="Guvoxnoma olingan yil">
-                        </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
                         <v-file-input
-                          v-if="!editedQItem.doc"
-                          v-model="editedQItem.doc"
+                          v-if="!editedQItem.workDownload"
+                          v-model="editedQItem.workDownload"
                           show-size
                           label="O'quv qo'llanma yuklash">
                         </v-file-input>
@@ -344,7 +333,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.name"
+                          v-model="editedMItem.workName"
                           label="Nomi"
                           clearable
                           required>
@@ -355,7 +344,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.mCount"
+                          v-model="editedMItem.workAuthorCount"
                           clearable
                           label="Mualliflar soni">
                         </v-text-field>
@@ -364,7 +353,7 @@
                         cols="12">
                         <v-text-field
                           label="Ham mualliflar F.I.SH"
-                          v-model="editedMItem.mName"
+                          v-model="editedMItem.workAuthorName"
                           clearable
                           persistent-hint
                           required>
@@ -375,7 +364,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedMItem.date"
+                          v-model="editedMItem.workYear"
                           clearable
                           label="Nashr etilgan yil"
                           required>
@@ -387,7 +376,7 @@
                         md="4">
                         <v-text-field
                           clearable
-                          v-model="editedMItem.number"
+                          v-model="editedMItem.workNumber"
                           label="Grif raqami">
                         </v-text-field>
                       </v-col>
@@ -395,19 +384,9 @@
                         cols="12"
                         sm="6"
                         md="4">
-                        <v-text-field
-                          clearable
-                          v-model="editedMItem.year"
-                          label="Monografiya olingan yil">
-                        </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
                         <v-file-input
-                          v-if="!editedMItem.doc"
-                          v-model="editedMItem.doc"
+                          v-if="!editedMItem.workDownload"
+                          v-model="editedMItem.workDownload"
                           show-size
                           label="Monografiya yuklash">
                         </v-file-input>
@@ -505,7 +484,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedKItem.name"
+                          v-model="editedKItem.workName"
                           label="Nomi"
                           clearable
                           required>
@@ -516,7 +495,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedKItem.mCount"
+                          v-model="editedKItem.workAuthorCount"
                           clearable
                           required
                           label="Mualliflar soni">
@@ -526,7 +505,7 @@
                         cols="12">
                         <v-text-field
                           label="Ham mualliflar F.I.SH"
-                          v-model="editedKItem.mName"
+                          v-model="editedKItem.workAuthorName"
                           clearable
                           persistent-hint
                           required>
@@ -537,7 +516,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedKItem.date"
+                          v-model="editedKItem.workYear"
                           clearable
                           label="Nashr etilgan yil"
                           required>
@@ -549,18 +528,8 @@
                         md="4">
                         <v-text-field
                           clearable
-                          v-model="editedKItem.number"
+                          v-model="editedKItem.workNumber"
                           label="Uslubiy kengash qarori raqami">
-                        </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          clearable
-                          v-model="editedKItem.year"
-                          label="Uslubiy ko’rsatma va majmualar olingan yil">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -569,8 +538,8 @@
                         md="4">
                         <v-file-input
                           show-size
-                          v-if="!editedKItem.doc"
-                          v-model="editedKItem.doc"
+                          v-if="!editedKItem.workDownload"
+                          v-model="editedKItem.workDownload"
                           label="Uslubiy ko'rsatma yuklash">
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedKItem)">Uslubiy ko'rsatmani yuklash</v-btn>
@@ -641,6 +610,16 @@
       </v-col>
     </v-row>
 
+    <v-overlay
+      :model-value="overlay"
+      class="align-center justify-center">
+      <v-progress-circular
+        color="primary"
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
+
   </v-container>
 </template>
 
@@ -651,6 +630,7 @@ export default {
 
   data () {
     return {
+      overlay: false,
       userId: localStorage.getItem("user-hemisId"),
       userName: localStorage.getItem("user-name"),
 
@@ -690,7 +670,7 @@ export default {
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
       itemsM: [
-        
+
       ],
 
       searchK: '',
@@ -704,7 +684,7 @@ export default {
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
       itemsK: [
-      
+
       ],
 
       dialog: false,
@@ -745,7 +725,7 @@ export default {
       editedQItem: {
         id: 0,
         workName: '',
-        workType: '1',
+        workType: '2',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
@@ -760,7 +740,7 @@ export default {
       defaultQItem: {
         id: 0,
         workName: '',
-        workType: '1',
+        workType: '2',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
@@ -779,7 +759,7 @@ export default {
       editedMItem: {
         id: 0,
         workName: '',
-        workType: '1',
+        workType: '3',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
@@ -794,7 +774,7 @@ export default {
       defaultMItem: {
         id: 0,
         workName: '',
-        workType: '1',
+        workType: '3',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
@@ -813,7 +793,7 @@ export default {
       editedKItem: {
         id: 0,
         workName: '',
-        workType: '1',
+        workType: '4',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
@@ -828,7 +808,7 @@ export default {
       defaultKItem: {
         id: 0,
         workName: '',
-        workType: '1',
+        workType: '4',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
@@ -904,7 +884,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedItem.id}`)
+      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}&statId=${this.editedItem.statId}`)
       .then(response => {
         console.log(`Deleteditem with ID ${this.editItem.id}`);
         this.items.splice(this.editedIndex, 1)
@@ -918,7 +898,7 @@ export default {
     },
     deleteQItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedQItem.id}`)
+      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedQItem.id}&newId=${this.editedQItem.newId}&statId=${this.editedQItem.statId}`)
       .then(response => {
         console.log(`Deleteditem with ID ${this.editedQItem.id}`);
         this.itemsQ.splice(this.editedQIndex, 1)
@@ -932,7 +912,7 @@ export default {
     },
     deleteMItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedMItem.id}`)
+      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}&statId=${this.editedMItem.statId}`)
       .then(response => {
         console.log(`Deleteditem with ID ${this.editedMItem.id}`);
         this.itemsM.splice(this.editedMIndex, 1)
@@ -946,7 +926,7 @@ export default {
     },
     deleteKItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedKItem.id}`)
+      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedKItem.id}&newId=${this.editedKItem.newId}&statId=${this.editedKItem.statId}`)
       .then(response => {
         console.log(`Deleteditem with ID ${this.editedKItem.id}`);
         this.itemsK.splice(this.editedKIndex, 1)
@@ -1094,7 +1074,7 @@ export default {
         axios.put("http://localhost:8080/api/works/update?id="+this.editedQItem.id, formData)
           .then(response => {
             console.log(response.data)
-            Object.assign(this.items[this.editedIndex], this.editedQItem)
+            Object.assign(this.itemsQ[this.editedQIndex], this.editedQItem)
             this.overlay = false
           })
           .catch(error => {
@@ -1167,7 +1147,7 @@ export default {
         formData.append('name', this.editedMItem.workName)
         formData.append('userName', this.userName)
         formData.append('type', this.editedMItem.workType)
-        formData.append('authorCount', this.editedIMtem.workAuthorCount)
+        formData.append('authorCount', this.editedMItem.workAuthorCount)
         formData.append('authorName', this.editedMItem.workAuthorName)
         formData.append('number', this.editedMItem.workNumber)
         formData.append('year', this.editedMItem.workYear)
@@ -1310,41 +1290,50 @@ export default {
 
   mounted() {
     axios
-      .get(`http://localhost:8080/api/works/type?userId=${this.userId}limit=10&offset=0&type="Darslik"`)
+      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type="Darslik"`)
       .then(response => {
-        console.log(response.data)
-        const data  = response.data.items
+        const data  = response.data
         for (const dataKey in data) {
+          if (data[dataKey].workNew === '1'){
+            data[dataKey].workNew = 'Tekshirilmoqda'
+          }
           this.items.push(data[dataKey])
+
         }
       });
 
       axios
-      .get(`http://localhost:8080/api/works/type?userId=${this.userId}limit=10&offset=0&type="O'quv qo'llanma"`)
+      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type="O'quv qo'llanma"`)
       .then(response => {
-        console.log(response.data)
-        const data  = response.data.items
+        const data  = response.data
         for (const dataKey in data) {
+          if (data[dataKey].workNew === '1'){
+            data[dataKey].workNew = 'Tekshirilmoqda'
+          }
           this.itemsQ.push(data[dataKey])
         }
       });
 
       axios
-      .get(`http://localhost:8080/api/works/type?userId=${this.userId}limit=10&offset=0&type="Monografiya"`)
+      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type="Monografiya"`)
       .then(response => {
-        console.log(response.data)
-        const data  = response.data.items
+        const data  = response.data
         for (const dataKey in data) {
+          if (data[dataKey].workNew === '1'){
+            data[dataKey].workNew = 'Tekshirilmoqda'
+          }
           this.itemsM.push(data[dataKey])
         }
       });
 
       axios
-      .get(`http://localhost:8080/api/works/type?userId=${this.userId}limit=10&offset=0&type="Uslubiy ko'rsatma"`)
+      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type="Uslubiy ko'rsatma"`)
       .then(response => {
-        console.log(response.data)
-        const data  = response.data.items
+        const data  = response.data
         for (const dataKey in data) {
+          if (data[dataKey].workNew === '1'){
+            data[dataKey].workNew = 'Tekshirilmoqda'
+          }
           this.itemsK.push(data[dataKey])
         }
       });

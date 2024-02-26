@@ -11,25 +11,40 @@
         <v-img
           height="350"
           cover
-          src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg">
+          :src="photo + editedItem.avatar">
         </v-img>
         <v-card-text>
+          <strong class="">
+            F.I.SH:
+          </strong>
           <strong>
             <h2 class="my-4" >
-              F.I.SH
+              {{editedItem.name}}
             </h2>
           </strong>
+          <strong class="">
+            Tug'ulgan sanasi:
+          </strong>
           <h3 >
-            Tug’ilgan yili va joyi
+            {{editedItem.year}}
           </h3>
+          <strong class="">
+            Doimiy yashash manzili:
+          </strong>
           <h4 class="my-4">
-            Doimiy yashash manzili
+            {{editedItem.place}}
           </h4>
           <strong class="">
             Lavozimi:
           </strong>
           <div class="ml-2 mb-4">
-            assistant, katta o’qituvchi, v.b.dotsent
+            {{editedItem.position}}
+          </div>
+          <div class="ml-2 mb-4">
+            {{editedItem.department}}
+          </div>
+          <div class="ml-2 mb-4">
+            {{editedItem.faculty}}
           </div>
           <div class="font-weight-bold mt-4">
             Bog’lanish malumotlari:
@@ -73,6 +88,7 @@
                     <v-col
                       cols="12">
                       <v-text-field
+                        v-model="editedItem.name"
                         label="F.I.SH. (passport bo’yicha)"
                         required>
                     </v-text-field>
@@ -82,6 +98,7 @@
                       sm="6"
                       md="4">
                       <v-text-field
+                        v-model="editedItem.year"
                         label="Tug’ilgan yili">
                     </v-text-field>
                     </v-col>
@@ -90,6 +107,7 @@
                       sm="6"
                       md="8">
                       <v-text-field
+                        v-model="editedItem.place"
                         label="Tug’ilgan joyi"
                         persistent-hint
                         required>
@@ -100,6 +118,7 @@
                       sm="6"
                       md="4">
                       <v-text-field
+                        v-model="editedItem.faculty"
                         label="Fakultet"
                         required>
                     </v-text-field>
@@ -109,6 +128,7 @@
                       sm="6"
                       md="4">
                       <v-text-field
+                        v-model="editedItem.department"
                         label="Kafedra">
                     </v-text-field>
                     </v-col>
@@ -117,15 +137,9 @@
                       sm="6"
                       md="4">
                       <v-text-field
+                        v-model="editedItem.position"
                         label="Lavozim"
                         persistent-hint
-                        required>
-                    </v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                      <v-text-field
-                        label="h-index"
-                        type="text"
                         required>
                     </v-text-field>
                     </v-col>
@@ -134,6 +148,7 @@
                       sm="6"
                       md="4">
                       <v-text-field
+                        v-model="editedItem.tel"
                         label="Tel:"
                         required>
                     </v-text-field>
@@ -143,6 +158,7 @@
                       sm="6"
                       md="4">
                       <v-text-field
+                        v-model="editedItem.email"
                         label="Email:">
                     </v-text-field>
                     </v-col>
@@ -151,10 +167,19 @@
                       sm="6"
                       md="4">
                       <v-text-field
+                        v-model="editedItem.telegram"
                         label="Telegram:"
                         persistent-hint
                         required>
                     </v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12">
+                      <v-file-input
+                        v-model="editedItem.newAvatar"
+                        show-size
+                        label="Rasmni tanlang">
+                      </v-file-input>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -164,13 +189,13 @@
                 <v-btn
                   color="blue-darken-1"
                   variant="text"
-                  @click="dialog = false">
+                  @click="close">
                   Yopish
                 </v-btn>
                 <v-btn
                   color="blue-darken-1"
                   variant="text"
-                  @click="dialog = false">
+                  @click="save">
                   Saqlash
                 </v-btn>
               </v-card-actions>
@@ -440,30 +465,114 @@
     </v-col>
 
   </v-row>
+
+    <v-overlay
+      :model-value="overlay"
+      class="align-center justify-center">
+      <v-progress-circular
+        color="primary"
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </v-container>
 </template>
 
 <script>
   import MyDialog from '@/components/MyDialog.vue';
+  import axios from "axios";
   export default {
     components:{
       MyDialog
     },
     data: () => ({
-      name: localStorage.getItem("user-name"),
-      avatar: "http://localhost:8080/uploads/photos/" + localStorage.getItem("user-avatar"),
-      userId: localStorage.getItem("user-hemisId"),
+      overlay: false,
+      photo: "http://localhost:8080/uploads/photos/",
       messages: [
         { from: 'Tel:',  message: `+998901234567`,   color: 'deep-purple-lighten-1',},
         {from: 'Email:', message: 'test@mail.com',  color: 'green',},
         {from: 'Telegram:', message: '@admin',  color: 'blue',},
-        {from: 'Bog`lanish vaqti:', message: 'Dushanba ~ Juma (10:00~17:00)',  color: 'red',}
       ],
       dialog: false,
+      editedItem: {
+        id: 0,
+        name: localStorage.getItem("user-name"),
+        avatar: localStorage.getItem("user-avatar"),
+        userId: localStorage.getItem("user-hemisId"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        position: '',
+        place: '',
+        year: '',
+        tel: '',
+        email: '',
+        telegram: '',
+        time: '',
+        newAvatar: null
+      },
+
       dialogD: false,
       dialogO: false,
 
     }),
+
+    methods: {
+      close () {
+        this.dialog = false
+      },
+
+      save () {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.editedItem.userId)
+        formData.append('name', this.editedItem.name)
+        formData.append('year', this.editedItem.year)
+        formData.append('place', this.editedItem.place)
+        formData.append('department', this.editedItem.department)
+        formData.append('faculty', this.editedItem.faculty)
+        formData.append('position', this.editedItem.position)
+        formData.append('tel', this.editedItem.tel)
+        formData.append('email', this.editedItem.email)
+        formData.append('telegram', this.editedItem.telegram)
+
+        if (this.editedItem.newAvatar){
+          // files
+          for (let file of this.editedItem.newAvatar) {
+            formData.append("avatar", file, file.name);
+          }
+        }
+        console.log(this.getId())
+        axios.put("http://localhost:8080/api/users/personal?userId=" + this.getId(), formData)
+          .then(response => {
+            console.log(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+        this.close()
+
+      },
+
+      getId(){
+        let userId = localStorage.getItem("user-hemisId");
+        return userId
+      }
+    },
+    mounted(){
+      axios
+        .get(`http://localhost:8080/api/users/userPersonal?userId=${this.getId()}`)
+        .then(response => {
+          const data  = response.data
+          for (const dataKey in data) {
+            console.log(data[dataKey])
+            this.editedItem = data[dataKey]
+
+          }
+        });
+    }
   }
 </script>
 

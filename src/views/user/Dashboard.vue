@@ -129,36 +129,24 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     data () {
       return {
         avatar: "http://localhost:8080/uploads/photos/" + localStorage.getItem("user-avatar"),
+        userId: localStorage.getItem("user-id"),
+
         search: '',
         headers: [
-          {
-            align: 'start',
-            key: 'name',
-            sortable: false,
-            title: 'Turi',
-          },
-          { key: 'calories', title: 'Soni' },
-          { key: 'fat', title: 'Ulushi' },
-          { key: 'carbs', title: 'Berilgan bal' },
+          { align: 'start', key: 'userName', sortable: false, title: 'F.I.SH',},
+          { key: 'userCount', title: 'Soni' },
+          { key: 'userShare', title: 'Ulushi' },
+          { key: 'userScore', title: 'Berilgan bal' },
         ],
         desserts: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-          }
         ],
+
         searchC: '',
         headersC: [
           {
@@ -185,6 +173,7 @@ export default {
             carbs: 37,
           }
         ],
+
         searchR: '',
         headersR: [
           {
@@ -211,6 +200,7 @@ export default {
             carbs: 37,
           }
         ],
+
         searchT: '',
         headersT: [
           {
@@ -240,7 +230,43 @@ export default {
       }
     },
 
+  methods: {
+      getUserId(){
+        return localStorage.getItem("user-hemisId")
+      }
+  },
+
+  mounted() {
+    axios
+      .get(`http://localhost:8080/api/statistic/user?userId=${this.getUserId()}`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          this.desserts.push(data[dataKey])
+        }
+      });
+
+    /*axios
+      .get(`http://localhost:8080/api/statistic/type?userId=${this.userId}&limit=10&offset=0&type="O'quv qo'llanma"`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          this.itemsQ.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/statistic/type?userId=${this.userId}&limit=10&offset=0&type="Monografiya"`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          this.itemsM.push(data[dataKey])
+        }
+      });*/
+
   }
+
+}
 </script>
 
 <style scoped>

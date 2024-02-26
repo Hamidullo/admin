@@ -63,7 +63,7 @@ export default {
             "IT", "Menejment", "Marketing", "Iqtisodiyot",
             "Buhgalteriya", "Ijtimoiy fanlar","Kimyoviy texnologiya",
             "Kimyo", "Oziq-ovqat", "Materiyalshunoslik", "Chet tillar",
-            "Oliy matematika", "TMJ", "Metrologiya",  "Umumtexnika fanlari", "QXMT",  "Manzarali bog‘dorchilik"],
+            "Oliy matematika", "TMJ", "Metrologiya",  "Umumtexnika fanlari", "QXMT",  "Manzarali bog‘dorchilik"].sort(),
           datasets: [
             {
               label: "Institut bo’yicha kafedralar reyting",
@@ -223,6 +223,7 @@ export default {
         this.i = 0
         this.year = this.years.at(this.i)
       }
+      location.reload();
     },
 
     compareNumbers(x, y) {

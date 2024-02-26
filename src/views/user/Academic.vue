@@ -593,6 +593,8 @@ export default {
       return {
         overlay: false,
         position: localStorage.getItem("user-position"),
+        userId: localStorage.getItem("user-hemisId"),
+        userName: localStorage.getItem("user-name"),
 
         dialog: false,
         dialogDelete: false,
@@ -703,18 +705,18 @@ export default {
         ],
         items: [
           {
-            name: 'Frozen Yogurt',
-            davlati: 159,
-            kunlar: 6.0,
-            hajmi: 24,
-            sertifikat: 4.0,
+            type: 'Frozen Yogurt',
+            seriesNumber: 159,
+            dateGiven: 6.0,
+            docNumber: 24,
+            specialtyNumber: 4.0,
           },
           {
-            name: 'Ice cream sandwich',
-            davlati: 237,
-            kunlar: 9.0,
-            hajmi: 37,
-            sertifikat: 4.3,
+            type: 'Ice cream sandwich',
+            seriesNumber: 237,
+            dateGiven: 9.0,
+            docNumber: 37,
+            specialtyNumber: 4.3,
           }
         ],
 
@@ -730,18 +732,18 @@ export default {
         ],
         itemsC: [
         {
-          name: 'Intel Core i9-11900K',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
+          country: 'Intel Core i9-11900K',
+          university: 8,
+          type: 16,
+          seriesNumber: '3.5 GHz',
+          dateGiven: '5.3 GHz',
         },
         {
-          name: 'AMD Ryzen 9 5950X',
-          davlati: 8,
-          kunlar: 16,
-          hajmi: '3.5 GHz',
-          sertifikat: '5.3 GHz',
+          country: 'AMD Ryzen 9 5950X',
+          university: 8,
+          type: 16,
+          seriesNumber: '3.5 GHz',
+          dateGiven: '5.3 GHz',
         }
         ],
 
@@ -757,18 +759,18 @@ export default {
         ],
         itemsS: [
           {
-            name: 'Frozen Yogurt',
-            davlati: 159,
-            kunlar: 6.0,
-            hajmi: 24,
-            sertifikat: 4.0,
+            magazineName: 'Frozen Yogurt',
+            datePublishing: 159,
+            articleName: 6.0,
+            articleLanguage: 24,
+            articleUrl: 4.0,
           },
           {
-            name: 'Ice cream sandwich',
-            davlati: 237,
-            kunlar: 9.0,
-            hajmi: 37,
-            sertifikat: 4.3,
+            magazineName: 'Ice cream sandwich',
+            datePublishing: 237,
+            articleName: 9.0,
+            articleLanguage: 37,
+            articleUrl: 4.3,
           }
         ],
       }

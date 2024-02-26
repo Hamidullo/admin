@@ -81,7 +81,8 @@ export default {
             localStorage.setItem("user-hemisId", response.data.hemisId)
             localStorage.setItem("user-name", response.data.name)
             localStorage.setItem("user-avatar", response.data.avatar)
-            console.log(response.data.avatar)
+            localStorage.setItem("user-department", response.data.department)
+            localStorage.setItem("user-faculty", response.data.faculty)
             localStorage.setItem("user-position", response.data.position)
             if (response.data.admin){
               this.$router.push({name: "AdminDash"})

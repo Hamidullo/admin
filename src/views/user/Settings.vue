@@ -21,10 +21,10 @@
           <v-divider />
         </v-col>
       </v-row>
-  
+
       <v-divider>
       </v-divider>
-  
+
       <v-row class="justify-center align-center bg-white mt-4">
         <v-col cols="12" sm="4" class="mb-6">
             Language
@@ -67,7 +67,7 @@
        title="Log out"
        prepend-icon="mdi-lock"
        append-icon="mdi-open-in-new"
-       @click="logOut"
+       @click="logout"
        target="_blank"
       rel="noopener">
     </v-card>
@@ -75,7 +75,7 @@
     </v-card>
 </v-container>
 </template>
-  
+
   <script>
   export default {
     data() {
@@ -88,11 +88,17 @@
         ],
       }
     },
-    
+
+    methods:{
+      logout(){
+        localStorage.clear()
+        this.$router.push({name: "Login"})
+      }
+    }
+
   }
 </script>
-  
+
   <style scoped>
-  
+
   </style>
-  
