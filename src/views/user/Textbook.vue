@@ -56,13 +56,22 @@
                     <v-col
                       cols="12"
                       sm="6"
-                      md="6">
-                      <v-text-field
-                        v-model="editedItem.workYear"
-                        clearable
+                      md="3">
+                      <v-select
                         label="Nashr etilgan yil"
-                        required>
-                    </v-text-field>
+                        v-model="editedItem.year"
+                        :items="years">
+                      </v-select>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="3">
+                      <v-select
+                        label="Nashr etilgan oy"
+                        v-model="editedItem.mounth"
+                        :items="mounth">
+                      </v-select>
                     </v-col>
                     <v-col
                       cols="12"
@@ -208,18 +217,27 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedQItem.workYear"
-                          clearable
+                        md="3">
+                        <v-select
                           label="Nashr etilgan yil"
-                          required>
-                        </v-text-field>
+                          v-model="editedQItem.year"
+                          :items="years">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan oy"
+                          v-model="editedQItem.mounth"
+                          :items="mounth">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-text-field
                           clearable
                           required
@@ -228,9 +246,7 @@
                         </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
+                        cols="12">
                         <v-file-input
                           v-if="!editedQItem.workDownload"
                           v-model="editedQItem.workDownload"
@@ -362,18 +378,27 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedMItem.workYear"
-                          clearable
+                        md="3">
+                        <v-select
                           label="Nashr etilgan yil"
-                          required>
-                        </v-text-field>
+                          v-model="editedMItem.year"
+                          :items="years">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan oy"
+                          v-model="editedMItem.mounth"
+                          :items="mounth">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-text-field
                           clearable
                           v-model="editedMItem.workNumber"
@@ -381,9 +406,7 @@
                         </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
+                        cols="12">
                         <v-file-input
                           v-if="!editedMItem.workDownload"
                           v-model="editedMItem.workDownload"
@@ -514,18 +537,27 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedKItem.workYear"
-                          clearable
+                        md="3">
+                        <v-select
                           label="Nashr etilgan yil"
-                          required>
-                        </v-text-field>
+                          v-model="editedKItem.year"
+                          :items="years">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan oy"
+                          v-model="editedKItem.mounth"
+                          :items="mounth">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-text-field
                           clearable
                           v-model="editedKItem.workNumber"
@@ -533,9 +565,7 @@
                         </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
+                        cols="12">
                         <v-file-input
                           show-size
                           v-if="!editedKItem.workDownload"
@@ -616,8 +646,8 @@
       <v-progress-circular
         color="primary"
         indeterminate
-        size="64"
-      ></v-progress-circular>
+        size="64">
+      </v-progress-circular>
     </v-overlay>
 
   </v-container>
@@ -633,15 +663,17 @@ export default {
       overlay: false,
       userId: localStorage.getItem("user-hemisId"),
       userName: localStorage.getItem("user-name"),
+      years: [2023,2024],
+      mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
 
       search: '',
       headers: [
         { key: 'workName', title: 'Nomi', align: 'start', sortable: false, },
         { key: 'workAuthorCount', title: 'Mualliflar soni' },
         { key: 'workAuthorName', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'workYear', title: 'Nashr etilgan yili' },
+        { key: 'year', title: 'Nashr etilgan yili' },
         { key: 'workNumber', title: 'Guvoxnoma raqami' },
-        { key: 'workNew', title: 'Hujjat holati' },
+        { key: 'news', title: 'Hujjat holati' },
         {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       items: [],
@@ -651,41 +683,36 @@ export default {
         { key: 'workName', title: 'Nomi', align: 'start', sortable: false, },
         { key: 'workAuthorCount', title: 'Mualliflar soni' },
         { key: 'workAuthorName', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'workYear', title: 'Nashr etilgan yili' },
+        { key: 'year', title: 'Nashr etilgan yili' },
         { key: 'workNumber', title: 'Guvoxnoma raqami' },
-        { key: 'workNew', title: 'Hujjat holati' },
+        { key: 'news', title: 'Hujjat holati' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
-      itemsQ: [
-      ],
+      itemsQ: [],
 
       searchM: '',
       headersM: [
         { key: 'workName', title: 'Nomi', align: 'start', sortable: false, },
         { key: 'workAuthorCount', title: 'Mualliflar soni' },
         { key: 'workAuthorName', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'workYear', title: 'Nashr etilgan yili' },
+        { key: 'year', title: 'Nashr etilgan yili' },
         { key: 'workNumber', title: 'Grif raqami' },
-        { key: 'workNew', title: 'Hujjat holati' },
+        { key: 'news', title: 'Hujjat holati' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
-      itemsM: [
-
-      ],
+      itemsM: [],
 
       searchK: '',
       headersK: [
         { key: 'workName', title: 'Nomi', align: 'start', sortable: false, },
         { key: 'workAuthorCount', title: 'Mualliflar soni' },
         { key: 'workAuthorName', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'workYear', title: 'Nashr etilgan yili' },
+        { key: 'year', title: 'Nashr etilgan yili' },
         { key: 'workNumber', title: 'Uslubiy kengash qarori raqami' },
-        { key: 'workNew', title: 'Hujjat holati' },
+        { key: 'news', title: 'Hujjat holati' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
-      itemsK: [
-
-      ],
+      itemsK: [],
 
       dialog: false,
       dialogDelete: false,
@@ -693,26 +720,32 @@ export default {
       editedItem: {
         id: 0,
         workName: '',
-        workType: '1',
+        workType: 1,
+        workTypeName: 'Darslik',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
-        workYear: '',
+        year: 0,
+        mounth: 0,
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
         faculty: localStorage.getItem("user-faculty"),
         statId: 0,
         newId: 0,
+        news: '',
         workDownload: null
       },
       defaultItem: {
         id: 0,
         workName: '',
         workType: '1',
+        workTypeName: 'Darslik',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
-        workYear: '',
+        year: 0,
+        mounth: 0,
+        news: '',
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
         faculty: localStorage.getItem("user-faculty"),
@@ -725,11 +758,14 @@ export default {
       editedQItem: {
         id: 0,
         workName: '',
-        workType: '2',
+        workType: 2,
+        workTypeName: 'O’quv qo’llanma',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
-        workYear: '',
+        year: 0,
+        mounth: 0,
+        news: '',
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
         faculty: localStorage.getItem("user-faculty"),
@@ -740,11 +776,14 @@ export default {
       defaultQItem: {
         id: 0,
         workName: '',
-        workType: '2',
+        workType: 2,
+        workTypeName: 'O’quv qo’llanma',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
-        workYear: '',
+        year: 0,
+        mounth: 0,
+        news: '',
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
         faculty: localStorage.getItem("user-faculty"),
@@ -759,11 +798,15 @@ export default {
       editedMItem: {
         id: 0,
         workName: '',
-        workType: '3',
+        workType: 3,
+        workTypeName: 'Monografiya',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
         workYear: '',
+        year: 0,
+        mounth: 0,
+        news: '',
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
         faculty: localStorage.getItem("user-faculty"),
@@ -774,11 +817,15 @@ export default {
       defaultMItem: {
         id: 0,
         workName: '',
-        workType: '3',
+        workType: 3,
+        workTypeName: 'Monografiya',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
         workYear: '',
+        year: 0,
+        mounth: 0,
+        news: '',
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
         faculty: localStorage.getItem("user-faculty"),
@@ -793,11 +840,15 @@ export default {
       editedKItem: {
         id: 0,
         workName: '',
-        workType: '4',
+        workType: 2,
+        workTypeName: 'Uslubiy ko’rsatma va majmualar',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
         workYear: '',
+        year: 0,
+        mounth: 0,
+        news: '',
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
         faculty: localStorage.getItem("user-faculty"),
@@ -808,11 +859,15 @@ export default {
       defaultKItem: {
         id: 0,
         workName: '',
-        workType: '4',
+        workType: 2,
+        workTypeName: 'Uslubiy ko’rsatma va majmualar',
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
         workYear: '',
+        year: 0,
+        mounth: 0,
+        news: '',
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
         faculty: localStorage.getItem("user-faculty"),
@@ -884,7 +939,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}&statId=${this.editedItem.statId}`)
+      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
       .then(response => {
         console.log(`Deleteditem with ID ${this.editItem.id}`);
         this.items.splice(this.editedIndex, 1)
@@ -898,7 +953,7 @@ export default {
     },
     deleteQItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedQItem.id}&newId=${this.editedQItem.newId}&statId=${this.editedQItem.statId}`)
+      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedQItem.id}&newId=${this.editedQItem.newId}`)
       .then(response => {
         console.log(`Deleteditem with ID ${this.editedQItem.id}`);
         this.itemsQ.splice(this.editedQIndex, 1)
@@ -912,7 +967,7 @@ export default {
     },
     deleteMItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}&statId=${this.editedMItem.statId}`)
+      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
       .then(response => {
         console.log(`Deleteditem with ID ${this.editedMItem.id}`);
         this.itemsM.splice(this.editedMIndex, 1)
@@ -926,7 +981,7 @@ export default {
     },
     deleteKItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedKItem.id}&newId=${this.editedKItem.newId}&statId=${this.editedKItem.statId}`)
+      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedKItem.id}&newId=${this.editedKItem.newId}`)
       .then(response => {
         console.log(`Deleteditem with ID ${this.editedKItem.id}`);
         this.itemsK.splice(this.editedKIndex, 1)
@@ -1008,7 +1063,9 @@ export default {
         formData.append('authorCount', this.editedItem.workAuthorCount)
         formData.append('authorName', this.editedItem.workAuthorName)
         formData.append('number', this.editedItem.workNumber)
-        formData.append('year', this.editedItem.workYear)
+        formData.append('typeName', this.editedItem.workTypeName)
+        formData.append('year', this.editedItem.year)
+        formData.append('mounth', this.editedItem.mounth)
         formData.append('statId', this.editedItem.statId)
         formData.append('newId', this.editedItem.newId)
 
@@ -1034,7 +1091,9 @@ export default {
         formData.append('authorCount', this.editedItem.workAuthorCount)
         formData.append('authorName', this.editedItem.workAuthorName)
         formData.append('number', this.editedItem.workNumber)
-        formData.append('year', this.editedItem.workYear)
+         formData.append('typeName', this.editedItem.workTypeName)
+         formData.append('year', this.editedItem.year)
+         formData.append('mounth', this.editedItem.mounth)
         formData.append('department', this.editedItem.department)
         formData.append('faculty', this.editedItem.faculty)
 
@@ -1067,7 +1126,9 @@ export default {
         formData.append('authorCount', this.editedQItem.workAuthorCount)
         formData.append('authorName', this.editedQItem.workAuthorName)
         formData.append('number', this.editedQItem.workNumber)
-        formData.append('year', this.editedQItem.workYear)
+        formData.append('typeName', this.editedItem.workTypeName)
+        formData.append('year', this.editedItem.year)
+        formData.append('mounth', this.editedItem.mounth)
         formData.append('statId', this.editedQItem.statId)
         formData.append('newId', this.editedQItem.newId)
 
@@ -1092,7 +1153,9 @@ export default {
         formData.append('authorCount', this.editedQItem.workAuthorCount)
         formData.append('authorName', this.editedQItem.workAuthorName)
         formData.append('number', this.editedQItem.workNumber)
-        formData.append('year', this.editedQItem.workYear)
+        formData.append('typeName', this.editedItem.workTypeName)
+        formData.append('year', this.editedItem.year)
+        formData.append('mounth', this.editedItem.mounth)
         formData.append('department', this.editedQItem.department)
         formData.append('faculty', this.editedQItem.faculty)
 
@@ -1125,7 +1188,9 @@ export default {
         formData.append('authorCount', this.editedMItem.workAuthorCount)
         formData.append('authorName', this.editedMItem.workAuthorName)
         formData.append('number', this.editedMItem.workNumber)
-        formData.append('year', this.editedMItem.workYear)
+        formData.append('typeName', this.editedItem.workTypeName)
+        formData.append('year', this.editedItem.year)
+        formData.append('mounth', this.editedItem.mounth)
         formData.append('statId', this.editedMItem.statId)
         formData.append('newId', this.editedMItem.newId)
 
@@ -1150,7 +1215,9 @@ export default {
         formData.append('authorCount', this.editedMItem.workAuthorCount)
         formData.append('authorName', this.editedMItem.workAuthorName)
         formData.append('number', this.editedMItem.workNumber)
-        formData.append('year', this.editedMItem.workYear)
+        formData.append('typeName', this.editedItem.workTypeName)
+        formData.append('year', this.editedItem.year)
+        formData.append('mounth', this.editedItem.mounth)
         formData.append('department', this.editedMItem.department)
         formData.append('faculty', this.editedMItem.faculty)
 
@@ -1183,7 +1250,9 @@ export default {
         formData.append('authorCount', this.editedKItem.workAuthorCount)
         formData.append('authorName', this.editedKItem.workAuthorName)
         formData.append('number', this.editedKItem.workNumber)
-        formData.append('year', this.editedKItem.workYear)
+        formData.append('typeName', this.editedItem.workTypeName)
+        formData.append('year', this.editedItem.year)
+        formData.append('mounth', this.editedItem.mounth)
         formData.append('statId', this.editedKItem.statId)
         formData.append('newId', this.editedKItem.newId)
 
@@ -1208,7 +1277,9 @@ export default {
         formData.append('authorCount', this.editedKItem.workAuthorCount)
         formData.append('authorName', this.editedKItem.workAuthorName)
         formData.append('number', this.editedKItem.workNumber)
-        formData.append('year', this.editedKItem.workYear)
+        formData.append('typeName', this.editedItem.workTypeName)
+        formData.append('year', this.editedItem.year)
+        formData.append('mounth', this.editedItem.mounth)
         formData.append('department', this.editedKItem.department)
         formData.append('faculty', this.editedKItem.faculty)
 
@@ -1290,12 +1361,16 @@ export default {
 
   mounted() {
     axios
-      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type="Darslik"`)
+      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type=1`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
-          if (data[dataKey].workNew === '1'){
-            data[dataKey].workNew = 'Tekshirilmoqda'
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
           }
           this.items.push(data[dataKey])
 
@@ -1303,36 +1378,48 @@ export default {
       });
 
       axios
-      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type="O'quv qo'llanma"`)
+      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type=2`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
-          if (data[dataKey].workNew === '1'){
-            data[dataKey].workNew = 'Tekshirilmoqda'
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
           }
           this.itemsQ.push(data[dataKey])
         }
       });
 
       axios
-      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type="Monografiya"`)
+      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type=3`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
-          if (data[dataKey].workNew === '1'){
-            data[dataKey].workNew = 'Tekshirilmoqda'
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
           }
           this.itemsM.push(data[dataKey])
         }
       });
 
       axios
-      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type="Uslubiy ko'rsatma"`)
+      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type=4`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
-          if (data[dataKey].workNew === '1'){
-            data[dataKey].workNew = 'Tekshirilmoqda'
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
           }
           this.itemsK.push(data[dataKey])
         }

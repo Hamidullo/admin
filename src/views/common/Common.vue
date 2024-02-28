@@ -210,11 +210,6 @@ export default {
   },
   methods: {
 
-    sortDepartment(array){
-      console.log("sortDepartment")
-      return array.sort(this.compareNumbers);
-    },
-
     yearChange(){
       if (this.i == 0){
         this.i = 1
@@ -224,10 +219,6 @@ export default {
         this.year = this.years.at(this.i)
       }
       location.reload();
-    },
-
-    compareNumbers(x, y) {
-      return x.score - y.score;
     },
 
   }

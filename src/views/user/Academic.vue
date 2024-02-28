@@ -30,7 +30,7 @@
                         sm="6"
                         md="6">
                         <v-select
-                          v-model="editedItem.type"
+                          v-model="editedItem.name"
                           label="Unvonni tanlang"
                           required
                           :items="['Fan doktorlik (DSc) diplomi', 'Fan nomzodi (PhD) diplomi', 'Professor yoki dotsent - ilmiy unvoni',]">
@@ -52,7 +52,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.docNumber"
+                          v-model="editedItem.number"
                           clearable
                           label="Raqami"
                           persistent-hint
@@ -62,26 +62,22 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
+                        md="3">
+                        <v-select
+                          label="Diplom berilgan yil"
                           v-model="editedItem.year"
-                          clearable
-                          label="Diplom olingan yil"
-                          persistent-hint
-                          required>
-                        </v-text-field>
+                          :items="years">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedItem.dateGiven"
-                          clearable
-                          label="Berilgan sanasi"
-                          persistent-hint
-                          required>
-                        </v-text-field>
+                        md="3">
+                        <v-select
+                          label="Diplom berilgan oy"
+                          v-model="editedItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -96,7 +92,9 @@
                         </v-text-field>
                       </v-col>
                       <v-col
-                        cols="12">
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-text-field
                           v-model="editedItem.departmentName"
                           clearable
@@ -191,8 +189,7 @@
       </v-col>
 
       <v-col cols="12">
-        <v-card flat
-        title="“TOP-1000” ro‘yxatiga kiruvchi xorijiy oliy ta’lim tashkilotlarida himoya qilgan">
+        <v-card flat title="“TOP-1000” ro‘yxatiga kiruvchi xorijiy oliy ta’lim tashkilotlarida himoya qilgan">
           <template v-slot:append>
             <!-- Dialog start -->
             <v-row justify="center" class="mr-2">
@@ -283,14 +280,22 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedCItem.year"
-                          clearable
-                          label="Diplom olingan yil"
-                          persistent-hint
-                          required>
-                        </v-text-field>
+                        md="3">
+                        <v-select
+                          label="Diplom berilgan yil"
+                          v-model="editedItem.year"
+                          :items="years">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Diplom berilgan oy"
+                          v-model="editedItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -428,17 +433,6 @@
                           sm="6"
                           md="6">
                           <v-text-field
-                            v-model="editedSItem.datePublishing"
-                            clearable
-                            required
-                            label="Jurnal nasher etilgan sana">
-                          </v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="6">
-                          <v-text-field
                             v-model="editedSItem.articleName"
                             clearable
                             label="Maqola nomi"
@@ -453,7 +447,7 @@
                           <v-text-field
                             v-model="editedSItem.articleUrl"
                             clearable
-                            label="«Scopus» qidiruv tizimlardagi internet manzili (giper xavolasi)"
+                            label="«Scopus» qidiruv tizimlardagi manzili (giper xavolasi)"
                             persistent-hint
                             required>
                           </v-text-field>
@@ -485,19 +479,25 @@
                         <v-col
                           cols="12"
                           sm="6"
-                          md="6">
-                          <v-text-field
-                            v-model="editedSItem.year"
-                            clearable
-                            label="Diplom olingan yil"
-                            persistent-hint
-                            required>
-                          </v-text-field>
+                          md="3">
+                          <v-select
+                            label="Jurnal nashr etilgan yil"
+                            v-model="editedItem.year"
+                            :items="years">
+                          </v-select>
                         </v-col>
                         <v-col
                           cols="12"
                           sm="6"
-                          md="6">
+                          md="3">
+                          <v-select
+                            label="Jurnal nashr etilgan oy"
+                            v-model="editedItem.mounth"
+                            :items="mounth">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12">
                           <v-file-input
                             show-size
                             v-if="!editedSItem.docDownload"
@@ -579,8 +579,8 @@
       <v-progress-circular
         color="primary"
         indeterminate
-        size="64"
-      ></v-progress-circular>
+        size="64">
+      </v-progress-circular>
     </v-overlay>
   </v-container>
 </template>
@@ -595,21 +595,25 @@ export default {
         position: localStorage.getItem("user-position"),
         userId: localStorage.getItem("user-hemisId"),
         userName: localStorage.getItem("user-name"),
+        years: [2023,2024],
+        mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
 
         dialog: false,
         dialogDelete: false,
         editedIndex: -1,
         editedItem: {
           id: 0,
-          name: '',
           type: '',
+
+          name: '',
           seriesNumber: '',
-          docNumber: '',
-          dateGiven: '',
+          number: '',
           specialtyNumber: '',
           departmentName: '',
           workStartND: '',
-          year: '',
+
+          year: 0,
+          mounth: 0,
           userName: localStorage.getItem("user-name"),
           department: localStorage.getItem("user-department"),
           faculty: localStorage.getItem("user-faculty"),
@@ -698,81 +702,39 @@ export default {
           { key: 'type', title: 'Turi', align: 'start', sortable: false, },
           { key: 'seriesNumber', title: 'Seriyasi' },
           { key: 'dateGiven', title: 'Raqami' },
-          { key: 'docNumber', title: 'Berilgan sana' },
+          { key: 'docNumber', title: 'Berilgan yili' },
           { key: 'specialtyNumber', title: 'Ixtisoslik raqami va nomi' },
           { key: 'departmentName', title: 'Mutaxassisligi nomi' },
+          { key: 'news', title: 'Hujjat holati' },
           { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
         ],
-        items: [
-          {
-            type: 'Frozen Yogurt',
-            seriesNumber: 159,
-            dateGiven: 6.0,
-            docNumber: 24,
-            specialtyNumber: 4.0,
-          },
-          {
-            type: 'Ice cream sandwich',
-            seriesNumber: 237,
-            dateGiven: 9.0,
-            docNumber: 37,
-            specialtyNumber: 4.3,
-          }
-        ],
+        items: [],
 
         searchC: '',
         headersC: [
-          { title: 'Xorijiy davlat nomi', align: 'start', key: 'country',},
-          { title: 'OTM nomi', align: 'start', key: 'university',},
-          { title: 'Turi', align: 'start', key: 'type',},
+          { key: 'name',title: 'Xorijiy davlat nomi', align: 'start',},
+          { key: 'university', title: 'OTM nomi', align: 'start', },
+          { key: 'type', title: 'Turi', align: 'start', },
           { key: 'seriesNumber', title: 'Seriyasi' },
           { key: 'dateGiven', title: 'Raqami' },
-          { title: 'Mutaxassisligi nomi', align: 'start', key: 'typeNumber',},
-          { title: 'Amallar',align: 'start', sortable: false, key: 'actions', },
+          { key: 'typeNumber', title: 'Mutaxassisligi nomi', align: 'start', },
+          { key: 'news', title: 'Hujjat holati' },
+          { key: 'actions', title: 'Amallar',align: 'start', sortable: false,  },
         ],
-        itemsC: [
-        {
-          country: 'Intel Core i9-11900K',
-          university: 8,
-          type: 16,
-          seriesNumber: '3.5 GHz',
-          dateGiven: '5.3 GHz',
-        },
-        {
-          country: 'AMD Ryzen 9 5950X',
-          university: 8,
-          type: 16,
-          seriesNumber: '3.5 GHz',
-          dateGiven: '5.3 GHz',
-        }
-        ],
+        itemsC: [],
 
         searchS: '',
         headersS: [
           { key: 'magazineName', title: 'Jurnal nomi' },
-          { key: 'datePublishing', title: 'Jurnalning nashr etilgan sanasi' },
+          { key: 'year', title: 'Jurnalning nashr etilgan yil' },
           { key: 'articleName', title: 'Maqola nomi' },
           { key: 'articleLanguage', title: 'Maqola chop etilgan til' },
           { key: 'articleUrl', title: 'Maqolani giper Xavolasi' },
           { key: 'hIndex', title: 'h-index' },
-          {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
+          { key: 'news', title: 'Hujjat holati' },
+          { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
         ],
-        itemsS: [
-          {
-            magazineName: 'Frozen Yogurt',
-            datePublishing: 159,
-            articleName: 6.0,
-            articleLanguage: 24,
-            articleUrl: 4.0,
-          },
-          {
-            magazineName: 'Ice cream sandwich',
-            datePublishing: 237,
-            articleName: 9.0,
-            articleLanguage: 37,
-            articleUrl: 4.3,
-          }
-        ],
+        itemsS: [],
       }
     },
   methods: {
