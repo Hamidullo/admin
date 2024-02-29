@@ -720,7 +720,7 @@ export default {
       editedItem: {
         id: 0,
         workName: '',
-        workType: 1,
+        workType: 21,
         workTypeName: 'Darslik',
         workAuthorCount: 0,
         workAuthorName: '',
@@ -738,7 +738,7 @@ export default {
       defaultItem: {
         id: 0,
         workName: '',
-        workType: '1',
+        workType: 21,
         workTypeName: 'Darslik',
         workAuthorCount: 0,
         workAuthorName: '',
@@ -758,7 +758,7 @@ export default {
       editedQItem: {
         id: 0,
         workName: '',
-        workType: 2,
+        workType: 22,
         workTypeName: 'O’quv qo’llanma',
         workAuthorCount: 0,
         workAuthorName: '',
@@ -776,7 +776,7 @@ export default {
       defaultQItem: {
         id: 0,
         workName: '',
-        workType: 2,
+        workType: 22,
         workTypeName: 'O’quv qo’llanma',
         workAuthorCount: 0,
         workAuthorName: '',
@@ -798,7 +798,7 @@ export default {
       editedMItem: {
         id: 0,
         workName: '',
-        workType: 3,
+        workType: 23,
         workTypeName: 'Monografiya',
         workAuthorCount: 0,
         workAuthorName: '',
@@ -817,7 +817,7 @@ export default {
       defaultMItem: {
         id: 0,
         workName: '',
-        workType: 3,
+        workType: 23,
         workTypeName: 'Monografiya',
         workAuthorCount: 0,
         workAuthorName: '',
@@ -840,7 +840,7 @@ export default {
       editedKItem: {
         id: 0,
         workName: '',
-        workType: 2,
+        workType: 24,
         workTypeName: 'Uslubiy ko’rsatma va majmualar',
         workAuthorCount: 0,
         workAuthorName: '',
@@ -859,7 +859,7 @@ export default {
       defaultKItem: {
         id: 0,
         workName: '',
-        workType: 2,
+        workType: 24,
         workTypeName: 'Uslubiy ko’rsatma va majmualar',
         workAuthorCount: 0,
         workAuthorName: '',
@@ -1056,18 +1056,10 @@ export default {
       if (this.editedIndex > -1) {
         this.overlay = true
         let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedItem.workName)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedItem.workType)
-        formData.append('authorCount', this.editedItem.workAuthorCount)
-        formData.append('authorName', this.editedItem.workAuthorName)
-        formData.append('number', this.editedItem.workNumber)
-        formData.append('typeName', this.editedItem.workTypeName)
-        formData.append('year', this.editedItem.year)
-        formData.append('mounth', this.editedItem.mounth)
-        formData.append('statId', this.editedItem.statId)
-        formData.append('newId', this.editedItem.newId)
+        formData.append('workName', this.editedItem.workName)
+        formData.append('workAuthorCount', this.editedItem.workAuthorCount)
+        formData.append('workAuthorName', this.editedItem.workAuthorName)
+        formData.append('workNumber', this.editedItem.workNumber)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedItem.id, formData)
           .then(response => {
@@ -1119,18 +1111,10 @@ export default {
       if (this.editedQIndex > -1) {
         this.overlay = true
         let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedQItem.workName)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedQItem.workType)
-        formData.append('authorCount', this.editedQItem.workAuthorCount)
-        formData.append('authorName', this.editedQItem.workAuthorName)
-        formData.append('number', this.editedQItem.workNumber)
-        formData.append('typeName', this.editedItem.workTypeName)
-        formData.append('year', this.editedItem.year)
-        formData.append('mounth', this.editedItem.mounth)
-        formData.append('statId', this.editedQItem.statId)
-        formData.append('newId', this.editedQItem.newId)
+        formData.append('workName', this.editedItem.workName)
+        formData.append('workAuthorCount', this.editedItem.workAuthorCount)
+        formData.append('workAuthorName', this.editedItem.workAuthorName)
+        formData.append('workNumber', this.editedItem.workNumber)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedQItem.id, formData)
           .then(response => {
@@ -1181,18 +1165,10 @@ export default {
       if (this.editedMIndex > -1) {
         this.overlay = true
         let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedMItem.workName)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedMItem.workType)
-        formData.append('authorCount', this.editedMItem.workAuthorCount)
-        formData.append('authorName', this.editedMItem.workAuthorName)
-        formData.append('number', this.editedMItem.workNumber)
-        formData.append('typeName', this.editedItem.workTypeName)
-        formData.append('year', this.editedItem.year)
-        formData.append('mounth', this.editedItem.mounth)
-        formData.append('statId', this.editedMItem.statId)
-        formData.append('newId', this.editedMItem.newId)
+        formData.append('workName', this.editedItem.workName)
+        formData.append('workAuthorCount', this.editedItem.workAuthorCount)
+        formData.append('workAuthorName', this.editedItem.workAuthorName)
+        formData.append('workNumber', this.editedItem.workNumber)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedMItem.id, formData)
           .then(response => {
@@ -1243,18 +1219,10 @@ export default {
       if (this.editedKIndex > -1) {
         this.overlay = true
         let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedKItem.workName)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedKItem.workType)
-        formData.append('authorCount', this.editedKItem.workAuthorCount)
-        formData.append('authorName', this.editedKItem.workAuthorName)
-        formData.append('number', this.editedKItem.workNumber)
-        formData.append('typeName', this.editedItem.workTypeName)
-        formData.append('year', this.editedItem.year)
-        formData.append('mounth', this.editedItem.mounth)
-        formData.append('statId', this.editedKItem.statId)
-        formData.append('newId', this.editedKItem.newId)
+        formData.append('workName', this.editedItem.workName)
+        formData.append('workAuthorCount', this.editedItem.workAuthorCount)
+        formData.append('workAuthorName', this.editedItem.workAuthorName)
+        formData.append('workNumber', this.editedItem.workNumber)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedKItem.id, formData)
           .then(response => {
@@ -1325,7 +1293,6 @@ export default {
         })
         .catch(() => console.log('error occured'))
     },
-
     downloadDoc(item) {
       console.log("Download start")
       this.downloadWithAxios("http://localhost:8080/api/works/download?userId="+item.userId+"&file="+item.workDownload,item.name)

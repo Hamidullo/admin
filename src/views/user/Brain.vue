@@ -29,7 +29,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedSItem.name"
+                          v-model="editedSItem.brainName"
                           clearable
                           label="Nomi"
                           required>
@@ -40,7 +40,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedSItem.quotesCount"
+                          v-model="editedSItem.brainQuotesCount"
                           clearable
                           required
                           label="Iqtiboslar soni">
@@ -61,7 +61,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedSItem.authorsCount"
+                          v-model="editedSItem.brainAuthorCount"
                           clearable
                           required
                           label="Mualliflar soni">
@@ -72,7 +72,7 @@
                         sm="6"
                         md="8">
                         <v-text-field
-                          v-model="editedSItem.authorsName"
+                          v-model="editedSItem.brainAuthorName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -84,7 +84,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedSItem.magazineName"
+                          v-model="editedSItem.brainMagName"
                           clearable
                           label="Nashr etilgan jurnal nomi"
                           required>
@@ -95,7 +95,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedSItem.magazineCountry"
+                          v-model="editedSItem.brainMagCountry"
                           clearable
                           required
                           label="Jurnal nashr etilgan davlat">
@@ -106,7 +106,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedSItem.articleUrl"
+                          v-model="editedSItem.brainLink"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -116,20 +116,28 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan yil"
                           v-model="editedSItem.year"
-                          clearable
-                          label="Maqola chiqarilgan yil"
-                          persistent-hint
-                          required>
-                        </v-text-field>
+                          :items="years">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan oy"
+                          v-model="editedSItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-file-input
-                          v-if="!editedSItem.doc"
-                          v-model="editedSItem.doc"
+                          v-if="!editedSItem.brainUploaded"
+                          v-model="editedSItem.brainUploaded"
                           show-size
                           label="Maqola yuklash">
                         </v-file-input>
@@ -202,8 +210,7 @@
 
 
       <v-col cols="12">
-        <v-card flat
-        title="“Web of sciense” bazalaridagi maqolalar">
+        <v-card flat title="“Web of sciense” bazalaridagi maqolalar">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -220,7 +227,7 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="text-h5">“Web of sciense” bazalaridagi maqola qo'shish:</span>
+                  <span class="text-h5">{{ formWTitle }}</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container>
@@ -230,7 +237,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedWItem.name"
+                          v-model="editedWItem.brainName"
                           clearable
                           label="Nomi"
                           required>
@@ -241,7 +248,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedWItem.quotesCount"
+                          v-model="editedWItem.brainQuotesCount"
                           clearable
                           label="Iqtiboslar soni">
                       </v-text-field>
@@ -251,7 +258,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedWItem.authorsCount"
+                          v-model="editedWItem.brainAuthorCount"
                           clearable
                           label="Mualliflar soni">
                       </v-text-field>
@@ -259,7 +266,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedWItem.authorsName"
+                          v-model="editedWItem.brainAuthorName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -271,7 +278,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedWItem.magazineName"
+                          v-model="editedWItem.brainMagName"
                           clearable
                           label="Nashr etilgan jurnal nomi"
                           required>
@@ -282,7 +289,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedWItem.magazineCountry"
+                          v-model="editedWItem.brainMagCountry"
                           clearable
                           label="Jurnal nashr etilgan davlat">
                       </v-text-field>
@@ -292,7 +299,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedWItem.articleUrl"
+                          v-model="editedWItem.brainLink"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -302,20 +309,28 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan yil"
                           v-model="editedWItem.year"
-                          clearable
-                          label="Maqola chiqarilgan yil"
-                          persistent-hint
-                          required>
-                        </v-text-field>
+                          :items="years">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan oy"
+                          v-model="editedWItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-file-input
-                          v-if="!editedWItem.doc"
-                          v-model="editedWItem.doc"
+                          v-if="!editedWItem.brainUploaded"
+                          v-model="editedWItem.brainUploaded"
                           show-size
                           label="Maqola yuklash">
                         </v-file-input>
@@ -390,8 +405,7 @@
 
     <v-row>
       <v-col cols="12">
-        <v-card flat
-        title="Xorijiy jurnallardagi maqolalar (OAK ro’yxatidagi)">
+        <v-card flat title="Xorijiy jurnallardagi maqolalar (OAK ro’yxatidagi)">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -417,7 +431,7 @@
                         md="4">
                         <v-text-field
                           clearable
-                          v-model="editedXItem.name"
+                          v-model="editedXItem.brainName"
                           label="Nomi"
                           required>
                       </v-text-field>
@@ -427,7 +441,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedXItem.quotesCount"
+                          v-model="editedXItem.brainQuotesCount"
                           clearable
                           required
                           label="Iqtiboslar soni">
@@ -438,7 +452,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedXItem.authorsCount"
+                          v-model="editedXItem.brainAuthorCount"
                           clearable
                           required
                           label="Mualliflar soni">
@@ -447,7 +461,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedXItem.authorsName"
+                          v-model="editedXItem.brainAuthorName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -459,7 +473,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedXItem.magazineName"
+                          v-model="editedXItem.brainMagName"
                           clearable
                           label="Nashr etilgan jurnal nomi"
                           required>
@@ -470,7 +484,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedXItem.magazineCountry"
+                          v-model="editedXItem.brainMagCountry"
                           clearable
                           required
                           label="Jurnal nashr etilgan davlat">
@@ -481,7 +495,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedXItem.articleUrl"
+                          v-model="editedXItem.brainLink"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -491,20 +505,28 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan yil"
                           v-model="editedXItem.year"
-                          clearable
-                          label="Maqola chiqarilgan yil"
-                          persistent-hint
-                          required>
-                        </v-text-field>
+                          :items="years">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan oy"
+                          v-model="editedXItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-file-input
-                          v-if="!editedXItem.doc"
-                          v-model="editedXItem.doc"
+                          v-if="!editedXItem.brainUploaded"
+                          v-model="editedXItem.brainUploaded"
                           show-size
                           label="Maqola yuklash">
                         </v-file-input>
@@ -577,9 +599,7 @@
 
 
       <v-col cols="12">
-        <v-card
-        flat
-        title="Respublika jurnallaridagi maqolalar (OAK ro’yxatidagi)">
+        <v-card flat title="Respublika jurnallaridagi maqolalar (OAK ro’yxatidagi)">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -606,7 +626,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedRItem.name"
+                          v-model="editedRItem.brainName"
                           clearable
                           label="Nomi"
                           required>
@@ -617,7 +637,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedRItem.quotesCount"
+                          v-model="editedRItem.brainQuotesCount"
                           clearable
                           required
                           label="Iqtiboslar soni">
@@ -628,7 +648,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedRItem.authorsCount"
+                          v-model="editedRItem.brainAuthorCount"
                           clearable
                           required
                           label="Mualliflar soni">
@@ -637,7 +657,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedRItem.authorsName"
+                          v-model="editedRItem.brainAuthorName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -649,7 +669,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedRItem.magazineName"
+                          v-model="editedRItem.brainMagName"
                           clearable
                           label="Nashr etilgan jurnal nomi"
                           required>
@@ -660,7 +680,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedRItem.magazineCountry"
+                          v-model="editedRItem.brainMagCountry"
                           clearable
                           label="Jurnal nashr etilgan davlat">
                       </v-text-field>
@@ -670,7 +690,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedRItem.articleUrl"
+                          v-model="editedRItem.brainLink"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -680,20 +700,28 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan yil"
                           v-model="editedRItem.year"
-                          clearable
-                          label="Maqola chiqarilgan yil"
-                          persistent-hint
-                          required>
-                        </v-text-field>
+                          :items="years">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan oy"
+                          v-model="editedRItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-file-input
-                          v-if="!editedRItem.doc"
-                          v-model="editedRItem.doc"
+                          v-if="!editedRItem.brainUploaded"
+                          v-model="editedRItem.brainUploaded"
                           show-size
                           label="Maqola yuklash">
                         </v-file-input>
@@ -768,8 +796,7 @@
 
     <v-row>
       <v-col cols="12">
-        <v-card flat
-        title="Xalqaro miqyosdagi anjumanlar">
+        <v-card flat title="Xalqaro miqyosdagi anjumanlar">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -796,7 +823,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedMItem.name"
+                          v-model="editedMItem.brainName"
                           clearable
                           label="Nomi"
                           required>
@@ -807,7 +834,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedMItem.conventionName"
+                          v-model="editedMItem.brainMagName"
                           clearable
                           required
                           label="Nashr etilgan anjuman nomi">
@@ -818,7 +845,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedMItem.authorsCount"
+                          v-model="editedMItem.brainAuthorCount"
                           clearable
                           required
                           label="Mualliflar soni">
@@ -827,7 +854,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedMItem.authorsName"
+                          v-model="editedMItem.brainAuthorName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -839,18 +866,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.datePublishing"
-                          clearable
-                          label="Nashr etilgan sana"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedMItem.conventionCountry"
+                          v-model="editedMItem.brainMagCountry"
                           clearable
                           required
                           label="Anjuman o'tkazilgan OTM, yoki davlat">
@@ -861,7 +877,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.articleUrl"
+                          v-model="editedMItem.brainLink"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -871,20 +887,28 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan yil"
                           v-model="editedMItem.year"
-                          clearable
-                          label="Maqola chiqarilgan yil"
-                          persistent-hint
-                          required>
-                        </v-text-field>
+                          :items="years">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan oy"
+                          v-model="editedMItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-file-input
-                          v-if="!editedMItem.doc"
-                          v-model="editedMItem.doc"
+                          v-if="!editedMItem.brainUploaded"
+                          v-model="editedMItem.brainUploaded"
                           show-size
                           label="Maqola yuklash">
                         </v-file-input>
@@ -957,9 +981,7 @@
 
 
       <v-col cols="12">
-        <v-card
-        flat
-        title="Respublika miqyosidagi anjumanlar">
+        <v-card flat title="Respublika miqyosidagi anjumanlar">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -986,7 +1008,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedAItem.name"
+                          v-model="editedAItem.brainName"
                           clearable
                           label="Nomi"
                           required>
@@ -997,7 +1019,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedAItem.conventionName"
+                          v-model="editedAItem.brainMagName"
                           clearable
                           required
                           label="Nashr etilgan anjuman nomi">
@@ -1008,7 +1030,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedAItem.authorsCount"
+                          v-model="editedAItem.brainAuthorCount"
                           clearable
                           required
                           label="Mualliflar soni">
@@ -1017,7 +1039,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedAItem.authorsName"
+                          v-model="editedAItem.brainAuthorName"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -1027,20 +1049,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedAItem.datePublishing"
-                          clearable
-                          label="Nashr etilgan sana"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedAItem.conventionCountry"
+                          v-model="editedAItem.brainMagCountry"
                           clearable
                           required
                           label="Anjuman o'tkazilgan OTM, yoki davlat">
@@ -1049,9 +1060,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedAItem.articleUrl"
+                          v-model="editedAItem.brainLink"
                           clearable
                           label="Maqola joylashgan havola"
                           persistent-hint
@@ -1061,20 +1072,30 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
-                        <v-text-field
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan yil"
                           v-model="editedAItem.year"
-                          clearable
-                          label="Maqola chiqarilgan yil"
-                          persistent-hint
-                          required>
-                        </v-text-field>
+                          :items="years">
+                        </v-select>
                       </v-col>
                       <v-col
-                        cols="12">
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan oy"
+                          v-model="editedAItem.mounth"
+                          :items="mounth">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
                         <v-file-input
-                          v-if="!editedAItem.doc"
-                          v-model="editedAItem.doc"
+                          v-if="!editedAItem.brainUploaded"
+                          v-model="editedAItem.brainUploaded"
                           show-size
                           label="Maqola yuklash">
                         </v-file-input>
@@ -1146,22 +1167,41 @@
       </v-col>
     </v-row>
 
+    <v-overlay
+      :model-value="overlay"
+      class="align-center justify-center">
+      <v-progress-circular
+        color="primary"
+        indeterminate
+        size="64">
+      </v-progress-circular>
+    </v-overlay>
+
   </v-container>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data () {
     return {
+      overlay: false,
+      userId: localStorage.getItem("user-hemisId"),
+      userName: localStorage.getItem("user-name"),
+      years: [2023,2024],
+      mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
+
       searchS: '',
       headersS: [
-        { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
-        { key: 'quotesCount', title: 'Iqtiboslari soni' },
-        { key: 'authorsCount', title: 'Mualliflar soni' },
-        { key: 'authorsName', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'magazineName', title: 'Nashr etilgan jurnal nomi' },
-        { key: 'magazineCountry', title: 'Jurnal nashr etiladigan davlat' },
-        { key: 'articleUrl', title: 'Maqola joylashgan havola' },
+        { key: 'brainName', title: 'Nomi',align: 'start', sortable: false,},
+        { key: 'brainQuotesCount', title: 'Iqtiboslari soni' },
+        { key: 'brainAuthorCount', title: 'Mualliflar soni' },
+        { key: 'brainAuthorName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'brainMagName', title: 'Nashr etilgan jurnal nomi' },
+        { key: 'brainMagCountry', title: 'Jurnal nashr etiladigan davlat' },
+        { key: 'brainLink', title: 'Maqola joylashgan havola' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       dialogS: false,
@@ -1169,62 +1209,64 @@ export default {
       editedSIndex: -1,
       editedSItem: {
         id: 0,
-        name: '',
-        quotesCount: 0,
+        brainType: 31,
+        brainTypeName: '“Scopus” bazalaridagi maqolalar',
+
+        brainName: '',
+        brainQuotesCount: 0,
         quarter: '',
-        authorsCount: 0,
-        authorsName: '',
-        magazineName: '',
-        magazineCountry: '',
-        articleUrl: '',
-        year: '',
-        doc: null,
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
       },
       defaultSItem: {
         id: 0,
-        name: '',
-        quotesCount: 0,
+        brainType: 31,
+        brainTypeName: '“Scopus” bazalaridagi maqolalar',
+
+        brainName: '',
+        brainQuotesCount: 0,
         quarter: '',
-        authorsCount: 0,
-        authorsName: '',
-        magazineName: '',
-        magazineCountry: '',
-        articleUrl: '',
-        year: '',
-        doc: null,
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
       },
-      itemsS: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        }
-      ],
+      itemsS: [],
 
       searchW: '',
       headersW: [
-        { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
-        { key: 'quotesCount', title: 'Iqtiboslari soni' },
-        { key: 'authorsCount', title: 'Mualliflar soni' },
-        { key: 'authorsName', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'magazineName', title: 'Nashr etilgan jurnal nomi' },
-        { key: 'magazineCountry', title: 'Jurnal nashr etiladigan davlat' },
-        { key: 'articleUrl', title: 'Maqola joylashgan havola' },
+        { key: 'brainName', title: 'Nomi',align: 'start', sortable: false,},
+        { key: 'brainQuotesCount', title: 'Iqtiboslari soni' },
+        { key: 'brainAuthorCount', title: 'Mualliflar soni' },
+        { key: 'brainAuthorName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'brainMagName', title: 'Nashr etilgan jurnal nomi' },
+        { key: 'brainMagCountry', title: 'Jurnal nashr etiladigan davlat' },
+        { key: 'brainLink', title: 'Maqola joylashgan havola' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       dialogW: false,
@@ -1232,60 +1274,64 @@ export default {
       editedWIndex: -1,
       editedWItem: {
         id: 0,
-        name: '',
-        quotesCount: 0,
-        authorsCount: 0,
-        authorsName: '',
-        magazineName: '',
-        magazineCountry: '',
-        articleUrl: '',
-        year: '',
-        doc: null,
+        brainType: 32,
+        brainTypeName: '“Web of sciense” bazalaridagi maqolalar',
+
+        brainName: '',
+        brainQuotesCount: 0,
+        quarter: '',
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
       },
       defaultWItem: {
         id: 0,
-        name: '',
-        quotesCount: 0,
-        authorsCount: 0,
-        authorsName: '',
-        magazineName: '',
-        magazineCountry: '',
-        articleUrl: '',
-        year: '',
-        doc: null,
+        brainType: 32,
+        brainTypeName: '“Web of sciense” bazalaridagi maqolalar',
+
+        brainName: '',
+        brainQuotesCount: 0,
+        quarter: '',
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
       },
-      itemsW: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        }
-      ],
+      itemsW: [],
 
       searchX: '',
       headersX: [
-        { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
-        { key: 'quotesCount', title: 'Iqtiboslari soni' },
-        { key: 'authorsCount', title: 'Mualliflar soni' },
-        { key: 'authorsName', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'magazineName', title: 'Nashr etilgan jurnal nomi' },
-        { key: 'magazineCountry', title: 'Jurnal nashr etiladigan davlat' },
-        { key: 'articleUrl', title: 'Maqola joylashgan havola' },
+        { key: 'brainName', title: 'Nomi',align: 'start', sortable: false,},
+        { key: 'brainQuotesCount', title: 'Iqtiboslari soni' },
+        { key: 'brainAuthorCount', title: 'Mualliflar soni' },
+        { key: 'brainAuthorName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'brainMagName', title: 'Nashr etilgan jurnal nomi' },
+        { key: 'brainMagCountry', title: 'Jurnal nashr etiladigan davlat' },
+        { key: 'brainLink', title: 'Maqola joylashgan havola' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       dialogX: false,
@@ -1293,60 +1339,64 @@ export default {
       editedXIndex: -1,
       editedXItem: {
         id: 0,
-        name: '',
-        quotesCount: 0,
-        authorsCount: 0,
-        authorsName: '',
-        magazineName: '',
-        magazineCountry: '',
-        articleUrl: '',
-        year: '',
-        doc: null,
+        brainType: 33,
+        brainTypeName: 'Xorijiy jurnallardagi maqolalar (OAK ro’yxatidagi)',
+
+        brainName: '',
+        brainQuotesCount: 0,
+        quarter: '',
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
       },
       defaultXItem: {
         id: 0,
-        name: '',
-        quotesCount: 0,
-        authorsCount: 0,
-        authorsName: '',
-        magazineName: '',
-        magazineCountry: '',
-        articleUrl: '',
-        year: '',
-        doc: null,
+        brainType: 33,
+        brainTypeName: 'Xorijiy jurnallardagi maqolalar (OAK ro’yxatidagi)',
+
+        brainName: '',
+        brainQuotesCount: 0,
+        quarter: '',
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
       },
-      itemsX: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        }
-      ],
+      itemsX: [],
 
       searchR: '',
       headersR: [
-        { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
-        { key: 'quotesCount', title: 'Iqtiboslari soni' },
-        { key: 'authorsCount', title: 'Mualliflar soni' },
-        { key: 'authorsName', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'magazineName', title: 'Nashr etilgan jurnal nomi' },
-        { key: 'magazineCountry', title: 'Jurnal nashr etiladigan davlat' },
-        { key: 'articleUrl', title: 'Maqola joylashgan havola' },
+        { key: 'brainName', title: 'Nomi',align: 'start', sortable: false,},
+        { key: 'brainQuotesCount', title: 'Iqtiboslari soni' },
+        { key: 'brainAuthorCount', title: 'Mualliflar soni' },
+        { key: 'brainAuthorName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'brainMagName', title: 'Nashr etilgan jurnal nomi' },
+        { key: 'brainMagCountry', title: 'Jurnal nashr etiladigan davlat' },
+        { key: 'brainLink', title: 'Maqola joylashgan havola' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       dialogR: false,
@@ -1354,60 +1404,64 @@ export default {
       editedRIndex: -1,
       editedRItem: {
         id: 0,
-        name: '',
-        quotesCount: 0,
-        authorsCount: 0,
-        authorsName: '',
-        magazineName: '',
-        magazineCountry: '',
-        articleUrl: '',
-        year: '',
-        doc: null,
+        brainType: 34,
+        brainTypeName: 'Respublika jurnallaridagi maqolalar (OAK ro’yxatidagi)',
+
+        brainName: '',
+        brainQuotesCount: 0,
+        quarter: '',
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
       },
       defaultRItem: {
         id: 0,
-        name: '',
-        quotesCount: 0,
-        authorsCount: 0,
-        authorsName: '',
-        magazineName: '',
-        magazineCountry: '',
-        articleUrl: '',
-        year: '',
-        doc: null,
+        brainType: 34,
+        brainTypeName: 'Respublika jurnallaridagi maqolalar (OAK ro’yxatidagi)',
+
+        brainName: '',
+        brainQuotesCount: 0,
+        quarter: '',
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
       },
-      itemsR: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        }
-      ],
+      itemsR: [],
 
       searchM: '',
       headersM: [
-        { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
-        { key: 'conventionName', title: 'Nashr etilgan anjuman nomi' },
-        { key: 'authorsCount', title: 'Mualliflar soni' },
-        { key: 'authorsName', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'datePublishing', title: 'Nashr etilgan sana' },
-        { key: 'conventionCountry', title: 'Anjuman o’tkazilgan OTM, ITM yoki davlat' },
-        { key: 'articleUrl', title: 'Maqola joylashgan havola' },
+        { key: 'brainName', title: 'Nomi',align: 'start', sortable: false,},
+        { key: 'brainQuotesCount', title: 'Nashr etilgan anjuman nomi' },
+        { key: 'brainAuthorCount', title: 'Mualliflar soni' },
+        { key: 'brainAuthorName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'year', title: 'Nashr etilgan yil' },
+        { key: 'brainMagCountry', title: 'Anjuman o’tkazilgan OTM, ITM yoki davlat' },
+        { key: 'brainLink', title: 'Maqola joylashgan havola' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       dialogM: false,
@@ -1415,60 +1469,64 @@ export default {
       editedMIndex: -1,
       editedMItem: {
         id: 0,
-        name: '',
-        conventionName: '',
-        authorsCount: 0,
-        authorsName: '',
-        datePublishing: '',
-        conventionCountry: '',
-        articleUrl: '',
-        year: '',
-        doc: null,
+        brainType: 35,
+        brainTypeName: 'Xalqaro miqyosdagi anjumanlar',
+
+        brainName: '',
+        brainQuotesCount: 0,
+        quarter: '',
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
       },
       defaultMItem: {
         id: 0,
-        name: '',
-        conventionName: '',
-        authorsCount: 0,
-        authorsName: '',
-        datePublishing: '',
-        conventionCountry: '',
-        articleUrl: '',
-        year: '',
-        doc: null,
+        brainType: 35,
+        brainTypeName: 'Xalqaro miqyosdagi anjumanlar',
+
+        brainName: '',
+        brainQuotesCount: 0,
+        quarter: '',
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
       },
-      itemsM: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        }
-      ],
+      itemsM: [],
 
       searchA: '',
       headersA: [
         { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
-        { key: 'conventionName', title: 'Nashr etilgan anjuman nomi' },
-        { key: 'authorsCount', title: 'Mualliflar soni' },
-        { key: 'authorsName', title: 'Ham mualliflar F.I.Sh' },
-        { key: 'datePublishing', title: 'Nashr etilgan sana' },
-        { key: 'conventionCountry', title: 'Anjuman o’tkazilgan OTM, ITM yoki davlat' },
-        { key: 'articleUrl', title: 'Maqola joylashgan havola' },
+        { key: 'brainMagName', title: 'Nashr etilgan anjuman nomi' },
+        { key: 'brainAuthorCount', title: 'Mualliflar soni' },
+        { key: 'brainAuthorName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'year', title: 'Nashr etilgan yil' },
+        { key: 'brainMagCountry', title: 'Anjuman o’tkazilgan OTM, ITM yoki davlat' },
+        { key: 'brainLink', title: 'Maqola joylashgan havola' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
       dialogA: false,
@@ -1476,50 +1534,53 @@ export default {
       editedAIndex: -1,
       editedAItem: {
         id: 0,
-        name: '',
-        conventionName: '',
-        authorsCount: 0,
-        authorsName: '',
-        datePublishing: '',
-        conventionCountry: '',
-        articleUrl: '',
-        year: '',
-        doc: null,
+        brainType: 36,
+        brainTypeName: 'Respublika miqyosidagi anjumanlar',
+
+        brainName: '',
+        brainQuotesCount: 0,
+        quarter: '',
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
       },
       defaultAItem: {
         id: 0,
-        name: '',
-        conventionName: '',
-        authorsCount: 0,
-        authorsName: '',
-        datePublishing: '',
-        conventionCountry: '',
-        articleUrl: '',
-        year: '',
-        doc: null,
+        brainType: 36,
+        brainTypeName: 'Respublika miqyosidagi anjumanlar',
+
+        brainName: '',
+        brainQuotesCount: 0,
+        quarter: '',
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
       },
-      itemsA: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          jNomi: 4.0,
-          jurnal: 1,
-          havola: 1,
-          fayil: 1,
-        }
-      ],
+      itemsA: [],
 
     }
   },
@@ -1649,27 +1710,87 @@ export default {
     },
 
     deleteSItemConfirm () {
-      this.itemsS.splice(this.editedSIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedSItem.id}&newId=${this.editedSItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editSItem.id}`);
+          this.itemsS.splice(this.editedSIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeSDelete()
     },
     deleteWItemConfirm () {
-      this.itemsW.splice(this.editedWIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedWItem.id}&newId=${this.editedWItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editWItem.id}`);
+          this.itemsW.splice(this.editedWIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeWDelete()
     },
     deleteXItemConfirm () {
-      this.itemsX.splice(this.editedXIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedXItem.id}&newId=${this.editedXItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editXItem.id}`);
+          this.itemsX.splice(this.editedXIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeXDelete()
     },
     deleteRItemConfirm () {
-      this.itemsR.splice(this.editedRIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedRItem.id}&newId=${this.editedRItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editRItem.id}`);
+          this.itemsR.splice(this.editedRIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeRDelete()
     },
     deleteMItemConfirm () {
-      this.itemsM.splice(this.editedMIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editMItem.id}`);
+          this.itemsM.splice(this.editedMIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeMDelete()
     },
     deleteAItemConfirm () {
-      this.itemsA.splice(this.editedAIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedAItem.id}&newId=${this.editedAItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editAItem.id}`);
+          this.itemsA.splice(this.editedAIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeADelete()
     },
 
@@ -1761,58 +1882,510 @@ export default {
 
     saveS () {
       if (this.editedSIndex > -1) {
-        Object.assign(this.itemsS[this.editedSIndex], this.editedSItem)
-      } else {
-        this.itemsS.push(this.editedSItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('name', this.editedSItem.brainName)
+        formData.append('authorCount', this.editedSItem.brainAuthorCount)
+        formData.append('authorName', this.editedSItem.brainAuthorName)
+        formData.append('magName', this.editedSItem.brainMagName)
+        formData.append('country', this.editedSItem.brainMagCountry)
+        formData.append('quotesCount', this.editedSItem.brainQuotesCount)
+        formData.append('url', this.editedSItem.brainLink)
+
+        axios.put("http://localhost:8080/api/brains/update?id="+this.editedSItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsS[this.editedSIndex], this.editedSItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedSItem.brainName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedSItem.brainType)
+        formData.append('typeName', this.editedSItem.brainTypeName)
+        formData.append('authorCount', this.editedSItem.brainAuthorCount)
+        formData.append('authorName', this.editedSItem.brainAuthorName)
+        formData.append('magName', this.editedSItem.brainMagName)
+        formData.append('country', this.editedSItem.brainMagCountry)
+        formData.append('quotesCount', this.editedSItem.brainQuotesCount)
+        formData.append('url', this.editedSItem.brainLink)
+        formData.append('year', this.editedSItem.year)
+        formData.append('mounth', this.editedSItem.mounth)
+        formData.append('statId', this.editedSItem.statId)
+        formData.append('newId', this.editedSItem.newId)
+        if (this.editedSItem.quarter === 'Q1'){
+          formData.append('quarter', '1')
+        } else if (this.editedSItem.quarter === 'Q2'){
+          formData.append('quarter', '2')
+        } else if (this.editedSItem.quarter === 'Q3'){
+          formData.append('quarter', '3')
+        } else if (this.editedSItem.quarter === 'Q4'){
+          formData.append('quarter', '4')
+        }
+
+        // files
+        for (let file of this.editedSItem.brainUploaded) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsS.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeS()
     },
     saveW () {
       if (this.editedWIndex > -1) {
-        Object.assign(this.itemsW[this.editedWIndex], this.editedWItem)
-      } else {
-        this.itemsW.push(this.editedWItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('name', this.editedWItem.brainName)
+        formData.append('authorCount', this.editedWItem.brainAuthorCount)
+        formData.append('authorName', this.editedWItem.brainAuthorName)
+        formData.append('magName', this.editedWItem.brainMagName)
+        formData.append('country', this.editedWItem.brainMagCountry)
+        formData.append('quotesCount', this.editedWItem.brainQuotesCount)
+        formData.append('url', this.editedWItem.brainLink)
+
+        axios.put("http://localhost:8080/api/brains/update?id="+this.editedWItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsW[this.editedWIndex], this.editedWItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedWItem.brainName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedWItem.brainType)
+        formData.append('typeName', this.editedWItem.brainTypeName)
+        formData.append('authorCount', this.editedWItem.brainAuthorCount)
+        formData.append('authorName', this.editedWItem.brainAuthorName)
+        formData.append('magName', this.editedWItem.brainMagName)
+        formData.append('country', this.editedWItem.brainMagCountry)
+        formData.append('quotesCount', this.editedWItem.brainQuotesCount)
+        formData.append('url', this.editedWItem.brainLink)
+        formData.append('year', this.editedWItem.year)
+        formData.append('mounth', this.editedWItem.mounth)
+        formData.append('statId', this.editedWItem.statId)
+        formData.append('newId', this.editedWItem.newId)
+
+        // files
+        for (let file of this.editedWItem.brainUploaded) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsW.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeW()
     },
     saveX () {
       if (this.editedXIndex > -1) {
-        Object.assign(this.itemsX[this.editedXIndex], this.editedXItem)
-      } else {
-        this.itemsX.push(this.editedXItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('name', this.editedXItem.brainName)
+        formData.append('authorCount', this.editedXItem.brainAuthorCount)
+        formData.append('authorName', this.editedXItem.brainAuthorName)
+        formData.append('magName', this.editedXItem.brainMagName)
+        formData.append('country', this.editedXItem.brainMagCountry)
+        formData.append('quotesCount', this.editedXItem.brainQuotesCount)
+        formData.append('url', this.editedXItem.brainLink)
+
+        axios.put("http://localhost:8080/api/brains/update?id="+this.editedXItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsX[this.editedXIndex], this.editedXItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedXItem.brainName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedXItem.brainType)
+        formData.append('typeName', this.editedXItem.brainTypeName)
+        formData.append('authorCount', this.editedXItem.brainAuthorCount)
+        formData.append('authorName', this.editedXItem.brainAuthorName)
+        formData.append('magName', this.editedXItem.brainMagName)
+        formData.append('country', this.editedXItem.brainMagCountry)
+        formData.append('quotesCount', this.editedXItem.brainQuotesCount)
+        formData.append('url', this.editedXItem.brainLink)
+        formData.append('year', this.editedXItem.year)
+        formData.append('mounth', this.editedXItem.mounth)
+        formData.append('statId', this.editedXItem.statId)
+        formData.append('newId', this.editedXItem.newId)
+
+        // files
+        for (let file of this.editedXItem.brainUploaded) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsX.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
-      this.close()
+      this.closeX()
     },
     saveR () {
       if (this.editedRIndex > -1) {
-        Object.assign(this.itemsR[this.editedRIndex], this.editedRItem)
-      } else {
-        this.itemsR.push(this.editedRItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('name', this.editedRItem.brainName)
+        formData.append('authorCount', this.editedRItem.brainAuthorCount)
+        formData.append('authorName', this.editedRItem.brainAuthorName)
+        formData.append('magName', this.editedRItem.brainMagName)
+        formData.append('country', this.editedRItem.brainMagCountry)
+        formData.append('quotesCount', this.editedRItem.brainQuotesCount)
+        formData.append('url', this.editedRItem.brainLink)
+
+        axios.put("http://localhost:8080/api/brains/update?id="+this.editedRItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsR[this.editedRIndex], this.editedRItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedRItem.brainName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedRItem.brainType)
+        formData.append('typeName', this.editedRItem.brainTypeName)
+        formData.append('authorCount', this.editedRItem.brainAuthorCount)
+        formData.append('authorName', this.editedRItem.brainAuthorName)
+        formData.append('magName', this.editedRItem.brainMagName)
+        formData.append('country', this.editedRItem.brainMagCountry)
+        formData.append('quotesCount', this.editedRItem.brainQuotesCount)
+        formData.append('url', this.editedRItem.brainLink)
+        formData.append('year', this.editedRItem.year)
+        formData.append('mounth', this.editedRItem.mounth)
+        formData.append('statId', this.editedRItem.statId)
+        formData.append('newId', this.editedRItem.newId)
+
+        // files
+        for (let file of this.editedRItem.brainUploaded) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsR.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
-      this.close()
+      this.closeR()
     },
     saveM () {
       if (this.editedMIndex > -1) {
-        Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
-      } else {
-        this.itemsM.push(this.editedMItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('name', this.editedMItem.brainName)
+        formData.append('authorCount', this.editedMItem.brainAuthorCount)
+        formData.append('authorName', this.editedMItem.brainAuthorName)
+        formData.append('magName', this.editedMItem.brainMagName)
+        formData.append('country', this.editedMItem.brainMagCountry)
+        formData.append('quotesCount', this.editedMItem.brainQuotesCount)
+        formData.append('url', this.editedMItem.brainLink)
+
+        axios.put("http://localhost:8080/api/brains/update?id="+this.editedMItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedMItem.brainName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedMItem.brainType)
+        formData.append('typeName', this.editedMItem.brainTypeName)
+        formData.append('authorCount', this.editedMItem.brainAuthorCount)
+        formData.append('authorName', this.editedMItem.brainAuthorName)
+        formData.append('magName', this.editedMItem.brainMagName)
+        formData.append('country', this.editedMItem.brainMagCountry)
+        formData.append('quotesCount', this.editedMItem.brainQuotesCount)
+        formData.append('url', this.editedMItem.brainLink)
+        formData.append('year', this.editedMItem.year)
+        formData.append('mounth', this.editedMItem.mounth)
+        formData.append('statId', this.editedMItem.statId)
+        formData.append('newId', this.editedMItem.newId)
+
+        // files
+        for (let file of this.editedMItem.brainUploaded) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsM.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
-      this.close()
+      this.closeM()
     },
     saveA () {
       if (this.editedAIndex > -1) {
-        Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
-      } else {
-        this.itemsA.push(this.editedAItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('name', this.editedAItem.brainName)
+        formData.append('authorCount', this.editedAItem.brainAuthorCount)
+        formData.append('authorName', this.editedAItem.brainAuthorName)
+        formData.append('magName', this.editedAItem.brainMagName)
+        formData.append('country', this.editedAItem.brainMagCountry)
+        formData.append('quotesCount', this.editedAItem.brainQuotesCount)
+        formData.append('url', this.editedAItem.brainLink)
+
+        axios.put("http://localhost:8080/api/brains/update?id="+this.editedAItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedAItem.brainName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedAItem.brainType)
+        formData.append('typeName', this.editedAItem.brainTypeName)
+        formData.append('authorCount', this.editedAItem.brainAuthorCount)
+        formData.append('authorName', this.editedAItem.brainAuthorName)
+        formData.append('magName', this.editedAItem.brainMagName)
+        formData.append('country', this.editedAItem.brainMagCountry)
+        formData.append('quotesCount', this.editedAItem.brainQuotesCount)
+        formData.append('url', this.editedAItem.brainLink)
+        formData.append('year', this.editedAItem.year)
+        formData.append('mounth', this.editedAItem.mounth)
+        formData.append('statId', this.editedAItem.statId)
+        formData.append('newId', this.editedAItem.newId)
+
+        // files
+        for (let file of this.editedAItem.brainUploaded) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsA.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
-      this.close()
+      this.closeA()
     },
 
-    downloadDoc(item){
-
-    }
+    forceFileDownload(response, title) {
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', title)
+      document.body.appendChild(link)
+      link.click()
+    },
+    downloadWithAxios(url, title) {
+      axios({
+        method: 'get',
+        url,
+        responseType: 'arraybuffer',
+      })
+        .then((response) => {
+          console.log("Download end")
+          this.forceFileDownload(response, title)
+        })
+        .catch(() => console.log('error occured'))
+    },
+    downloadDoc(item) {
+      this.downloadWithAxios("http://localhost:8080/api/works/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+    },
 
   },
+
+  mounted() {
+    axios
+      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=31`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
+          this.itemsS.push(data[dataKey])
+
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=32`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
+          this.itemsW.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=33`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
+          this.itemsX.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=34`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
+          this.itemsR.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=35`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
+          this.itemsM.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=36`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
+          this.itemsA.push(data[dataKey])
+        }
+      });
+  }
 
 }
 </script>

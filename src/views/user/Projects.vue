@@ -30,7 +30,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.projectName"
                           clearable
                           label="Loyiha nomi"
                           required>
@@ -41,7 +41,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.projectType"
+                          v-model="editedItem.project"
                           clearable
                           required
                           label="Loyiha turi">
@@ -52,18 +52,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.projectYears"
-                          clearable
-                          required
-                          label="Loyiha bajariladigon yillar">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedItem.projectSum"
+                          v-model="editedItem.projectFinancing"
                           clearable
                           label="Loyihani moliyalashtirish xajmi"
                           required>
@@ -72,13 +61,22 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
+                        md="3">
+                        <v-select
+                          label="Loyiha bajarilgan yil"
                           v-model="editedItem.year"
-                          clearable
-                          label="Loyihani gubohnomasi olingan yil"
-                          required>
-                        </v-text-field>
+                          :items="years">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Loyiha bajarilgan oy"
+                          v-model="editedItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -96,8 +94,8 @@
                         sm="6"
                         md="6">
                         <v-file-input
-                          v-if="!editedItem.doc"
-                          v-model="editedItem.doc"
+                          v-if="!editedItem.projectDoc"
+                          v-model="editedItem.projectDoc"
                           show-size
                           label="Chek yuklash">
                         </v-file-input>
@@ -169,9 +167,7 @@
       </v-col>
 
       <v-col  cols="12">
-        <v-card
-        flat
-        title="Qo’shma loyihalardagi ishtiroki">
+        <v-card flat title="Qo’shma loyihalardagi ishtiroki">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -198,7 +194,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.name"
+                          v-model="editedMItem.projectName"
                           clearable
                           label="Loyiha nomi"
                           required>
@@ -209,7 +205,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.projectType"
+                          v-model="editedMItem.project"
                           clearable
                           required
                           label="Loyiha turi">
@@ -220,18 +216,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.projectYears"
-                          clearable
-                          required
-                          label="Loyiha bajariladigon yillar">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedMItem.projectSum"
+                          v-model="editedMItem.projectFinancing"
                           clearable
                           label="Loyihani moliyalashtirish xajmi"
                           required>
@@ -240,13 +225,22 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
+                        md="3">
+                        <v-select
+                          label="Loyiha bajarilgan yil"
                           v-model="editedMItem.year"
-                          clearable
-                          label="Loyihani guvohnomasi olingan yil"
-                          required>
-                        </v-text-field>
+                          :items="years">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Loyiha bajarilgan oy"
+                          v-model="editedMItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -264,8 +258,8 @@
                         sm="6"
                         md="6">
                         <v-file-input
-                          v-if="!editedMItem.doc"
-                          v-model="editedMItem.doc"
+                          v-if="!editedMItem.projectDoc"
+                          v-model="editedMItem.projectDoc"
                           show-size
                           label="Chek yuklash">
                         </v-file-input>
@@ -335,341 +329,333 @@
         </v-data-table>
       </v-card>
       </v-col>
-    </v-row>
 
-    <v-row>
       <v-col  cols="12">
         <v-card flat title="Respublik loyihalaridagi ishtiroki">
-        <template v-slot:append>
-          <!-- Dialog start -->
-          <v-row justify="center" class="mr-2">
-            <v-dialog
-              v-model="dialogY"
-              persistent
-              width="1024">
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props">
-                  Qo'shish
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{ formYTitle }}</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedYItem.name"
-                          clearable
-                          label="Loyiha nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedYItem.projectType"
-                          clearable
-                          required
-                          label="Loyiha turi">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedYItem.projectYears"
-                          clearable
-                          required
-                          label="Loyiha bajariladigon yillar">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedYItem.projectSum"
-                          clearable
-                          label="Loyihani moliyalashtirish xajmi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedYItem.year"
-                          clearable
-                          label="Loyihani guvohnomasi olingan yil"
-                          required>
-                        </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-select
-                          label="Lavozimni tanlang"
-                          v-model="editedYItem.projectPosition"
-                          required
-                          :items="['Raxbar', 'Opponent']">
-                        </v-select>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-file-input
-                          v-if="!editedYItem.doc"
-                          v-model="editedYItem.doc"
-                          show-size
-                          label="Chek yuklash">
-                        </v-file-input>
-                        <v-btn size="x-large" v-else @click="downloadDoc(editedYItem)">Chek yuklash</v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog
+                v-model="dialogY"
+                persistent
+                width="1024">
+                <template v-slot:activator="{ props }">
                   <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="closeY">
-                    Yopish
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
                   </v-btn>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="saveY">
-                    Saqlash
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="dialogYDelete" width="auto">
-              <v-card>
-                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Respublik loyihalaridagi ishtirokni o'chirishni hohlaysizmi?</v-card-title>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue-darken-1" variant="text" @click="closeYDelete">Bekor qilish</v-btn>
-                  <v-btn color="red" variant="text" @click="deleteYItemConfirm">O'chirish</v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-          <!-- Dialog end -->
-        </template>
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchY"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details
-          ></v-text-field>
-        </template>
-        <v-data-table
-          :headers="headersY"
-          :items="itemsY"
-          :search="searchY">
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              size="small"
-              class="me-2"
-              @click="editYItem(item)">
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              size="small"
-              @click="deleteYItem(item)">
-              mdi-delete
-            </v-icon>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formYTitle }}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedYItem.projectName"
+                            clearable
+                            label="Loyiha nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedYItem.project"
+                            clearable
+                            required
+                            label="Loyiha turi">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedYItem.projectFinancing"
+                            clearable
+                            label="Loyihani moliyalashtirish xajmi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Loyiha bajarilgan yil"
+                            v-model="editedYItem.year"
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Loyiha bajarilgan oy"
+                            v-model="editedYItem.mounth"
+                            :items="mounth">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-select
+                            label="Lavozimni tanlang"
+                            v-model="editedYItem.projectPosition"
+                            required
+                            :items="['Raxbar', 'Opponent']">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-file-input
+                            v-if="!editedYItem.projectDoc"
+                            v-model="editedYItem.projectDoc"
+                            show-size
+                            label="Chek yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedYItem)">Chek yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeY">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveY">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogYDelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Respublik loyihalaridagi ishtirokni o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeYDelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteYItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <!-- Dialog end -->
           </template>
-        </v-data-table>
-      </v-card>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchY"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details
+            ></v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersY"
+            :items="itemsY"
+            :search="searchY">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editYItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteYItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
       </v-col>
 
       <v-col  cols="12">
-        <v-card
-        flat
-        title="Startaplardagi ishtiroki">
-        <template v-slot:append>
-          <!-- Dialog start -->
-          <v-row justify="center" class="mr-2">
-            <v-dialog
-              v-model="dialogN"
-              persistent
-              width="1024">
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props">
-                  Qo'shish
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{ formNTitle }}</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedNItem.name"
-                          clearable
-                          label="Loyiha nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedNItem.projectType"
-                          clearable
-                          required
-                          label="Loyiha turi">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedNItem.projectYears"
-                          clearable
-                          required
-                          label="Loyiha bajariladigon yillar">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedNItem.projectSum"
-                          clearable
-                          label="Loyihani moliyalashtirish xajmi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedNItem.year"
-                          clearable
-                          label="Loyiha guvohnomasi olingan yil"
-                          required>
-                        </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-select
-                          label="Lavozimni tanlang"
-                          v-model="editedNItem.projectPosition"
-                          required
-                          :items="['Raxbar', 'Opponent']">
-                        </v-select>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-file-input
-                          v-if="!editedNItem.doc"
-                          v-model="editedNItem.doc"
-                          show-size
-                          label="Darslik yuklash">
-                        </v-file-input>
-                        <v-btn size="x-large" v-else @click="downloadDoc(editedNItem)">Darslikni yuklash</v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+        <v-card flat title="Startaplardagi ishtiroki">
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog
+                v-model="dialogN"
+                persistent
+                width="1024">
+                <template v-slot:activator="{ props }">
                   <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="closeN">
-                    Yopish
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
                   </v-btn>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="saveN">
-                    Saqlash
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="dialogNDelete" width="auto">
-              <v-card>
-                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Startaplardagi ishtirokni o'chirishni hohlaysizmi?</v-card-title>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue-darken-1" variant="text" @click="closeNDelete">Bekor qilish</v-btn>
-                  <v-btn color="red" variant="text" @click="deleteNItemConfirm">O'chirish</v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-          <!-- Dialog end -->
-        </template>
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchN"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details
-          ></v-text-field>
-        </template>
-        <v-data-table
-          :headers="headersN"
-          :items="itemsN"
-          :search="searchN">
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              size="small"
-              class="me-2"
-              @click="editNItem(item)">
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              size="small"
-              @click="deleteNItem(item)">
-              mdi-delete
-            </v-icon>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formNTitle }}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedNItem.projectName"
+                            clearable
+                            label="Loyiha nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedNItem.project"
+                            clearable
+                            required
+                            label="Loyiha turi">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedNItem.projectFinancing"
+                            clearable
+                            label="Loyihani moliyalashtirish xajmi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Loyiha bajarilgan yil"
+                            v-model="editedNItem.year"
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Loyiha bajarilgan oy"
+                            v-model="editedNItem.mounth"
+                            :items="mounth">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-select
+                            label="Lavozimni tanlang"
+                            v-model="editedNItem.projectPosition"
+                            required
+                            :items="['Raxbar', 'Opponent']">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-file-input
+                            v-if="!editedNItem.projectDoc"
+                            v-model="editedNItem.projectDoc"
+                            show-size
+                            label="Darslik yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedNItem)">Darslikni yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeN">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveN">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogNDelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Startaplardagi ishtirokni o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeNDelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteNItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <!-- Dialog end -->
           </template>
-        </v-data-table>
-      </v-card>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchN"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details
+            ></v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersN"
+            :items="itemsN"
+            :search="searchN">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editNItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteNItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
       </v-col>
 
       <v-col  cols="12">
@@ -700,7 +686,7 @@
                           sm="6"
                           md="6">
                           <v-text-field
-                            v-model="editedAItem.name"
+                            v-model="editedAItem.projectName"
                             clearable
                             label="Shatnoma nomi"
                             required>
@@ -710,20 +696,9 @@
                           cols="12"
                           sm="6"
                           md="6">
-                          <v-text-field
-                            v-model="editedAItem.projectYears"
-                            clearable
-                            required
-                            label="Shartnoma bajariladigan yil">
-                          </v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="6">
                           <v-select
                             label="Shatnoma xajmi"
-                            v-model="editedAItem.projectSize"
+                            v-model="editedAItem.projectFinancing"
                             required
                             :items="['Fan doktori 5-mln', 'Fan nomzodi 4-mln', 'Darajasiz PO` 3-mln' ]">
                           </v-select>
@@ -733,7 +708,7 @@
                           sm="6"
                           md="6">
                           <v-text-field
-                            v-model="editedAItem.projectCompany"
+                            v-model="editedAItem.project"
                             clearable
                             label="Shartnoma tuzulgan tashkilot"
                             required>
@@ -742,19 +717,28 @@
                         <v-col
                           cols="12"
                           sm="6"
-                          md="6">
-                          <v-text-field
+                          md="3">
+                          <v-select
+                            label="Loyiha bajarilgan yil"
                             v-model="editedAItem.year"
-                            clearable
-                            label="Shartnoma yakunlangan yil"
-                            required>
-                          </v-text-field>
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Loyiha bajarilgan oy"
+                            v-model="editedAItem.mounth"
+                            :items="mounth">
+                          </v-select>
                         </v-col>
                         <v-col
                           cols="12">
                           <v-file-input
-                            v-if="!editedAItem.doc"
-                            v-model="editedAItem.doc"
+                            v-if="!editedAItem.projectDoc"
+                            v-model="editedAItem.projectDoc"
                             show-size
                             label="Chek yuklash">
                           </v-file-input>
@@ -830,6 +814,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data () {
     return {
@@ -838,49 +824,55 @@ export default {
       editedIndex: -1,
       editedItem: {
         id: 0,
-        name: '',
-        projectType: '',
-        projectYears: '',
-        projectSum: '',
+        projectType: 41,
+        projectTypeName: 'Xalqaro loyihalardagi ishtiroki',
+
+        projectName: '',
+        projectFinancing: '',
         projectPosition: '',
-        year: '',
-        doc: null
+        project: '',
+
+        year: 0,
+        mounth: 0,
+        news: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        projectDoc: null
       },
       defaultItem: {
         id: 0,
-        name: '',
-        projectType: '',
-        projectYears: '',
-        projectSum: '',
+        projectType: 41,
+        projectTypeName: 'Xalqaro loyihalardagi ishtiroki',
+
+        projectName: '',
+        projectFinancing: '',
         projectPosition: '',
-        year: '',
-        doc: null
+        project: '',
+
+        year: 0,
+        mounth: 0,
+        news: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        projectDoc: null
       },
       search: '',
       headers: [
-        { key: 'name',  title: 'Loyiha nomi',align: 'start', sortable: false,},
-        { key: 'projectType', title: 'Loyiha turi' },
-        { key: 'projectYears', title: 'Loyiha bajariladigan yillar' },
-        { key: 'projectSum', title: 'Loyihani moliyalashtirish xajmi' },
+        { key: 'projectName',  title: 'Loyiha nomi',align: 'start', sortable: false,},
+        { key: 'project', title: 'Loyiha turi' },
+        { key: 'year', title: 'Loyiha yakunlangan yil' },
+        { key: 'projectFinancing', title: 'Loyihani moliyalashtirish xajmi' },
         { key: 'projectPosition', title: 'Loyihadagi lavozim' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      items: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        }
-      ],
+      items: [],
 
 
       dialogM: false,
@@ -888,196 +880,225 @@ export default {
       editedMIndex: -1,
       editedMItem: {
         id: 0,
-        name: '',
-        projectType: '',
-        projectYears: '',
-        projectSum: '',
+        projectType: 42,
+        projectTypeName: 'Qo’shma loyihalardagi ishtiroki',
+
+        projectName: '',
+        projectFinancing: '',
         projectPosition: '',
-        year: '',
-        doc: null
+        project: '',
+
+        year: 0,
+        mounth: 0,
+        news: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        projectDoc: null
       },
       defaultMItem: {
         id: 0,
-        name: '',
-        projectType: '',
-        projectYears: '',
-        projectSum: '',
+        projectType: 42,
+        projectTypeName: 'Qo’shma loyihalardagi ishtiroki',
+
+        projectName: '',
+        projectFinancing: '',
         projectPosition: '',
-        year: '',
-        doc: null
+        project: '',
+
+        year: 0,
+        mounth: 0,
+        news: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        projectDoc: null
       },
       searchM: '',
       headersM: [
-        { key: 'name',  title: 'Loyiha nomi',align: 'start', sortable: false,},
-        { key: 'projectType', title: 'Loyiha turi' },
-        { key: 'projectYears', title: 'Loyiha bajariladigan yillar' },
-        { key: 'projectSum', title: 'Loyihani moliyalashtirish xajmi' },
+        { key: 'projectName',  title: 'Loyiha nomi',align: 'start', sortable: false,},
+        { key: 'project', title: 'Loyiha turi' },
+        { key: 'year', title: 'Loyiha bajariladigan yillar' },
+        { key: 'projectFinancing', title: 'Loyihani moliyalashtirish xajmi' },
         { key: 'projectPosition', title: 'Loyihadagi lavozim' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      itemsM: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        }
-      ],
+      itemsM: [],
 
       dialogY: false,
       dialogYDelete: false,
       editedYIndex: -1,
       editedYItem: {
         id: 0,
-        name: '',
-        projectType: '',
-        projectYears: '',
-        projectSum: '',
+        projectType: 43,
+        projectTypeName: 'Respublik loyihalaridagi ishtiroki',
+
+        projectName: '',
+        projectFinancing: '',
         projectPosition: '',
-        year: '',
-        doc: null
+        project: '',
+
+        year: 0,
+        mounth: 0,
+        news: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        projectDoc: null
       },
       defaultYItem: {
         id: 0,
-        name: '',
-        projectType: '',
-        projectYears: '',
-        projectSum: '',
+        projectType: 43,
+        projectTypeName: 'Respublik loyihalaridagi ishtiroki',
+
+        projectName: '',
+        projectFinancing: '',
         projectPosition: '',
-        year: '',
-        doc: null
+        project: '',
+
+        year: 0,
+        mounth: 0,
+        news: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        projectDoc: null
       },
       searchY: '',
       headersY: [
-        { key: 'name',  title: 'Loyiha nomi',align: 'start', sortable: false,},
-        { key: 'projectType', title: 'Loyiha turi' },
-        { key: 'projectYears', title: 'Loyiha bajariladigan yillar' },
-        { key: 'projectSum', title: 'Loyihani moliyalashtirish xajmi' },
+        { key: 'projectName',  title: 'Loyiha nomi',align: 'start', sortable: false,},
+        { key: 'project', title: 'Loyiha turi' },
+        { key: 'year', title: 'Loyiha bajariladigan yillar' },
+        { key: 'projectFinancing', title: 'Loyihani moliyalashtirish xajmi' },
         { key: 'projectPosition', title: 'Loyihadagi lavozim' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      itemsY: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        }
-      ],
+      itemsY: [],
 
       dialogN: false,
       dialogNDelete: false,
       editedNIndex: -1,
       editedNItem: {
         id: 0,
-        name: '',
-        projectType: '',
-        projectYears: '',
-        projectSum: '',
+        projectType: 44,
+        projectTypeName: 'Startaplardagi ishtiroki',
+
+        projectName: '',
+        projectFinancing: '',
         projectPosition: '',
-        year: '',
-        doc: null
+        project: '',
+
+        year: 0,
+        mounth: 0,
+        news: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        projectDoc: null
       },
       defaultNItem: {
         id: 0,
-        name: '',
-        projectType: '',
-        projectYears: '',
-        projectSum: '',
+        projectType: 44,
+        projectTypeName: 'Startaplardagi ishtiroki',
+
+        projectName: '',
+        projectFinancing: '',
         projectPosition: '',
-        year: '',
-        doc: null
+        project: '',
+
+        year: 0,
+        mounth: 0,
+        news: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        projectDoc: null
       },
       searchN: '',
       headersN: [
-        { key: 'name',  title: 'Loyiha nomi',align: 'start', sortable: false,},
-        { key: 'projectType', title: 'Loyiha turi' },
-        { key: 'projectYears', title: 'Loyiha bajariladigan yillar' },
-        { key: 'projectSum', title: 'Loyihani moliyalashtirish xajmi' },
+        { key: 'projectName',  title: 'Loyiha nomi',align: 'start', sortable: false,},
+        { key: 'project', title: 'Loyiha turi' },
+        { key: 'year', title: 'Loyiha bajariladigan yillar' },
+        { key: 'projectFinancing', title: 'Loyihani moliyalashtirish xajmi' },
         { key: 'projectPosition', title: 'Loyihadagi lavozim' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      itemsN: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-        }
-      ],
+      itemsN: [],
 
       dialogA: false,
       dialogADelete: false,
       editedAIndex: -1,
       editedAItem: {
         id: 0,
-        name: '',
-        projectYears: '',
-        projectSize: '',
-        projectCompany: '',
-        year: '',
-        doc: null
+        projectType: 45,
+        projectTypeName: 'Xo’jalik shartnomalari',
+
+        projectName: '',
+        projectFinancing: '',
+        projectPosition: '',
+        project: '',
+
+        year: 0,
+        mounth: 0,
+        news: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        projectDoc: null
       },
       defaultAItem: {
         id: 0,
-        name: '',
-        projectYears: '',
-        projectSize: '',
-        projectCompany: '',
-        year: '',
-        doc: null
+        projectType: 45,
+        projectTypeName: 'Xo’jalik shartnomalari',
+
+        projectName: '',
+        projectFinancing: '',
+        projectPosition: '',
+        project: '',
+
+        year: 0,
+        mounth: 0,
+        news: '',
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        projectDoc: null
       },
       searchA: '',
       headersA: [
-        { key: 'name', title: 'Shartnoma nomi', align: 'start', sortable: false,},
-        { key: 'projectYears', title: 'Shartnoma bajariladigan yil' },
-        { key: 'projectSize', title: 'Shartnoma  xajmi' },
-        { key: 'projectCompany', title: 'Shartnoma tuzilgan tashkilot' },
+        { key: 'projectName', title: 'Shartnoma nomi', align: 'start', sortable: false,},
+        { key: 'year', title: 'Shartnoma bajarilgan yil' },
+        { key: 'projectFinancing', title: 'Shartnoma  xajmi' },
+        { key: 'projectPosition', title: 'Shartnoma tuzilgan tashkilot' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      itemsA: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-        }
-      ],
+      itemsA: [],
 
     }
   },
 
   methods: {
+
     editItem (item) {
       this.editedIndex = this.items.indexOf(item)
       this.editedItem = Object.assign({}, item)
@@ -1131,23 +1152,73 @@ export default {
     },
 
     deleteItemConfirm () {
-      this.items.splice(this.editedIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/projects/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+        .then(response => {
+          console.log(`Delete item with ID ${this.editItem.id}`);
+          this.items.splice(this.editedIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeDelete()
     },
     deleteMItemConfirm () {
-      this.itemsM.splice(this.editedMIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/projects/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
+        .then(response => {
+          console.log(`Delete item with ID ${this.editMItem.id}`);
+          this.itemsM.splice(this.editedMIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeMDelete()
     },
     deleteYItemConfirm () {
-      this.itemsY.splice(this.editedYIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/projects/delete?id=${this.editedYItem.id}&newId=${this.editedYItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editYItem.id}`);
+          this.itemsY.splice(this.editedYIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeYDelete()
     },
     deleteNItemConfirm () {
-      this.itemsN.splice(this.editedNIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/projects/delete?id=${this.editedNItem.id}&newId=${this.editedNItem.newId}`)
+        .then(response => {
+          console.log(`Delete item with ID ${this.editNItem.id}`);
+          this.itemsN.splice(this.editedNIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeNDelete()
     },
     deleteAItemConfirm () {
-      this.itemsA.splice(this.editedAIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/projects/delete?id=${this.editedAItem.id}&newId=${this.editedAItem.newId}`)
+        .then(response => {
+          console.log(`Delete item with ID ${this.editAItem.id}`);
+          this.itemsA.splice(this.editedAIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeADelete()
     },
 
@@ -1225,48 +1296,332 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.items[this.editedIndex], this.editedItem)
-      } else {
-        this.items.push(this.editedItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('projectName', this.editedItem.projectName)
+        formData.append('projectFinancing', this.editedItem.projectFinancing)
+        formData.append('project', this.editedItem.project)
+
+        axios.put("http://localhost:8080/api/works/update?id="+this.editedItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.items[this.editedIndex], this.editedItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        if (this.editedItem.projectPosition === 'Raxbar'){
+          this.editedItem.position = 1
+        } else {
+          this.editedItem.position = 2
+        }
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedItem.projectName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedItem.projectType)
+        formData.append('typeName', this.editedItem.projectTypeName)
+        formData.append('financing', this.editedItem.projectFinancing)
+        formData.append('project', this.editedItem.project)
+        formData.append('positionName', this.editedItem.projectPosition)
+        formData.append('position', this.editedItem.position)
+        formData.append('year', this.editedItem.year)
+        formData.append('mounth', this.editedItem.mounth)
+        formData.append('department', this.editedItem.department)
+        formData.append('faculty', this.editedItem.faculty)
+
+        // files
+        for (let file of this.editedItem.projectDoc) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/projects/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.items.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.close()
     },
     saveM () {
       if (this.editedMIndex > -1) {
-        Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
-      } else {
-        this.itemsM.push(this.editedMItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('projectName', this.editedMItem.projectName)
+        formData.append('projectFinancing', this.editedMItem.projectFinancing)
+        formData.append('project', this.editedMItem.project)
+
+        axios.put("http://localhost:8080/api/works/update?id="+this.editedMItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        if (this.editedMItem.projectPosition === 'Raxbar'){
+          this.editedMItem.position = 1
+        } else {
+          this.editedMItem.position = 2
+        }
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedMItem.projectName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedMItem.projectType)
+        formData.append('typeName', this.editedMItem.projectTypeName)
+        formData.append('financing', this.editedMItem.projectFinancing)
+        formData.append('project', this.editedMItem.project)
+        formData.append('positionName', this.editedMItem.projectPosition)
+        formData.append('position', this.editedMItem.position)
+        formData.append('year', this.editedMItem.year)
+        formData.append('mounth', this.editedMItem.mounth)
+        formData.append('department', this.editedMItem.department)
+        formData.append('faculty', this.editedMItem.faculty)
+
+        // files
+        for (let file of this.editedMItem.projectDoc) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/projects/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsM.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeM()
     },
     saveY () {
       if (this.editedYIndex > -1) {
-        Object.assign(this.itemsY[this.editedYIndex], this.editedYItem)
-      } else {
-        this.itemsY.push(this.editedYItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('projectName', this.editedYItem.projectName)
+        formData.append('projectFinancing', this.editedYItem.projectFinancing)
+        formData.append('project', this.editedYItem.project)
+
+        axios.put("http://localhost:8080/api/works/update?id="+this.editedYItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsY[this.editedYIndex], this.editedYItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        if (this.editedYItem.projectPosition === 'Raxbar'){
+          this.editedYItem.position = 1
+        } else {
+          this.editedYItem.position = 2
+        }
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedYItem.projectName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedYItem.projectType)
+        formData.append('typeName', this.editedYItem.projectTypeName)
+        formData.append('financing', this.editedYItem.projectFinancing)
+        formData.append('project', this.editedYItem.project)
+        formData.append('positionName', this.editedYItem.projectPosition)
+        formData.append('position', this.editedYItem.position)
+        formData.append('year', this.editedYItem.year)
+        formData.append('mounth', this.editedYItem.mounth)
+        formData.append('department', this.editedYItem.department)
+        formData.append('faculty', this.editedYItem.faculty)
+
+        // files
+        for (let file of this.editedYItem.projectDoc) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/projects/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsY.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeY()
     },
     saveN () {
       if (this.editedNIndex > -1) {
-        Object.assign(this.itemsN[this.editedNIndex], this.editedNItem)
-      } else {
-        this.itemsN.push(this.editedNItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('projectName', this.editedNItem.projectName)
+        formData.append('projectFinancing', this.editedNItem.projectFinancing)
+        formData.append('project', this.editedNItem.project)
+
+        axios.put("http://localhost:8080/api/works/update?id="+this.editedNItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsN[this.editedNIndex], this.editedNItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        if (this.editedNItem.projectPosition === 'Raxbar'){
+          this.editedNItem.position = 1
+        } else {
+          this.editedNItem.position = 2
+        }
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedNItem.projectName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedNItem.projectType)
+        formData.append('typeName', this.editedNItem.projectTypeName)
+        formData.append('financing', this.editedNItem.projectFinancing)
+        formData.append('project', this.editedNItem.project)
+        formData.append('positionName', this.editedNItem.projectPosition)
+        formData.append('position', this.editedNItem.position)
+        formData.append('year', this.editedNItem.year)
+        formData.append('mounth', this.editedNItem.mounth)
+        formData.append('department', this.editedNItem.department)
+        formData.append('faculty', this.editedNItem.faculty)
+
+        // files
+        for (let file of this.editedNItem.projectDoc) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/projects/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsN.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeN()
     },
     saveA () {
       if (this.editedAIndex > -1) {
-        Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
-      } else {
-        this.itemsA.push(this.editedAItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('projectName', this.editedAItem.projectName)
+        formData.append('projectFinancing', this.editedAItem.projectFinancing)
+        formData.append('project', this.editedAItem.project)
+
+        axios.put("http://localhost:8080/api/works/update?id="+this.editedAItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        if (this.editedAItem.projectPosition === 'Raxbar'){
+          this.editedAItem.position = 1
+        } else {
+          this.editedAItem.position = 2
+        }
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedAItem.projectName)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedAItem.projectType)
+        formData.append('typeName', this.editedAItem.projectTypeName)
+        formData.append('financing', this.editedAItem.projectFinancing)
+        formData.append('project', this.editedAItem.project)
+        formData.append('positionName', this.editedAItem.projectPosition)
+        formData.append('position', this.editedAItem.position)
+        formData.append('year', this.editedAItem.year)
+        formData.append('mounth', this.editedAItem.mounth)
+        formData.append('department', this.editedAItem.department)
+        formData.append('faculty', this.editedAItem.faculty)
+
+        // files
+        for (let file of this.editedAItem.projectDoc) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/projects/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsA.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeA()
     },
 
-    downloadDoc(item){
-
-    }
+    forceFileDownload(response, title) {
+      console.log(title)
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', title)
+      document.body.appendChild(link)
+      link.click()
+    },
+    downloadWithAxios(url, title) {
+      console.log(url)
+      console.log("Download con")
+      axios({
+        method: 'get',
+        url,
+        responseType: 'arraybuffer',
+      })
+        .then((response) => {
+          console.log("Download end")
+          this.forceFileDownload(response, title)
+        })
+        .catch(() => console.log('error occured'))
+    },
+    downloadDoc(item) {
+      console.log("Download start")
+      this.downloadWithAxios("http://localhost:8080/api/projects/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+    },
 
   },
 
@@ -1319,6 +1674,89 @@ export default {
     dialogADelete (val) {
       val || this.closeADelete()
     },
+  },
+
+  mounted() {
+    axios
+      .get(`http://localhost:8080/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=41`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.items.push(data[dataKey])
+
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=42`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.itemsM.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=43`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.itemsY.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=44`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.itemsN.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=45`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.itemsA.push(data[dataKey])
+        }
+      });
   }
 
 }

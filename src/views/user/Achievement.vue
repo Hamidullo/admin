@@ -494,43 +494,7 @@ export default {
           { key: 'number', title: 'Seriya raqami' },
           {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
         ],
-        items: [
-          {
-            name: 'Frozen Yogurt',
-            turi: 159,
-            yili: 6.0,
-            seriya: 24,
-            sertifikat: 4.0,
-          },
-          {
-            name: 'Ice cream sandwich',
-            turi: 159,
-            yili: 6.0,
-            seriya: 24,
-            sertifikat: 4.0,
-          },
-          {
-            name: 'Eclair',
-            turi: 159,
-            yili: 6.0,
-            seriya: 24,
-            sertifikat: 4.0,
-          },
-          {
-            name: 'Cupcake',
-            turi: 159,
-            yili: 6.0,
-            seriya: 24,
-            sertifikat: 4.0,
-          },
-          {
-            name: 'Gingerbread',
-            turi: 159,
-            yili: 6.0,
-            seriya: 24,
-            sertifikat: 4.0,
-          },
-        ],
+        items: [],
 
         searchD: '',
         headersD: [
@@ -540,43 +504,7 @@ export default {
           { key: 'year', title: 'Berilgan yili' },
           { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
         ],
-        itemsD: [
-        {
-          name: 'Intel Core i9-11900K',
-          turi: 8,
-          maqsadi: 16,
-          yili: '3.5 GHz',
-          diplom: '125W',
-        },
-        {
-          name: 'AMD Ryzen 9 5950X',
-          turi: 8,
-          maqsadi: 16,
-          yili: '3.5 GHz',
-          diplom: '125W',
-        },
-        {
-          name: 'Intel Core i7-10700K',
-          turi: 8,
-          maqsadi: 16,
-          yili: '3.5 GHz',
-          diplom: '125W',
-        },
-        {
-          name: 'AMD Ryzen 5 5600X',
-          turi: 8,
-          maqsadi: 16,
-          yili: '3.5 GHz',
-          diplom: '125W',
-        },
-        {
-          name: 'Intel Core i5-10600K',
-          turi: 8,
-          maqsadi: 16,
-          yili: '3.5 GHz',
-          diplom: '125W',
-        },
-        ],
+        itemsD: [],
 
         searchA: '',
         headersA: [
@@ -586,43 +514,7 @@ export default {
           { key: 'achieve', title: 'Maqsadi' },
           {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
         ],
-        itemsA: [
-          {
-            name: 'Frozen Yogurt',
-            turi: 159,
-            yili: 6.0,
-            maqsadi: 24,
-            sertifikat: 4.0,
-          },
-          {
-            name: 'Ice cream sandwich',
-            turi: 159,
-            yili: 6.0,
-            maqsadi: 24,
-            sertifikat: 4.0,
-          },
-          {
-            name: 'Eclair',
-            turi: 159,
-            yili: 6.0,
-            maqsadi: 24,
-            sertifikat: 4.0,
-          },
-          {
-            name: 'Cupcake',
-            turi: 159,
-            yili: 6.0,
-            maqsadi: 24,
-            sertifikat: 4.0,
-          },
-          {
-            name: 'Gingerbread',
-            turi: 159,
-            yili: 6.0,
-            maqsadi: 24,
-            sertifikat: 4.0,
-          },
-        ],
+        itemsA: [],
       }
     },
     methods: {
