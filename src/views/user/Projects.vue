@@ -810,6 +810,16 @@
       </v-col>
     </v-row>
 
+    <v-overlay
+      :model-value="overlay"
+      class="align-center justify-center">
+      <v-progress-circular
+        color="primary"
+        indeterminate
+        size="64">
+      </v-progress-circular>
+    </v-overlay>
+
   </v-container>
 </template>
 
@@ -819,6 +829,12 @@ import axios from "axios";
 export default {
   data () {
     return {
+      overlay: false,
+      userId: localStorage.getItem("user-hemisId"),
+      userName: localStorage.getItem("user-name"),
+      years: [2023,2024],
+      mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
+
       dialog: false,
       dialogDelete: false,
       editedIndex: -1,
@@ -1301,6 +1317,7 @@ export default {
         formData.append('projectName', this.editedItem.projectName)
         formData.append('projectFinancing', this.editedItem.projectFinancing)
         formData.append('project', this.editedItem.project)
+        formData.append('newId', this.editedItem.newId)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedItem.id, formData)
           .then(response => {
@@ -1361,6 +1378,7 @@ export default {
         formData.append('projectName', this.editedMItem.projectName)
         formData.append('projectFinancing', this.editedMItem.projectFinancing)
         formData.append('project', this.editedMItem.project)
+        formData.append('newId', this.editedMItem.newId)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedMItem.id, formData)
           .then(response => {
@@ -1421,6 +1439,7 @@ export default {
         formData.append('projectName', this.editedYItem.projectName)
         formData.append('projectFinancing', this.editedYItem.projectFinancing)
         formData.append('project', this.editedYItem.project)
+        formData.append('newId', this.editedYItem.newId)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedYItem.id, formData)
           .then(response => {
@@ -1481,6 +1500,7 @@ export default {
         formData.append('projectName', this.editedNItem.projectName)
         formData.append('projectFinancing', this.editedNItem.projectFinancing)
         formData.append('project', this.editedNItem.project)
+        formData.append('newId', this.editedNItem.newId)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedNItem.id, formData)
           .then(response => {
@@ -1541,6 +1561,7 @@ export default {
         formData.append('projectName', this.editedAItem.projectName)
         formData.append('projectFinancing', this.editedAItem.projectFinancing)
         formData.append('project', this.editedAItem.project)
+        formData.append('newId', this.editedAItem.newId)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedAItem.id, formData)
           .then(response => {

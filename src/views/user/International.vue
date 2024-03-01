@@ -30,7 +30,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.internationalName"
                           clearable
                           label="Xorijiy OTM yoki ITM nomi"
                           required>
@@ -41,19 +41,10 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.country"
+                          v-model="editedItem.internationalCountry"
                           clearable
                           required
                           label="Davlati">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          v-model="editedItem.days"
-                          clearable
-                          required
-                          label="Mashg’ulot olib borilgan kunlar">
                       </v-text-field>
                       </v-col>
                       <v-col
@@ -61,7 +52,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.size"
+                          v-model="editedItem.internationalLessonsSize"
                           clearable
                           label="Mashg’ulot xajmi"
                           persistent-hint
@@ -73,12 +64,32 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.year"
+                          v-model="editedItem.internationalLessonsCount"
                           clearable
-                          label="Mashg’ulot tasdiqlangan yil"
+                          label="Mashg’ulotlar soni"
                           persistent-hint
                           required>
                         </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Mashg’ulot olib borilgan yil"
+                          v-model="editedItem.year"
+                          :items="years">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Mashg’ulot olib borilgan oy"
+                          v-model="editedItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -158,8 +169,7 @@
       </v-col>
 
       <v-col>
-        <v-card flat
-        title="Stajirovka va malaka oshirish">
+        <v-card flat title="Stajirovka va malaka oshirish">
           <template v-slot:append>
             <!-- Dialog start -->
             <v-row justify="center" class="mr-2">
@@ -185,7 +195,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedCItem.name"
+                          v-model="editedCItem.internationalName"
                           clearable
                           label="Xorijiy OTM yoki ITM nomi"
                           required>
@@ -196,19 +206,10 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedCItem.country"
+                          v-model="editedCItem.internationalCountry"
                           clearable
                           required
                           label="Davlati">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          v-model="editedCItem.days"
-                          clearable
-                          required
-                          label="Stajirovka va malaka oshirilgan kunlar">
                       </v-text-field>
                       </v-col>
                       <v-col
@@ -216,7 +217,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedCItem.size"
+                          v-model="editedCItem.internationalLessonsSize"
                           clearable
                           label="Stajirovka xajmi"
                           persistent-hint
@@ -228,12 +229,32 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedCItem.year"
+                          v-model="editedCItem.internationalLessonsCount"
                           clearable
-                          label="Stajirovka tasdiqlangan yil"
+                          label="Stajirovka olib borilgan kunlar soni"
                           persistent-hint
                           required>
                         </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Stajirovka olib borilgan yil"
+                          v-model="editedCItem.year"
+                          :items="years">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Stajirovka olib borilgan oy"
+                          v-model="editedCItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -317,28 +338,58 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     data () {
       return {
+        overlay: false,
+        userId: localStorage.getItem("user-hemisId"),
+        userName: localStorage.getItem("user-name"),
+        years: [2023,2024],
+        mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
+
         dialog: false,
         dialogDelete: false,
         editedIndex: -1,
         editedItem: {
           id: 0,
-          name: '',
-          country: '',
-          days: '',
-          size: 0,
-          year: '',
+          internationalType: 61,
+          internationalTypeName: 'Top – 1000-da o’quv mashg’ulotlari olib borish',
+
+          internationalName: '',
+          internationalCountry: '',
+          internationalLessonsCount: '',
+          internationalLessonsSize: '',
+
+          year: 0,
+          mounth: 0,
+          userName: localStorage.getItem("user-name"),
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
+          statId: 0,
+          newId: 0,
+          news: '',
           doc: null,
         },
         defaultItem: {
           id: 0,
-          name: '',
-          country: '',
-          days: '',
-          size: 0,
-          year: '',
+          internationalType: 61,
+          internationalTypeName: 'Top – 1000-da o’quv mashg’ulotlari olib borish',
+
+          internationalName: '',
+          internationalCountry: '',
+          internationalLessonsCount: '',
+          internationalLessonsSize: '',
+
+          year: 0,
+          mounth: 0,
+          userName: localStorage.getItem("user-name"),
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
+          statId: 0,
+          newId: 0,
+          news: '',
           doc: null,
         },
 
@@ -347,72 +398,68 @@ export default {
         editedCIndex: -1,
         editedCItem: {
           id: 0,
-          name: '',
-          country: '',
-          days: '',
-          size: 0,
-          year: '',
+          internationalType: 62,
+          internationalTypeName: 'Stajirovka va malaka oshirish',
+
+          internationalName: '',
+          internationalCountry: '',
+          internationalLessonsCount: '',
+          internationalLessonsSize: '',
+
+          year: 0,
+          mounth: 0,
+          userName: localStorage.getItem("user-name"),
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
+          statId: 0,
+          newId: 0,
+          news: '',
           doc: null,
         },
         defaultCItem: {
           id: 0,
-          name: '',
-          country: '',
-          days: '',
-          size: 0,
-          year: '',
+          internationalType: 62,
+          internationalTypeName: 'Stajirovka va malaka oshirish',
+
+          internationalName: '',
+          internationalCountry: '',
+          internationalLessonsCount: '',
+          internationalLessonsSize: '',
+
+          year: 0,
+          mounth: 0,
+          userName: localStorage.getItem("user-name"),
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
+          statId: 0,
+          newId: 0,
+          news: '',
           doc: null,
         },
 
         search: '',
         headers: [
-          { key: 'name', title: 'Xorijiy OTM yoki ITM nomi',align: 'start', sortable: false, },
-          { key: 'country', title: 'Davlati' },
-          { key: 'days', title: 'Mashg’ulot olib borilgan kunlar' },
-          { key: 'siz', title: 'Mashg’ulot xajmi' },
+          { key: 'internationalName', title: 'Xorijiy OTM yoki ITM nomi',align: 'start', sortable: false, },
+          { key: 'internationalCountry', title: 'Davlati' },
+          { key: 'mounth', title: 'Mashg’ulot olib borilgan oy' },
+          { key: 'internationalLessonsCount', title: 'Mashg’ulotlar soni' },
+          { key: 'internationalLessonsSize', title: 'Mashg’ulot xajmi' },
+          { key: 'news', title: 'Hujjat holati' },
           { key: 'actions', title: 'Amallar',align: 'start',  sortable: false },
         ],
-        items: [
-          {
-            name: 'Frozen Yogurt',
-            davlati: 159,
-            kunlar: 6.0,
-            hajmi: 24,
-            sertifikat: 4.0,
-          },
-          {
-            name: 'Ice cream sandwich',
-            davlati: 237,
-            kunlar: 9.0,
-            hajmi: 37,
-            sertifikat: 4.3,
-          }
-        ],
+        items: [],
 
         searchC: '',
         headersC: [
-          { key: 'name', title: 'Xorijiy OTM yoki ITM nomi',align: 'start', sortable: false, },
-          { key: 'country', title: 'Davlati', align: 'center', },
-          { title: 'Stajirovka va malaka oshirilgan kunlar', align: 'center', key: 'days',},
-          { title: 'Stajirovka xajmi', align: 'end', key: 'size',},
+          { key: 'internationalName', title: 'Xorijiy OTM yoki ITM nomi',align: 'start', sortable: false, },
+          { key: 'internationalCountry', title: 'Davlati', align: 'center', },
+          { key: 'mounth', title: 'Stajirovka va malaka oshirilgan oy', align: 'center', },
+          { key: 'internationalLessonsCount', title: 'Stajirovka kunlari soni', align: 'end', },
+          { key: 'internationalLessonsSize', title: 'Stajirovka xajmi', align: 'end', },
+          { key: 'news', title: 'Hujjat holati' },
           { key: 'actions', title: 'Amallar',align: 'start',  sortable: false },
         ],
-        itemsC: [
-          {
-            name: 'Intel Core i9-11900K',
-            davlati: 8,
-            kunlar: 16,
-            hajmi: '3.5 GHz',
-            sertifikat: '5.3 GHz',
-          },
-          {
-            name: 'AMD Ryzen 9 5950X',
-            davlati: 8,
-            kunlar: 16,
-            hajmi: '3.5 GHz',
-            sertifikat: '5.3 GHz',
-          }
-        ]
+        itemsC: []
       }
     },
   methods: {
@@ -421,7 +468,6 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
-
     editCItem (item) {
       this.editedCIndex = this.itemsC.indexOf(item)
       this.editedCItem = Object.assign({}, item)
@@ -433,7 +479,6 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
-
     deleteCItem (item) {
       this.editedCIndex = this.itemsC.indexOf(item)
       this.editedCItem = Object.assign({}, item)
@@ -441,12 +486,31 @@ export default {
     },
 
     deleteItemConfirm () {
-      this.items.splice(this.editedIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/internationals/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+        .then(response => {
+          console.log(`Delete item with ID ${this.editItem.id}`);
+          this.items.splice(this.editedIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeDelete()
     },
-
     deleteCItemConfirm () {
-      this.itemsC.splice(this.editedCIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/internationals/delete?id=${this.editedCItem.id}&newId=${this.editedCItem.newId}`)
+        .then(response => {
+          console.log(`Delete item with ID ${this.editCItem.id}`);
+          this.itemsC.splice(this.editedCIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeCDelete()
     },
 
@@ -457,7 +521,6 @@ export default {
         this.editedIndex = -1
       })
     },
-
     closeC () {
       this.dialogC = false
       this.$nextTick(() => {
@@ -473,7 +536,6 @@ export default {
         this.editedIndex = -1
       })
     },
-
     closeCDelete () {
       this.dialogCDelete = false
       this.$nextTick(() => {
@@ -484,25 +546,148 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.items[this.editedIndex], this.editedItem)
-      } else {
-        this.items.push(this.editedItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('name', this.editedItem.internationalName)
+        formData.append('country', this.editedItem.internationalCountry)
+        formData.append('size', this.editedItem.internationalLessonsSize)
+        formData.append('count', this.editedItem.internationalLessonsCount)
+        formData.append('newId', this.editedItem.newId)
+
+        axios.put("http://localhost:8080/api/internationals/update?id="+this.editedItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.items[this.editedIndex], this.editedItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedItem.internationalType)
+        formData.append('typeName', this.editedItem.internationalTypeName)
+
+        formData.append('name', this.editedItem.internationalName)
+        formData.append('country', this.editedItem.internationalCountry)
+        formData.append('size', this.editedItem.internationalLessonsSize)
+        formData.append('count', this.editedItem.internationalLessonsCount)
+
+        formData.append('year', this.editedItem.year)
+        formData.append('mounth', this.editedItem.mounth)
+        formData.append('department', this.editedItem.department)
+        formData.append('faculty', this.editedItem.faculty)
+
+        // files
+        for (let file of this.editedItem.doc) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/internationals/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.items.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.close()
     },
-
     saveC () {
       if (this.editedCIndex > -1) {
-        Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
-      } else {
-        this.itemsC.push(this.editedCItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('name', this.editedCItem.internationalName)
+        formData.append('country', this.editedCItem.internationalCountry)
+        formData.append('size', this.editedCItem.internationalLessonsSize)
+        formData.append('count', this.editedCItem.internationalLessonsCount)
+        formData.append('newId', this.editedCItem.newId)
+
+        axios.put("http://localhost:8080/api/internationals/update?id="+this.editedCItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedCItem.internationalType)
+        formData.append('typeName', this.editedCItem.internationalTypeName)
+
+        formData.append('name', this.editedCItem.internationalName)
+        formData.append('country', this.editedCItem.internationalCountry)
+        formData.append('size', this.editedCItem.internationalLessonsSize)
+        formData.append('count', this.editedCItem.internationalLessonsCount)
+
+        formData.append('year', this.editedCItem.year)
+        formData.append('mounth', this.editedCItem.mounth)
+        formData.append('department', this.editedCItem.department)
+        formData.append('faculty', this.editedCItem.faculty)
+
+        // files
+        for (let file of this.editedCItem.doc) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/internationals/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsC.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeC()
     },
 
-    downloadDoc(item){
-
-    }
+    forceFileDownload(response, title) {
+      console.log(title)
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', title)
+      document.body.appendChild(link)
+      link.click()
+    },
+    downloadWithAxios(url, title) {
+      console.log(url)
+      console.log("Download con")
+      axios({
+        method: 'get',
+        url,
+        responseType: 'arraybuffer',
+      })
+        .then((response) => {
+          console.log("Download end")
+          this.forceFileDownload(response, title)
+        })
+        .catch(() => console.log('error occured'))
+    },
+    downloadDoc(item) {
+      console.log("Download start")
+      this.downloadWithAxios("http://localhost:8080/api/internationals/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+    },
 
   },
 
@@ -528,6 +713,41 @@ export default {
     dialogCDelete (val) {
       val || this.closeCDelete()
     },
+  },
+
+  mounted() {
+    axios
+      .get(`http://localhost:8080/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=51`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.items.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=52`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.itemsC.push(data[dataKey])
+        }
+      });
+
   }
 }
 </script>

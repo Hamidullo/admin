@@ -937,6 +937,7 @@ export default {
         formData.append('number', this.editedItem.number)
         formData.append('departmentName', this.editedItem.departmentName)
         formData.append('workStartND', this.editedItem.workStartND)
+        formData.append('newId', this.editedItem.newId)
 
         axios.post("http://localhost:8080/api/academics/update?id="+this.editedItem.id, formData)
           .then(response => {
@@ -1007,6 +1008,7 @@ export default {
         formData.append('number', this.editedCItem.number)
         formData.append('departmentName', this.editedCItem.departmentName)
         formData.append('workStartND', this.editedCItem.workStartND)
+        formData.append('newId', this.editedCItem.newId)
 
         axios.post("http://localhost:8080/api/academics/update?id="+this.editedCItem.id, formData)
           .then(response => {
@@ -1070,6 +1072,7 @@ export default {
         formData.append('number', this.editedSItem.number)
         formData.append('departmentName', this.editedSItem.departmentName)
         formData.append('workStartND', this.editedSItem.workStartND)
+        formData.append('newId', this.editedSItem.newId)
 
         axios.post("http://localhost:8080/api/academics/update?id="+this.editedSItem.id, formData)
           .then(response => {

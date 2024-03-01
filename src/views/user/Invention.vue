@@ -1,6 +1,5 @@
 <template>
-  <v-container class="py-8 px-6 bg-grey-lighten-2"
-  fluid>
+  <v-container class="py-8 px-6 bg-grey-lighten-2" fluid>
 
     <v-row>
       <v-col>
@@ -29,7 +28,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.inventionName"
                           clearable
                           label="Patent nomi"
                           required>
@@ -40,7 +39,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.number"
+                          v-model="editedItem.inventionNumber"
                           clearable
                           required
                           label="Patent raqami">
@@ -51,7 +50,16 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedItem.authorCount"
+                          v-if="editedItem.inventionAuthorsCount"
+                          v-model="editedItem.inventionAuthorsCount"
+                          clearable
+                          required
+                          label="Mualliflar soni">
+                      </v-text-field>
+                        <v-text-field
+                          v-else
+                          readonly
+                          v-model="editedItem.inventionAuthorsCount"
                           clearable
                           required
                           label="Mualliflar soni">
@@ -60,7 +68,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedItem.authorName"
+                          v-model="editedItem.inventionAuthorNames"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -70,32 +78,30 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedItem.datePublished"
-                          clearable
-                          label="Nashr etilgan sana"
-                          required>
-                      </v-text-field>
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan yil"
+                          v-model="editedItem.year"
+                          :items="years">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedItem.year"
-                          clearable
-                          label="Nashr etilgan yil"
-                          required>
-                        </v-text-field>
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan oy"
+                          v-model="editedItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
                         md="6">
                         <v-file-input
-                          v-if="!editedItem.doc"
-                          v-model="editedItem.doc"
+                          v-if="!editedItem.inventionDownload"
+                          v-model="editedItem.inventionDownload"
                           show-size
                           label="Patent yuklash">
                         </v-file-input>
@@ -192,7 +198,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedMItem.name"
+                          v-model="editedMItem.inventionName"
                           clearable
                           label="Patent nomi"
                           required>
@@ -203,7 +209,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.number"
+                          v-model="editedMItem.inventionNumber"
                           clearable
                           required
                           label="Patent raqami">
@@ -214,7 +220,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-model="editedMItem.authorCount"
+                          v-model="editedMItem.inventionAuthorsCount"
                           clearable
                           required
                           label="Mualliflar soni">
@@ -223,7 +229,7 @@
                       <v-col
                         cols="12">
                         <v-text-field
-                          v-model="editedMItem.authorName"
+                          v-model="editedMItem.inventionAuthorNames"
                           clearable
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
@@ -233,32 +239,30 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedMItem.datePublished"
-                          clearable
-                          label="Nashr etilgan sana"
-                          required>
-                      </v-text-field>
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan yil"
+                          v-model="editedMItem.year"
+                          :items="years">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedMItem.year"
-                          clearable
-                          label="Nashr etilgan yil"
-                          required>
-                        </v-text-field>
+                        md="3">
+                        <v-select
+                          label="Nashr etilgan oy"
+                          v-model="editedMItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
                         md="6">
                         <v-file-input
-                          v-if="!editedMItem.doc"
-                          v-model="editedMItem.doc"
+                          v-if="!editedMItem.inventionDownload"
+                          v-model="editedMItem.inventionDownload"
                           show-size
                           label="Patent yuklash">
                         </v-file-input>
@@ -328,693 +332,719 @@
         </v-data-table>
       </v-card>
       </v-col>
-    </v-row>
 
-    <v-row>
       <v-col>
         <v-card flat title="Selektsiya yutuqlari">
-        <template v-slot:append>
-          <!-- Dialog start -->
-          <v-row justify="center" class="mr-2">
-            <v-dialog
-              v-model="dialogY"
-              persistent
-              width="1024">
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props">
-                  Qo'shish
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{ formYTitle}}</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          v-model="editedYItem.name"
-                          clearable
-                          label="Patent nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedYItem.number"
-                          clearable
-                          required
-                          label="Patent raqami">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedYItem.authorCount"
-                          clearable
-                          required
-                          label="Mualliflar soni">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          v-model="editedYItem.authorName"
-                          clearable
-                          label="Ham mualliflar F.I.SH"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedYItem.datePublished"
-                          clearable
-                          label="Nashr etilgan sana"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedYItem.year"
-                          clearable
-                          label="Nashr etilgan yil"
-                          required>
-                        </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-file-input
-                          v-if="!editedYItem.doc"
-                          v-model="editedYItem.doc"
-                          show-size
-                          label="Patent yuklash">
-                        </v-file-input>
-                        <v-btn size="x-large" v-else @click="downloadDoc(editedYItem)">Patentni yuklash</v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog
+                v-model="dialogY"
+                persistent
+                width="1024">
+                <template v-slot:activator="{ props }">
                   <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="closeY">
-                    Yopish
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
                   </v-btn>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="saveY">
-                    Saqlash
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="dialogYDelete" width="auto">
-              <v-card>
-                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Selektsiya yutug`ini o'chirishni hohlaysizmi?</v-card-title>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue-darken-1" variant="text" @click="closeYDelete">Bekor qilish</v-btn>
-                  <v-btn color="red" variant="text" @click="deleteYItemConfirm">O'chirish</v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-          <!-- Dialog end -->
-        </template>
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchY"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details>
-          </v-text-field>
-        </template>
-        <v-data-table
-          :headers="headersY"
-          :items="itemsY"
-          :search="searchY">
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              size="small"
-              class="me-2"
-              @click="editYItem(item)">
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              size="small"
-              @click="deleteYItem(item)">
-              mdi-delete
-            </v-icon>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formYTitle}}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            v-model="editedYItem.inventionName"
+                            clearable
+                            label="Patent nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedYItem.inventionNumber"
+                            clearable
+                            required
+                            label="Patent raqami">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedYItem.inventionAuthorsCount"
+                            clearable
+                            required
+                            label="Mualliflar soni">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            v-model="editedYItem.inventionAuthorNames"
+                            clearable
+                            label="Ham mualliflar F.I.SH"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan yil"
+                            v-model="editedYItem.year"
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan oy"
+                            v-model="editedYItem.mounth"
+                            :items="mounth">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-file-input
+                            v-if="!editedYItem.inventionDownload"
+                            v-model="editedYItem.inventionDownload"
+                            show-size
+                            label="Patent yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedYItem)">Patentni yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeY">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveY">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogYDelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Selektsiya yutug`ini o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeYDelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteYItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <!-- Dialog end -->
           </template>
-        </v-data-table>
-      </v-card>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchY"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details>
+            </v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersY"
+            :items="itemsY"
+            :search="searchY">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editYItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteYItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
       </v-col>
 
       <v-col>
         <v-card flat title="Sanoat namunalari">
-        <template v-slot:append>
-          <!-- Dialog start -->
-          <v-row justify="center" class="mr-2">
-            <v-dialog
-              v-model="dialogN"
-              persistent
-              width="1024">
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props">
-                  Qo'shish
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{ formNTitle }}</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          clearable
-                          v-model="editedNItem.name"
-                          label="Patent nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          clearable
-                          required
-                          v-model="editedNItem.number"
-                          label="Patent raqami">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          clearable
-                          required
-                          v-model="editedNItem.authorCount"
-                          label="Mualliflar soni">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          clearable
-                          v-model="editedNItem.authorName"
-                          label="Ham mualliflar F.I.SH"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          clearable
-                          v-model="editedNItem.datePublished"
-                          label="Nashr etilgan sana"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          clearable
-                          v-model="editedNItem.year"
-                          label="Nashr etilgan yil"
-                          required>
-                        </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-file-input
-                          v-if="!editedNItem.doc"
-                          v-model="editedNItem.doc"
-                          show-size
-                          label="Patent yuklash">
-                        </v-file-input>
-                        <v-btn size="x-large" v-else @click="downloadDoc(editedNItem)">Patentni yuklash</v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog
+                v-model="dialogN"
+                persistent
+                width="1024">
+                <template v-slot:activator="{ props }">
                   <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="closeN">
-                    Yopish
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
                   </v-btn>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="saveN">
-                    Saqlash
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="dialogNDelete" width="auto">
-              <v-card>
-                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Sanoat namunasini o'chirishni hohlaysizmi?</v-card-title>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue-darken-1" variant="text" @click="closeNDelete">Bekor qilish</v-btn>
-                  <v-btn color="red" variant="text" @click="deleteNItemConfirm">O'chirish</v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-          <!-- Dialog end -->
-        </template>
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchN"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details>
-          </v-text-field>
-        </template>
-        <v-data-table
-          :headers="headersN"
-          :items="itemsN"
-          :search="searchN">
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              size="small"
-              class="me-2"
-              @click="editNItem(item)">
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              size="small"
-              @click="deleteNItem(item)">
-              mdi-delete
-            </v-icon>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formNTitle }}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            clearable
+                            v-model="editedNItem.inventionName"
+                            label="Patent nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            clearable
+                            required
+                            v-model="editedNItem.inventionNumber"
+                            label="Patent raqami">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            clearable
+                            required
+                            v-model="editedNItem.inventionAuthorsCount"
+                            label="Mualliflar soni">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            clearable
+                            v-model="editedNItem.inventionAuthorNames"
+                            label="Ham mualliflar F.I.SH"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan yil"
+                            v-model="editedNItem.year"
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan oy"
+                            v-model="editedNItem.mounth"
+                            :items="mounth">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-file-input
+                            v-if="!editedNItem.inventionDownload"
+                            v-model="editedNItem.inventionDownload"
+                            show-size
+                            label="Patent yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedNItem)">Patentni yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeN">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveN">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogNDelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Sanoat namunasini o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeNDelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteNItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <!-- Dialog end -->
           </template>
-        </v-data-table>
-      </v-card>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchN"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details>
+            </v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersN"
+            :items="itemsN"
+            :search="searchN">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editNItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteNItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
       </v-col>
-    </v-row>
 
-    <v-row>
       <v-col>
         <v-card flat title="AKT ga oid dasturiy maxsulotlar uchun guvoxnomalar">
-        <template v-slot:append>
-          <!-- Dialog start -->
-          <v-row justify="center" class="mr-2">
-            <v-dialog
-              v-model="dialogA"
-              persistent
-              width="1024">
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props">
-                  Qo'shish
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{ formATitle }}</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          clearable
-                          v-model="editedAItem.name"
-                          label="Guvoxnoma nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          clearable
-                          required
-                          v-model="editedAItem.number"
-                          label="Guvoxnoma raqami">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          clearable
-                          required
-                          v-model="editedAItem.authorCount"
-                          label="Mualliflar soni">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          clearable
-                          v-model="editedAItem.authorName"
-                          label="Ham mualliflar F.I.SH"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          clearable
-                          v-model="editedAItem.datePublished"
-                          label="Nashr etilgan sana"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          clearable
-                          v-model="editedAItem.year"
-                          label="Nashr etilgan yil"
-                          required>
-                        </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-file-input
-                          v-if="!editedItem.doc"
-                          v-model="editedItem.doc"
-                          show-size
-                          label="Guvohnoma yuklash">
-                        </v-file-input>
-                        <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Guvohnomani yuklash</v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog
+                v-model="dialogA"
+                persistent
+                width="1024">
+                <template v-slot:activator="{ props }">
                   <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="closeA">
-                    Yopish
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
                   </v-btn>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="saveA">
-                    Saqlash
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="dialogADelete" width="auto">
-              <v-card>
-                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">AKT ga oid dasturiy maxsulotlar uchun guvoxnoma o'chirishni hohlaysizmi?</v-card-title>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue-darken-1" variant="text" @click="closeADelete">Bekor qilish</v-btn>
-                  <v-btn color="red" variant="text" @click="deleteAItemConfirm">O'chirish</v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-          <!-- Dialog end -->
-        </template>
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchA"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details>
-          </v-text-field>
-        </template>
-        <v-data-table
-          :headers="headersA"
-          :items="itemsA"
-          :search="searchA">
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              size="small"
-              class="me-2"
-              @click="editAItem(item)">
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              size="small"
-              @click="deleteAItem(item)">
-              mdi-delete
-            </v-icon>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formATitle }}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            clearable
+                            v-model="editedAItem.inventionName"
+                            label="Guvoxnoma nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            clearable
+                            required
+                            v-model="editedAItem.inventionNumber"
+                            label="Guvoxnoma raqami">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            clearable
+                            required
+                            v-model="editedAItem.inventionAuthorsCount"
+                            label="Mualliflar soni">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            clearable
+                            v-model="editedAItem.inventionAuthorNames"
+                            label="Ham mualliflar F.I.SH"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan yil"
+                            v-model="editedAItem.year"
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan oy"
+                            v-model="editedAItem.mounth"
+                            :items="mounth">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-file-input
+                            v-if="!editedAItem.inventionDownload"
+                            v-model="editedAItem.inventionDownload"
+                            show-size
+                            label="Guvohnoma yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Guvohnomani yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeA">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveA">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogADelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">AKT ga oid dasturiy maxsulotlar uchun guvoxnoma o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeADelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteAItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <!-- Dialog end -->
           </template>
-        </v-data-table>
-      </v-card>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchA"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details>
+            </v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersA"
+            :items="itemsA"
+            :search="searchA">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editAItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteAItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
       </v-col>
 
       <v-col>
         <v-card flat title="Mualliflik xuquqni ximoya qiluvchi guvoxnomalar">
-        <template v-slot:append>
-          <!-- Dialog start -->
-          <v-row justify="center" class="mr-2">
-            <v-dialog
-              v-model="dialogG"
-              persistent
-              width="1024">
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props">
-                  Qo'shish
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{ formGTitle }}</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          v-model="editedGItem.name"
-                          clearable
-                          label="Guvoxnoma nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedGItem.number"
-                          clearable
-                          required
-                          label="Guvoxnoma raqami">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedGItem.authorCount"
-                          clearable
-                          required
-                          label="Mualliflar soni">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          v-model="editedGItem.authorName"
-                          clearable
-                          label="Ham mualliflar F.I.SH"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedGItem.datePublished"
-                          clearable
-                          label="Nashr etilgan sana"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedGItem.year"
-                          clearable
-                          label="Nashr etilgan yil"
-                          required>
-                        </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-file-input
-                          v-if="!editedGItem.doc"
-                          v-model="editedGItem.doc"
-                          show-size
-                          label="Guvohnoma yuklash">
-                        </v-file-input>
-                        <v-btn size="x-large" v-else @click="downloadDoc(editedGItem)">Guvohnomani yuklash</v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog
+                v-model="dialogG"
+                persistent
+                width="1024">
+                <template v-slot:activator="{ props }">
                   <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="closeG">
-                    Yopish
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
                   </v-btn>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="saveG">
-                    Saqlash
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="dialogGDelete" width="auto">
-              <v-card>
-                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Mualliflik xuquqni ximoya qiluvchi guvoxnoma o'chirishni hohlaysizmi?</v-card-title>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue-darken-1" variant="text" @click="closeGDelete">Bekor qilish</v-btn>
-                  <v-btn color="red" variant="text" @click="deleteGItemConfirm">O'chirish</v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-          <!-- Dialog end -->
-        </template>
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchG"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details>
-          </v-text-field>
-        </template>
-        <v-data-table
-          :headers="headersG"
-          :items="itemsG"
-          :search="searchG">
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              size="small"
-              class="me-2"
-              @click="editGItem(item)">
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              size="small"
-              @click="deleteGItem(item)">
-              mdi-delete
-            </v-icon>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formGTitle }}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            v-model="editedGItem.inventionName"
+                            clearable
+                            label="Guvoxnoma nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedGItem.inventionNumber"
+                            clearable
+                            required
+                            label="Guvoxnoma raqami">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedGItem.inventionAuthorsCount"
+                            clearable
+                            required
+                            label="Mualliflar soni">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            v-model="editedGItem.inventionAuthorNames"
+                            clearable
+                            label="Ham mualliflar F.I.SH"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan yil"
+                            v-model="editedItem.year"
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan oy"
+                            v-model="editedItem.mounth"
+                            :items="mounth">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-file-input
+                            v-if="!editedGItem.inventionDownload"
+                            v-model="editedGItem.inventionDownload"
+                            show-size
+                            label="Guvohnoma yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedGItem)">Guvohnomani yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeG">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveG">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogGDelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Mualliflik xuquqni ximoya qiluvchi guvoxnoma o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeGDelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteGItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <!-- Dialog end -->
           </template>
-        </v-data-table>
-      </v-card>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchG"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details>
+            </v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersG"
+            :items="itemsG"
+            :search="searchG">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editGItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteGItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
       </v-col>
     </v-row>
+
+    <v-overlay
+      :model-value="overlay"
+      class="align-center justify-center">
+      <v-progress-circular
+        color="primary"
+        indeterminate
+        size="64">
+      </v-progress-circular>
+    </v-overlay>
 
   </v-container>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data () {
     return {
+      overlay: false,
+      userId: localStorage.getItem("user-hemisId"),
+      userName: localStorage.getItem("user-name"),
+      years: [2023,2024],
+      mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
+
       dialog: false,
       dialogDelete: false,
       editedIndex: -1,
       editedItem: {
         id: 0,
-        name: '',
-        number: '',
-        authorCount: 0,
-        authorName: '',
-        datePublished: '',
-        year: '',
-        doc: null
+        inventionType: 51,
+        inventionTypeName: 'Ixtirolar',
+
+        inventionName: '',
+        inventionAuthorsCount: 0,
+        inventionAuthorNames: '',
+        inventionNumber: '',
+
+        year: 0,
+        mounth: 0,
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        news: '',
+        inventionDownload: null
       },
       defaultItem: {
         id: 0,
-        name: '',
-        number: '',
-        authorCount: 0,
-        authorName: '',
-        datePublished: '',
-        year: '',
-        doc: null
+        inventionType: 51,
+        inventionTypeName: 'Ixtirolar',
+
+        inventionName: '',
+        inventionAuthorsCount: 0,
+        inventionAuthorNames: '',
+        inventionNumber: '',
+
+        year: 0,
+        mounth: 0,
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        news: '',
+        inventionDownload: null
       },
 
       dialogM: false,
@@ -1022,23 +1052,43 @@ export default {
       editedMIndex: -1,
       editedMItem: {
         id: 0,
-        name: '',
-        number: '',
-        authorCount: 0,
-        authorName: '',
-        datePublished: '',
-        year: '',
-        doc: null
+        inventionType: 52,
+        inventionTypeName: 'Ixtiro-foydali modellari',
+
+        inventionName: '',
+        inventionAuthorsCount: 0,
+        inventionAuthorNames: '',
+        inventionNumber: '',
+
+        year: 0,
+        mounth: 0,
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        news: '',
+        inventionDownload: null
       },
       defaultMItem: {
         id: 0,
-        name: '',
-        number: '',
-        authorCount: 0,
-        authorName: '',
-        datePublished: '',
-        year: '',
-        doc: null
+        inventionType: 52,
+        inventionTypeName: 'Ixtiro-foydali modellari',
+
+        inventionName: '',
+        inventionAuthorsCount: 0,
+        inventionAuthorNames: '',
+        inventionNumber: '',
+
+        year: 0,
+        mounth: 0,
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        news: '',
+        inventionDownload: null
       },
 
       dialogY: false,
@@ -1046,23 +1096,43 @@ export default {
       editedYIndex: -1,
       editedYItem: {
         id: 0,
-        name: '',
-        number: '',
-        authorCount: 0,
-        authorName: '',
-        datePublished: '',
-        year: '',
-        doc: null
+        inventionType: 53,
+        inventionTypeName: 'Selektsiya yutuqlari',
+
+        inventionName: '',
+        inventionAuthorsCount: 0,
+        inventionAuthorNames: '',
+        inventionNumber: '',
+
+        year: 0,
+        mounth: 0,
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        news: '',
+        inventionDownload: null
       },
       defaultYItem: {
         id: 0,
-        name: '',
-        number: '',
-        authorCount: 0,
-        authorName: '',
-        datePublished: '',
-        year: '',
-        doc: null
+        inventionType: 53,
+        inventionTypeName: 'Selektsiya yutuqlari',
+
+        inventionName: '',
+        inventionAuthorsCount: 0,
+        inventionAuthorNames: '',
+        inventionNumber: '',
+
+        year: 0,
+        mounth: 0,
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        news: '',
+        inventionDownload: null
       },
 
       dialogN: false,
@@ -1070,23 +1140,43 @@ export default {
       editedNIndex: -1,
       editedNItem: {
         id: 0,
-        name: '',
-        number: '',
-        authorCount: 0,
-        authorName: '',
-        datePublished: '',
-        year: '',
-        doc: null
+        inventionType: 54,
+        inventionTypeName: 'Sanoat namunalari',
+
+        inventionName: '',
+        inventionAuthorsCount: 0,
+        inventionAuthorNames: '',
+        inventionNumber: '',
+
+        year: 0,
+        mounth: 0,
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        news: '',
+        inventionDownload: null
       },
       defaultNItem: {
         id: 0,
-        name: '',
-        number: '',
-        authorCount: 0,
-        authorName: '',
-        datePublished: '',
-        year: '',
-        doc: null
+        inventionType: 54,
+        inventionTypeName: 'Sanoat namunalari',
+
+        inventionName: '',
+        inventionAuthorsCount: 0,
+        inventionAuthorNames: '',
+        inventionNumber: '',
+
+        year: 0,
+        mounth: 0,
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        news: '',
+        inventionDownload: null
       },
 
       dialogA: false,
@@ -1094,23 +1184,43 @@ export default {
       editedAIndex: -1,
       editedAItem: {
         id: 0,
-        name: '',
-        number: '',
-        authorCount: 0,
-        authorName: '',
-        datePublished: '',
-        year: '',
-        doc: null
+        inventionType: 55,
+        inventionTypeName: 'AKT ga oid dasturiy maxsulotlar uchun guvoxnomalar',
+
+        inventionName: '',
+        inventionAuthorsCount: 0,
+        inventionAuthorNames: '',
+        inventionNumber: '',
+
+        year: 0,
+        mounth: 0,
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        news: '',
+        inventionDownload: null
       },
       defaultAItem: {
         id: 0,
-        name: '',
-        number: '',
-        authorCount: 0,
-        authorName: '',
-        datePublished: '',
-        year: '',
-        doc: null
+        inventionType: 55,
+        inventionTypeName: 'AKT ga oid dasturiy maxsulotlar uchun guvoxnomalar',
+
+        inventionName: '',
+        inventionAuthorsCount: 0,
+        inventionAuthorNames: '',
+        inventionNumber: '',
+
+        year: 0,
+        mounth: 0,
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        news: '',
+        inventionDownload: null
       },
 
       dialogG: false,
@@ -1118,192 +1228,116 @@ export default {
       editedGIndex: -1,
       editedGItem: {
         id: 0,
-        name: '',
-        number: '',
-        authorCount: 0,
-        authorName: '',
-        datePublished: '',
-        year: '',
-        doc: null
+        inventionType: 56,
+        inventionTypeName: 'Mualliflik xuquqni ximoya qiluvchi guvoxnomalar',
+
+        inventionName: '',
+        inventionAuthorsCount: 0,
+        inventionAuthorNames: '',
+        inventionNumber: '',
+
+        year: 0,
+        mounth: 0,
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        news: '',
+        inventionDownload: null
       },
       defaultGItem: {
         id: 0,
-        name: '',
-        number: '',
-        authorCount: 0,
-        authorName: '',
-        datePublished: '',
-        year: '',
-        doc: null
+        inventionType: 56,
+        inventionTypeName: 'Mualliflik xuquqni ximoya qiluvchi guvoxnomalar',
+
+        inventionName: '',
+        inventionAuthorsCount: 0,
+        inventionAuthorNames: '',
+        inventionNumber: '',
+
+        year: 0,
+        mounth: 0,
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        statId: 0,
+        newId: 0,
+        news: '',
+        inventionDownload: null
       },
 
       search: '',
       headers: [
-        { key: 'name', title: 'Patent nomi', align: 'start', sortable: false, },
-        { key: 'number', title: 'Patent raqami' },
-        { key: 'authorCount', title: 'Mualliflar soni' },
-        { key: 'authorName', title: 'Mualliflar F.I.Sh' },
-        { key: 'datePublished', title: 'Nashr etilgan sana' },
+        { key: 'inventionName', title: 'Patent nomi', align: 'start', sortable: false, },
+        { key: 'inventionNumber', title: 'Patent raqami' },
+        { key: 'inventionAuthorsCount', title: 'Mualliflar soni' },
+        { key: 'inventionAuthorNames', title: 'Mualliflar F.I.Sh' },
+        { key: 'year', title: 'Nashr etilgan yil' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      items: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        }
-      ],
+      items: [],
 
       searchM: '',
       headersM: [
-        { key: 'name', title: 'Patent nomi', align: 'start', sortable: false, },
-        { key: 'number', title: 'Patent raqami' },
-        { key: 'authorCount', title: 'Mualliflar soni' },
-        { key: 'authorName', title: 'Mualliflar F.I.Sh' },
-        { key: 'datePublished', title: 'Nashr etilgan sana' },
+        { key: 'inventionName', title: 'Patent nomi', align: 'start', sortable: false, },
+        { key: 'inventionNumber', title: 'Patent raqami' },
+        { key: 'inventionAuthorsCount', title: 'Mualliflar soni' },
+        { key: 'inventionAuthorNames', title: 'Mualliflar F.I.Sh' },
+        { key: 'year', title: 'Nashr etilgan yil' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      itemsM: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        }
-      ],
+      itemsM: [],
 
       searchY: '',
       headersY: [
-        { key: 'name', title: 'Patent nomi', align: 'start', sortable: false, },
-        { key: 'number', title: 'Patent raqami' },
-        { key: 'authorCount', title: 'Mualliflar soni' },
-        { key: 'authorName', title: 'Mualliflar F.I.Sh' },
-        { key: 'datePublished', title: 'Nashr etilgan sana' },
+        { key: 'inventionName', title: 'Patent nomi', align: 'start', sortable: false, },
+        { key: 'inventionNumber', title: 'Patent raqami' },
+        { key: 'inventionAuthorsCount', title: 'Mualliflar soni' },
+        { key: 'inventionAuthorNames', title: 'Mualliflar F.I.Sh' },
+        { key: 'year', title: 'Nashr etilgan yil' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      itemsY: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        }
-      ],
+      itemsY: [],
 
       searchN: '',
       headersN: [
-        { key: 'name', title: 'Patent nomi', align: 'start', sortable: false, },
-        { key: 'number', title: 'Patent raqami' },
-        { key: 'authorCount', title: 'Mualliflar soni' },
-        { key: 'authorName', title: 'Mualliflar F.I.Sh' },
-        { key: 'datePublished', title: 'Nashr etilgan sana' },
+        { key: 'inventionName', title: 'Patent nomi', align: 'start', sortable: false, },
+        { key: 'inventionNumber', title: 'Patent raqami' },
+        { key: 'inventionAuthorsCount', title: 'Mualliflar soni' },
+        { key: 'inventionAuthorNames', title: 'Mualliflar F.I.Sh' },
+        { key: 'year', title: 'Nashr etilgan yil' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      itemsN: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        }
-      ],
+      itemsN: [],
 
       searchA: '',
       headersA: [
-        { key: 'name', title: 'Patent nomi', align: 'start', sortable: false, },
-        { key: 'number', title: 'Guvohnoma raqami' },
-        { key: 'authorCount', title: 'Mualliflar soni' },
-        { key: 'authorName', title: 'Mualliflar F.I.Sh' },
-        { key: 'datePublished', title: 'Nashr etilgan sana' },
+        { key: 'inventionName', title: 'Patent nomi', align: 'start', sortable: false, },
+        { key: 'inventionNumber', title: 'Guvohnoma raqami' },
+        { key: 'inventionAuthorsCount', title: 'Mualliflar soni' },
+        { key: 'inventionAuthorNames', title: 'Mualliflar F.I.Sh' },
+        { key: 'year', title: 'Nashr etilgan yil' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      itemsA: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        }
-      ],
+      itemsA: [],
 
       searchG: '',
       headersG: [
-        { key: 'name', title: 'Patent nomi', align: 'start', sortable: false, },
-        { key: 'number', title: 'Guvohnoma raqami' },
-        { key: 'authorCount', title: 'Mualliflar soni' },
-        { key: 'authorName', title: 'Mualliflar F.I.Sh' },
-        { key: 'datePublished', title: 'Nashr etilgan sana' },
+        { key: 'inventionName', title: 'Patent nomi', align: 'start', sortable: false, },
+        { key: 'inventionNumber', title: 'Guvohnoma raqami' },
+        { key: 'autinventionAuthorsCounthorCount', title: 'Mualliflar soni' },
+        { key: 'inventionAuthorNames', title: 'Mualliflar F.I.Sh' },
+        { key: 'year', title: 'Nashr etilgan yil' },
+        { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      itemsG: [
-        {
-          name: 'Frozen Yogurt',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          raqami: 159,
-          mSoni: 6.0,
-          mNomi: 24,
-          sana: 4.0,
-          patent: 1,
-        }
-      ],
+      itemsG: [],
     }
   },
 
@@ -1371,27 +1405,87 @@ export default {
     },
 
     deleteItemConfirm () {
-      this.items.splice(this.editedIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/inventions/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editItem.id}`);
+          this.items.splice(this.editedIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeDelete()
     },
     deleteMItemConfirm () {
-      this.itemsM.splice(this.editedMIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/inventions/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editMItem.id}`);
+          this.itemsM.splice(this.editedMIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeMDelete()
     },
     deleteYItemConfirm () {
-      this.itemsY.splice(this.editedYIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/inventions/delete?id=${this.editedYItem.id}&newId=${this.editedYItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editYItem.id}`);
+          this.itemsY.splice(this.editedYIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeYDelete()
     },
     deleteNItemConfirm () {
-      this.itemsN.splice(this.editedNIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/inventions/delete?id=${this.editedNItem.id}&newId=${this.editedNItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editNItem.id}`);
+          this.itemsN.splice(this.editedNIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeNDelete()
     },
     deleteAItemConfirm () {
-      this.itemsA.splice(this.editedAIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/inventions/delete?id=${this.editedAItem.id}&newId=${this.editedAItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editAItem.id}`);
+          this.itemsA.splice(this.editedAIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeADelete()
     },
     deleteGItemConfirm () {
-      this.itemsG.splice(this.editedGIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/inventions/delete?id=${this.editedGItem.id}&newId=${this.editedGItem.newId}`)
+        .then(response => {
+          console.log(`Delete item with ID ${this.editGItem.id}`);
+          this.itemsG.splice(this.editedGIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeGDelete()
     },
 
@@ -1483,56 +1577,380 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.items[this.editedIndex], this.editedItem)
-      } else {
-        this.items.push(this.editedItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('inventionName', this.editedItem.inventionName)
+        formData.append('inventionNumber', this.editedItem.inventionNumber)
+        formData.append('inventionAuthorsCount', this.editedItem.inventionAuthorsCount)
+        formData.append('inventionAuthorNames', this.editedItem.inventionAuthorNames)
+        formData.append('newId', this.editedItem.newId)
+
+        axios.put("http://localhost:8080/api/inventions/update?id="+this.editedItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.items[this.editedIndex], this.editedItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedItem.inventionType)
+        formData.append('typeName', this.editedItem.inventionTypeName)
+
+        formData.append('name', this.editedItem.inventionName)
+        formData.append('authorCount', this.editedItem.inventionAuthorsCount)
+        formData.append('authorName', this.editedItem.inventionAuthorNames)
+        formData.append('number', this.editedItem.inventionNumber)
+
+        formData.append('year', this.editedItem.year)
+        formData.append('mounth', this.editedItem.mounth)
+        formData.append('department', this.editedItem.department)
+        formData.append('faculty', this.editedItem.faculty)
+
+        // files
+        for (let file of this.editedItem.inventionDownload) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/inventions/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.items.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.close()
     },
     saveM () {
       if (this.editedMIndex > -1) {
-        Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
-      } else {
-        this.itemsM.push(this.editedMItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('inventionName', this.editedMItem.inventionName)
+        formData.append('inventionNumber', this.editedMItem.inventionNumber)
+        formData.append('inventionAuthorsCount', this.editedMItem.inventionAuthorsCount)
+        formData.append('inventionAuthorNames', this.editedMItem.inventionAuthorNames)
+        formData.append('newId', this.editedMItem.newId)
+
+        axios.put("http://localhost:8080/api/inventions/update?id="+this.editedMItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedMItem.inventionType)
+        formData.append('typeName', this.editedMItem.inventionTypeName)
+
+        formData.append('name', this.editedMItem.inventionName)
+        formData.append('authorCount', this.editedMItem.inventionAuthorsCount)
+        formData.append('authorName', this.editedMItem.inventionAuthorNames)
+        formData.append('number', this.editedMItem.inventionNumber)
+
+        formData.append('year', this.editedMItem.year)
+        formData.append('mounth', this.editedMItem.mounth)
+        formData.append('department', this.editedMItem.department)
+        formData.append('faculty', this.editedMItem.faculty)
+
+        // files
+        for (let file of this.editedMItem.inventionDownload) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/inventions/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsM.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeM()
     },
     saveY () {
       if (this.editedYIndex > -1) {
-        Object.assign(this.itemsY[this.editedYIndex], this.editedYItem)
-      } else {
-        this.itemsY.push(this.editedYItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('inventionName', this.editedYItem.inventionName)
+        formData.append('inventionNumber', this.editedYItem.inventionNumber)
+        formData.append('inventionAuthorsCount', this.editedYItem.inventionAuthorsCount)
+        formData.append('inventionAuthorNames', this.editedYItem.inventionAuthorNames)
+        formData.append('newId', this.editedYItem.newId)
+
+        axios.put("http://localhost:8080/api/inventions/update?id="+this.editedYItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsY[this.editedYIndex], this.editedYItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedYItem.inventionType)
+        formData.append('typeName', this.editedYItem.inventionTypeName)
+
+        formData.append('name', this.editedYItem.inventionName)
+        formData.append('authorCount', this.editedYItem.inventionAuthorsCount)
+        formData.append('authorName', this.editedYItem.inventionAuthorNames)
+        formData.append('number', this.editedYItem.inventionNumber)
+
+        formData.append('year', this.editedYItem.year)
+        formData.append('mounth', this.editedYItem.mounth)
+        formData.append('department', this.editedYItem.department)
+        formData.append('faculty', this.editedYItem.faculty)
+
+        // files
+        for (let file of this.editedYItem.inventionDownload) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/inventions/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsY.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeY()
     },
     saveN () {
       if (this.editedNIndex > -1) {
-        Object.assign(this.itemsN[this.editedNIndex], this.editedNItem)
-      } else {
-        this.itemsN.push(this.editedNItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('inventionName', this.editedNItem.inventionName)
+        formData.append('inventionNumber', this.editedNItem.inventionNumber)
+        formData.append('inventionAuthorsCount', this.editedNItem.inventionAuthorsCount)
+        formData.append('inventionAuthorNames', this.editedNItem.inventionAuthorNames)
+        formData.append('newId', this.editedNItem.newId)
+
+        axios.put("http://localhost:8080/api/inventions/update?id="+this.editedNItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsN[this.editedNIndex], this.editedNItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedNItem.inventionType)
+        formData.append('typeName', this.editedNItem.inventionTypeName)
+
+        formData.append('name', this.editedNItem.inventionName)
+        formData.append('authorCount', this.editedNItem.inventionAuthorsCount)
+        formData.append('authorName', this.editedNItem.inventionAuthorNames)
+        formData.append('number', this.editedNItem.inventionNumber)
+
+        formData.append('year', this.editedNItem.year)
+        formData.append('mounth', this.editedNItem.mounth)
+        formData.append('department', this.editedNItem.department)
+        formData.append('faculty', this.editedNItem.faculty)
+
+        // files
+        for (let file of this.editedNItem.inventionDownload) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/inventions/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsN.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeN()
     },
     saveA () {
       if (this.editedAIndex > -1) {
-        Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
-      } else {
-        this.itemsA.push(this.editedAItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('inventionName', this.editedAItem.inventionName)
+        formData.append('inventionNumber', this.editedAItem.inventionNumber)
+        formData.append('inventionAuthorsCount', this.editedAItem.inventionAuthorsCount)
+        formData.append('inventionAuthorNames', this.editedAItem.inventionAuthorNames)
+        formData.append('newId', this.editedAItem.newId)
+
+        axios.put("http://localhost:8080/api/inventions/update?id="+this.editedAItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedAItem.inventionType)
+        formData.append('typeName', this.editedAItem.inventionTypeName)
+
+        formData.append('name', this.editedAItem.inventionName)
+        formData.append('authorCount', this.editedAItem.inventionAuthorsCount)
+        formData.append('authorName', this.editedAItem.inventionAuthorNames)
+        formData.append('number', this.editedAItem.inventionNumber)
+
+        formData.append('year', this.editedAItem.year)
+        formData.append('mounth', this.editedAItem.mounth)
+        formData.append('department', this.editedAItem.department)
+        formData.append('faculty', this.editedAItem.faculty)
+
+        // files
+        for (let file of this.editedAItem.inventionDownload) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/inventions/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsA.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeA()
     },
     saveG () {
       if (this.editedGIndex > -1) {
-        Object.assign(this.itemsG[this.editedGIndex], this.editedGItem)
-      } else {
-        this.itemsG.push(this.editedGItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('inventionName', this.editedGItem.inventionName)
+        formData.append('inventionNumber', this.editedGItem.inventionNumber)
+        formData.append('inventionAuthorsCount', this.editedGItem.inventionAuthorsCount)
+        formData.append('inventionAuthorNames', this.editedGItem.inventionAuthorNames)
+        formData.append('newId', this.editedGItem.newId)
+
+        axios.put("http://localhost:8080/api/inventions/update?id="+this.editedGItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsG[this.editedGIndex], this.editedGItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedGItem.inventionType)
+        formData.append('typeName', this.editedGItem.inventionTypeName)
+
+        formData.append('name', this.editedGItem.inventionName)
+        formData.append('authorCount', this.editedGItem.inventionAuthorsCount)
+        formData.append('authorName', this.editedGItem.inventionAuthorNames)
+        formData.append('number', this.editedGItem.inventionNumber)
+
+        formData.append('year', this.editedGItem.year)
+        formData.append('mounth', this.editedGItem.mounth)
+        formData.append('department', this.editedGItem.department)
+        formData.append('faculty', this.editedGItem.faculty)
+
+        // files
+        for (let file of this.editedGItem.inventionDownload) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/inventions/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsG.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeG()
     },
 
-    downloadDoc(item){
-
-    }
+    forceFileDownload(response, title) {
+      console.log(title)
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', title)
+      document.body.appendChild(link)
+      link.click()
+    },
+    downloadWithAxios(url, title) {
+      console.log(url)
+      console.log("Download con")
+      axios({
+        method: 'get',
+        url,
+        responseType: 'arraybuffer',
+      })
+        .then((response) => {
+          console.log("Download end")
+          this.forceFileDownload(response, title)
+        })
+        .catch(() => console.log('error occured'))
+    },
+    downloadDoc(item) {
+      console.log("Download start")
+      this.downloadWithAxios("http://localhost:8080/api/inventions/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+    },
   },
 
   computed: {
@@ -1594,6 +2012,105 @@ export default {
       val || this.closeGDelete()
     },
   },
+
+  mounted() {
+    axios
+      .get(`http://localhost:8080/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=51`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.items.push(data[dataKey])
+
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=52`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.itemsM.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=53`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.itemsY.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=54`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.itemsN.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=55`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.itemsA.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=56`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.itemsG.push(data[dataKey])
+        }
+      });
+  }
 
 }
 </script>

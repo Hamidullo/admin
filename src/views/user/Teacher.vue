@@ -41,6 +41,17 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          v-model="editedItem.place"
+                          clearable
+                          required
+                          label="Shogird ish joyi">
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-text-field
                           v-model="editedItem.position"
                           clearable
                           required
@@ -77,33 +88,41 @@
                         <v-select
                           label="Shogird yutug'ini tanlang"
                           required
-                          v-model="editedItem.type"
+                          v-model="editedItem.typeName"
                           :items="['Fan doktori', 'Falsafa doktori', 'Stipendiant', 'Olimpiada g’olibi', 'Sport ustalari ']">
                         </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedItem.year"
-                          clearable
+                        md="3">
+                        <v-select
                           label="Shogird tayorlangan yil"
-                          persistent-hint
-                          required>
-                        </v-text-field>
+                          v-model="editedItem.year"
+                          :items="years">
+                        </v-select>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="3">
+                        <v-select
+                          label="Shogird tayorlangan oy"
+                          v-model="editedItem.mounth"
+                          :items="mounth">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
                         md="6">
                         <v-file-input
-                          v-if="!editedItem.doc"
-                          v-model="editedItem.doc"
+                          v-if="!editedItem.student"
+                          v-model="editedItem.student"
                           show-size
                           label="Hujjat yuklash">
                         </v-file-input>
-                        <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Hujjatni yuklash</v-btn>
+                        <v-btn size="x-large" v-else @click="downloadTDoc(editedItem)">Hujjatni yuklash</v-btn>
                       </v-col>
 
                     </v-row>
@@ -195,7 +214,7 @@
                           sm="6"
                           md="6">
                           <v-text-field
-                            v-model="editedDItem.name"
+                            v-model="editedDItem.achievementName"
                             clearable
                             required
                             label="Davlat mukofoti">
@@ -204,31 +223,29 @@
                         <v-col
                           cols="12"
                           sm="6"
-                          md="6">
-                          <v-text-field
-                            v-model="editedDItem.type"
-                            clearable
-                            required
-                            label="Turi">
-                          </v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="6">
-                          <v-text-field
+                          md="3">
+                          <v-select
+                            label="Davlat mukofoti berilgan yil"
                             v-model="editedDItem.year"
-                            clearable
-                            required
-                            label="Berilgan yili">
-                          </v-text-field>
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Davlat mukofoti berilgan oy"
+                            v-model="editedDItem.mounth"
+                            :items="mounth">
+                          </v-select>
                         </v-col>
                         <v-col
                           cols="12"
                           sm="6"
                           md="6">
                           <v-text-field
-                            v-model="editedDItem.number"
+                            v-model="editedDItem.achievementNumber"
                             clearable
                             label="Seriya raqami"
                             persistent-hint
@@ -236,14 +253,16 @@
                           </v-text-field>
                         </v-col>
                         <v-col
-                          cols="12">
+                          cols="12"
+                          sm="6"
+                          md="6">
                           <v-file-input
-                            v-if="!editedDItem.doc"
-                            v-model="editedDItem.doc"
+                            v-if="!editedDItem.achievementDownload"
+                            v-model="editedDItem.achievementDownload"
                             show-size
                             label="Sertifikat yuklash">
                           </v-file-input>
-                          <v-btn size="x-large" v-else @click="downloadDoc(editedDItem)">Sertifikatni yuklash</v-btn>
+                          <v-btn size="x-large" v-else @click="downloadADoc(editedDItem)">Sertifikatni yuklash</v-btn>
                         </v-col>
                       </v-row>
                     </v-container>
@@ -312,100 +331,137 @@
       </v-col>
     </v-row>
 
+    <v-overlay
+      :model-value="overlay"
+      class="align-center justify-center">
+      <v-progress-circular
+        color="primary"
+        indeterminate
+        size="64">
+      </v-progress-circular>
+    </v-overlay>
+
   </v-container>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data () {
       return {
+        overlay: false,
+        userId: localStorage.getItem("user-hemisId"),
+        userName: localStorage.getItem("user-name"),
+        years: [2023,2024],
+        mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
+
         dialog: false,
         dialogDelete: false,
         editedIndex: -1,
         editedItem: {
           id: 0,
+
           name: '',
+          type: 0,
+          typeName: '',
+          place: '',
           position: '',
-          department: '0',
+          department: '',
           faculty: '',
-          type: '',
-          year: '',
-          doc: null
+
+          year: 0,
+          mounth: 0,
+          userName: localStorage.getItem("user-name"),
+
+          statId: 0,
+          newId: 0,
+          news: '',
+          student: null
         },
         defaultItem: {
           id: 0,
+          userName: localStorage.getItem("user-name"),
+
           name: '',
+          type: 0,
+          typeName: '',
+          place: '',
           position: '',
-          department: '0',
+          department: '',
           faculty: '',
-          type: '',
-          year: '',
-          doc: null
+
+          year: 0,
+          mounth: 0,
+
+          statId: 0,
+          newId: 0,
+          news: '',
+          student: null
         },
         search: '',
         headers: [
           { key: 'name', title: 'Tayyorlagan shogird', align: 'start', sortable: false, },
+          { key: 'place', title: 'Ish joyi' },
           { key: 'position', title: 'Lavozimi' },
           { key: 'department', title: 'Kafedrasi' },
           { key: 'faculty', title: 'Fakulteti' },
-          { key: 'type', title: 'Turi' },
-          {  key: 'actions', title: 'Amallar',align: 'start',sortable: false },
+          { key: 'typeName', title: 'Turi' },
+          { key: 'news', title: 'Hujjat holati' },
+          { key: 'actions', title: 'Amallar',align: 'start',sortable: false },
         ],
-        items: [
-          {
-            name: 'Frozen Yogurt',
-            fan: 159,
-            falsafa: 6.0,
-            olimpiyada: 24,
-            sport: 4.0,
-            stipendia: 4.0,
-          },
-          {
-            name: 'Ice cream sandwich',
-            fan: 237,
-            falsafa: 9.0,
-            olimpiyada: 37,
-            sport: 4.3,
-            stipendia: 4.3,
-          }
-        ],
+        items: [],
 
         dialogD: false,
         dialogDDelete: false,
         editedDIndex: -1,
         editedDItem: {
           id: 0,
-          name: '',
-          type: '',
-          year: '',
-          number: '',
-          doc: null
+          achievementType: 71,
+          achievementTypeName: 'Davlat mukofoti',
+
+          achievementName: '',
+          achievementSpecies: '',
+          achievementNumber: '',
+
+          year: 0,
+          mounth: 0,
+          userName: localStorage.getItem("user-name"),
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
+          statId: 0,
+          newId: 0,
+          news: '',
+          achievementDownload: null
         },
         defaultDItem: {
           id: 0,
-          name: '',
-          type: '',
-          year: '',
-          number: '',
-          doc: null
+          achievementType: 71,
+          achievementTypeName: 'Davlat mukofoti',
+
+          achievementName: '',
+          achievementSpecies: '',
+          achievementNumber: '',
+
+          year: 0,
+          mounth: 0,
+          userName: localStorage.getItem("user-name"),
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
+          statId: 0,
+          newId: 0,
+          news: '',
+          achievementDownload: null
         },
         searchD: '',
         headersD: [
-          { key: 'name', title: 'Davlat mukofotlari', align: 'start', sortable: false, },
-          { key: 'type', title: 'Turi' },
+          { key: 'achievementName', title: 'Mukofot turi', align: 'start', sortable: false, },
           { key: 'year', title: 'Berilgan yili' },
-          { key: 'number', title: 'Seriya raqami' },
-          {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
+          { key: 'achievementNumber', title: 'Seriya raqami' },
+          { key: 'news', title: 'Hujjat holati' },
+          { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
         ],
-        itemsD: [
-          {
-            name: 'Frozen Yogurt',
-            turi: 159,
-            yili: 6.0,
-            seriya: 24,
-            sertifikat: 4.0,
-          }
-        ],
+        itemsD: [],
       }
     },
 
@@ -488,34 +544,221 @@ export default {
     },
 
     deleteItemConfirm () {
-      this.items.splice(this.editedIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/teachers/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+        .then(response => {
+          console.log(`Delete item with ID ${this.editItem.id}`);
+          this.items.splice(this.editedIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeDelete()
     },
     deleteDItemConfirm () {
-      this.itemsD.splice(this.editedDIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/achievements/delete?id=${this.editedDItem.id}&newId=${this.editedDItem.newId}`)
+        .then(response => {
+          console.log(`Delete item with ID ${this.editItem.id}`);
+          this.itemsD.splice(this.editedDIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeDDelete()
     },
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.items[this.editedIndex], this.editedItem)
-      } else {
-        this.items.push(this.editedItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('name', this.editedItem.workName)
+        formData.append('place', this.editedItem.workAuthorCount)
+        formData.append('position', this.editedItem.workAuthorName)
+        formData.append('department', this.editedItem.workNumber)
+        formData.append('faculty', this.editedItem.workNumber)
+        formData.append('newId', this.editedItem.newId)
+
+        axios.put("http://localhost:8080/api/teachers/update?id="+this.editedItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.items[this.editedIndex], this.editedItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+
+        if (this.editedItem.typeName === 'Fan doktori'){
+          this.editedItem.type = 1
+        } else if (this.editedItem.typeName === 'Falsafa doktori'){
+          this.editedItem.type = 2
+        } else if (this.editedItem.typeName === 'Stipendiant'){
+          this.editedItem.type = 3
+        } else if (this.editedItem.typeName === 'Olimpiada g’olibi'){
+          this.editedItem.type = 4
+        } else {
+          this.editedItem.type = 5
+        }
+
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('userName', this.editedItem.userName)
+
+        formData.append('name', this.editedItem.name)
+        formData.append('type', this.editedItem.type)
+        formData.append('typeName', this.editedItem.typeName)
+        formData.append('place', this.editedItem.place)
+        formData.append('position', this.editedItem.position)
+        formData.append('department', this.editedItem.department)
+        formData.append('faculty', this.editedItem.faculty)
+
+        formData.append('year', this.editedItem.year)
+        formData.append('mounth', this.editedItem.mounth)
+
+        // files
+        for (let file of this.editedItem.student) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/teachers/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.items.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.close()
     },
     saveD () {
       if (this.editedDIndex > -1) {
-        Object.assign(this.itemsD[this.editedDIndex], this.editedDItem)
-      } else {
-        this.itemsD.push(this.editedDItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('name', this.editedDItem.achievementName)
+        formData.append('number', this.editedDItem.achievementNumber)
+        formData.append('newId', this.editedDItem.newId)
+
+        axios.put("http://localhost:8080/api/achievements/update?id="+this.editedDItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsD[this.editedDIndex], this.editedDItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('userName', this.userName)
+
+        formData.append('name', this.editedDItem.achievementName)
+        formData.append('type', this.editedDItem.achievementType)
+        formData.append('typeName', this.editedDItem.achievementTypeName)
+        formData.append('number', this.editedDItem.achievementNumber)
+        formData.append('year', this.editedDItem.year)
+        formData.append('mounth', this.editedDItem.mounth)
+        formData.append('department', this.editedDItem.department)
+        formData.append('faculty', this.editedDItem.faculty)
+
+        // files
+        for (let file of this.editedDItem.doc) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/achievements/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsD.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.closeD()
     },
 
-    downloadDoc(item){
+    forceFileDownload(response, title) {
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', title)
+      document.body.appendChild(link)
+      link.click()
+    },
+    downloadWithAxios(url, title) {
+      axios({
+        method: 'get',
+        url,
+        responseType: 'arraybuffer',
+      })
+        .then((response) => {
+          this.forceFileDownload(response, title)
+        })
+        .catch(() => console.log('error occured'))
+    },
+    downloadTDoc(item) {
+      this.downloadWithAxios("http://localhost:8080/api/teachers/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+    },
+    downloadADoc(item) {
+      this.downloadWithAxios("http://localhost:8080/api/achievements/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+    },
+  },
 
-    }
+  mounted() {
+    axios
+      .get(`http://localhost:8080/api/teachers/teacher?userId=${this.userId}&limit=10&offset=0`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.items.push(data[dataKey])
+
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/achievements/achievement?userId=${this.userId}&limit=10&offset=0`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          this.itemsD.push(data[dataKey])
+        }
+      });
+
+
   }
 
 }

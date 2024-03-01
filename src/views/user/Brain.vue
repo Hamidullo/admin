@@ -1891,6 +1891,7 @@ export default {
         formData.append('country', this.editedSItem.brainMagCountry)
         formData.append('quotesCount', this.editedSItem.brainQuotesCount)
         formData.append('url', this.editedSItem.brainLink)
+        formData.append('newId', this.editedSItem.newId)
 
         axios.put("http://localhost:8080/api/brains/update?id="+this.editedSItem.id, formData)
           .then(response => {
@@ -1961,6 +1962,7 @@ export default {
         formData.append('country', this.editedWItem.brainMagCountry)
         formData.append('quotesCount', this.editedWItem.brainQuotesCount)
         formData.append('url', this.editedWItem.brainLink)
+        formData.append('newId', this.editedWItem.newId)
 
         axios.put("http://localhost:8080/api/brains/update?id="+this.editedWItem.id, formData)
           .then(response => {
@@ -2022,6 +2024,7 @@ export default {
         formData.append('country', this.editedXItem.brainMagCountry)
         formData.append('quotesCount', this.editedXItem.brainQuotesCount)
         formData.append('url', this.editedXItem.brainLink)
+        formData.append('newId', this.editedXItem.newId)
 
         axios.put("http://localhost:8080/api/brains/update?id="+this.editedXItem.id, formData)
           .then(response => {
@@ -2083,6 +2086,7 @@ export default {
         formData.append('country', this.editedRItem.brainMagCountry)
         formData.append('quotesCount', this.editedRItem.brainQuotesCount)
         formData.append('url', this.editedRItem.brainLink)
+        formData.append('newId', this.editedRItem.newId)
 
         axios.put("http://localhost:8080/api/brains/update?id="+this.editedRItem.id, formData)
           .then(response => {
@@ -2144,6 +2148,7 @@ export default {
         formData.append('country', this.editedMItem.brainMagCountry)
         formData.append('quotesCount', this.editedMItem.brainQuotesCount)
         formData.append('url', this.editedMItem.brainLink)
+        formData.append('newId', this.editedMItem.newId)
 
         axios.put("http://localhost:8080/api/brains/update?id="+this.editedMItem.id, formData)
           .then(response => {
@@ -2205,6 +2210,7 @@ export default {
         formData.append('country', this.editedAItem.brainMagCountry)
         formData.append('quotesCount', this.editedAItem.brainQuotesCount)
         formData.append('url', this.editedAItem.brainLink)
+        formData.append('newId', this.editedAItem.newId)
 
         axios.put("http://localhost:8080/api/brains/update?id="+this.editedAItem.id, formData)
           .then(response => {

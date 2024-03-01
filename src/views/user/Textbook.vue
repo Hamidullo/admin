@@ -1060,6 +1060,7 @@ export default {
         formData.append('workAuthorCount', this.editedItem.workAuthorCount)
         formData.append('workAuthorName', this.editedItem.workAuthorName)
         formData.append('workNumber', this.editedItem.workNumber)
+        formData.append('newId', this.editedItem.newId)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedItem.id, formData)
           .then(response => {
@@ -1115,6 +1116,7 @@ export default {
         formData.append('workAuthorCount', this.editedItem.workAuthorCount)
         formData.append('workAuthorName', this.editedItem.workAuthorName)
         formData.append('workNumber', this.editedItem.workNumber)
+        formData.append('newId', this.editedItem.newId)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedQItem.id, formData)
           .then(response => {
@@ -1169,6 +1171,7 @@ export default {
         formData.append('workAuthorCount', this.editedItem.workAuthorCount)
         formData.append('workAuthorName', this.editedItem.workAuthorName)
         formData.append('workNumber', this.editedItem.workNumber)
+        formData.append('newId', this.editedItem.newId)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedMItem.id, formData)
           .then(response => {
@@ -1223,6 +1226,7 @@ export default {
         formData.append('workAuthorCount', this.editedItem.workAuthorCount)
         formData.append('workAuthorName', this.editedItem.workAuthorName)
         formData.append('workNumber', this.editedItem.workNumber)
+        formData.append('newId', this.editedItem.newId)
 
         axios.put("http://localhost:8080/api/works/update?id="+this.editedKItem.id, formData)
           .then(response => {
