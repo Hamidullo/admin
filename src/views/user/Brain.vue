@@ -466,21 +466,21 @@
                           cols="12"
                           sm="6"
                           md="6">
-                          <v-text-field
-                            v-model="editedDItem.brainMagName"
-                            clearable
-                            label="Nashr etilgan jurnal nomi"
-                            required>
-                          </v-text-field>
+                          <v-select
+                            label="Turi"
+                            v-model="editedDItem.brainMagCountry"
+                            :items="['IAP','E3','AIP','Boshqa']">
+                          </v-select>
                         </v-col>
                         <v-col
                           cols="12"
                           sm="6"
                           md="6">
                           <v-text-field
-                            v-model="editedDItem.brainMagCountry"
+                            v-model="editedDItem.brainMagName"
                             clearable
-                            label="Jurnal nashr etilgan davlat">
+                            label="Konferentsiya nomi"
+                            required>
                           </v-text-field>
                         </v-col>
                         <v-col
