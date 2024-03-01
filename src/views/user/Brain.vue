@@ -400,770 +400,953 @@
         </v-data-table>
       </v-card>
       </v-col>
-    </v-row>
 
+      <v-col cols="12">
+        <v-card flat title="“Scopus” va “Web of sciense” bazalarida indeklanuvchi konferentsiyalar">
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog v-model="dialogD" persistent width="1024">
+                <template v-slot:activator="{ props }">
+                  <v-btn
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formDTitle }}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedDItem.brainName"
+                            clearable
+                            label="Nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedDItem.brainQuotesCount"
+                            clearable
+                            label="Iqtiboslar soni">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedDItem.brainAuthorCount"
+                            clearable
+                            label="Mualliflar soni">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            v-model="editedDItem.brainAuthorName"
+                            clearable
+                            label="Ham mualliflar F.I.SH"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedDItem.brainMagName"
+                            clearable
+                            label="Nashr etilgan jurnal nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedDItem.brainMagCountry"
+                            clearable
+                            label="Jurnal nashr etilgan davlat">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedDItem.brainLink"
+                            clearable
+                            label="Maqola joylashgan havola"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan yil"
+                            v-model="editedDItem.year"
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan oy"
+                            v-model="editedDItem.mounth"
+                            :items="mounth">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-file-input
+                            v-if="!editedDItem.brainUploaded"
+                            v-model="editedDItem.brainUploaded"
+                            show-size
+                            label="Maqola yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedDItem)">Maqolani yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeD">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveD">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogDDelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">“Scopus” va “Web of sciense” bazalarida indeklanuvchi konferentsiyani o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeDDelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteDItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <!-- Dialog end -->
+          </template>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchD"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details
+            ></v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersD"
+            :items="itemsD"
+            :search="searchD">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editDItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteDItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
+      </v-col>
 
-    <v-row>
       <v-col cols="12">
         <v-card flat title="Xorijiy jurnallardagi maqolalar (OAK ro’yxatidagi)">
-        <template v-slot:append>
-          <!-- Dialog start -->
-          <v-row justify="center" class="mr-2">
-            <v-dialog
-              v-model="dialogX" persistent width="1024">
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props">
-                  Qo'shish
-                </v-btn>
-              </template>
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog
+                v-model="dialogX" persistent width="1024">
+                <template v-slot:activator="{ props }">
+                  <v-btn
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{formXTitle}}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            clearable
+                            v-model="editedXItem.brainName"
+                            label="Nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedXItem.brainQuotesCount"
+                            clearable
+                            required
+                            label="Iqtiboslar soni">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedXItem.brainAuthorCount"
+                            clearable
+                            required
+                            label="Mualliflar soni">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            v-model="editedXItem.brainAuthorName"
+                            clearable
+                            label="Ham mualliflar F.I.SH"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedXItem.brainMagName"
+                            clearable
+                            label="Nashr etilgan jurnal nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedXItem.brainMagCountry"
+                            clearable
+                            required
+                            label="Jurnal nashr etilgan davlat">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedXItem.brainLink"
+                            clearable
+                            label="Maqola joylashgan havola"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan yil"
+                            v-model="editedXItem.year"
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan oy"
+                            v-model="editedXItem.mounth"
+                            :items="mounth">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-file-input
+                            v-if="!editedXItem.brainUploaded"
+                            v-model="editedXItem.brainUploaded"
+                            show-size
+                            label="Maqola yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedXItem)">Maqolani yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeX">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveX">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <v-dialog v-model="dialogXDelete" width="auto">
               <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{formXTitle}}</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          clearable
-                          v-model="editedXItem.brainName"
-                          label="Nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedXItem.brainQuotesCount"
-                          clearable
-                          required
-                          label="Iqtiboslar soni">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedXItem.brainAuthorCount"
-                          clearable
-                          required
-                          label="Mualliflar soni">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          v-model="editedXItem.brainAuthorName"
-                          clearable
-                          label="Ham mualliflar F.I.SH"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedXItem.brainMagName"
-                          clearable
-                          label="Nashr etilgan jurnal nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedXItem.brainMagCountry"
-                          clearable
-                          required
-                          label="Jurnal nashr etilgan davlat">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedXItem.brainLink"
-                          clearable
-                          label="Maqola joylashgan havola"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="3">
-                        <v-select
-                          label="Nashr etilgan yil"
-                          v-model="editedXItem.year"
-                          :items="years">
-                        </v-select>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="3">
-                        <v-select
-                          label="Nashr etilgan oy"
-                          v-model="editedXItem.mounth"
-                          :items="mounth">
-                        </v-select>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-file-input
-                          v-if="!editedXItem.brainUploaded"
-                          v-model="editedXItem.brainUploaded"
-                          show-size
-                          label="Maqola yuklash">
-                        </v-file-input>
-                        <v-btn size="x-large" v-else @click="downloadDoc(editedXItem)">Maqolani yuklash</v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
+                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Xorijiy jurnallardagi maqolani o'chirishni hohlaysizmi?</v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="closeX">
-                    Yopish
-                  </v-btn>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="saveX">
-                    Saqlash
-                  </v-btn>
+                  <v-btn color="blue-darken-1" variant="text" @click="closeXDelete">Bekor qilish</v-btn>
+                  <v-btn color="red" variant="text" @click="deleteXItemConfirm">O'chirish</v-btn>
+                  <v-spacer></v-spacer>
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          </v-row>
-          <v-dialog v-model="dialogXDelete" width="auto">
-            <v-card>
-              <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Xorijiy jurnallardagi maqolani o'chirishni hohlaysizmi?</v-card-title>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue-darken-1" variant="text" @click="closeXDelete">Bekor qilish</v-btn>
-                <v-btn color="red" variant="text" @click="deleteXItemConfirm">O'chirish</v-btn>
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-          <!-- Dialog end -->
-        </template>
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchX"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details
-          ></v-text-field>
-        </template>
-        <v-data-table
-          :headers="headersX"
-          :items="itemsX"
-          :search="searchX">
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              size="small"
-              class="me-2"
-              @click="editXItem(item)">
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              size="small"
-              @click="deleteXItem(item)">
-              mdi-delete
-            </v-icon>
+            <!-- Dialog end -->
           </template>
-        </v-data-table>
-      </v-card>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchX"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details
+            ></v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersX"
+            :items="itemsX"
+            :search="searchX">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editXItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteXItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
       </v-col>
 
 
       <v-col cols="12">
         <v-card flat title="Respublika jurnallaridagi maqolalar (OAK ro’yxatidagi)">
-        <template v-slot:append>
-          <!-- Dialog start -->
-          <v-row justify="center" class="mr-2">
-            <v-dialog
-              v-model="dialogR"
-              persistent
-              width="1024">
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props">
-                  Qo'shish
-                </v-btn>
-              </template>
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog
+                v-model="dialogR"
+                persistent
+                width="1024">
+                <template v-slot:activator="{ props }">
+                  <v-btn
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{formRTitle}}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedRItem.brainName"
+                            clearable
+                            label="Nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedRItem.brainQuotesCount"
+                            clearable
+                            required
+                            label="Iqtiboslar soni">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedRItem.brainAuthorCount"
+                            clearable
+                            required
+                            label="Mualliflar soni">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            v-model="editedRItem.brainAuthorName"
+                            clearable
+                            label="Ham mualliflar F.I.SH"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedRItem.brainMagName"
+                            clearable
+                            label="Nashr etilgan jurnal nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedRItem.brainMagCountry"
+                            clearable
+                            label="Jurnal nashr etilgan davlat">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedRItem.brainLink"
+                            clearable
+                            label="Maqola joylashgan havola"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan yil"
+                            v-model="editedRItem.year"
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan oy"
+                            v-model="editedRItem.mounth"
+                            :items="mounth">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-file-input
+                            v-if="!editedRItem.brainUploaded"
+                            v-model="editedRItem.brainUploaded"
+                            show-size
+                            label="Maqola yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedRItem)">Maqolani yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeR">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveR">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <v-dialog v-model="dialogRDelete" width="auto">
               <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{formRTitle}}</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedRItem.brainName"
-                          clearable
-                          label="Nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedRItem.brainQuotesCount"
-                          clearable
-                          required
-                          label="Iqtiboslar soni">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedRItem.brainAuthorCount"
-                          clearable
-                          required
-                          label="Mualliflar soni">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          v-model="editedRItem.brainAuthorName"
-                          clearable
-                          label="Ham mualliflar F.I.SH"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedRItem.brainMagName"
-                          clearable
-                          label="Nashr etilgan jurnal nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedRItem.brainMagCountry"
-                          clearable
-                          label="Jurnal nashr etilgan davlat">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedRItem.brainLink"
-                          clearable
-                          label="Maqola joylashgan havola"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="3">
-                        <v-select
-                          label="Nashr etilgan yil"
-                          v-model="editedRItem.year"
-                          :items="years">
-                        </v-select>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="3">
-                        <v-select
-                          label="Nashr etilgan oy"
-                          v-model="editedRItem.mounth"
-                          :items="mounth">
-                        </v-select>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-file-input
-                          v-if="!editedRItem.brainUploaded"
-                          v-model="editedRItem.brainUploaded"
-                          show-size
-                          label="Maqola yuklash">
-                        </v-file-input>
-                        <v-btn size="x-large" v-else @click="downloadDoc(editedRItem)">Maqolani yuklash</v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
+                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Respublika jurnallaridagi maqolani o'chirishni hohlaysizmi?</v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="closeR">
-                    Yopish
-                  </v-btn>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="saveR">
-                    Saqlash
-                  </v-btn>
+                  <v-btn color="blue-darken-1" variant="text" @click="closeRDelete">Bekor qilish</v-btn>
+                  <v-btn color="red" variant="text" @click="deleteRItemConfirm">O'chirish</v-btn>
+                  <v-spacer></v-spacer>
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          </v-row>
-          <v-dialog v-model="dialogRDelete" width="auto">
-            <v-card>
-              <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Respublika jurnallaridagi maqolani o'chirishni hohlaysizmi?</v-card-title>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue-darken-1" variant="text" @click="closeRDelete">Bekor qilish</v-btn>
-                <v-btn color="red" variant="text" @click="deleteRItemConfirm">O'chirish</v-btn>
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-          <!-- Dialog end -->
-        </template>
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchR"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details>
-          </v-text-field>
-        </template>
-        <v-data-table
-          :headers="headersR"
-          :items="itemsR"
-          :search="searchR">
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              size="small"
-              class="me-2"
-              @click="editRItem(item)">
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              size="small"
-              @click="deleteRItem(item)">
-              mdi-delete
-            </v-icon>
+            <!-- Dialog end -->
           </template>
-        </v-data-table>
-      </v-card>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchR"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details>
+            </v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersR"
+            :items="itemsR"
+            :search="searchR">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editRItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteRItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
       </v-col>
-    </v-row>
 
-
-    <v-row>
       <v-col cols="12">
         <v-card flat title="Xalqaro miqyosdagi anjumanlar">
-        <template v-slot:append>
-          <!-- Dialog start -->
-          <v-row justify="center" class="mr-2">
-            <v-dialog
-              v-model="dialogM"
-              persistent
-              width="1024">
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props">
-                  Qo'shish
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{formMTitle}}</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedMItem.brainName"
-                          clearable
-                          label="Nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedMItem.brainMagName"
-                          clearable
-                          required
-                          label="Nashr etilgan anjuman nomi">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedMItem.brainAuthorCount"
-                          clearable
-                          required
-                          label="Mualliflar soni">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          v-model="editedMItem.brainAuthorName"
-                          clearable
-                          label="Ham mualliflar F.I.SH"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedMItem.brainMagCountry"
-                          clearable
-                          required
-                          label="Anjuman o'tkazilgan OTM, yoki davlat">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedMItem.brainLink"
-                          clearable
-                          label="Maqola joylashgan havola"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="3">
-                        <v-select
-                          label="Nashr etilgan yil"
-                          v-model="editedMItem.year"
-                          :items="years">
-                        </v-select>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="3">
-                        <v-select
-                          label="Nashr etilgan oy"
-                          v-model="editedMItem.mounth"
-                          :items="mounth">
-                        </v-select>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-file-input
-                          v-if="!editedMItem.brainUploaded"
-                          v-model="editedMItem.brainUploaded"
-                          show-size
-                          label="Maqola yuklash">
-                        </v-file-input>
-                        <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Maqolani yuklash</v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog
+                v-model="dialogM"
+                persistent
+                width="1024">
+                <template v-slot:activator="{ props }">
                   <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="closeM">
-                    Yopish
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
                   </v-btn>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="saveM">
-                    Saqlash
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="dialogMDelete" width="auto">
-              <v-card>
-                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Xalqaro miqyosdagi anjuman o'chirishni hohlaysizmi?</v-card-title>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue-darken-1" variant="text" @click="closeMDelete">Bekor qilish</v-btn>
-                  <v-btn color="red" variant="text" @click="deleteMItemConfirm">O'chirish</v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-          <!-- Dialog end -->
-        </template>
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchA"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details
-          ></v-text-field>
-        </template>
-        <v-data-table
-          :headers="headersM"
-          :items="itemsM"
-          :search="searchM">
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              size="small"
-              class="me-2"
-              @click="editMItem(item)">
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              size="small"
-              @click="deleteMItem(item)">
-              mdi-delete
-            </v-icon>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{formMTitle}}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedMItem.brainName"
+                            clearable
+                            label="Nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedMItem.brainMagName"
+                            clearable
+                            required
+                            label="Nashr etilgan anjuman nomi">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedMItem.brainAuthorCount"
+                            clearable
+                            required
+                            label="Mualliflar soni">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            v-model="editedMItem.brainAuthorName"
+                            clearable
+                            label="Ham mualliflar F.I.SH"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedMItem.brainMagCountry"
+                            clearable
+                            required
+                            label="Anjuman o'tkazilgan OTM, yoki davlat">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedMItem.brainLink"
+                            clearable
+                            label="Maqola joylashgan havola"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan yil"
+                            v-model="editedMItem.year"
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan oy"
+                            v-model="editedMItem.mounth"
+                            :items="mounth">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-file-input
+                            v-if="!editedMItem.brainUploaded"
+                            v-model="editedMItem.brainUploaded"
+                            show-size
+                            label="Maqola yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Maqolani yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeM">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveM">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogMDelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Xalqaro miqyosdagi anjuman o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeMDelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteMItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <!-- Dialog end -->
           </template>
-        </v-data-table>
-      </v-card>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchA"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details
+            ></v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersM"
+            :items="itemsM"
+            :search="searchM">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editMItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteMItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
       </v-col>
 
 
       <v-col cols="12">
         <v-card flat title="Respublika miqyosidagi anjumanlar">
-        <template v-slot:append>
-          <!-- Dialog start -->
-          <v-row justify="center" class="mr-2">
-            <v-dialog
-              v-model="dialogA"
-              persistent
-              width="1024">
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  v-bind="props">
-                  Qo'shish
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{formATitle}}</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedAItem.brainName"
-                          clearable
-                          label="Nomi"
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedAItem.brainMagName"
-                          clearable
-                          required
-                          label="Nashr etilgan anjuman nomi">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4">
-                        <v-text-field
-                          v-model="editedAItem.brainAuthorCount"
-                          clearable
-                          required
-                          label="Mualliflar soni">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
-                        <v-text-field
-                          v-model="editedAItem.brainAuthorName"
-                          clearable
-                          label="Ham mualliflar F.I.SH"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedAItem.brainMagCountry"
-                          clearable
-                          required
-                          label="Anjuman o'tkazilgan OTM, yoki davlat">
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-text-field
-                          v-model="editedAItem.brainLink"
-                          clearable
-                          label="Maqola joylashgan havola"
-                          persistent-hint
-                          required>
-                      </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="3">
-                        <v-select
-                          label="Nashr etilgan yil"
-                          v-model="editedAItem.year"
-                          :items="years">
-                        </v-select>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="3">
-                        <v-select
-                          label="Nashr etilgan oy"
-                          v-model="editedAItem.mounth"
-                          :items="mounth">
-                        </v-select>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="6">
-                        <v-file-input
-                          v-if="!editedAItem.brainUploaded"
-                          v-model="editedAItem.brainUploaded"
-                          show-size
-                          label="Maqola yuklash">
-                        </v-file-input>
-                        <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Maqola yuklash</v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+          <template v-slot:append>
+            <!-- Dialog start -->
+            <v-row justify="center" class="mr-2">
+              <v-dialog
+                v-model="dialogA"
+                persistent
+                width="1024">
+                <template v-slot:activator="{ props }">
                   <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="closeA">
-                    Yopish
+                    color="primary"
+                    v-bind="props">
+                    Qo'shish
                   </v-btn>
-                  <v-btn
-                    color="blue-darken-1"
-                    variant="text"
-                    @click="saveA">
-                    Saqlash
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="dialogADelete" width="auto">
-              <v-card>
-                <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Respublika miqyosidagi anjuman o'chirishni hohlaysizmi?</v-card-title>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue-darken-1" variant="text" @click="closeADelete">Bekor qilish</v-btn>
-                  <v-btn color="red" variant="text" @click="deleteAItemConfirm">O'chirish</v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-          <!-- Dialog end -->
-        </template>
-        <template v-slot:text>
-          <v-text-field
-            v-model="searchA"
-            label="Qidiruv..."
-            prepend-inner-icon="mdi-magnify"
-            single-line
-            variant="outlined"
-            hide-details
-          ></v-text-field>
-        </template>
-        <v-data-table
-          :headers="headersA"
-          :items="itemsA"
-          :search="searchA">
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              size="small"
-              class="me-2"
-              @click="editAItem(item)">
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              size="small"
-              @click="deleteAItem(item)">
-              mdi-delete
-            </v-icon>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{formATitle}}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedAItem.brainName"
+                            clearable
+                            label="Nomi"
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedAItem.brainMagName"
+                            clearable
+                            required
+                            label="Nashr etilgan anjuman nomi">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4">
+                          <v-text-field
+                            v-model="editedAItem.brainAuthorCount"
+                            clearable
+                            required
+                            label="Mualliflar soni">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-text-field
+                            v-model="editedAItem.brainAuthorName"
+                            clearable
+                            label="Ham mualliflar F.I.SH"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedAItem.brainMagCountry"
+                            clearable
+                            required
+                            label="Anjuman o'tkazilgan OTM, yoki davlat">
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-text-field
+                            v-model="editedAItem.brainLink"
+                            clearable
+                            label="Maqola joylashgan havola"
+                            persistent-hint
+                            required>
+                          </v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan yil"
+                            v-model="editedAItem.year"
+                            :items="years">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="3">
+                          <v-select
+                            label="Nashr etilgan oy"
+                            v-model="editedAItem.mounth"
+                            :items="mounth">
+                          </v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="6">
+                          <v-file-input
+                            v-if="!editedAItem.brainUploaded"
+                            v-model="editedAItem.brainUploaded"
+                            show-size
+                            label="Maqola yuklash">
+                          </v-file-input>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Maqola yuklash</v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="closeA">
+                      Yopish
+                    </v-btn>
+                    <v-btn
+                      color="blue-darken-1"
+                      variant="text"
+                      @click="saveA">
+                      Saqlash
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogADelete" width="auto">
+                <v-card>
+                  <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Respublika miqyosidagi anjuman o'chirishni hohlaysizmi?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-darken-1" variant="text" @click="closeADelete">Bekor qilish</v-btn>
+                    <v-btn color="red" variant="text" @click="deleteAItemConfirm">O'chirish</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+            <!-- Dialog end -->
           </template>
-        </v-data-table>
-      </v-card>
+          <template v-slot:text>
+            <v-text-field
+              v-model="searchA"
+              label="Qidiruv..."
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              variant="outlined"
+              hide-details
+            ></v-text-field>
+          </template>
+          <v-data-table
+            :headers="headersA"
+            :items="itemsA"
+            :search="searchA">
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="editAItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                size="small"
+                @click="deleteAItem(item)">
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
       </v-col>
     </v-row>
 
@@ -1582,6 +1765,71 @@ export default {
       },
       itemsA: [],
 
+      searchD: '',
+      headersD: [
+        { key: 'name', title: 'Nomi',align: 'start', sortable: false,},
+        { key: 'brainMagName', title: 'Nashr etilgan anjuman nomi' },
+        { key: 'brainAuthorCount', title: 'Mualliflar soni' },
+        { key: 'brainAuthorName', title: 'Ham mualliflar F.I.Sh' },
+        { key: 'year', title: 'Nashr etilgan yil' },
+        { key: 'brainMagCountry', title: 'Anjuman o’tkazilgan OTM, ITM yoki davlat' },
+        { key: 'brainLink', title: 'Maqola joylashgan havola' },
+        { key: 'news', title: 'Hujjat holati' },
+        { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
+      ],
+      dialogD: false,
+      dialogDDelete: false,
+      editedDIndex: -1,
+      editedDItem: {
+        id: 0,
+        brainType: 37,
+        brainTypeName: '“Scopus” va “Web of sciense” bazalarida indeklanuvchi konferentsiyalar',
+
+        brainName: '',
+        brainQuotesCount: 0,
+        quarter: '',
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
+      },
+      defaultDItem: {
+        id: 0,
+        brainType: 37,
+        brainTypeName: '“Scopus” va “Web of sciense” bazalarida indeklanuvchi konferentsiyalar',
+
+        brainName: '',
+        brainQuotesCount: 0,
+        quarter: '',
+        brainAuthorCount: 0,
+        brainAuthorName: '',
+        brainMagName: '',
+        brainMagCountry: '',
+        brainLink: '',
+
+        userName: localStorage.getItem("user-name"),
+        department: localStorage.getItem("user-department"),
+        faculty: localStorage.getItem("user-faculty"),
+        year: 0,
+        mounth: 0,
+        statId: 0,
+        newId: 0,
+        news: '',
+        brainUploaded: null,
+      },
+      itemsD: [],
+
     }
   },
 
@@ -1603,6 +1851,9 @@ export default {
     },
     formATitle () {
       return this.editedAIndex === -1 ? 'Respublika miqyosidagi anjuman qo`shish' : 'Respublika miqyosidagi anjuman taxrirlash'
+    },
+    formDTitle () {
+      return this.editedDIndex === -1 ? '“Scopus” va “Web of sciense” bazalarida indeklanuvchi konferentsiya qo`shish' : '“Scopus” va “Web of sciense” bazalarida indeklanuvchi konferentsiyani taxrirlash'
     },
   },
 
@@ -1643,6 +1894,12 @@ export default {
     dialogADelete (val) {
       val || this.closeADelete()
     },
+    dialogD (val) {
+      val || this.closeD()
+    },
+    dialogDDelete (val) {
+      val || this.closeDDelete()
+    },
   },
 
   methods: {
@@ -1677,6 +1934,11 @@ export default {
       this.editedAItem = Object.assign({}, item)
       this.dialogA = true
     },
+    editDItem (item) {
+      this.editedDIndex = this.itemsD.indexOf(item)
+      this.editedDItem = Object.assign({}, item)
+      this.dialogD = true
+    },
 
     deleteSItem (item) {
       this.editedSIndex = this.itemsS.indexOf(item)
@@ -1707,6 +1969,11 @@ export default {
       this.editedAIndex = this.itemsA.indexOf(item)
       this.editedAItem = Object.assign({}, item)
       this.dialogADelete = true
+    },
+    deleteDItem (item) {
+      this.editedDIndex = this.itemsD.indexOf(item)
+      this.editedDItem = Object.assign({}, item)
+      this.dialogDDelete = true
     },
 
     deleteSItemConfirm () {
@@ -1793,6 +2060,20 @@ export default {
         });
       this.closeADelete()
     },
+    deleteDItemConfirm () {
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedDItem.id}&newId=${this.editedDItem.newId}`)
+        .then(response => {
+          console.log(`Deleteditem with ID ${this.editDItem.id}`);
+          this.itemsD.splice(this.editedDIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
+      this.closeDDelete()
+    },
 
     closeS () {
       this.dialogS = false
@@ -1836,6 +2117,13 @@ export default {
         this.editedAIndex = -1
       })
     },
+    closeD () {
+      this.dialogD = false
+      this.$nextTick(() => {
+        this.editedDItem = Object.assign({}, this.defaultDItem)
+        this.editedDIndex = -1
+      })
+    },
 
     closeSDelete () {
       this.dialogSDelete = false
@@ -1877,6 +2165,13 @@ export default {
       this.$nextTick(() => {
         this.editedAItem = Object.assign({}, this.defaultAItem)
         this.editedAIndex = -1
+      })
+    },
+    closeDDelete () {
+      this.dialogDDelete = false
+      this.$nextTick(() => {
+        this.editedDItem = Object.assign({}, this.defaultDItem)
+        this.editedDIndex = -1
       })
     },
 
@@ -2261,6 +2556,70 @@ export default {
       }
       this.closeA()
     },
+    saveD () {
+      if (this.editedDIndex > -1) {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('name', this.editedDItem.brainName)
+        formData.append('authorCount', this.editedDItem.brainAuthorCount)
+        formData.append('authorName', this.editedDItem.brainAuthorName)
+        formData.append('magName', this.editedDItem.brainMagName)
+        formData.append('country', this.editedDItem.brainMagCountry)
+        formData.append('quotesCount', this.editedDItem.brainQuotesCount)
+        formData.append('url', this.editedDItem.brainLink)
+        formData.append('newId', this.editedDItem.newId)
+
+        axios.put("http://localhost:8080/api/brains/update?id="+this.editedDItem.id, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.itemsD[this.editedDIndex], this.editedDItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('userName', this.userName)
+        formData.append('type', this.editedDItem.brainType)
+        formData.append('typeName', this.editedDItem.brainTypeName)
+
+        formData.append('name', this.editedDItem.brainName)
+        formData.append('authorCount', this.editedDItem.brainAuthorCount)
+        formData.append('authorName', this.editedDItem.brainAuthorName)
+        formData.append('magName', this.editedDItem.brainMagName)
+        formData.append('country', this.editedDItem.brainMagCountry)
+        formData.append('quotesCount', this.editedDItem.brainQuotesCount)
+        formData.append('url', this.editedDItem.brainLink)
+
+        formData.append('year', this.editedDItem.year)
+        formData.append('mounth', this.editedDItem.mounth)
+        formData.append('statId', this.editedDItem.statId)
+        formData.append('newId', this.editedDItem.newId)
+
+        // files
+        for (let file of this.editedDItem.brainUploaded) {
+          formData.append("doc", file, file.name);
+        }
+        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.itemsD.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      }
+      this.closeD()
+    },
 
     forceFileDownload(response, title) {
       const url = window.URL.createObjectURL(new Blob([response.data]))
@@ -2389,6 +2748,23 @@ export default {
           }
           data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
           this.itemsA.push(data[dataKey])
+        }
+      });
+
+    axios
+      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=37`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].news === 1){
+            data[dataKey].news = 'Tekshirilmoqda'
+          } else if (data[dataKey].news === 2){
+            data[dataKey].news = 'Tasdiqlandi'
+          } else {
+            data[dataKey].news = 'Rad etildi'
+          }
+          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
+          this.itemsD.push(data[dataKey])
         }
       });
   }

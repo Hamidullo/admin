@@ -40,12 +40,11 @@
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
+                        <v-select
+                          label="Loyiha turi"
                           v-model="editedItem.project"
-                          clearable
-                          required
-                          label="Loyiha turi">
-                      </v-text-field>
+                          :items="['Fundamental','Amaliy','Innovatsion']">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -204,12 +203,11 @@
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
+                        <v-select
+                          label="Loyiha turi"
                           v-model="editedMItem.project"
-                          clearable
-                          required
-                          label="Loyiha turi">
-                      </v-text-field>
+                          :items="['Fundamental','Amaliy','Innovatsion']">
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -368,12 +366,11 @@
                           cols="12"
                           sm="6"
                           md="6">
-                          <v-text-field
+                          <v-select
+                            label="Loyiha turi"
                             v-model="editedYItem.project"
-                            clearable
-                            required
-                            label="Loyiha turi">
-                          </v-text-field>
+                            :items="['Fundamental','Amaliy','Innovatsion','Tijoratlashtirish']">
+                          </v-select>
                         </v-col>
                         <v-col
                           cols="12"
