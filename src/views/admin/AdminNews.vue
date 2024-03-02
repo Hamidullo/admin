@@ -6,13 +6,9 @@
         :items="desserts"
         :sort-by="[{ key: 'calories', order: 'asc' }]">
         <template v-slot:top>
-          <v-toolbar
-            flat>
+          <v-toolbar flat>
             <v-toolbar-title>YANGI QO’SHILGAN HUJATLAR</v-toolbar-title>
-            <v-divider
-              class="mx-4"
-              inset
-              vertical>
+            <v-divider class="mx-4" inset vertical>
             </v-divider>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="1024px">
@@ -30,7 +26,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedItem.name"
+                          v-model="editedItem.newName"
                           label="F.I.Sh">
                         </v-text-field>
                       </v-col>
@@ -39,7 +35,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedItem.calories"
+                          v-model="editedItem.newTypeName"
                           label="Hujjat turi">
                         </v-text-field>
                       </v-col>
@@ -48,7 +44,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedItem.fat"
+                          v-model="editedItem.newAuthCount"
                           label="Mualliflar soni">
                         </v-text-field>
                       </v-col>
@@ -57,7 +53,7 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedItem.carbs"
+                          v-model="editedItem.newAuthName"
                           label="Ham mualliflar">
                         </v-text-field>
                       </v-col>
@@ -65,7 +61,7 @@
                         cols="12"
                         sm="6"
                         md="4">
-                        <v-btn class="bg-grey-lighten-4" block rounded="0" size="x-large">Hujjatni yuklash</v-btn>
+                        <v-btn class="bg-grey-lighten-4" block rounded="0" @click="downloadDoc(editedItem)" size="x-large">Hujjatni yuklash</v-btn>
                       </v-col>
                       <v-col
                         cols="12"
@@ -73,9 +69,9 @@
                         md="4">
                         <v-select
                           label="Amal"
-                          v-model="select"
-                          :items="['Rad etish', 'Tasdiqlash']"
-                        ></v-select>
+                          v-model="editedItem.newConfirmationN"
+                          :items="['Rad etish', 'Tasdiqlash']">
+                        </v-select>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -136,36 +132,61 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return{
+      overlay: false,
+      userId: localStorage.getItem("user-hemisId"),
+      userName: localStorage.getItem("user-name"),
+
       select: "",
       dialog: false,
       dialogDelete: false,
       headers: [
-        { title: 'F.I.SH', align: 'start', sortable: false, key: 'name',},
-        { title: 'Hujjat turi',align: 'center', key: 'type' },
-        { title: 'Mualliflar soni',align: 'center', key: 'count' },
-        { title: 'Ham mualliflar',align: 'center', key: 'authors' },
-        { title: 'Hujjat yuklangan',align: 'center', key: 'doc' },
+        { title: 'F.I.SH', align: 'start', sortable: false, key: 'newName',},
+        { title: 'Hujjat turi',align: 'center', key: 'newTypeName' },
+        { title: 'Mualliflar soni',align: 'center', key: 'newAuthCount' },
+        { title: 'Ham mualliflar',align: 'center', key: 'newAuthName' },
+        { title: 'Hujjat holati',align: 'center', key: 'news' },
         { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
       desserts: [],
       editedIndex: -1,
       editedItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
-        check: false,
+        id: 0,
+        userId: 0,
+        newTypeName: '',
+        userName: '',
+        newName: '',
+        newAuthCount: 0,
+        newAuthName: '',
+        news: '',
+        docId: 0,
+        tableName: '',
+        newConfirmation: 0,
+        newConfirmationN: '',
+        newConfirmationName: '',
+        newConfirmationUserId: 0,
+        newFileUploaded: '',
       },
       defaultItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
+        id: 0,
+        userId: 0,
+        newTypeName: '',
+        userName: '',
+        newName: '',
+        newAuthCount: 0,
+        newAuthName: '',
+        news: '',
+        docId: 0,
+        tableName: '',
+        newConfirmation: 0,
+        newConfirmationN: '',
+        newConfirmationName: '',
+        newConfirmationUserId: 0,
+        newFileUploaded: '',
       },
     }
   },
@@ -179,31 +200,7 @@ export default {
     },
   },
 
-  created () {
-    this.initialize()
-  },
-
   methods: {
-    initialize () {
-      this.desserts = [
-        {
-          name: 'Frozen Yogurt',
-          id: 1,
-          type: 159,
-          count: 6.0,
-          authors: 24,
-          doc: 4.0,
-        },
-        {
-          name: 'Frozen Yogurt',
-          id: 2,
-          type: 159,
-          count: 6.0,
-          authors: 24,
-          doc: 4.0,
-        }
-      ]
-    },
 
     editItem (item) {
       this.editedIndex = this.desserts.indexOf(item)
@@ -223,7 +220,17 @@ export default {
     },
 
     deleteItemConfirm () {
-      this.desserts.splice(this.editedIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/news/delete?id=${this.editedItem.id}&newId=${this.editedItem.docId}`)
+        .then(response => {
+          console.log(`Delete item with ID ${this.editItem.id}`);
+          this.items.splice(this.editedIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeDelete()
     },
 
@@ -244,14 +251,80 @@ export default {
     },
 
     save () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
+      this.overlay = true
+      let formData = new FormData();
+      formData.append('userId', this.editedItem.userId)
+      if (this.editedItem.newConfirmationN === 'Rad etish'){
+        this.editedItem.newConfirmation = 3
       } else {
-        this.desserts.push(this.editedItem)
+        this.editedItem.newConfirmation = 2
       }
+      formData.append('confirm', this.editedItem.newConfirmation)
+      formData.append('confirmUserId', this.userId)
+      formData.append('confirmName', this.userName)
+
+      axios.put("http://localhost:8080/api/news/confirm?id="+this.editedItem.id, formData)
+        .then(response => {
+          console.log(response.data)
+          Object.assign(this.items[this.editedIndex], this.editedItem)
+          this.overlay = false
+        })
+        .catch(error => {
+          this.errorMessage = error.message;
+          this.overlay = false
+          console.error("There was an error!", error);
+        });
       this.close()
     },
+
+    forceFileDownload(response, title) {
+      console.log(title)
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', title)
+      document.body.appendChild(link)
+      link.click()
+    },
+    downloadWithAxios(url, title) {
+      console.log(url)
+      console.log("Download con")
+      axios({
+        method: 'get',
+        url,
+        responseType: 'arraybuffer',
+      })
+        .then((response) => {
+          console.log("Download end")
+          this.forceFileDownload(response, title)
+        })
+        .catch(() => console.log('error occured'))
+    },
+    downloadDoc(item) {
+      console.log("Download start")
+      this.downloadWithAxios("http://localhost:8080/api/"+ item.tableName +"/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+    },
   },
+
+  mounted() {
+    axios
+      .get(`http://localhost:8080/api/news/typeAdmin?userId=${this.userId}&limit=10&offset=0`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].newSeen === 1){
+            data[dataKey].newSeen = 'Tekshirilmoqda'
+          } else if (data[dataKey].newSeen === 2){
+            data[dataKey].newSeen = 'Tasdiqlandi'
+          } else {
+            data[dataKey].newSeen = 'Rad etildi'
+          }
+          this.items.push(data[dataKey])
+
+        }
+      });
+  }
+
 }
 </script>
 

@@ -589,7 +589,7 @@
 import axios from "axios";
 
 export default {
-    data () {
+  data () {
       return {
         overlay: false,
         position: localStorage.getItem("user-position"),
@@ -805,6 +805,7 @@ export default {
         itemsS: [],
       }
     },
+
   methods: {
     editItem (item) {
       this.editedIndex = this.items.indexOf(item)

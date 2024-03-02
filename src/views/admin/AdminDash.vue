@@ -3,9 +3,7 @@
 
     <v-row>
       <v-col cols="6">
-        <v-card
-          flat
-          title="Institut bo’yicha fakultetlar reyting">
+        <v-card flat title="Institut bo’yicha fakultetlar reyting">
           <template v-slot:text>
             <v-text-field
               v-model="search"
@@ -42,9 +40,7 @@
 
     <v-row  align="center" justify="center" >
       <v-col cols="6">
-        <v-card
-          flat
-          title="Institut bo’yicha reyting">
+        <v-card flat title="Institut bo’yicha reyting">
           <template v-slot:text>
             <v-text-field
               v-model="search"
@@ -65,9 +61,7 @@
       </v-col>
 
       <v-col cols="6">
-        <v-card
-          flat
-          title="Fakultetlar bo’yicha reyting">
+        <v-card flat title="Fakultetlar bo’yicha reyting">
           <template v-slot:text>
             <v-select
               label="Fakultet"
@@ -87,9 +81,7 @@
       </v-col>
 
       <v-col >
-        <v-card
-          flat
-          title="Kafedralar bo’yicha reyting">
+        <v-card flat title="Kafedralar bo’yicha reyting">
           <template v-slot:text>
             <v-select
               label="Kafedra"

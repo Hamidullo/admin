@@ -1,13 +1,12 @@
 <template>
   <v-container class="bg-grey-lighten-2" align="center" justify="center" fluid>
-    <v-card class="px-6 py-6">
+    <v-card v-if="isUserAdmin" class="px-6 py-6">
       <v-data-table
         :headers="headers"
-        :items="desserts"
-        :sort-by="[{ key: 'calories', order: 'asc' }]">
+        :items="items"
+        :sort-by="[{ key: 'name', order: 'asc' }]">
         <template v-slot:top>
-          <v-toolbar
-            flat>
+          <v-toolbar flat>
             <v-toolbar-title>Foydalanuvchilar</v-toolbar-title>
             <v-divider
               class="mx-4"
@@ -38,7 +37,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedItem.name"
                           clearable
@@ -48,9 +47,9 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.id"
+                          v-model="editedItem.userId"
                           clearable
                           label="Hemis ID">
                         </v-text-field>
@@ -58,7 +57,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedItem.position"
                           clearable
@@ -68,7 +67,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedItem.department"
                           clearable
@@ -78,7 +77,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
                           v-model="editedItem.faculty"
                           clearable
@@ -88,12 +87,23 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        md="4">
+                        md="6">
                         <v-text-field
-                          v-model="editedItem.protein"
+                          v-model="editedItem.password"
                           clearable
                           label="Parol">
                         </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-select
+                          v-model="editedItem.roleName"
+                          :items="['User', 'Admin']"
+                          clearable
+                          label="Rol">
+                        </v-select>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -150,43 +160,64 @@
         </template>
       </v-data-table>
     </v-card>
+
+    <v-card
+      v-else
+      class="mx-auto"
+      prepend-icon="mdi-home"
+      width="400">
+      <template v-slot:title>
+        Siz superAdmin emassiz
+      </template>
+
+      <v-card-text>
+        Bu oynadan foydalana olmaysiz
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return{
+      isUserAdmin: true,
+
       dialog: false,
       dialogDelete: false,
       headers: [
-        {
-          title: 'F.I.SH',
-          align: 'start',
-          sortable: false,
-          key: 'name',
-        },
-        { title: 'Hemis Id',align: 'center', key: 'id' },
+        { title: 'F.I.SH', align: 'start', sortable: false, key: 'name',},
+        { title: 'Hemis Id',align: 'center', key: 'userId' },
         { title: 'Lavozimi',align: 'center', key: 'position' },
         { title: 'Kafedrasi',align: 'center', key: 'department' },
         { title: 'Fakulteti',align: 'center', key: 'faculty' },
         { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
-      desserts: [],
+      items: [],
       editedIndex: -1,
       editedItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        userId: '',
+        position: '',
+        department: '',
+        faculty: '',
+        password: '',
+        role: 0,
+        roleName: ''
       },
       defaultItem: {
-        name: '',
         id: 0,
-        position: 0,
-        department: 0,
-        faculty: 0,
+        name: '',
+        userId: '',
+        position: '',
+        department: '',
+        faculty: '',
+        password: '',
+        role: 0,
+        roleName: ''
       },
     }
   },
@@ -205,47 +236,7 @@ export default {
     },
   },
 
-  created () {
-    this.initialize()
-  },
-
   methods: {
-    initialize () {
-      this.desserts = [
-        {
-          name: 'Frozen Yogurt',
-          id: 1,
-          position: 159,
-          department: 6.0,
-          faculty: 24,
-          protein: 4.0,
-        },
-        {
-          name: 'Frozen Yogurt',
-          id: 2,
-          position: 159,
-          department: 6.0,
-          faculty: 24,
-          protein: 4.0,
-        },
-        {
-          name: 'Ice cream sandwich',
-          id: 3,
-          position: 237,
-          department: 9.0,
-          faculty: 37,
-          protein: 4.3,
-        },
-        {
-          name: 'Eclair',
-          id: 4,
-          position: 262,
-          department: 16.0,
-          faculty: 23,
-          protein: 6.0,
-        }
-      ]
-    },
 
     editItem (item) {
       this.editedIndex = this.desserts.indexOf(item)
@@ -260,12 +251,22 @@ export default {
     },
 
     openItem (item) {
-      const userId = item.id;
+      const userId = item.userId;
       this.$router.push({path: `/admin/user/${userId}` })
     },
 
     deleteItemConfirm () {
-      this.desserts.splice(this.editedIndex, 1)
+      this.overlay = true
+      axios.delete(`http://localhost:8080/api/users/delete?userId=${this.editedItem.userId}`)
+        .then(response => {
+          console.log(`Delete item with ID ${this.editItem.userId}`);
+          this.items.splice(this.editedIndex, 1)
+          this.overlay = false
+        })
+        .catch(error => {
+          console.error(error);
+          this.overlay = false
+        });
       this.closeDelete()
     },
 
@@ -287,13 +288,76 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
-      } else {
-        this.desserts.push(this.editedItem)
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('name', this.editedItem.name)
+        formData.append('department', this.editedItem.department)
+        formData.append('faculty', this.editedItem.faculty)
+        formData.append('position', this.editedItem.position)
+        formData.append('password', this.editedItem.password)
+
+        axios.put("http://localhost:8080/api/users/admin?userId="+this.editedItem.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            Object.assign(this.items[this.editedIndex], this.editedItem)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+      } else
+      {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('userId', this.userId)
+        formData.append('name', this.editedItem.name)
+        formData.append('faculty', this.editedItem.faculty)
+        formData.append('department', this.editedItem.department)
+        formData.append('position', this.editedItem.position)
+        formData.append('password', this.editedItem.password)
+        if (this.editedItem.roleName === 'User'){
+          this.editedItem.role = 0
+        } else if (this.editedItem.roleName === 'Admin'){
+          this.editedItem.role = 1
+        }
+        formData.append('role', this.editedItem.role)
+
+        axios.post("http://localhost:8080/api/users/create?userId="+this.userId, formData)
+          .then(response => {
+            console.log(response.data)
+            this.items.push(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
       }
       this.close()
     },
   },
+
+  mounted() {
+    axios
+      .get(`http://localhost:8080/api/users/admin?userId=${this.userId}&limit=10&offset=0`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          if (data[dataKey].newSeen === 1){
+            data[dataKey].newSeen = 'Tekshirilmoqda'
+          } else if (data[dataKey].newSeen === 2){
+            data[dataKey].newSeen = 'Tasdiqlandi'
+          } else {
+            data[dataKey].newSeen = 'Rad etildi'
+          }
+          this.items.push(data[dataKey])
+
+        }
+      });
+  }
 }
 </script>
 
