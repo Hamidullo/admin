@@ -174,6 +174,17 @@
         Bu oynadan foydalana olmaysiz
       </v-card-text>
     </v-card>
+
+    <v-overlay
+    :model-value="overlay"
+    class="align-center justify-center">
+    <v-progress-circular
+      color="primary"
+      indeterminate
+      size="64">
+    </v-progress-circular>
+  </v-overlay>
+
   </v-container>
 </template>
 
@@ -184,6 +195,9 @@ export default {
   data() {
     return{
       isUserAdmin: true,
+      overlay: false,
+      userId: localStorage.getItem("user-hemisId"),
+      userName: localStorage.getItem("user-name"),
 
       dialog: false,
       dialogDelete: false,
@@ -341,6 +355,12 @@ export default {
   },
 
   mounted() {
+
+    let userData = localStorage.getItem("user-role")
+    if(userData !== 2){
+      this.isUserAdmin = true
+    }
+
     axios
       .get(`http://localhost:8080/api/users/admin?userId=${this.userId}&limit=10&offset=0`)
       .then(response => {

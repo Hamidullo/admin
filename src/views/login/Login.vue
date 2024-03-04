@@ -78,24 +78,24 @@ export default {
           let data = response.data
           if (data.name){
             localStorage.setItem("user-id", response.data.id)
-            localStorage.setItem("user-hemisId", response.data.hemisId)
+            localStorage.setItem("user-userId", response.data.hemisId)
             localStorage.setItem("user-name", response.data.name)
             localStorage.setItem("user-avatar", response.data.avatar)
             localStorage.setItem("user-department", response.data.department)
             localStorage.setItem("user-faculty", response.data.faculty)
             localStorage.setItem("user-position", response.data.position)
-            if (response.data.admin){
+            if (response.data.role !== 0){
               this.$router.push({name: "AdminDash"})
-              localStorage.setItem("user-admin", response.data.admin)
+              localStorage.setItem("user-role", response.data.role)
             } else {
               this.$router.push({name: "Dashboard"})
             }
           } else {
             localStorage.setItem("user-id", response.data.id)
             localStorage.setItem("user-hemisId", response.data.hemisId)
-            if (response.data.admin){
+            if (response.data.role !== 0){
               this.$router.push({name: "AdminAbout"})
-              localStorage.setItem("user-admin", response.data.admin)
+              localStorage.setItem("user-role", response.data.admin)
             } else {
               this.$router.push({name: "About"})
             }

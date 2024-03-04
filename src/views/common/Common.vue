@@ -30,7 +30,7 @@
         <v-card align="center" flat title="Institut bo’yicha fakultetlar reyting">
           <v-data-table
             :headers="headers"
-            :items="desserts"
+            :items="items"
             :search="search">
           </v-data-table>
         </v-card>
@@ -176,7 +176,7 @@ export default {
         { key: 'share', title: 'Ulushi', align: 'center' },
         { key: 'score', title: 'Berilgan Bal', align: 'center' }
       ],
-      desserts: [
+      items: [
         {
           name: 'Muxandislik-texnologiyasi',
           count: 159,

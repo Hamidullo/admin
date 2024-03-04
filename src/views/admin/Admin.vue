@@ -17,10 +17,10 @@ export default {
   components: {AdminSidebar,AdminHeader},
   async mounted() {
     /*let user = localStorage.getItem("user-logged")
-    let userData = localStorage.getItem("user-admin")
+    let userData = localStorage.getItem("user-role")
     if (!user){
       await this.$router.push({name: "Login"})
-    } else if(!userData){
+    } else if(userData !== 0){
       await this.$router.push({name: "Dashboard"})
     } else {
       await this.$router.push({name: "AdminDash"})

@@ -9,13 +9,12 @@
         </v-col>
         <v-col cols="12" sm="4" >
           <v-list-item>
-            <v-list-item-content
-              ><v-list-item-title class="font-weight-bold ml-4">
-                Dark Mode</v-list-item-title
-              >
-            </v-list-item-content>
-            <v-list-item-action class="ml-4"
-              ><v-switch v-model="$vuetify.theme.dark" />
+            <v-list-item-content>
+              <v-list-item-title class="font-weight-bold ml-4">
+                Dark Mode</v-list-item-title>
+              </v-list-item-content>
+            <v-list-item-action class="ml-4">
+              <v-switch v-model="$vuetify.theme.dark" />
             </v-list-item-action>
           </v-list-item>
           <v-divider />
@@ -39,8 +38,8 @@
           label="Select"
           persistent-hint
           return-object
-          single-line
-        ></v-select>
+          single-line>
+        </v-select>
         </v-col>
       </v-row>
 
@@ -76,7 +75,7 @@
 </v-container>
 </template>
   
-  <script>
+<script>
   export default {
     data() {
       return{
@@ -92,7 +91,7 @@
   }
 </script>
   
-  <style scoped>
-  
-  </style>
+<style scoped>
+
+</style>
   

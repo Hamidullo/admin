@@ -15,7 +15,6 @@
             outlined
             shaped
             prepend-inner-icon="mdi-account">
-
           </v-text-field>
         </v-col>
         <v-col  cols="6">
@@ -37,7 +36,6 @@
             outlined
             shaped
             prepend-inner-icon="mdi-account">
-
           </v-text-field>
         </v-col>
         <v-col  cols="6">
@@ -159,9 +157,7 @@
           </v-data-table>
         </v-card>
       </v-col>
-    </v-row>
 
-    <v-row class="mt-2" >
       <v-col cols="6">
         <v-card
           flat
@@ -223,9 +219,7 @@
           </v-data-table>
         </v-card>
       </v-col>
-    </v-row>
 
-    <v-row class="mt-2" >
       <v-col cols="6">
         <v-card
           flat
@@ -319,6 +313,17 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-overlay
+      :model-value="overlay"
+      class="align-center justify-center">
+      <v-progress-circular
+        color="primary"
+        indeterminate
+        size="64">
+      </v-progress-circular>
+    </v-overlay>
+
   </v-container>
 </template>
 
@@ -338,24 +343,7 @@ export default {
         { key: 'protein',align: 'center', title: 'Protein (g)' },
         { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
-      desserts: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: 1,
-        }
-      ],
+      desserts: [],
 
       searchI: '',
       headersI: [
@@ -366,24 +354,7 @@ export default {
         { key: 'protein',align: 'center', title: 'Protein (g)' },
         { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
-      dessertsI: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: 1,
-        }
-      ],
+      dessertsI: [],
 
       searchL: '',
       headersL: [
@@ -394,24 +365,7 @@ export default {
         { key: 'protein',align: 'center', title: 'Protein (g)' },
         { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
-      dessertsL: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: 1,
-        }
-      ],
+      dessertsL: [],
 
       searchIX: '',
       headersIX: [
@@ -422,24 +376,7 @@ export default {
         { key: 'protein',align: 'center', title: 'Protein (g)' },
         { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
-      dessertsIX: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: 1,
-        }
-      ],
+      dessertsIX: [],
 
       searchX: '',
       headersX: [
@@ -450,24 +387,7 @@ export default {
         { key: 'protein',align: 'center', title: 'Protein (g)' },
         { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
-      dessertsX: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: 1,
-        }
-      ],
+      dessertsX: [],
 
       searchU: '',
       headersU: [
@@ -478,24 +398,7 @@ export default {
         { key: 'protein',align: 'center', title: 'Protein (g)' },
         { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
-      dessertsU: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: 1,
-        }
-      ],
+      dessertsU: [],
 
       searchE: '',
       headersE: [
@@ -506,24 +409,7 @@ export default {
         { key: 'protein',align: 'center', title: 'Protein (g)' },
         { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
-      dessertsE: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: 1,
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: 1,
-        }
-      ],
+      dessertsE: [],
     }
   },
   methods: {
