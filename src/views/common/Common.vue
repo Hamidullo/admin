@@ -48,6 +48,7 @@
 import UserDataService from "@/services/UserDataService";
 import PlanetChart from '@/components/PlanetChart.vue'
 import UChart from '@/components/UChart.vue'
+import axios from "axios";
 
 export default {
   components: {
@@ -55,7 +56,8 @@ export default {
   },
   data() {
     return {
-      planetChartData: {
+      overlay: false,
+      planetChartData: {},/*{
         type: "bar",
         data: {
           labels:  [
@@ -141,8 +143,8 @@ export default {
             ]
           }
         }
-      },
-      config: {
+      },*/
+      config: {},/* {
         type: 'pie',
         data: {
           labels: [
@@ -153,7 +155,7 @@ export default {
           ],
           datasets: [{
             label: 'Institut bo’yicha fakultetlar reyting',
-            data: [59, 137, 262, 355],
+            data: [1, 2, 3, 4],
             backgroundColor: [
               'rgb(236,19,19)',
               'rgb(239,213,43)',
@@ -167,7 +169,7 @@ export default {
           responsive: true,
           maintainAspectRatio: true,
         }
-      },
+      },*/
 
       search: '',
       headers: [
@@ -179,27 +181,27 @@ export default {
       items: [
         {
           name: 'Muxandislik-texnologiyasi',
-          count: 159,
-          share: 6.0,
-          score: 24,
+          count: 1,
+          share: 2,
+          score: 3,
         },
         {
           name: 'Kimyo texnologiya',
-          count: 237,
-          share: 9.0,
-          score: 37,
+          count: 4,
+          share: 5,
+          score: 6,
         },
         {
           name: 'Avtomatika va energetika',
-          count: 262,
-          share: 16.0,
-          score: 23,
+          count: 6,
+          share: 7,
+          score: 8,
         },
         {
           name: 'Iqtisodiyot',
-          count: 305,
-          share: 3.7,
-          score: 67,
+          count: 9,
+          share: 10,
+          score: 11,
         }
       ],
 
@@ -221,6 +223,251 @@ export default {
       location.reload();
     },
 
+    planetData(){
+      axios.get("http://localhost:8080/api/commons/department" )
+        .then(response => {
+          console.log(response.data)
+          this.overlay = false
+
+          const departments = []
+          const scores = []
+          for (const departmentsKey in response.data) {
+            departments.push(response.data[departmentsKey].department)
+            scores.push(response.data[departmentsKey].score)
+          }
+
+          return {
+            type: "bar",
+              data: {
+              labels:  departments.sort(),
+                datasets: [
+                {
+                  label: "Institut bo’yicha kafedralar reyting",
+                  data: scores.sort(function(a, b){return a - b}),
+                  backgroundColor: [
+                    'rgb(234,6,40)',
+                    'rgb(250,58,98)',
+                    'rgb(241,88,129)',
+                    'rgb(241,121,157)',
+                    'rgb(245,184,32)',
+                    'rgb(253,199,62)',
+                    'rgb(253,225,113)',
+                    'rgb(238,216,129)',
+                    'rgb(234,255,99)',
+                    'rgb(207,232,41)',
+                    'rgb(122,218,20)',
+                    'rgb(47,220,6)',
+                    'rgb(47,171,13)',
+                    'rgb(40,145,11)',
+                    'rgb(15,110,187)',
+                    'rgb(32,89,213)',
+                    'rgb(15,75,187)',
+                    'rgb(15,75,187)',
+                    'rgb(37,69,225)',
+                    'rgb(34,65,189)',
+                    'rgb(29,71,182)',
+                  ],
+                  borderColor: "#36495d",
+                  borderWidth: 2
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                      padding: 10
+                    }
+                  }
+                ],
+                  xAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                      padding: 10,
+                      margin: 10
+                    }
+                  }
+                ]
+              }
+            }
+          }
+
+        })
+        .catch(error => {
+          this.errorMessage = error.message;
+          this.overlay = false
+          return  {
+            type: "bar",
+            data: {
+              labels:  [
+                "Energetika","Fizika", "O‘zbek tili", "TJAB",
+                "IT", "Menejment", "Marketing", "Iqtisodiyot",
+                "Buhgalteriya", "Ijtimoiy fanlar","Kimyoviy texnologiya",
+                "Kimyo", "Oziq-ovqat", "Materiyalshunoslik", "Chet tillar",
+                "Oliy matematika", "TMJ", "Metrologiya",  "Umumtexnika fanlari", "QXMT",  "Manzarali bog‘dorchilik"].sort(),
+              datasets: [
+                {
+                  label: "Institut bo’yicha kafedralar reyting",
+                  data: [
+                    5,
+                    10,
+                    18,
+                    20,
+                    16,
+                    40,
+                    30,
+                    13,
+                    23,
+                    33,
+                    26,
+                    56,
+                    42,
+                    7,
+                    9,
+                    17,
+                    24,
+                    28,
+                    36,
+                    39,
+                    4,
+                  ].sort(function(a, b){return a - b}),
+                  backgroundColor: [
+                    'rgb(234,6,40)',
+                    'rgb(250,58,98)',
+                    'rgb(241,88,129)',
+                    'rgb(241,121,157)',
+                    'rgb(245,184,32)',
+                    'rgb(253,199,62)',
+                    'rgb(253,225,113)',
+                    'rgb(238,216,129)',
+                    'rgb(234,255,99)',
+                    'rgb(207,232,41)',
+                    'rgb(122,218,20)',
+                    'rgb(47,220,6)',
+                    'rgb(47,171,13)',
+                    'rgb(40,145,11)',
+                    'rgb(15,110,187)',
+                    'rgb(32,89,213)',
+                    'rgb(15,75,187)',
+                    'rgb(15,75,187)',
+                    'rgb(37,69,225)',
+                    'rgb(34,65,189)',
+                    'rgb(29,71,182)',
+                  ],
+                  borderColor: "#36495d",
+                  borderWidth: 2
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                      padding: 10
+                    }
+                  }
+                ],
+                xAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                      padding: 10,
+                      margin: 10
+                    }
+                  }
+                ]
+              }
+            }
+          }
+
+          console.error("There was an error!", error);
+        });
+    },
+
+    configData(){
+      axios.get("http://localhost:8080/api/commons/faculty" )
+        .then(response => {
+          console.log(response.data)
+          this.overlay = false
+
+          const faculties = []
+          const scores = []
+          for (const departmentsKey in response.data) {
+            faculties.push(response.data[departmentsKey].faculty)
+            scores.push(response.data[departmentsKey].score)
+          }
+
+          return {
+            type: 'pie',
+            data: {
+              labels: faculties,
+              datasets: [{
+                label: 'Institut bo’yicha fakultetlar reyting',
+                data: scores,
+                backgroundColor: [
+                  'rgb(236,19,19)',
+                  'rgb(239,213,43)',
+                  'rgb(80,211,36)',
+                  'rgb(15,75,187)'
+                ],
+                hoverOffset: 4
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: true,
+            }
+          }
+
+        })
+        .catch(error => {
+          this.errorMessage = error.message;
+          this.overlay = false
+          return {
+            type: 'pie',
+            data: {
+              labels: [
+                'Muxandislik-texnologiyasi',
+                'Kimyo texnologiya',
+                'Avtomatika va energetika',
+                'Iqtisodiyot'
+              ],
+              datasets: [{
+                label: 'Institut bo’yicha fakultetlar reyting',
+                data: [1, 2, 3, 4],
+                backgroundColor: [
+                  'rgb(236,19,19)',
+                  'rgb(239,213,43)',
+                  'rgb(80,211,36)',
+                  'rgb(15,75,187)'
+                ],
+                hoverOffset: 4
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: true,
+            }
+          }
+
+          console.error("There was an error!", error);
+        });
+    }
+
+  },
+
+  mounted() {
+    this.planetChartData = this.planetData()
+    this.config = this.configData()
   }
 
 }
