@@ -6,21 +6,94 @@
 
 <script>
 import Chart from 'chart.js'
+import axios from "axios";
 
 export default {
   name: 'PlanetChart',
-  props: {
-    planetData: Object
-  },
-  data() {
-    return{
-
-      planets: this.planetData
-    }
-  },
   mounted() {
-    const ctx = document.getElementById('planet-chart');
-    new Chart(ctx, this.planets);
+
+    axios.get("http://api.nammti.uz/api/commons/department" )
+      .then(response => {
+
+        this.overlay = false
+        let deps = []
+        let scorD = []
+        for (const departmentsKey in response.data) {
+          deps.push(response.data[departmentsKey].department)
+          scorD.push(response.data[departmentsKey].score)
+        }
+
+        const ctx = document.getElementById('planet-chart');
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels:  deps,
+            datasets: [
+              {
+                label: "Institut bo’yicha kafedralar reyting",
+                data: scorD,
+                backgroundColor: [
+                  'rgb(234,6,40)',
+                  'rgb(250,58,98)',
+                  'rgb(241,88,129)',
+                  'rgb(241,121,157)',
+                  'rgb(245,184,32)',
+                  'rgb(253,199,62)',
+                  'rgb(253,225,113)',
+                  'rgb(238,216,129)',
+                  'rgb(234,255,99)',
+                  'rgb(207,232,41)',
+                  'rgb(122,218,20)',
+                  'rgb(47,220,6)',
+                  'rgb(47,171,13)',
+                  'rgb(40,145,11)',
+                  'rgb(15,110,187)',
+                  'rgb(32,89,213)',
+                  'rgb(15,75,187)',
+                  'rgb(15,75,187)',
+                  'rgb(37,69,225)',
+                  'rgb(34,65,189)',
+                  'rgb(29,71,182)',
+                ],
+                borderColor: "#36495d",
+                borderWidth: 2
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                    padding: 10
+                  }
+                }
+              ],
+              xAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                    padding: 10,
+                    margin: 10
+                  }
+                }
+              ]
+            }
+          }
+        });
+
+
+      })
+      .catch(error => {
+        this.errorMessage = error.message;
+        this.overlay = false
+
+        console.error("There was an error!", error);
+      });
+
   }
 }
 </script>

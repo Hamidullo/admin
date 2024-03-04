@@ -18,6 +18,8 @@ bun install
 
 ### Compiles and hot-reloads for development
 
+# sudo cp -r /home/sammy/vuetify-meets-nginx-app/dist /var/www/vuetify-meets-nginx-app
+
 ```
 # yarn
 yarn dev
