@@ -135,7 +135,7 @@ export default {
     data () {
       return {
         avatar: "http://api.nammti.uz/uploads/photos/" + localStorage.getItem("user-avatar"),
-        userId: localStorage.getItem("user-id"),
+        userId: localStorage.getItem("user-userId"),
         faculties: ['Muxandislik-texnologiyasi', 'Kimyo texnologiya', 'Avtomatika va energetika', 'Iqtisodiyot'],
         faculty: 'Muxandislik-texnologiyasi',
         departments: ["Energetika",
