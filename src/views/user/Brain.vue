@@ -1978,7 +1978,7 @@ export default {
 
     deleteSItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedSItem.id}&newId=${this.editedSItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/brains/delete?id=${this.editedSItem.id}&newId=${this.editedSItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editSItem.id}`);
           this.itemsS.splice(this.editedSIndex, 1)
@@ -1992,7 +1992,7 @@ export default {
     },
     deleteWItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedWItem.id}&newId=${this.editedWItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/brains/delete?id=${this.editedWItem.id}&newId=${this.editedWItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editWItem.id}`);
           this.itemsW.splice(this.editedWIndex, 1)
@@ -2006,7 +2006,7 @@ export default {
     },
     deleteXItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedXItem.id}&newId=${this.editedXItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/brains/delete?id=${this.editedXItem.id}&newId=${this.editedXItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editXItem.id}`);
           this.itemsX.splice(this.editedXIndex, 1)
@@ -2020,7 +2020,7 @@ export default {
     },
     deleteRItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedRItem.id}&newId=${this.editedRItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/brains/delete?id=${this.editedRItem.id}&newId=${this.editedRItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editRItem.id}`);
           this.itemsR.splice(this.editedRIndex, 1)
@@ -2034,7 +2034,7 @@ export default {
     },
     deleteMItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/brains/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editMItem.id}`);
           this.itemsM.splice(this.editedMIndex, 1)
@@ -2048,7 +2048,7 @@ export default {
     },
     deleteAItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedAItem.id}&newId=${this.editedAItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/brains/delete?id=${this.editedAItem.id}&newId=${this.editedAItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editAItem.id}`);
           this.itemsA.splice(this.editedAIndex, 1)
@@ -2062,7 +2062,7 @@ export default {
     },
     deleteDItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/brains/delete?id=${this.editedDItem.id}&newId=${this.editedDItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/brains/delete?id=${this.editedDItem.id}&newId=${this.editedDItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editDItem.id}`);
           this.itemsD.splice(this.editedDIndex, 1)
@@ -2188,7 +2188,7 @@ export default {
         formData.append('url', this.editedSItem.brainLink)
         formData.append('newId', this.editedSItem.newId)
 
-        axios.put("http://localhost:8080/api/brains/update?id="+this.editedSItem.id, formData)
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedSItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsS[this.editedSIndex], this.editedSItem)
@@ -2232,7 +2232,7 @@ export default {
         for (let file of this.editedSItem.brainUploaded) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsS.push(response.data)
@@ -2259,7 +2259,7 @@ export default {
         formData.append('url', this.editedWItem.brainLink)
         formData.append('newId', this.editedWItem.newId)
 
-        axios.put("http://localhost:8080/api/brains/update?id="+this.editedWItem.id, formData)
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedWItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsW[this.editedWIndex], this.editedWItem)
@@ -2294,7 +2294,7 @@ export default {
         for (let file of this.editedWItem.brainUploaded) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsW.push(response.data)
@@ -2321,7 +2321,7 @@ export default {
         formData.append('url', this.editedXItem.brainLink)
         formData.append('newId', this.editedXItem.newId)
 
-        axios.put("http://localhost:8080/api/brains/update?id="+this.editedXItem.id, formData)
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedXItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsX[this.editedXIndex], this.editedXItem)
@@ -2356,7 +2356,7 @@ export default {
         for (let file of this.editedXItem.brainUploaded) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsX.push(response.data)
@@ -2383,7 +2383,7 @@ export default {
         formData.append('url', this.editedRItem.brainLink)
         formData.append('newId', this.editedRItem.newId)
 
-        axios.put("http://localhost:8080/api/brains/update?id="+this.editedRItem.id, formData)
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedRItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsR[this.editedRIndex], this.editedRItem)
@@ -2418,7 +2418,7 @@ export default {
         for (let file of this.editedRItem.brainUploaded) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsR.push(response.data)
@@ -2445,7 +2445,7 @@ export default {
         formData.append('url', this.editedMItem.brainLink)
         formData.append('newId', this.editedMItem.newId)
 
-        axios.put("http://localhost:8080/api/brains/update?id="+this.editedMItem.id, formData)
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedMItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
@@ -2480,7 +2480,7 @@ export default {
         for (let file of this.editedMItem.brainUploaded) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsM.push(response.data)
@@ -2507,7 +2507,7 @@ export default {
         formData.append('url', this.editedAItem.brainLink)
         formData.append('newId', this.editedAItem.newId)
 
-        axios.put("http://localhost:8080/api/brains/update?id="+this.editedAItem.id, formData)
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedAItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
@@ -2542,7 +2542,7 @@ export default {
         for (let file of this.editedAItem.brainUploaded) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsA.push(response.data)
@@ -2569,7 +2569,7 @@ export default {
         formData.append('url', this.editedDItem.brainLink)
         formData.append('newId', this.editedDItem.newId)
 
-        axios.put("http://localhost:8080/api/brains/update?id="+this.editedDItem.id, formData)
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedDItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsD[this.editedDIndex], this.editedDItem)
@@ -2606,7 +2606,7 @@ export default {
         for (let file of this.editedDItem.brainUploaded) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/brains/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsD.push(response.data)
@@ -2642,14 +2642,14 @@ export default {
         .catch(() => console.log('error occured'))
     },
     downloadDoc(item) {
-      this.downloadWithAxios("http://localhost:8080/api/works/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      this.downloadWithAxios("http://api.nammti.uz/api/works/download?userId="+item.userId+"&file="+item.workDownload,item.name)
     },
 
   },
 
   mounted() {
     axios
-      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=31`)
+      .get(`http://api.nammti.uz/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=31`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -2667,7 +2667,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=32`)
+      .get(`http://api.nammti.uz/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=32`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -2684,7 +2684,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=33`)
+      .get(`http://api.nammti.uz/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=33`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -2701,7 +2701,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=34`)
+      .get(`http://api.nammti.uz/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=34`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -2718,7 +2718,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=35`)
+      .get(`http://api.nammti.uz/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=35`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -2735,7 +2735,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=36`)
+      .get(`http://api.nammti.uz/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=36`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -2752,7 +2752,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:8080/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=37`)
+      .get(`http://api.nammti.uz/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=37`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

@@ -487,7 +487,7 @@
     },
     data: () => ({
       overlay: false,
-      photo: "http://localhost:8080/uploads/photos/",
+      photo: "http://api.nammti.uz/uploads/photos/",
       messages: [
         { from: 'Tel:',  message: `+998901234567`,   color: 'deep-purple-lighten-1',},
         {from: 'Email:', message: 'test@mail.com',  color: 'green',},
@@ -542,7 +542,7 @@
           }
         }
         console.log(this.getId())
-        axios.put("http://localhost:8080/api/users/personal?userId=" + this.getId(), formData)
+        axios.put("http://api.nammti.uz/api/users/personal?userId=" + this.getId(), formData)
           .then(response => {
             console.log(response.data)
             this.overlay = false
@@ -563,7 +563,7 @@
     },
     mounted(){
       axios
-        .get(`http://localhost:8080/api/users/userPersonal?userId=${this.getId()}`)
+        .get(`http://api.nammti.uz/api/users/userPersonal?userId=${this.getId()}`)
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {

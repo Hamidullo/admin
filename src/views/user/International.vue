@@ -487,7 +487,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/internationals/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/internationals/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
@@ -501,7 +501,7 @@ export default {
     },
     deleteCItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/internationals/delete?id=${this.editedCItem.id}&newId=${this.editedCItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/internationals/delete?id=${this.editedCItem.id}&newId=${this.editedCItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editCItem.id}`);
           this.itemsC.splice(this.editedCIndex, 1)
@@ -554,7 +554,7 @@ export default {
         formData.append('count', this.editedItem.internationalLessonsCount)
         formData.append('newId', this.editedItem.newId)
 
-        axios.put("http://localhost:8080/api/internationals/update?id="+this.editedItem.id, formData)
+        axios.put("http://api.nammti.uz/api/internationals/update?id="+this.editedItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -588,7 +588,7 @@ export default {
         for (let file of this.editedItem.doc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/internationals/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/internationals/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
@@ -612,7 +612,7 @@ export default {
         formData.append('count', this.editedCItem.internationalLessonsCount)
         formData.append('newId', this.editedCItem.newId)
 
-        axios.put("http://localhost:8080/api/internationals/update?id="+this.editedCItem.id, formData)
+        axios.put("http://api.nammti.uz/api/internationals/update?id="+this.editedCItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
@@ -646,7 +646,7 @@ export default {
         for (let file of this.editedCItem.doc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/internationals/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/internationals/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsC.push(response.data)
@@ -686,7 +686,7 @@ export default {
     },
     downloadDoc(item) {
       console.log("Download start")
-      this.downloadWithAxios("http://localhost:8080/api/internationals/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      this.downloadWithAxios("http://api.nammti.uz/api/internationals/download?userId="+item.userId+"&file="+item.workDownload,item.name)
     },
 
   },
@@ -717,7 +717,7 @@ export default {
 
   mounted() {
     axios
-      .get(`http://localhost:8080/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=51`)
+      .get(`http://api.nammti.uz/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=51`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -733,7 +733,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:8080/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=52`)
+      .get(`http://api.nammti.uz/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=52`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

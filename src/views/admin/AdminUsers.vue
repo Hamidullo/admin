@@ -271,7 +271,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/users/delete?userId=${this.editedItem.userId}`)
+      axios.delete(`http://api.nammti.uz/api/users/delete?userId=${this.editedItem.userId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.userId}`);
           this.items.splice(this.editedIndex, 1)
@@ -310,7 +310,7 @@ export default {
         formData.append('position', this.editedItem.position)
         formData.append('password', this.editedItem.password)
 
-        axios.put("http://localhost:8080/api/users/admin?userId="+this.editedItem.userId, formData)
+        axios.put("http://api.nammti.uz/api/users/admin?userId="+this.editedItem.userId, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -338,7 +338,7 @@ export default {
         }
         formData.append('role', this.editedItem.role)
 
-        axios.post("http://localhost:8080/api/users/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/users/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
@@ -362,7 +362,7 @@ export default {
     }
 
     axios
-      .get(`http://localhost:8080/api/users/admin?userId=${this.userId}&limit=10&offset=0`)
+      .get(`http://api.nammti.uz/api/users/admin?userId=${this.userId}&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

@@ -1166,7 +1166,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/projects/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/projects/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
@@ -1180,7 +1180,7 @@ export default {
     },
     deleteMItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/projects/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/projects/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editMItem.id}`);
           this.itemsM.splice(this.editedMIndex, 1)
@@ -1194,7 +1194,7 @@ export default {
     },
     deleteYItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/projects/delete?id=${this.editedYItem.id}&newId=${this.editedYItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/projects/delete?id=${this.editedYItem.id}&newId=${this.editedYItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editYItem.id}`);
           this.itemsY.splice(this.editedYIndex, 1)
@@ -1208,7 +1208,7 @@ export default {
     },
     deleteNItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/projects/delete?id=${this.editedNItem.id}&newId=${this.editedNItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/projects/delete?id=${this.editedNItem.id}&newId=${this.editedNItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editNItem.id}`);
           this.itemsN.splice(this.editedNIndex, 1)
@@ -1222,7 +1222,7 @@ export default {
     },
     deleteAItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/projects/delete?id=${this.editedAItem.id}&newId=${this.editedAItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/projects/delete?id=${this.editedAItem.id}&newId=${this.editedAItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editAItem.id}`);
           this.itemsA.splice(this.editedAIndex, 1)
@@ -1316,7 +1316,7 @@ export default {
         formData.append('project', this.editedItem.project)
         formData.append('newId', this.editedItem.newId)
 
-        axios.put("http://localhost:8080/api/works/update?id="+this.editedItem.id, formData)
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -1354,7 +1354,7 @@ export default {
         for (let file of this.editedItem.projectDoc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/projects/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/projects/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
@@ -1377,7 +1377,7 @@ export default {
         formData.append('project', this.editedMItem.project)
         formData.append('newId', this.editedMItem.newId)
 
-        axios.put("http://localhost:8080/api/works/update?id="+this.editedMItem.id, formData)
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedMItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
@@ -1415,7 +1415,7 @@ export default {
         for (let file of this.editedMItem.projectDoc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/projects/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/projects/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsM.push(response.data)
@@ -1438,7 +1438,7 @@ export default {
         formData.append('project', this.editedYItem.project)
         formData.append('newId', this.editedYItem.newId)
 
-        axios.put("http://localhost:8080/api/works/update?id="+this.editedYItem.id, formData)
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedYItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsY[this.editedYIndex], this.editedYItem)
@@ -1476,7 +1476,7 @@ export default {
         for (let file of this.editedYItem.projectDoc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/projects/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/projects/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsY.push(response.data)
@@ -1499,7 +1499,7 @@ export default {
         formData.append('project', this.editedNItem.project)
         formData.append('newId', this.editedNItem.newId)
 
-        axios.put("http://localhost:8080/api/works/update?id="+this.editedNItem.id, formData)
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedNItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsN[this.editedNIndex], this.editedNItem)
@@ -1537,7 +1537,7 @@ export default {
         for (let file of this.editedNItem.projectDoc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/projects/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/projects/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsN.push(response.data)
@@ -1560,7 +1560,7 @@ export default {
         formData.append('project', this.editedAItem.project)
         formData.append('newId', this.editedAItem.newId)
 
-        axios.put("http://localhost:8080/api/works/update?id="+this.editedAItem.id, formData)
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedAItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
@@ -1598,7 +1598,7 @@ export default {
         for (let file of this.editedAItem.projectDoc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/projects/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/projects/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsA.push(response.data)
@@ -1638,7 +1638,7 @@ export default {
     },
     downloadDoc(item) {
       console.log("Download start")
-      this.downloadWithAxios("http://localhost:8080/api/projects/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      this.downloadWithAxios("http://api.nammti.uz/api/projects/download?userId="+item.userId+"&file="+item.workDownload,item.name)
     },
 
   },
@@ -1696,7 +1696,7 @@ export default {
 
   mounted() {
     axios
-      .get(`http://localhost:8080/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=41`)
+      .get(`http://api.nammti.uz/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=41`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1713,7 +1713,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:8080/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=42`)
+      .get(`http://api.nammti.uz/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=42`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1729,7 +1729,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:8080/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=43`)
+      .get(`http://api.nammti.uz/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=43`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1745,7 +1745,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:8080/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=44`)
+      .get(`http://api.nammti.uz/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=44`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1761,7 +1761,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:8080/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=45`)
+      .get(`http://api.nammti.uz/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=45`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

@@ -231,7 +231,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/news/delete?id=${this.editedItem.id}&newId=${this.editedItem.docId}`)
+      axios.delete(`http://api.nammti.uz/api/news/delete?id=${this.editedItem.id}&newId=${this.editedItem.docId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
@@ -273,7 +273,7 @@ export default {
       formData.append('confirmUserId', this.userId)
       formData.append('confirmName', this.userName)
 
-      axios.put("http://localhost:8080/api/news/confirm?id="+this.editedItem.id, formData)
+      axios.put("http://api.nammti.uz/api/news/confirm?id="+this.editedItem.id, formData)
         .then(response => {
           console.log(response.data)
           Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -312,13 +312,13 @@ export default {
     },
     downloadDoc(item) {
       console.log("Download start")
-      this.downloadWithAxios("http://localhost:8080/api/"+ item.tableName +"/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      this.downloadWithAxios("http://api.nammti.uz/api/"+ item.tableName +"/download?userId="+item.userId+"&file="+item.workDownload,item.name)
     },
   },
 
   mounted() {
     axios
-      .get(`http://localhost:8080/api/news/typeAdmin?userId=${this.userId}&limit=10&offset=0`)
+      .get(`http://api.nammti.uz/api/news/typeAdmin?userId=${this.userId}&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

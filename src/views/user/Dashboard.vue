@@ -80,16 +80,16 @@
       <v-card
       flat
       title="Fakultetlar bo’yicha reyting">
-      <template v-slot:text>
-        <v-text-field
-          v-model="searchC"
-          label="Qidiruv..."
-          prepend-inner-icon="mdi-magnify"
-          single-line
-          variant="outlined"
-          hide-details
-        ></v-text-field>
-      </template>
+        <template v-slot:text>
+          <v-select
+            label="Fakultet"
+            v-model="faculty"
+            :items="faculties"
+            hide-details
+            @change="changeFaculty"
+            variant="outlined">
+          </v-select>
+        </template>
       <v-data-table
         :headers="headersC"
         :items="itemsC"
@@ -104,16 +104,16 @@
       <v-card
       flat
       title="Kafedralar bo’yicha reyting">
-      <template v-slot:text>
-        <v-text-field
-          v-model="searchR"
-          label="Qidiruv..."
-          prepend-inner-icon="mdi-magnify"
-          single-line
-          variant="outlined"
-          hide-details
-        ></v-text-field>
-      </template>
+        <template v-slot:text>
+          <v-select
+            label="Kafedra"
+            v-model="department"
+            :items="departments"
+            hide-details
+            @change="changeDepartment"
+            variant="outlined">
+          </v-select>
+        </template>
 
       <v-data-table
         :headers="headersR"
@@ -134,8 +134,32 @@ import axios from "axios";
 export default {
     data () {
       return {
-        avatar: "http://localhost:8080/uploads/photos/" + localStorage.getItem("user-avatar"),
+        avatar: "http://api.nammti.uz/uploads/photos/" + localStorage.getItem("user-avatar"),
         userId: localStorage.getItem("user-id"),
+        faculties: ['Muxandislik-texnologiyasi', 'Kimyo texnologiya', 'Avtomatika va energetika', 'Iqtisodiyot'],
+        faculty: 'Muxandislik-texnologiyasi',
+        departments: ["Energetika",
+          "Fizika",
+          "O‘zbek tili",
+          "TJAB",
+          "IT",
+          "Menejment ",
+          "Marketing ",
+          "Iqtisodiyot",
+          "Buhgalteriya",
+          "Ijtimoiy fanlar",
+          "Kimyoviy texnologiya",
+          "Kimyo",
+          "Oziq-ovqat",
+          "Materiyalshunoslik",
+          "Chet tillar",
+          "Oliy matematika",
+          "TMJ",
+          "Metrologiya",
+          "Umumtexnika fanlari",
+          "QXMT",
+          "Manzarali bog‘dorchilik",],
+        department: 'Energetika',
 
         search: '',
         headers: [
@@ -144,101 +168,67 @@ export default {
           { key: 'userShare', title: 'Ulushi' },
           { key: 'userScore', title: 'Berilgan bal' },
         ],
-        desserts: [
-        ],
+        desserts: [],
 
         searchC: '',
         headersC: [
-          {
-            align: 'start',
-            key: 'name',
-            sortable: false,
-            title: 'Turi',
-          },
-          { key: 'calories', title: 'Soni' },
-          { key: 'fat', title: 'Ulushi' },
-          { key: 'carbs', title: 'Berilgan bal' },
+          { align: 'start', key: 'userName', sortable: false, title: 'F.I.SH',},
+          { key: 'userCount', title: 'Soni' },
+          { key: 'userShare', title: 'Ulushi' },
+          { key: 'userScore', title: 'Berilgan bal' },
         ],
-        itemsC: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-          }
-        ],
+        itemsC: [],
 
         searchR: '',
         headersR: [
-          {
-            align: 'start',
-            key: 'name',
-            sortable: false,
-            title: 'Turi',
-          },
-          { key: 'calories', title: 'Soni' },
-          { key: 'fat', title: 'Ulushi' },
-          { key: 'carbs', title: 'Berilgan bal' },
+          { align: 'start', key: 'userName', sortable: false, title: 'F.I.SH',},
+          { key: 'userCount', title: 'Soni' },
+          { key: 'userShare', title: 'Ulushi' },
+          { key: 'userScore', title: 'Berilgan bal' },
         ],
-        dessertsR: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-          }
-        ],
+        dessertsR: [],
 
         searchT: '',
         headersT: [
-          {
-            align: 'start',
-            key: 'name',
-            sortable: false,
-            title: 'Turi',
-          },
-          { key: 'calories', title: 'Soni' },
-          { key: 'fat', title: 'Ulushi' },
-          { key: 'carbs', title: 'Berilgan bal' },
+          { align: 'start', key: 'userName', sortable: false, title: 'F.I.SH',},
+          { key: 'userCount', title: 'Soni' },
+          { key: 'userShare', title: 'Ulushi' },
+          { key: 'userScore', title: 'Berilgan bal' },
         ],
-        dessertsT: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-          }
-        ],
+        dessertsT: [],
       }
     },
 
   methods: {
       getUserId(){
         return localStorage.getItem("user-hemisId")
-      }
+      },
+
+    changeDepartment(a){
+      axios
+        .get(`http://api.nammti.uz/api/statistic/department?limit=10&offset=0${a}`)
+        .then(response => {
+          const data  = response.data
+          for (const dataKey in data) {
+            this.dessertsR.push(data[dataKey])
+          }
+        });
+    },
+    changeFaculty(a){
+      axios
+        .get(`http://api.nammti.uz/api/statistic/faculty?limit=10&offset=0&faculty=${a}`)
+        .then(response => {
+          const data  = response.data
+          for (const dataKey in data) {
+            this.itemsC.push(data[dataKey])
+          }
+        });
+    },
   },
 
   mounted() {
     axios
-      .get(`http://localhost:8080/api/statistic/user?userId=${this.getUserId()}`)
+      .get(`http://api.nammti.uz/api/statistic/all?&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -246,25 +236,31 @@ export default {
         }
       });
 
-    /*axios
-      .get(`http://localhost:8080/api/statistic/type?userId=${this.userId}&limit=10&offset=0&type="O'quv qo'llanma"`)
+    axios
+      .get(`http://api.nammti.uz/api/statistic/faculty?limit=10&offset=0&faculty=${this.faculty}`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
-          this.itemsQ.push(data[dataKey])
+          this.itemsC.push(data[dataKey])
         }
       });
 
     axios
-      .get(`http://localhost:8080/api/statistic/type?userId=${this.userId}&limit=10&offset=0&type="Monografiya"`)
+      .get(`http://api.nammti.uz/api/statistic/department?limit=10&offset=0${this.department}`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
-          this.itemsM.push(data[dataKey])
+          this.dessertsR.push(data[dataKey])
         }
-      });*/
+      });
 
-  }
+  },
+
+  watch: {
+    selectedDepartment: function (newValue) {
+      this.changeDepartment(newValue)
+    },
+  },
 
 }
 </script>

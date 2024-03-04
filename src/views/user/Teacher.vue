@@ -545,7 +545,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/teachers/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/teachers/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
@@ -559,7 +559,7 @@ export default {
     },
     deleteDItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/achievements/delete?id=${this.editedDItem.id}&newId=${this.editedDItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/achievements/delete?id=${this.editedDItem.id}&newId=${this.editedDItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.itemsD.splice(this.editedDIndex, 1)
@@ -583,7 +583,7 @@ export default {
         formData.append('faculty', this.editedItem.workNumber)
         formData.append('newId', this.editedItem.newId)
 
-        axios.put("http://localhost:8080/api/teachers/update?id="+this.editedItem.id, formData)
+        axios.put("http://api.nammti.uz/api/teachers/update?id="+this.editedItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -629,7 +629,7 @@ export default {
         for (let file of this.editedItem.student) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/teachers/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/teachers/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
@@ -651,7 +651,7 @@ export default {
         formData.append('number', this.editedDItem.achievementNumber)
         formData.append('newId', this.editedDItem.newId)
 
-        axios.put("http://localhost:8080/api/achievements/update?id="+this.editedDItem.id, formData)
+        axios.put("http://api.nammti.uz/api/achievements/update?id="+this.editedDItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsD[this.editedDIndex], this.editedDItem)
@@ -682,7 +682,7 @@ export default {
         for (let file of this.editedDItem.doc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/achievements/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/achievements/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsD.push(response.data)
@@ -717,16 +717,16 @@ export default {
         .catch(() => console.log('error occured'))
     },
     downloadTDoc(item) {
-      this.downloadWithAxios("http://localhost:8080/api/teachers/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      this.downloadWithAxios("http://api.nammti.uz/api/teachers/download?userId="+item.userId+"&file="+item.workDownload,item.name)
     },
     downloadADoc(item) {
-      this.downloadWithAxios("http://localhost:8080/api/achievements/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      this.downloadWithAxios("http://api.nammti.uz/api/achievements/download?userId="+item.userId+"&file="+item.workDownload,item.name)
     },
   },
 
   mounted() {
     axios
-      .get(`http://localhost:8080/api/teachers/teacher?userId=${this.userId}&limit=10&offset=0`)
+      .get(`http://api.nammti.uz/api/teachers/teacher?userId=${this.userId}&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -743,7 +743,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:8080/api/achievements/achievement?userId=${this.userId}&limit=10&offset=0`)
+      .get(`http://api.nammti.uz/api/achievements/achievement?userId=${this.userId}&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

@@ -939,7 +939,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/works/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
       .then(response => {
         console.log(`Deleteditem with ID ${this.editItem.id}`);
         this.items.splice(this.editedIndex, 1)
@@ -953,7 +953,7 @@ export default {
     },
     deleteQItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedQItem.id}&newId=${this.editedQItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/works/delete?id=${this.editedQItem.id}&newId=${this.editedQItem.newId}`)
       .then(response => {
         console.log(`Deleteditem with ID ${this.editedQItem.id}`);
         this.itemsQ.splice(this.editedQIndex, 1)
@@ -967,7 +967,7 @@ export default {
     },
     deleteMItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/works/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
       .then(response => {
         console.log(`Deleteditem with ID ${this.editedMItem.id}`);
         this.itemsM.splice(this.editedMIndex, 1)
@@ -981,7 +981,7 @@ export default {
     },
     deleteKItemConfirm () {
       this.overlay = true
-      axios.delete(`http://localhost:8080/api/works/delete?id=${this.editedKItem.id}&newId=${this.editedKItem.newId}`)
+      axios.delete(`http://api.nammti.uz/api/works/delete?id=${this.editedKItem.id}&newId=${this.editedKItem.newId}`)
       .then(response => {
         console.log(`Deleteditem with ID ${this.editedKItem.id}`);
         this.itemsK.splice(this.editedKIndex, 1)
@@ -1062,7 +1062,7 @@ export default {
         formData.append('workNumber', this.editedItem.workNumber)
         formData.append('newId', this.editedItem.newId)
 
-        axios.put("http://localhost:8080/api/works/update?id="+this.editedItem.id, formData)
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -1094,7 +1094,7 @@ export default {
         for (let file of this.editedItem.workDownload) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/works/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/works/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
@@ -1118,7 +1118,7 @@ export default {
         formData.append('workNumber', this.editedItem.workNumber)
         formData.append('newId', this.editedItem.newId)
 
-        axios.put("http://localhost:8080/api/works/update?id="+this.editedQItem.id, formData)
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedQItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsQ[this.editedQIndex], this.editedQItem)
@@ -1149,7 +1149,7 @@ export default {
         for (let file of this.editedQItem.workDownload) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/works/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/works/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsQ.push(response.data)
@@ -1173,7 +1173,7 @@ export default {
         formData.append('workNumber', this.editedItem.workNumber)
         formData.append('newId', this.editedItem.newId)
 
-        axios.put("http://localhost:8080/api/works/update?id="+this.editedMItem.id, formData)
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedMItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedMItem)
@@ -1204,7 +1204,7 @@ export default {
         for (let file of this.editedMItem.workDownload) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/works/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/works/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsM.push(response.data)
@@ -1228,7 +1228,7 @@ export default {
         formData.append('workNumber', this.editedItem.workNumber)
         formData.append('newId', this.editedItem.newId)
 
-        axios.put("http://localhost:8080/api/works/update?id="+this.editedKItem.id, formData)
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedKItem.id, formData)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedKItem)
@@ -1259,7 +1259,7 @@ export default {
         for (let file of this.editedKItem.workDownload) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://localhost:8080/api/works/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/works/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsK.push(response.data)
@@ -1299,7 +1299,7 @@ export default {
     },
     downloadDoc(item) {
       console.log("Download start")
-      this.downloadWithAxios("http://localhost:8080/api/works/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      this.downloadWithAxios("http://api.nammti.uz/api/works/download?userId="+item.userId+"&file="+item.workDownload,item.name)
     },
   },
 
@@ -1332,7 +1332,7 @@ export default {
 
   mounted() {
     axios
-      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type=1`)
+      .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=1`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1349,7 +1349,7 @@ export default {
       });
 
       axios
-      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type=2`)
+      .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=2`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1365,7 +1365,7 @@ export default {
       });
 
       axios
-      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type=3`)
+      .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=3`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1381,7 +1381,7 @@ export default {
       });
 
       axios
-      .get(`http://localhost:8080/api/works/type?userId=${this.userId}&limit=10&offset=0&type=4`)
+      .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=4`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
