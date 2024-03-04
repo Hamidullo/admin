@@ -22,19 +22,19 @@
               {{editedItem.name}}
             </h2>
           </strong>
-          <strong class="">
+          <strong class="my-4">
             Tug'ulgan sanasi:
           </strong>
-          <h3 >
+          <h3 class="my-4">
             {{editedItem.year}}
           </h3>
-          <strong class="">
+          <strong class="my-4">
             Doimiy yashash manzili:
           </strong>
           <h4 class="my-4">
             {{editedItem.place}}
           </h4>
-          <strong class="">
+          <strong class="my-4">
             Lavozimi:
           </strong>
           <div class="ml-2 mb-4">
@@ -220,16 +220,22 @@
               <strong class="ml-2">
                 Bakalavriat:
               </strong>
-              <div class="ml-4">
+              <div class="ml-4" v-if="!diploma.bach_inst">
                 Tamomlagan OTM va yili, ta’lim yo’nalishi
+              </div>
+              <div class="ml-4" v-else>
+                {{ diploma.bach_inst }} , {{ diploma.bach_year }} , {{ diploma.bach_direction }}
               </div>
             </v-card-text>
             <v-card-text>
               <strong class="ml-2">
                 Magistartura:
               </strong>
-              <div class="ml-4">
-                Tamomlagan OTM va yili, Mutaxasisligi
+              <div class="ml-4" v-if="!diploma.mast_inst">
+                Tamomlagan OTM va yili, ta’lim yo’nalishi
+              </div>
+              <div class="ml-4" v-else>
+                {{ diploma.mast_inst }} , {{ diploma.mast_year }} , {{ diploma.mast_direction }}
               </div>
             </v-card-text>
 
@@ -260,18 +266,21 @@
                           cols="12">
                           <v-text-field
                             label="Tamomlagan OTM"
+                            v-model="diploma.bach_inst"
                             required>
                         </v-text-field>
                         </v-col>
                         <v-col
                           cols="12">
                           <v-text-field
+                            v-model="diploma.bach_year"
                             label="Tamomlagan yili">
                         </v-text-field>
                         </v-col>
                         <v-col
                           cols="12">
                           <v-text-field
+                            v-model="diploma.bach_direction"
                             label="Ta’lim yo’nalishi"
                             persistent-hint
                             required>
@@ -285,6 +294,7 @@
                         <v-col
                           cols="12">
                           <v-text-field
+                            v-model="diploma.bach_inst"
                             label="Tamomlagan OTM"
                             required>
                         </v-text-field>
@@ -292,12 +302,14 @@
                         <v-col
                           cols="12">
                           <v-text-field
+                            v-model="diploma.mast_year"
                             label="Tamomlagan yili">
                         </v-text-field>
                         </v-col>
                         <v-col
                           cols="12">
                           <v-text-field
+                            v-model="diploma.mast_direction"
                             label="Mutaxasisligi"
                             persistent-hint
                             required>
@@ -317,7 +329,7 @@
                     <v-btn
                       color="blue-darken-1"
                       variant="text"
-                      @click="dialogD = false">
+                      @click="saveD">
                       Saqlash
                     </v-btn>
                   </v-card-actions>
@@ -339,11 +351,17 @@
               <strong class="ml-2">
                 O’quv yiliga belgilangan dars mashg’ulotlari:
               </strong>
-              <div class="ml-4 mt-2">
+              <div class="ml-4 mt-2" v-if="!aud.aud_training">
                 Auditoriya mashg’ulotlari (xajmi / maruza/amaliyot/laboratoriya/seminar/ (kalendar reja yuklanadi))
               </div>
-              <div class="ml-4">
+              <div class="ml-4 mt-2" v-else>
+                Auditoriya mashg’ulotlari ( {{ aud.aud_training }} / {{ aud.aud_lecture }} / {{ aud.aud_practice }} / {{ aud.aud_laboratory }} / {{ aud.aud_seminar }} )
+              </div>
+              <div class="ml-4"  v-if="!aud.aud_without">
                 Auditoriyasiz mashg’ulotlar (----)
+              </div>
+              <div class="ml-4"  v-else>
+                Auditoriyasiz mashg’ulotlar ( {{ aud.aud_without }} )
               </div>
             </v-card-text>
 
@@ -375,6 +393,7 @@
                           sm="6"
                           md="4">
                           <v-text-field
+                            v-model="aud.aud_training"
                             label="Xajmi"
                             required>
                           </v-text-field>
@@ -384,6 +403,7 @@
                           sm="6"
                           md="4">
                           <v-text-field
+                            v-model="aud.aud_lecture"
                             label="Maruza">
                           </v-text-field>
                         </v-col>
@@ -392,6 +412,7 @@
                           sm="6"
                           md="4">
                           <v-text-field
+                            v-model="aud.aud_practice"
                             label="Amaliyot"
                             persistent-hint
                             required>
@@ -402,6 +423,7 @@
                           sm="6"
                           md="4">
                           <v-text-field
+                            v-model="aud.aud_laboratory"
                             label="Laboratoriya"
                             persistent-hint
                             required>
@@ -412,6 +434,7 @@
                           sm="6"
                           md="4">
                           <v-text-field
+                            v-model="aud.aud_seminar"
                             label="Seminar"
                             persistent-hint
                             required>
@@ -422,6 +445,7 @@
                           sm="6"
                           md="4">
                           <v-text-field
+                            v-model="aud.aud_doc"
                             label="Kalendar reja"
                             persistent-hint
                             required>
@@ -430,6 +454,7 @@
                         <v-col
                           cols="12">
                           <v-text-field
+                            v-model="aud.aud_without"
                             label="Auditoriyasiz mashg’ulotlar"
                             persistent-hint
                             required>
@@ -449,7 +474,7 @@
                     <v-btn
                       color="blue-darken-1"
                       variant="text"
-                      @click="dialogO = false">
+                      @click="saveO">
                       Saqlash
                     </v-btn>
                   </v-card-actions>
@@ -510,6 +535,24 @@
         time: '',
         newAvatar: null
       },
+      diploma: {
+        bach_inst: '',
+        bach_year: '',
+        bach_direction: '',
+        mast_inst: '',
+        mast_year: '',
+        mast_direction: '',
+      },
+      aud: {
+        aud_training: '',
+        aud_lecture: '',
+        aud_practice: '',
+        aud_laboratory: '',
+        aud_seminar: '',
+        aud_cal_palne: '',
+        aud_without: '',
+        aud_doc: '',
+      },
 
       dialogD: false,
       dialogO: false,
@@ -517,7 +560,14 @@
     }),
 
     methods: {
+
       close () {
+        this.dialog = false
+      },
+      closeD () {
+        this.dialog = false
+      },
+      closeO () {
         this.dialog = false
       },
 
@@ -555,9 +605,57 @@
         this.close()
 
       },
+      saveD () {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('bach_inst', this.diploma.bach_inst)
+        formData.append('bach_year', this.diploma.bach_year)
+        formData.append('bach_direction', this.diploma.bach_direction)
+        formData.append('mast_inst', this.diploma.mast_inst)
+        formData.append('mast_year', this.diploma.mast_year)
+        formData.append('mast_direction', this.diploma.mast_direction)
+
+        console.log(this.getId())
+        axios.put("http://api.nammti.uz/api/users/diploma?userId=" + this.getId(), formData)
+          .then(response => {
+            console.log(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+        this.closeD()
+
+      },
+      saveO () {
+        this.overlay = true
+        let formData = new FormData();
+        formData.append('bach_inst', this.diploma.bach_inst)
+        formData.append('bach_year', this.diploma.bach_year)
+        formData.append('bach_direction', this.diploma.bach_direction)
+        formData.append('mast_inst', this.diploma.mast_inst)
+        formData.append('mast_year', this.diploma.mast_year)
+        formData.append('mast_direction', this.diploma.mast_direction)
+
+        console.log(this.getId())
+        axios.put("http://api.nammti.uz/api/users/diploma?userId=" + this.getId(), formData)
+          .then(response => {
+            console.log(response.data)
+            this.overlay = false
+          })
+          .catch(error => {
+            this.errorMessage = error.message;
+            this.overlay = false
+            console.error("There was an error!", error);
+          });
+        this.closeO()
+
+      },
 
       getId(){
-        let userId = localStorage.getItem("user-hemisId");
+        let userId = localStorage.getItem("user-userId");
         return userId
       }
     },
