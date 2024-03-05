@@ -3,7 +3,7 @@
 
     <v-row>
       <v-col cols="12">
-        <v-card flat title="Ilmiy daraja yoki unvonlari">
+        <v-card class="bg-blue-grey-darken-1" flat title="Ilmiy daraja yoki unvonlari">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -13,12 +13,12 @@
               width="1024">
               <template v-slot:activator="{ props }">
                 <v-btn
-                  color="primary"
+                  class="bg-blue-grey-darken-3"
                   v-bind="props">
                   Qo'shish
                 </v-btn>
               </template>
-              <v-card>
+              <v-card class="bg-blue-grey-darken-4">
                 <v-card-title>
                   <span class="text-h5">{{formTitle}}</span>
                 </v-card-title>
@@ -144,7 +144,7 @@
               </v-card>
             </v-dialog>
             <v-dialog v-model="dialogDelete" width="auto">
-              <v-card>
+              <v-card class="bg-blue-grey-darken-4">
                 <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Ilmiy daraja yoki unvonni o'chirishni hohlaysizmi?</v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -157,7 +157,7 @@
           </v-row>
           <!-- Dialog end -->
         </template>
-        <template v-slot:text>
+        <template  v-slot:text>
           <v-text-field
             v-model="search"
             label="Qidiruv..."
@@ -168,6 +168,7 @@
           </v-text-field>
         </template>
         <v-data-table
+          class="bg-blue-grey-darken-1"
           :headers="headers"
           :items="items"
           :search="search">
@@ -189,7 +190,7 @@
       </v-col>
 
       <v-col cols="12">
-        <v-card flat title="“TOP-1000” ro‘yxatiga kiruvchi xorijiy oliy ta’lim tashkilotlarida himoya qilgan">
+        <v-card class="bg-blue-grey-darken-1" flat title="“TOP-1000” ro‘yxatiga kiruvchi xorijiy oliy ta’lim tashkilotlarida himoya qilgan">
           <template v-slot:append>
             <!-- Dialog start -->
             <v-row justify="center" class="mr-2">
@@ -198,12 +199,12 @@
               width="1024">
               <template v-slot:activator="{ props }">
                 <v-btn
-                  color="primary"
+                  class="bg-blue-grey-darken-3"
                   v-bind="props">
                   Qo'shish
                 </v-btn>
               </template>
-              <v-card>
+              <v-card class="bg-blue-grey-darken-4">
                 <v-card-title>
                   <span class="text-h5">{{ formCTitle }}</span>
                 </v-card-title>
@@ -349,7 +350,7 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-              <v-dialog v-model="dialogCDelete" width="auto">
+              <v-dialog class="bg-blue-grey-darken-1" v-model="dialogCDelete" width="auto">
                 <v-card>
                   <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">“TOP-1000” ro‘yxatiga kiruvchi xorijiy oliy ta’lim tashkilotlarida himoya qilgan o'chirishni hohlaysizmi?</v-card-title>
                   <v-card-actions>
@@ -376,6 +377,7 @@
         <v-data-table
           :headers="headersC"
           :items="itemsC"
+          class="bg-blue-grey-darken-1"
           :search="searchC"
           item-value="name">
           <template v-slot:item.actions="{ item }">
@@ -396,7 +398,7 @@
       </v-col>
 
       <v-col cols="12">
-        <v-card flat title="“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥ 5 dan yuqoriligi">
+        <v-card class="bg-blue-grey-darken-1" flat title="“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥ 5 dan yuqoriligi">
           <template v-slot:append>
             <!-- Dialog start -->
             <v-row justify="center" class="mr-2">
@@ -405,12 +407,12 @@
                 width="1024">
                 <template v-slot:activator="{ props }">
                   <v-btn
-                    color="primary"
+                    class="bg-blue-grey-darken-3"
                     v-bind="props">
                     Qo'shish
                   </v-btn>
                 </template>
-                <v-card>
+                <v-card class="bg-blue-grey-darken-4">
                   <v-card-title>
                     <span class="text-h5">{{ formSTitle }}</span>
                   </v-card-title>
@@ -554,6 +556,7 @@
             :headers="headersS"
             :items="itemsS"
             :search="searchS"
+            class="bg-blue-grey-darken-1"
             item-value="name">
             <template v-slot:item.actions="{ item }">
               <v-icon

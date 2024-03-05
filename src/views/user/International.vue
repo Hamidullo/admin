@@ -3,7 +3,7 @@
 
     <v-row>
       <v-col>
-        <v-card flat title="Top – 1000-da o’quv mashg’ulotlari olib borish">
+        <v-card class="bg-color-container" flat title="Top – 1000-da o’quv mashg’ulotlari olib borish">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -18,7 +18,7 @@
                   Qo'shish
                 </v-btn>
               </template>
-              <v-card>
+              <v-card  class="form-color">
                 <v-card-title>
                   <span class="text-h5">{{formTitle}}</span>
                 </v-card-title>
@@ -109,13 +109,13 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn
-                    color="blue-darken-1"
+                    class="bg-red"
                     variant="text"
                     @click="close">
                     Yopish
                   </v-btn>
                   <v-btn
-                    color="blue-darken-1"
+                    class="bg-green-lighten-1"
                     variant="text"
                     @click="save">
                     Saqlash
@@ -124,7 +124,7 @@
               </v-card>
             </v-dialog>
             <v-dialog v-model="dialogDelete" width="auto">
-              <v-card>
+              <v-card class="form-color">
                 <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Top – 1000-da o’quv mashg’ulotlari olib borish o'chirishni hohlaysizmi?</v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -150,6 +150,7 @@
         <v-data-table
           :headers="headers"
           :items="items"
+          class="bg-color-container"
           :search="search">
           <template v-slot:item.actions="{ item }">
             <v-icon
@@ -169,7 +170,7 @@
       </v-col>
 
       <v-col>
-        <v-card flat title="Stajirovka va malaka oshirish">
+        <v-card class="bg-color-container" flat title="Stajirovka va malaka oshirish">
           <template v-slot:append>
             <!-- Dialog start -->
             <v-row justify="center" class="mr-2">
@@ -183,7 +184,7 @@
                   Qo'shish
                 </v-btn>
               </template>
-              <v-card>
+              <v-card  class="form-color">
                 <v-card-title>
                   <span class="text-h5">{{ formCTitle }}</span>
                 </v-card-title>
@@ -274,13 +275,13 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn
-                    color="blue-darken-1"
+                    class="bg-red"
                     variant="text"
                     @click="closeC">
                     Yopish
                   </v-btn>
                   <v-btn
-                    color="blue-darken-1"
+                    class="bg-green-lighten-1"
                     variant="text"
                     @click="saveC">
                     Saqlash
@@ -289,7 +290,7 @@
               </v-card>
             </v-dialog>
               <v-dialog v-model="dialogCDelete" width="auto">
-                <v-card>
+                <v-card class="form-color">
                   <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Stajirovka va malaka oshirish o'chirishni hohlaysizmi?</v-card-title>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -315,6 +316,7 @@
         <v-data-table
           :headers="headersC"
           :items="itemsC"
+          class="bg-color-container"
           :search="searchC"
           item-value="name">
           <template v-slot:item.actions="{ item }">
@@ -753,5 +755,12 @@ export default {
 </script>
 
 <style scoped>
-
+.bg-color-container{
+  background-color: #59bce0;
+  color: white;
+}
+.form-color{
+  background-color: #2b748d;
+  color: white;
+}
 </style>

@@ -3,7 +3,7 @@
 
     <v-row>
       <v-col cols="12">
-        <v-card flat title="Xalqaro loyihalardagi ishtiroki">
+        <v-card class="bg-color-container" flat title="Xalqaro loyihalardagi ishtiroki">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -13,12 +13,12 @@
               width="1024">
               <template v-slot:activator="{ props }">
                 <v-btn
-                  color="primary"
+                  class="bg-orange-darken-4"
                   v-bind="props">
                   Qo'shish
                 </v-btn>
               </template>
-              <v-card>
+              <v-card class="form-color">
                 <v-card-title>
                   <span class="text-h5">{{ formTitle }}</span>
                 </v-card-title>
@@ -106,13 +106,13 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn
-                    color="blue-darken-1"
+                    class="bg-red"
                     variant="text"
                     @click="close">
                     Yopish
                   </v-btn>
                   <v-btn
-                    color="blue-darken-1"
+                    class="bg-green-lighten-1"
                     variant="text"
                     @click="save">
                     Saqlash
@@ -121,7 +121,7 @@
               </v-card>
             </v-dialog>
             <v-dialog v-model="dialogDelete" width="auto">
-              <v-card>
+              <v-card class="form-color">
                 <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Xalqaro loyihalardagi ishtirokni o'chirishni hohlaysizmi?</v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -147,6 +147,7 @@
         <v-data-table
           :headers="headers"
           :items="items"
+          class="bg-color-container"
           :search="search">
           <template v-slot:item.actions="{ item }">
             <v-icon
@@ -166,7 +167,7 @@
       </v-col>
 
       <v-col  cols="12">
-        <v-card flat title="Qo’shma loyihalardagi ishtiroki">
+        <v-card class="bg-color-container" flat title="Qo’shma loyihalardagi ishtiroki">
         <template v-slot:append>
           <!-- Dialog start -->
           <v-row justify="center" class="mr-2">
@@ -176,12 +177,12 @@
               width="1024">
               <template v-slot:activator="{ props }">
                 <v-btn
-                  color="primary"
+                  class="bg-orange-darken-4"
                   v-bind="props">
                   Qo'shish
                 </v-btn>
               </template>
-              <v-card>
+              <v-card class="form-color">
                 <v-card-title>
                   <span class="text-h5">{{ formMTitle }}</span>
                 </v-card-title>
@@ -269,13 +270,13 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn
-                    color="blue-darken-1"
+                    class="bg-red"
                     variant="text"
                     @click="closeM">
                     Yopish
                   </v-btn>
                   <v-btn
-                    color="blue-darken-1"
+                    class="bg-green-lighten-1"
                     variant="text"
                     @click="saveM">
                     Saqlash
@@ -284,7 +285,7 @@
               </v-card>
             </v-dialog>
             <v-dialog v-model="dialogMDelete" width="auto">
-              <v-card>
+              <v-card class="form-color">
                 <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Qo’shma loyihalardagi ishtirokni o'chirishni hohlaysizmi?</v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -310,6 +311,7 @@
         <v-data-table
           :headers="headersM"
           :items="itemsM"
+          class="bg-color-container"
           :search="searchM">
           <template v-slot:item.actions="{ item }">
             <v-icon
@@ -329,7 +331,7 @@
       </v-col>
 
       <v-col  cols="12">
-        <v-card flat title="Respublik loyihalaridagi ishtiroki">
+        <v-card class="bg-color-container" flat title="Respublik loyihalaridagi ishtiroki">
           <template v-slot:append>
             <!-- Dialog start -->
             <v-row justify="center" class="mr-2">
@@ -339,12 +341,12 @@
                 width="1024">
                 <template v-slot:activator="{ props }">
                   <v-btn
-                    color="primary"
+                    class="bg-orange-darken-4"
                     v-bind="props">
                     Qo'shish
                   </v-btn>
                 </template>
-                <v-card>
+                <v-card class="form-color">
                   <v-card-title>
                     <span class="text-h5">{{ formYTitle }}</span>
                   </v-card-title>
@@ -432,13 +434,13 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
-                      color="blue-darken-1"
+                      class="bg-red"
                       variant="text"
                       @click="closeY">
                       Yopish
                     </v-btn>
                     <v-btn
-                      color="blue-darken-1"
+                      class="bg-green-lighten-1"
                       variant="text"
                       @click="saveY">
                       Saqlash
@@ -447,7 +449,7 @@
                 </v-card>
               </v-dialog>
               <v-dialog v-model="dialogYDelete" width="auto">
-                <v-card>
+                <v-card class="form-color">
                   <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Respublik loyihalaridagi ishtirokni o'chirishni hohlaysizmi?</v-card-title>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -473,6 +475,7 @@
           <v-data-table
             :headers="headersY"
             :items="itemsY"
+            class="bg-color-container"
             :search="searchY">
             <template v-slot:item.actions="{ item }">
               <v-icon
@@ -492,7 +495,7 @@
       </v-col>
 
       <v-col  cols="12">
-        <v-card flat title="Startaplardagi ishtiroki">
+        <v-card class="bg-color-container" flat title="Startaplardagi ishtiroki">
           <template v-slot:append>
             <!-- Dialog start -->
             <v-row justify="center" class="mr-2">
@@ -502,12 +505,12 @@
                 width="1024">
                 <template v-slot:activator="{ props }">
                   <v-btn
-                    color="primary"
+                    class="bg-orange-darken-4"
                     v-bind="props">
                     Qo'shish
                   </v-btn>
                 </template>
-                <v-card>
+                <v-card class="form-color">
                   <v-card-title>
                     <span class="text-h5">{{ formNTitle }}</span>
                   </v-card-title>
@@ -596,13 +599,13 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
-                      color="blue-darken-1"
+                      class="bg-red"
                       variant="text"
                       @click="closeN">
                       Yopish
                     </v-btn>
                     <v-btn
-                      color="blue-darken-1"
+                      class="bg-green-lighten-1"
                       variant="text"
                       @click="saveN">
                       Saqlash
@@ -611,7 +614,7 @@
                 </v-card>
               </v-dialog>
               <v-dialog v-model="dialogNDelete" width="auto">
-                <v-card>
+                <v-card class="form-color">
                   <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Startaplardagi ishtirokni o'chirishni hohlaysizmi?</v-card-title>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -637,6 +640,7 @@
           <v-data-table
             :headers="headersN"
             :items="itemsN"
+            class="bg-color-container"
             :search="searchN">
             <template v-slot:item.actions="{ item }">
               <v-icon
@@ -656,7 +660,7 @@
       </v-col>
 
       <v-col  cols="12">
-        <v-card flat title="Xo’jalik shartnomalari">
+        <v-card class="bg-color-container" flat title="Xo’jalik shartnomalari">
           <template v-slot:append>
             <!-- Dialog start -->
             <v-row justify="center" class="mr-2">
@@ -666,12 +670,12 @@
                 width="1024">
                 <template v-slot:activator="{ props }">
                   <v-btn
-                    color="primary"
+                    class="bg-orange-darken-4"
                     v-bind="props">
                     Qo'shish
                   </v-btn>
                 </template>
-                <v-card>
+                <v-card class="form-color">
                   <v-card-title>
                     <span class="text-h5">{{ formATitle }}</span>
                   </v-card-title>
@@ -747,13 +751,13 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
-                      color="blue-darken-1"
+                      class="bg-red"
                       variant="text"
                       @click="closeA">
                       Yopish
                     </v-btn>
                     <v-btn
-                      color="blue-darken-1"
+                      class="bg-green-lighten-1"
                       variant="text"
                       @click="saveA">
                       Saqlash
@@ -762,7 +766,7 @@
                 </v-card>
               </v-dialog>
               <v-dialog v-model="dialogADelete" width="auto">
-                <v-card>
+                <v-card class="form-color">
                   <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">Xo’jalik shartnomani o'chirishni hohlaysizmi?</v-card-title>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -788,6 +792,7 @@
           <v-data-table
             :headers="headersA"
             :items="itemsA"
+            class="bg-color-container"
             :search="searchA">
             <template v-slot:item.actions="{ item }">
               <v-icon
@@ -1781,5 +1786,12 @@ export default {
 </script>
 
 <style scoped>
-
+.bg-color-container{
+  background-color: #ef8441;
+  color: white;
+}
+.form-color{
+  background-color: #c04f09;
+  color: white;
+}
 </style>

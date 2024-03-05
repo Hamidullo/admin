@@ -765,5 +765,12 @@ export default {
 </script>
 
 <style scoped>
-
+.bg-color-container{
+  background-color: #efb241;
+  color: white;
+}
+.form-color{
+  background-color: #c04f09;
+  color: white;
+}
 </style>
