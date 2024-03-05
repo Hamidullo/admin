@@ -5,7 +5,7 @@
 
     <v-col class="mr-4" cols="4">
       <v-card
-       class="mx-auto"
+       class="mx-auto bg-color-container"
        max-width="500"
        rounded="5">
         <v-img
@@ -73,12 +73,12 @@
             width="1024">
             <template v-slot:activator="{ props }">
               <v-btn
-                color="primary"
+                color="teal-darken-2"
                 v-bind="props">
                 Taxrirlash
               </v-btn>
             </template>
-            <v-card>
+            <v-card class="form-color">
               <v-card-title>
                 <span class="text-h5">Shaxsiy ma'lumotlar</span>
               </v-card-title>
@@ -187,13 +187,13 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
-                  color="blue-darken-1"
+                  class="bg-red"
                   variant="text"
                   @click="close">
                   Yopish
                 </v-btn>
                 <v-btn
-                  color="blue-darken-1"
+                  class="bg-green-lighten-1"
                   variant="text"
                   @click="save">
                   Saqlash
@@ -212,7 +212,7 @@
       <v-row >
         <v-col>
           <v-card
-           class="mx-auto"
+           class="mx-auto bg-color-container"
            max-width="500"
            title="Diplomlar:"
            rounded="5">
@@ -247,12 +247,12 @@
                 width="1024">
                 <template v-slot:activator="{ props }">
                   <v-btn
-                    color="primary"
+                    color="teal-darken-2"
                     v-bind="props">
                     Taxrirlash
                   </v-btn>
                 </template>
-                <v-card>
+                <v-card  class="form-color">
                   <v-card-title>
                     <span class="text-h5">Diplomlar:</span>
                   </v-card-title>
@@ -321,13 +321,13 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
-                      color="blue-darken-1"
+                      class="bg-red"
                       variant="text"
                       @click="dialogD = false">
                       Yopish
                     </v-btn>
                     <v-btn
-                      color="blue-darken-1"
+                      class="bg-green-lighten-1"
                       variant="text"
                       @click="saveD">
                       Saqlash
@@ -343,7 +343,7 @@
 
         <v-col>
           <v-card
-            class="mx-auto"
+            class="mx-auto bg-color-container"
             max-width="500"
             title=""
             rounded="5">
@@ -373,12 +373,12 @@
                 width="1024">
                 <template v-slot:activator="{ props }">
                   <v-btn
-                    color="primary"
+                    color="teal-darken-2"
                     v-bind="props">
                     Taxrirlash
                   </v-btn>
                 </template>
-                <v-card>
+                <v-card  class="form-color">
                   <v-card-title>
                     <span class="text-h5">O’quv yiliga belgilangan dars mashg’ulotlari:</span>
                   </v-card-title>
@@ -466,13 +466,13 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
-                      color="blue-darken-1"
+                      class="bg-red"
                       variant="text"
                       @click="dialogO = false">
                       Yopish
                     </v-btn>
                     <v-btn
-                      color="blue-darken-1"
+                      class="bg-green-lighten-1"
                       variant="text"
                       @click="saveO">
                       Saqlash
@@ -674,6 +674,13 @@
   }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.bg-color-container{
+  background-color: #26A69A;
+  color: white;
+}
+.form-color{
+  background-color: #00695C;
+  color: white;
+}
 </style>

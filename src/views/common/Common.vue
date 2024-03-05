@@ -27,10 +27,11 @@
 
     <v-row align="center" justify="center">
       <v-col cols="6">
-        <v-card align="center" flat title="Institut bo’yicha fakultetlar reyting">
+        <v-card align="center" class="bg-color-container" flat title="Institut bo’yicha fakultetlar reyting">
           <v-data-table
             :headers="headers"
             :items="items"
+            class="bg-color-container"
             :search="search">
           </v-data-table>
         </v-card>
@@ -116,5 +117,9 @@ export default {
 }
 .title{
   color: #5865f2 !important;
+}
+.bg-color-container{
+  background-color: #59bce0;
+  color: white;
 }
 </style>

@@ -37,7 +37,8 @@
             :value="item.value"
             @click="item.action"
             :active="item.routeName === $route.name"
-            color="primary">
+            :active-color="item.color"
+            >
             <template v-slot:prepend>
               <v-icon :icon="item.icon"></v-icon>
             </template>
@@ -65,70 +66,80 @@ export default {
           title: 'STATISTIKA' ,
           action: this.openHomePage,
           icon: 'mdi-home',
-          routeName: "Dashboard"
+          routeName: "Dashboard",
+          color: 'blue-lighten-1\n'
         },
         {
           value: 2,
           icon: 'mdi-account',
           title: 'SHAXSIY MA’LUMOTLAR' ,
           action: this.openAccountPage,
-          routeName: "About"
+          routeName: "About",
+          color: 'teal-lighten-1'
         },
         {
           value: 3,
           icon: 'mdi-school',
           title: 'SIFAT(SALOHIYAT) KO‘RSATKICHI' ,
           action: this.openAcademicPage,
-          routeName: "Academic"
+          routeName: "Academic",
+          color: 'blue-grey-darken-1'
         },
         {
           value: 4,
           icon: 'mdi-briefcase',
           title: 'O’QUV-USLUBIY ISHLAR' ,
           action: this.openWorkPage,
-          routeName: "Textbook"
+          routeName: "Textbook",
+          color: 'green-darken-3'
         },
         {
           value: 5,
           icon: 'mdi-brain',
           title: 'ILMIY ISHLAR' ,
           action: this.openBrainPage,
-          routeName: "Brain"
+          routeName: "Brain",
+          color: 'light-blue-darken-2'
         },
         {
           value: 6,
           icon: 'mdi-calculator',
           title: 'LOYIHALAR VA TIJORATLASHTIRISH' ,
           action: this.openProjectPage,
-          routeName: "Projects"
+          routeName: "Projects",
+          color: 'orange-darken-2'
         },
         {
           value: 7,
           icon: 'mdi-star-box-multiple',
           title: 'IXTIROCHILIK VA RATSIONALIZATORLIK' ,
           action: this.openInventionPage,
-          routeName: "Invention"
+          routeName: "Invention",
+          color: 'pink-darken-2'
         },
         {
           value: 8,
           icon: 'mdi-bag-suitcase',
           title: 'XALQARO XAMKORLIK MASALALARI' ,
           action: this.openInternationalPage,
-          routeName: "International"
+          routeName: "International",
+          color: 'blue-darken-1'
         },
         {
           value: 9,
           icon: 'mdi-human-male-board-poll',
           title: 'USTOZ-SHOGIRD TIZIMI' ,
           action: this.openTeacherPage,
-          routeName: "Teacher"
+          routeName: "Teacher",
+          color: 'deep-purple-lighten-1'
         },
         {
           value: 10,
           icon: 'mdi-cog',
           title: 'SOZLAMALAR' ,
           action: this.openSettingsPage,
-          routeName: "Settings"
+          routeName: "Settings",
+          color: 'blue-grey-darken-1'
         },
       ],
     }
