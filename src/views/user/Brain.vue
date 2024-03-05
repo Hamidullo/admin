@@ -1,5 +1,5 @@
 <template>
-  <v-container class="py-8 px-6 bg-grey-lighten-2"
+  <v-container class="py-8 px-6 "
   fluid>
 
     <v-row>

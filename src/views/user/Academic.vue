@@ -1,5 +1,5 @@
 <template>
-  <v-container class="py-8 px-6 bg-grey-lighten-2" fluid>
+  <v-container class="py-8 px-6 " fluid>
 
     <v-row>
       <v-col cols="12">
@@ -23,16 +23,25 @@
                   <span class="text-h5">{{formTitle}}</span>
                 </v-card-title>
                 <v-card-text>
-                  <v-container>
+                  <v-form ref="form">
                     <v-row>
                       <v-col
                         cols="12"
                         sm="6"
                         md="6">
                         <v-select
+                          v-if="!editedItem.name"
                           v-model="editedItem.name"
                           label="Unvonni tanlang"
-                          required
+                          :rules="rules"
+                          :items="['Fan doktorlik (DSc) diplomi', 'Fan nomzodi (PhD) diplomi', 'Professor yoki dotsent - ilmiy unvoni',]">
+                        </v-select>
+                        <v-select
+                          v-else
+                          readonly
+                          v-model="editedItem.name"
+                          label="Unvonni tanlang"
+                          :rules="rules"
                           :items="['Fan doktorlik (DSc) diplomi', 'Fan nomzodi (PhD) diplomi', 'Professor yoki dotsent - ilmiy unvoni',]">
                         </v-select>
                       </v-col>
@@ -43,9 +52,9 @@
                         <v-text-field
                           v-model="editedItem.series"
                           clearable
-                          required
+                          :rules="rules"
                           label="Seriyasi">
-                      </v-text-field>
+                        </v-text-field>
                       </v-col>
                       <v-col
                         cols="12"
@@ -56,8 +65,8 @@
                           clearable
                           label="Raqami"
                           persistent-hint
-                          required>
-                      </v-text-field>
+                          :rules="rules">
+                        </v-text-field>
                       </v-col>
                       <v-col
                         cols="12"
@@ -66,6 +75,7 @@
                         <v-select
                           label="Diplom berilgan yil"
                           v-model="editedItem.year"
+                          :rules="rules"
                           :items="years">
                         </v-select>
                       </v-col>
@@ -76,6 +86,7 @@
                         <v-select
                           label="Diplom berilgan oy"
                           v-model="editedItem.mounth"
+                          :rules="rules"
                           :items="mounth">
                         </v-select>
                       </v-col>
@@ -88,7 +99,7 @@
                           clearable
                           label="Ixtisoslik raqami va nomi"
                           persistent-hint
-                          required>
+                          :rules="rules">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -100,7 +111,7 @@
                           clearable
                           label="Mutaxassisligi nomi"
                           persistent-hint
-                          required>
+                          :rules="rules">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -110,13 +121,14 @@
                           clearable
                           label="Ishga qabul qilinganligi to‘g‘risidagi buyruq raqami va sanasi"
                           persistent-hint
-                          required>
+                          :rules="rules">
                         </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-file-input
                           show-size
+                          :rules="rules"
                           v-if="!editedItem.docDownload"
                           v-model="editedItem.docDownload"
                           label="Diplom yuklash">
@@ -124,7 +136,7 @@
                         <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Diplom yuklash</v-btn>
                       </v-col>
                     </v-row>
-                  </v-container>
+                  </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -209,7 +221,7 @@
                   <span class="text-h5">{{ formCTitle }}</span>
                 </v-card-title>
                 <v-card-text>
-                  <v-container>
+                  <v-form ref="form">
                     <v-row>
                       <v-col
                         cols="12"
@@ -218,9 +230,9 @@
                         <v-text-field
                           v-model="editedCItem.country"
                           clearable
-                          required
+                          :rules="rules"
                           label="Davlat">
-                      </v-text-field>
+                        </v-text-field>
                       </v-col>
                       <v-col
                         cols="12"
@@ -229,27 +241,28 @@
                         <v-text-field
                           v-model="editedCItem.university"
                           clearable
-                          required
+                          :rules="rules"
                           label="OTM">
-                      </v-text-field>
+                        </v-text-field>
                       </v-col>
                       <v-col
-                          cols="12"
-                          sm="6"
-                          md="6">
-                          <v-select
-                            label="OTM reytingi"
-                            v-model="editedCItem.rating"
-                            :items="['TOP-500', 'TOP-1000', 'TOP-1000 magistratura',]">
-                          </v-select>
-                        </v-col>
+                        cols="12"
+                        sm="6"
+                        md="6">
+                        <v-select
+                          label="OTM reytingi"
+                          v-model="editedCItem.rating"
+                          :rules="rules"
+                          :items="['TOP-500', 'TOP-1000', 'TOP-1000 magistratura',]">
+                        </v-select>
+                      </v-col>
                       <v-col
                         cols="12"
                         sm="6"
                         md="6">
                         <v-select
                           label="Diplom turi"
-                          required
+                          :rules="rules"
                           v-model="editedCItem.dipType"
                           :items="['PhD (falsafa doktori yoki fan nomzodi)', 'DSc (fan doktori)', 'Magistratura diplom',]">
                         </v-select>
@@ -263,7 +276,7 @@
                           clearable
                           label="Diplom seriyasi"
                           persistent-hint
-                          required>
+                          :rules="rules">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -275,7 +288,7 @@
                           clearable
                           label="Diplom raqami"
                           persistent-hint
-                          required>
+                          :rules="rules">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -284,6 +297,7 @@
                         md="3">
                         <v-select
                           label="Diplom berilgan yil"
+                          :rules="rules"
                           v-model="editedItem.year"
                           :items="years">
                         </v-select>
@@ -294,6 +308,7 @@
                         md="3">
                         <v-select
                           label="Diplom berilgan oy"
+                          :rules="rules"
                           v-model="editedItem.mounth"
                           :items="mounth">
                         </v-select>
@@ -307,7 +322,7 @@
                           clearable
                           label="Mutaxassisligi raqami va nomi"
                           persistent-hint
-                          required>
+                          :rules="rules">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -317,13 +332,14 @@
                           clearable
                           label="Ishga qabul qilinganligi to‘g‘risidagi buyruq raqami va sanasi"
                           persistent-hint
-                          required>
+                          :rules="rules">
                         </v-text-field>
                       </v-col>
                       <v-col
                         cols="12">
                         <v-file-input
                           show-size
+                          :rules="rules"
                           v-if="!editedCItem.docDownload"
                           v-model="editedCItem.docDownload"
                           label="Diplom yuklash">
@@ -331,7 +347,7 @@
                         <v-btn size="x-large" v-else @click="downloadDoc(editedCItem)">Diplom yuklash</v-btn>
                       </v-col>
                     </v-row>
-                  </v-container>
+                  </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -417,7 +433,7 @@
                     <span class="text-h5">{{ formSTitle }}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12"
@@ -426,7 +442,7 @@
                           <v-text-field
                             v-model="editedSItem.name"
                             clearable
-                            required
+                            :rules="rules"
                             label="Jurnal nomi">
                           </v-text-field>
                         </v-col>
@@ -439,7 +455,7 @@
                             clearable
                             label="Maqola nomi"
                             persistent-hint
-                            required>
+                            :rules="rules">
                           </v-text-field>
                         </v-col>
                         <v-col
@@ -451,7 +467,7 @@
                             clearable
                             label="«Scopus» qidiruv tizimlardagi manzili (giper xavolasi)"
                             persistent-hint
-                            required>
+                            :rules="rules">
                           </v-text-field>
                         </v-col>
                         <v-col
@@ -463,7 +479,7 @@
                             clearable
                             label="Maqola chop etilgan til"
                             persistent-hint
-                            required>
+                            :rules="rules">
                           </v-text-field>
                         </v-col>
                         <v-col
@@ -475,7 +491,7 @@
                             clearable
                             label="h-index"
                             persistent-hint
-                            required>
+                            :rules="rules">
                           </v-text-field>
                         </v-col>
                         <v-col
@@ -485,6 +501,7 @@
                           <v-select
                             label="Jurnal nashr etilgan yil"
                             v-model="editedItem.year"
+                            :rules="rules"
                             :items="years">
                           </v-select>
                         </v-col>
@@ -495,6 +512,7 @@
                           <v-select
                             label="Jurnal nashr etilgan oy"
                             v-model="editedItem.mounth"
+                            :rules="rules"
                             :items="mounth">
                           </v-select>
                         </v-col>
@@ -502,6 +520,7 @@
                           cols="12">
                           <v-file-input
                             show-size
+                            :rules="rules"
                             v-if="!editedSItem.docDownload"
                             v-model="editedSItem.docDownload"
                             label="Diplom yuklash">
@@ -509,7 +528,7 @@
                           <v-btn size="x-large" v-else @click="downloadDoc(editedSItem)">Diplomni yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -585,6 +604,30 @@
         size="64">
       </v-progress-circular>
     </v-overlay>
+
+    <v-snackbar
+      :timeout="3000"
+      color="red"
+      v-model="snackF"
+      elevation="24">
+      Hujjatni yuklashda hatolik!
+    </v-snackbar>
+
+    <v-snackbar
+      :timeout="3000"
+      color="success"
+      v-model="snackS"
+      elevation="24">
+      Hujjat muvaffaqiyatli yuklandi!
+    </v-snackbar>
+
+    <v-snackbar
+      :timeout="3000"
+      color="success"
+      v-model="snackD"
+      elevation="24">
+      Hujjat o'chirildi!
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -595,6 +638,15 @@ export default {
   data () {
       return {
         overlay: false,
+        rules: [
+          value => {
+            if (value) return true
+            return 'Qator bo`sh bo`lmasligi kerak.'
+          },
+        ],
+        snackF: false,
+        snackS: false,
+        snackD: false,
         position: localStorage.getItem("user-position"),
         userId: localStorage.getItem("user-hemisId"),
         userName: localStorage.getItem("user-name"),
@@ -849,6 +901,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -863,6 +916,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editCItem.id}`);
           this.itemsC.splice(this.editedCIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -877,6 +931,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editSItem.id}`);
           this.itemsS.splice(this.editedSIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -929,204 +984,232 @@ export default {
       })
     },
 
-    save () {
-      if (this.editedIndex > -1) {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('country', this.editedItem.country)
-        formData.append('university', this.editedItem.university)
-        formData.append('rating', this.editedItem.rating)
-        formData.append('dipType', this.editedItem.dipType)
-        formData.append('series', this.editedItem.series)
-        formData.append('number', this.editedItem.number)
-        formData.append('departmentName', this.editedItem.departmentName)
-        formData.append('workStartND', this.editedItem.workStartND)
-        formData.append('newId', this.editedItem.newId)
+    async save () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedIndex > -1) {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('country', this.editedItem.country)
+          formData.append('university', this.editedItem.university)
+          formData.append('rating', this.editedItem.rating)
+          formData.append('dipType', this.editedItem.dipType)
+          formData.append('series', this.editedItem.series)
+          formData.append('number', this.editedItem.number)
+          formData.append('departmentName', this.editedItem.departmentName)
+          formData.append('workStartND', this.editedItem.workStartND)
+          formData.append('newId', this.editedItem.newId)
 
-        axios.post("http://api.nammti.uz/api/academics/update?id="+this.editedItem.id, formData)
-          .then(response => {
-            console.log(response.data)
-            Object.assign(this.items[this.editedIndex], this.editedItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
-      } else {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedItem.name)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedItem.type)
-        formData.append('typeName', this.editedItem.typeName)
-        formData.append('country', this.editedItem.country)
-        formData.append('university', this.editedItem.university)
-        formData.append('rating', this.editedItem.rating)
-        formData.append('dipType', this.editedItem.dipType)
-        formData.append('series', this.editedItem.series)
-        formData.append('number', this.editedItem.number)
-        formData.append('departmentName', this.editedItem.departmentName)
-        formData.append('workStartND', this.editedItem.workStartND)
-        formData.append('year', this.editedItem.year)
-        formData.append('mounth', this.editedItem.mounth)
-        formData.append('department', this.editedItem.department)
-        formData.append('faculty', this.editedItem.faculty)
-        if (this.editedItem.name === 'Fan doktorlik (DSc) diplomi'){
-          this.editedItem.top = '1'
-        } else if (this.editedItem.name === 'Fan nomzodi (PhD) diplomi'){
-          this.editedItem.top = '2'
-        } else {
-          this.editedItem.top = '2'
+          await axios.post("http://api.nammti.uz/api/academics/update?id="+this.editedItem.id, formData)
+            .then(response => {
+              console.log(response.data)
+              Object.assign(this.items[this.editedIndex], this.editedItem)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
+        else {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('userId', this.userId)
+          formData.append('name', this.editedItem.name)
+          formData.append('userName', this.userName)
+          formData.append('type', this.editedItem.type)
+          formData.append('typeName', this.editedItem.typeName)
+          formData.append('country', this.editedItem.country)
+          formData.append('university', this.editedItem.university)
+          formData.append('rating', this.editedItem.rating)
+          formData.append('dipType', this.editedItem.dipType)
+          formData.append('series', this.editedItem.series)
+          formData.append('number', this.editedItem.number)
+          formData.append('departmentName', this.editedItem.departmentName)
+          formData.append('workStartND', this.editedItem.workStartND)
+          formData.append('year', this.editedItem.year)
+          formData.append('mounth', this.editedItem.mounth)
+          formData.append('department', this.editedItem.department)
+          formData.append('faculty', this.editedItem.faculty)
+          if (this.editedItem.name === 'Fan doktorlik (DSc) diplomi'){
+            this.editedItem.top = '1'
+          } else if (this.editedItem.name === 'Fan nomzodi (PhD) diplomi'){
+            this.editedItem.top = '2'
+          } else {
+            this.editedItem.top = '2'
+          }
 
-        // files
-        for (let file of this.editedItem.docDownload) {
-          formData.append("doc", file, file.name);
+          // files
+          for (let file of this.editedItem.docDownload) {
+            formData.append("doc", file, file.name);
+          }
+          await axios.post("http://api.nammti.uz/api/academics/create?userId="+this.userId, formData)
+            .then(response => {
+              console.log(response.data)
+              this.items.push(response.data)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
-        axios.post("http://api.nammti.uz/api/academics/create?userId="+this.userId, formData)
-          .then(response => {
-            console.log(response.data)
-            this.items.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
+        this.$refs.form.resetValidation()
+        this.close()
       }
-      this.close()
+
     },
-    saveC () {
-      if (this.editedCIndex > -1) {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('country', this.editedCItem.country)
-        formData.append('university', this.editedCItem.university)
-        formData.append('rating', this.editedCItem.rating)
-        formData.append('dipType', this.editedCItem.dipType)
-        formData.append('series', this.editedCItem.series)
-        formData.append('number', this.editedCItem.number)
-        formData.append('departmentName', this.editedCItem.departmentName)
-        formData.append('workStartND', this.editedCItem.workStartND)
-        formData.append('newId', this.editedCItem.newId)
+    async saveC () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid){
+        if (this.editedCIndex > -1) {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('country', this.editedCItem.country)
+          formData.append('university', this.editedCItem.university)
+          formData.append('rating', this.editedCItem.rating)
+          formData.append('dipType', this.editedCItem.dipType)
+          formData.append('series', this.editedCItem.series)
+          formData.append('number', this.editedCItem.number)
+          formData.append('departmentName', this.editedCItem.departmentName)
+          formData.append('workStartND', this.editedCItem.workStartND)
+          formData.append('newId', this.editedCItem.newId)
 
-        axios.post("http://api.nammti.uz/api/academics/update?id="+this.editedCItem.id, formData)
-          .then(response => {
-            console.log(response.data)
-            Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
-      } else {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedCItem.name)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedCItem.type)
-        formData.append('typeName', this.editedCItem.typeName)
-        formData.append('country', this.editedCItem.country)
-        formData.append('university', this.editedCItem.university)
-        formData.append('rating', this.editedCItem.rating)
-        formData.append('dipType', this.editedCItem.dipType)
-        formData.append('series', this.editedCItem.series)
-        formData.append('number', this.editedCItem.number)
-        formData.append('departmentName', this.editedCItem.departmentName)
-        formData.append('workStartND', this.editedCItem.workStartND)
-        formData.append('year', this.editedCItem.year)
-        formData.append('mounth', this.editedCItem.mounth)
-        formData.append('department', this.editedCItem.department)
-        formData.append('faculty', this.editedCItem.faculty)
-
-        // files
-        for (let file of this.editedCItem.docDownload) {
-          formData.append("doc", file, file.name);
+          await axios.post("http://api.nammti.uz/api/academics/update?id="+this.editedCItem.id, formData)
+            .then(response => {
+              console.log(response.data)
+              Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
+              this.overlay = false
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              console.error("There was an error!", error);
+            });
         }
-        axios.post("http://api.nammti.uz/api/academics/create?userId="+this.userId, formData)
-          .then(response => {
-            console.log(response.data)
-            this.itemsC.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
+        else {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('userId', this.userId)
+          formData.append('name', this.editedCItem.name)
+          formData.append('userName', this.userName)
+          formData.append('type', this.editedCItem.type)
+          formData.append('typeName', this.editedCItem.typeName)
+          formData.append('country', this.editedCItem.country)
+          formData.append('university', this.editedCItem.university)
+          formData.append('rating', this.editedCItem.rating)
+          formData.append('dipType', this.editedCItem.dipType)
+          formData.append('series', this.editedCItem.series)
+          formData.append('number', this.editedCItem.number)
+          formData.append('departmentName', this.editedCItem.departmentName)
+          formData.append('workStartND', this.editedCItem.workStartND)
+          formData.append('year', this.editedCItem.year)
+          formData.append('mounth', this.editedCItem.mounth)
+          formData.append('department', this.editedCItem.department)
+          formData.append('faculty', this.editedCItem.faculty)
+
+          // files
+          for (let file of this.editedCItem.docDownload) {
+            formData.append("doc", file, file.name);
+          }
+          await axios.post("http://api.nammti.uz/api/academics/create?userId="+this.userId, formData)
+            .then(response => {
+              console.log(response.data)
+              this.itemsC.push(response.data)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
+        }
+        this.$refs.form.resetValidation()
+        this.closeC()
       }
-      this.closeC()
+
     },
-    saveS () {
-      if (this.editedSIndex > -1) {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('country', this.editedSItem.country)
-        formData.append('university', this.editedSItem.university)
-        formData.append('rating', this.editedSItem.rating)
-        formData.append('dipType', this.editedSItem.dipType)
-        formData.append('series', this.editedSItem.series)
-        formData.append('number', this.editedSItem.number)
-        formData.append('departmentName', this.editedSItem.departmentName)
-        formData.append('workStartND', this.editedSItem.workStartND)
-        formData.append('newId', this.editedSItem.newId)
+    async saveS () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid){
+        if (this.editedSIndex > -1) {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('country', this.editedSItem.country)
+          formData.append('university', this.editedSItem.university)
+          formData.append('rating', this.editedSItem.rating)
+          formData.append('dipType', this.editedSItem.dipType)
+          formData.append('series', this.editedSItem.series)
+          formData.append('number', this.editedSItem.number)
+          formData.append('departmentName', this.editedSItem.departmentName)
+          formData.append('workStartND', this.editedSItem.workStartND)
+          formData.append('newId', this.editedSItem.newId)
 
-        axios.post("http://api.nammti.uz/api/academics/update?id="+this.editedSItem.id, formData)
-          .then(response => {
-            console.log(response.data)
-            Object.assign(this.itemsS[this.editedSIndex], this.editedSItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
-      } else {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedSItem.name)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedSItem.type)
-        formData.append('typeName', this.editedSItem.typeName)
-        formData.append('country', this.editedSItem.country)
-        formData.append('university', this.editedSItem.university)
-        formData.append('rating', this.editedSItem.rating)
-        formData.append('dipType', this.editedSItem.dipType)
-        formData.append('series', this.editedSItem.series)
-        formData.append('number', this.editedSItem.number)
-        formData.append('departmentName', this.editedSItem.departmentName)
-        formData.append('workStartND', this.editedSItem.workStartND)
-        formData.append('year', this.editedSItem.year)
-        formData.append('mounth', this.editedSItem.mounth)
-        formData.append('department', this.editedSItem.department)
-        formData.append('faculty', this.editedSItem.faculty)
-
-        // files
-        for (let file of this.editedSItem.docDownload) {
-          formData.append("doc", file, file.name);
+          axios.post("http://api.nammti.uz/api/academics/update?id="+this.editedSItem.id, formData)
+            .then(response => {
+              console.log(response.data)
+              Object.assign(this.itemsS[this.editedSIndex], this.editedSItem)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
-        axios.post("http://api.nammti.uz/api/academics/create?userId="+this.userId, formData)
-          .then(response => {
-            console.log(response.data)
-            this.itemsS.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
+        else {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('userId', this.userId)
+          formData.append('name', this.editedSItem.name)
+          formData.append('userName', this.userName)
+          formData.append('type', this.editedSItem.type)
+          formData.append('typeName', this.editedSItem.typeName)
+          formData.append('country', this.editedSItem.country)
+          formData.append('university', this.editedSItem.university)
+          formData.append('rating', this.editedSItem.rating)
+          formData.append('dipType', this.editedSItem.dipType)
+          formData.append('series', this.editedSItem.series)
+          formData.append('number', this.editedSItem.number)
+          formData.append('departmentName', this.editedSItem.departmentName)
+          formData.append('workStartND', this.editedSItem.workStartND)
+          formData.append('year', this.editedSItem.year)
+          formData.append('mounth', this.editedSItem.mounth)
+          formData.append('department', this.editedSItem.department)
+          formData.append('faculty', this.editedSItem.faculty)
+
+          // files
+          for (let file of this.editedSItem.docDownload) {
+            formData.append("doc", file, file.name);
+          }
+          axios.post("http://api.nammti.uz/api/academics/create?userId="+this.userId, formData)
+            .then(response => {
+              console.log(response.data)
+              this.itemsS.push(response.data)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
+        }
+        this.$refs.form.resetValidation()
+        this.closeS()
       }
-      this.closeS()
+
     },
 
     forceFileDownload(response, title) {
@@ -1186,8 +1269,8 @@ export default {
     },
   },
 
-  mounted() {
-    axios
+  async mounted() {
+    await axios
       .get(`http://api.nammti.uz/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=21`)
       .then(response => {
         const data  = response.data
@@ -1204,7 +1287,7 @@ export default {
         }
       });
 
-    axios
+    await axios
       .get(`http://api.nammti.uz/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=22`)
       .then(response => {
         const data  = response.data
@@ -1220,7 +1303,7 @@ export default {
         }
       });
 
-    axios
+    await axios
       .get(`http://api.nammti.uz/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=23`)
       .then(response => {
         const data  = response.data

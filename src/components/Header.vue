@@ -3,12 +3,11 @@
     app
     elevate-on-scroll
     elevation="4"
-    color="white">
+    image="https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0zNzNiYXRjaDE1LWJnLTExZC14LmpwZw.jpg"
+    >
 
     <v-app-bar-title >
-      <h4 >
-        <v-btn @click="openDash"><strong>Namangan muhandislik-texnologiya instituti</strong></v-btn>
-      </h4>
+      <v-btn color="white" @click="openDash"><strong><h2>Namangan muhandislik-texnologiya instituti</h2></strong></v-btn>
     </v-app-bar-title>
 
     <v-menu
@@ -64,7 +63,7 @@ export default {
   data() {
     return{
       name: localStorage.getItem("user-name"),
-      avatar: "http://localhost:8080/uploads/photos/" + localStorage.getItem("user-avatar"),
+      avatar: "http://api.nammti.uz/uploads/photos/" + localStorage.getItem("user-avatar"),
       position: localStorage.getItem("user-position"),
       menus: [
         { icon: 'mdi-account', title: 'Profile',  rout: 'About'},

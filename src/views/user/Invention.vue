@@ -1,5 +1,5 @@
 <template>
-  <v-container class="py-8 px-6 bg-grey-lighten-2" fluid>
+  <v-container class="py-8 px-6 " fluid>
 
     <v-row>
       <v-col>
@@ -13,7 +13,7 @@
               width="1024">
               <template v-slot:activator="{ props }">
                 <v-btn
-                  class="bg-pink-darken-2"
+                  class="bg-indigo"
                   v-bind="props">
                   Qo'shish
                 </v-btn>
@@ -184,7 +184,7 @@
               width="1024">
               <template v-slot:activator="{ props }">
                 <v-btn
-                  class="bg-pink-darken-2"
+                  class="bg-indigo"
                   v-bind="props">
                   Qo'shish
                 </v-btn>
@@ -346,7 +346,7 @@
                 width="1024">
                 <template v-slot:activator="{ props }">
                   <v-btn
-                    class="bg-pink-darken-2"
+                    class="bg-indigo"
                     v-bind="props">
                     Qo'shish
                   </v-btn>
@@ -508,7 +508,7 @@
                 width="1024">
                 <template v-slot:activator="{ props }">
                   <v-btn
-                    class="bg-pink-darken-2"
+                    class="bg-indigo"
                     v-bind="props">
                     Qo'shish
                   </v-btn>
@@ -670,7 +670,7 @@
                 width="1024">
                 <template v-slot:activator="{ props }">
                   <v-btn
-                    class="bg-pink-darken-2"
+                    class="bg-indigo"
                     v-bind="props">
                     Qo'shish
                   </v-btn>
@@ -832,7 +832,7 @@
                 width="1024">
                 <template v-slot:activator="{ props }">
                   <v-btn
-                    class="bg-pink-darken-2"
+                    class="bg-indigo"
                     v-bind="props">
                     Qo'shish
                   </v-btn>
@@ -2123,11 +2123,11 @@ export default {
 
 <style scoped>
 .bg-color-container{
-  background-color: #fa3a62;
+  background-color: #5C6BC0;
   color: white;
 }
 .form-color{
-  background-color: #be1946;
+  background-color: #3949AB;
   color: white;
 }
 </style>

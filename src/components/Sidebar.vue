@@ -4,10 +4,12 @@
     v-model="drawer"
     :rail="rail"
     permanent
+    image="https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0zNzNiYXRjaDE1LWJnLTExZC14LmpwZw.jpg"
     @click="rail = false"
+    class="border-0"
     width="350">
     <v-list-item
-      class="ma-1"
+      class="ma-1 text-white"
       :title="name"
       nav>
       <template v-slot:prepend>
@@ -21,6 +23,7 @@
 
       <template v-slot:append>
         <v-btn
+          color="white"
           variant="text"
           icon="mdi-chevron-left"
           @click.stop="rail = !rail">
@@ -38,6 +41,7 @@
             @click="item.action"
             :active="item.routeName === $route.name"
             :active-color="item.color"
+            class="text-white"
             >
             <template v-slot:prepend>
               <v-icon :icon="item.icon"></v-icon>
@@ -57,7 +61,7 @@ export default {
     return{
       drawer: true,
       rail: true,
-      avatar: "http://localhost:8080/uploads/photos/" + localStorage.getItem("user-avatar"),
+      avatar: "http://api.nammti.uz/uploads/photos/" + localStorage.getItem("user-avatar"),
       name: localStorage.getItem("user-name"),
       model: 1,
       menus: [
@@ -115,7 +119,7 @@ export default {
           title: 'IXTIROCHILIK VA RATSIONALIZATORLIK' ,
           action: this.openInventionPage,
           routeName: "Invention",
-          color: 'pink-darken-2'
+          color: 'indigo-darken-1'
         },
         {
           value: 8,
@@ -188,8 +192,5 @@ export default {
 </script>
 
 <style scoped>
-.bg-active {
-  background-color: black;
-  color : white !important;
-}
+
 </style>

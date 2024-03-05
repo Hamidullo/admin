@@ -1,8 +1,8 @@
 <template>
-  <v-container class="py-8 px-6 bg-grey-lighten-2" fluid>
+  <v-container class="py-8 px-6 " fluid>
 
     <v-row>
-      <v-col cols="6">
+      <v-col >
         <v-card class="bg-color-container" flat title="Tayyorlagan shogirdlar">
         <template v-slot:append>
           <!-- Dialog start -->
@@ -192,7 +192,7 @@
       </v-card>
       </v-col>
 
-      <v-col cols="6">
+      <v-col>
         <v-card class="bg-color-container" flat title="Davlat mukofotlari">
           <template v-slot:append>
             <!-- Dialog start -->
