@@ -2680,7 +2680,6 @@ export default {
           } else {
             data[dataKey].news = 'Rad etildi'
           }
-          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
           this.itemsS.push(data[dataKey])
 
         }
@@ -2698,7 +2697,6 @@ export default {
           } else {
             data[dataKey].news = 'Rad etildi'
           }
-          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
           this.itemsW.push(data[dataKey])
         }
       });
@@ -2715,7 +2713,7 @@ export default {
           } else {
             data[dataKey].news = 'Rad etildi'
           }
-          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
+
           this.itemsX.push(data[dataKey])
         }
       });
@@ -2732,7 +2730,6 @@ export default {
           } else {
             data[dataKey].news = 'Rad etildi'
           }
-          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
           this.itemsR.push(data[dataKey])
         }
       });
@@ -2749,7 +2746,7 @@ export default {
           } else {
             data[dataKey].news = 'Rad etildi'
           }
-          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
+
           this.itemsM.push(data[dataKey])
         }
       });
@@ -2766,7 +2763,7 @@ export default {
           } else {
             data[dataKey].news = 'Rad etildi'
           }
-          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
+
           this.itemsA.push(data[dataKey])
         }
       });
@@ -2783,7 +2780,7 @@ export default {
           } else {
             data[dataKey].news = 'Rad etildi'
           }
-          data[dataKey].brainLink = `<a v-bind:href="''"> {{ data[dataKey].brainLink }} </a>`
+
           this.itemsD.push(data[dataKey])
         }
       });

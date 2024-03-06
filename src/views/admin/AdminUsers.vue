@@ -303,14 +303,16 @@ export default {
     save () {
       if (this.editedIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('name', this.editedItem.name)
-        formData.append('department', this.editedItem.department)
-        formData.append('faculty', this.editedItem.faculty)
-        formData.append('position', this.editedItem.position)
-        formData.append('password', this.editedItem.password)
+        let data = {
+          'name': this.editedItem.name,
+          'department': this.editedItem.department,
+          'faculty': this.editedItem.faculty,
+          'position': this.editedItem.position,
+          'password': this.editedItem.password,
+        }
 
-        axios.put("http://api.nammti.uz/api/users/admin?userId="+this.editedItem.userId, formData)
+
+        axios.put("http://api.nammti.uz/api/users/admin?userId="+this.editedItem.userId, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -362,7 +364,7 @@ export default {
     }
 
     axios
-      .get(`http://api.nammti.uz/api/users/admin?userId=${this.userId}&limit=10&offset=0`)
+      .get(`http://api.nammti.uz/api/users/admin?userId=${this.userId}&limit=20&offset=0`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     drawer(rout){
-      if(rout !== 'logout'){
+      if(rout === 'Login'){
         localStorage.clear()
         this.$router.push({name: rout})
       } else {

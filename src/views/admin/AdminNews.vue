@@ -3,7 +3,7 @@
     <v-card class="px-6 py-6">
       <v-data-table
         :headers="headers"
-        :items="desserts"
+        :items="items"
         :sort-by="[{ key: 'calories', order: 'asc' }]">
         <template v-slot:top>
           <v-toolbar flat>
@@ -12,7 +12,6 @@
             </v-divider>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="1024px">
-
               <v-card>
                 <v-card-title>
                   <span class="text-h5">Tasdiqlash</span>
@@ -148,7 +147,7 @@ export default {
   data() {
     return{
       overlay: false,
-      userId: localStorage.getItem("user-hemisId"),
+      userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
 
       select: "",
@@ -159,10 +158,10 @@ export default {
         { title: 'Hujjat turi',align: 'center', key: 'newTypeName' },
         { title: 'Mualliflar soni',align: 'center', key: 'newAuthCount' },
         { title: 'Ham mualliflar',align: 'center', key: 'newAuthName' },
-        { title: 'Hujjat holati',align: 'center', key: 'news' },
+        { title: 'Hujjat holati',align: 'center', key: 'newSeen' },
         { title: 'Amallar',align: 'center', key: 'actions', sortable: false },
       ],
-      desserts: [],
+      items: [],
       editedIndex: -1,
       editedItem: {
         id: 0,
@@ -213,13 +212,13 @@ export default {
   methods: {
 
     editItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
+      this.editedIndex = this.items.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
+      this.editedIndex = this.items.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
@@ -262,21 +261,23 @@ export default {
 
     save () {
       this.overlay = true
-      let formData = new FormData();
-      formData.append('userId', this.editedItem.userId)
       if (this.editedItem.newConfirmationN === 'Rad etish'){
         this.editedItem.newConfirmation = 3
       } else {
         this.editedItem.newConfirmation = 2
       }
-      formData.append('confirm', this.editedItem.newConfirmation)
-      formData.append('confirmUserId', this.userId)
-      formData.append('confirmName', this.userName)
+      let data = {
+        'userId': this.editedItem.userId,
+        'confirm': this.editedItem.newConfirmation,
+        'confirmUserId': this.userId,
+        'confirmName': this.userName,
+      }
 
-      axios.put("http://api.nammti.uz/api/news/confirm?id="+this.editedItem.id, formData)
+
+      axios.put("http://api.nammti.uz/api/news/confirm?id="+this.editedItem.id, data)
         .then(response => {
           console.log(response.data)
-          Object.assign(this.items[this.editedIndex], this.editedItem)
+          this.items.splice(this.editedIndex, 1)
           this.overlay = false
         })
         .catch(error => {
@@ -321,6 +322,7 @@ export default {
       .get(`http://api.nammti.uz/api/news/typeAdmin?userId=${this.userId}&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
+        console.log(data)
         for (const dataKey in data) {
           if (data[dataKey].newSeen === 1){
             data[dataKey].newSeen = 'Tekshirilmoqda'

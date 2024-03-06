@@ -76,6 +76,7 @@ export default {
           this.snackS = true;
           localStorage.setItem("user-logged", true)
           let data = response.data
+          console.log(data)
           if (data.name){
             localStorage.setItem("user-id", response.data.id)
             localStorage.setItem("user-userId", response.data.userId)
@@ -84,18 +85,18 @@ export default {
             localStorage.setItem("user-department", response.data.department)
             localStorage.setItem("user-faculty", response.data.faculty)
             localStorage.setItem("user-position", response.data.position)
-            if (response.data.role !== 0){
+            localStorage.setItem("user-role", response.data.role)
+            if (response.data.role !== "0"){
               this.$router.push({name: "AdminDash"})
-              localStorage.setItem("user-role", response.data.role)
             } else {
               this.$router.push({name: "Dashboard"})
             }
           } else {
             localStorage.setItem("user-id", response.data.id)
             localStorage.setItem("user-userId", response.data.userId)
-            if (response.data.role !== 0){
+            localStorage.setItem("user-role", response.data.role)
+            if (response.data.role !== "0"){
               this.$router.push({name: "AdminAbout"})
-              localStorage.setItem("user-role", response.data.admin)
             } else {
               this.$router.push({name: "About"})
             }
@@ -116,10 +117,11 @@ export default {
     let user = localStorage.getItem("user-logged")
     if (user){
       let userData = localStorage.getItem("user-role")
-      if (userData){
-        this.$router.push({name: "AdminDash"})
-      } else {
+      if (userData === "0"){
         this.$router.push({name: "Dashboard"})
+      } else {
+
+        this.$router.push({name: "AdminDash"})
       }
 
     }

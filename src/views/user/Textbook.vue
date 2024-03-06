@@ -1433,7 +1433,7 @@ export default {
 
   async mounted() {
     await axios
-      .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=1`)
+      .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=21`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1450,7 +1450,7 @@ export default {
       });
 
     await axios
-      .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=2`)
+      .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=22`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1466,7 +1466,7 @@ export default {
       });
 
     await axios
-      .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=3`)
+      .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=23`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1482,7 +1482,7 @@ export default {
       });
 
     await axios
-      .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=4`)
+      .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=24`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
