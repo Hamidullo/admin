@@ -50,20 +50,12 @@
                         sm="6"
                         md="6">
                         <v-text-field
-                          v-if="editedItem.inventionAuthorsCount"
                           v-model="editedItem.inventionAuthorsCount"
                           clearable
                           required
                           label="Mualliflar soni">
                       </v-text-field>
-                        <v-text-field
-                          v-else
-                          readonly
-                          v-model="editedItem.inventionAuthorsCount"
-                          clearable
-                          required
-                          label="Mualliflar soni">
-                      </v-text-field>
+
                       </v-col>
                       <v-col
                         cols="12">
@@ -1004,7 +996,7 @@ export default {
   data () {
     return {
       overlay: false,
-      userId: localStorage.getItem("user-hemisId"),
+      userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
       years: [2023,2024],
       mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -1584,14 +1576,15 @@ export default {
     save () {
       if (this.editedIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('inventionName', this.editedItem.inventionName)
-        formData.append('inventionNumber', this.editedItem.inventionNumber)
-        formData.append('inventionAuthorsCount', this.editedItem.inventionAuthorsCount)
-        formData.append('inventionAuthorNames', this.editedItem.inventionAuthorNames)
-        formData.append('newId', this.editedItem.newId)
+        let data = {
+          'inventionName': this.editedItem.inventionName,
+          'inventionNumber': this.editedItem.inventionNumber,
+          'inventionAuthorsCount': this.editedItem.inventionAuthorsCount,
+          'inventionAuthorNames': this.editedItem.inventionAuthorNames,
+          'newId': this.editedItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/inventions/update?id="+this.editedItem.id, formData)
+        axios.put("http://api.nammti.uz/api/inventions/update?id="+this.editedItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -1642,14 +1635,17 @@ export default {
     saveM () {
       if (this.editedMIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('inventionName', this.editedMItem.inventionName)
-        formData.append('inventionNumber', this.editedMItem.inventionNumber)
-        formData.append('inventionAuthorsCount', this.editedMItem.inventionAuthorsCount)
-        formData.append('inventionAuthorNames', this.editedMItem.inventionAuthorNames)
-        formData.append('newId', this.editedMItem.newId)
 
-        axios.put("http://api.nammti.uz/api/inventions/update?id="+this.editedMItem.id, formData)
+        let data = {
+          'inventionName': this.editedMItem.inventionName,
+          'inventionNumber': this.editedMItem.inventionNumber,
+          'inventionAuthorsCount': this.editedMItem.inventionAuthorsCount,
+          'inventionAuthorNames': this.editedMItem.inventionAuthorNames,
+          'newId': this.editedMItem.newId,
+        }
+
+
+        axios.put("http://api.nammti.uz/api/inventions/update?id="+this.editedMItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
@@ -1700,14 +1696,16 @@ export default {
     saveY () {
       if (this.editedYIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('inventionName', this.editedYItem.inventionName)
-        formData.append('inventionNumber', this.editedYItem.inventionNumber)
-        formData.append('inventionAuthorsCount', this.editedYItem.inventionAuthorsCount)
-        formData.append('inventionAuthorNames', this.editedYItem.inventionAuthorNames)
-        formData.append('newId', this.editedYItem.newId)
+        let data = {
+          'inventionName': this.editedYItem.inventionName,
+          'inventionNumber': this.editedYItem.inventionNumber,
+          'inventionAuthorsCount': this.editedYItem.inventionAuthorsCount,
+          'inventionAuthorNames': this.editedYItem.inventionAuthorNames,
+          'newId': this.editedYItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/inventions/update?id="+this.editedYItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/inventions/update?id="+this.editedYItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsY[this.editedYIndex], this.editedYItem)
@@ -1758,14 +1756,16 @@ export default {
     saveN () {
       if (this.editedNIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('inventionName', this.editedNItem.inventionName)
-        formData.append('inventionNumber', this.editedNItem.inventionNumber)
-        formData.append('inventionAuthorsCount', this.editedNItem.inventionAuthorsCount)
-        formData.append('inventionAuthorNames', this.editedNItem.inventionAuthorNames)
-        formData.append('newId', this.editedNItem.newId)
+        let data = {
+          'inventionName': this.editedNItem.inventionName,
+          'inventionNumber': this.editedNItem.inventionNumber,
+          'inventionAuthorsCount': this.editedNItem.inventionAuthorsCount,
+          'inventionAuthorNames': this.editedNItem.inventionAuthorNames,
+          'newId': this.editedNItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/inventions/update?id="+this.editedNItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/inventions/update?id="+this.editedNItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsN[this.editedNIndex], this.editedNItem)
@@ -1816,14 +1816,16 @@ export default {
     saveA () {
       if (this.editedAIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('inventionName', this.editedAItem.inventionName)
-        formData.append('inventionNumber', this.editedAItem.inventionNumber)
-        formData.append('inventionAuthorsCount', this.editedAItem.inventionAuthorsCount)
-        formData.append('inventionAuthorNames', this.editedAItem.inventionAuthorNames)
-        formData.append('newId', this.editedAItem.newId)
+        let data = {
+          'inventionName': this.editedAItem.inventionName,
+          'inventionNumber': this.editedAItem.inventionNumber,
+          'inventionAuthorsCount': this.editedAItem.inventionAuthorsCount,
+          'inventionAuthorNames': this.editedAItem.inventionAuthorNames,
+          'newId': this.editedAItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/inventions/update?id="+this.editedAItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/inventions/update?id="+this.editedAItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
@@ -1874,14 +1876,16 @@ export default {
     saveG () {
       if (this.editedGIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('inventionName', this.editedGItem.inventionName)
-        formData.append('inventionNumber', this.editedGItem.inventionNumber)
-        formData.append('inventionAuthorsCount', this.editedGItem.inventionAuthorsCount)
-        formData.append('inventionAuthorNames', this.editedGItem.inventionAuthorNames)
-        formData.append('newId', this.editedGItem.newId)
+        let data = {
+          'inventionName': this.editedGItem.inventionName,
+          'inventionNumber': this.editedGItem.inventionNumber,
+          'inventionAuthorsCount': this.editedGItem.inventionAuthorsCount,
+          'inventionAuthorNames': this.editedGItem.inventionAuthorNames,
+          'newId': this.editedGItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/inventions/update?id="+this.editedGItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/inventions/update?id="+this.editedGItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsG[this.editedGIndex], this.editedGItem)

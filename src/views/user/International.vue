@@ -54,6 +54,7 @@
                         <v-text-field
                           v-model="editedItem.internationalLessonsSize"
                           clearable
+                          type="number"
                           label="Mashg’ulot xajmi"
                           persistent-hint
                           required>
@@ -66,6 +67,7 @@
                         <v-text-field
                           v-model="editedItem.internationalLessonsCount"
                           clearable
+                          type="number"
                           label="Mashg’ulotlar soni"
                           persistent-hint
                           required>
@@ -220,6 +222,7 @@
                         <v-text-field
                           v-model="editedCItem.internationalLessonsSize"
                           clearable
+                          type="number"
                           label="Stajirovka xajmi"
                           persistent-hint
                           required>
@@ -232,6 +235,7 @@
                         <v-text-field
                           v-model="editedCItem.internationalLessonsCount"
                           clearable
+                          type="number"
                           label="Stajirovka olib borilgan kunlar soni"
                           persistent-hint
                           required>
@@ -346,7 +350,7 @@ export default {
     data () {
       return {
         overlay: false,
-        userId: localStorage.getItem("user-hemisId"),
+        userId: localStorage.getItem("user-userId"),
         userName: localStorage.getItem("user-name"),
         years: [2023,2024],
         mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -549,14 +553,16 @@ export default {
     save () {
       if (this.editedIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('name', this.editedItem.internationalName)
-        formData.append('country', this.editedItem.internationalCountry)
-        formData.append('size', this.editedItem.internationalLessonsSize)
-        formData.append('count', this.editedItem.internationalLessonsCount)
-        formData.append('newId', this.editedItem.newId)
+        let data = {
+          'name': this.editedItem.internationalName,
+          'country': this.editedItem.internationalCountry,
+          'size': this.editedItem.internationalLessonsSize,
+          'count': this.editedItem.internationalLessonsCount,
+          'newId': this.editedItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/internationals/update?id="+this.editedItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/internationals/update?id="+this.editedItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -607,14 +613,16 @@ export default {
     saveC () {
       if (this.editedCIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('name', this.editedCItem.internationalName)
-        formData.append('country', this.editedCItem.internationalCountry)
-        formData.append('size', this.editedCItem.internationalLessonsSize)
-        formData.append('count', this.editedCItem.internationalLessonsCount)
-        formData.append('newId', this.editedCItem.newId)
+        let data = {
+          'name': this.editedCItem.internationalName,
+          'country': this.editedCItem.internationalCountry,
+          'size': this.editedCItem.internationalLessonsSize,
+          'count': this.editedCItem.internationalLessonsCount,
+          'newId': this.editedCItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/internationals/update?id="+this.editedCItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/internationals/update?id="+this.editedCItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
@@ -719,7 +727,7 @@ export default {
 
   mounted() {
     axios
-      .get(`http://api.nammti.uz/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=51`)
+      .get(`http://api.nammti.uz/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=61`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -735,7 +743,7 @@ export default {
       });
 
     axios
-      .get(`http://api.nammti.uz/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=52`)
+      .get(`http://api.nammti.uz/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=62`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

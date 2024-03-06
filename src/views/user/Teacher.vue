@@ -353,7 +353,7 @@ export default {
   data () {
       return {
         overlay: false,
-        userId: localStorage.getItem("user-hemisId"),
+        userId: localStorage.getItem("user-userId"),
         userName: localStorage.getItem("user-name"),
         years: [2023,2024],
         mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -577,15 +577,17 @@ export default {
     save () {
       if (this.editedIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('name', this.editedItem.workName)
-        formData.append('place', this.editedItem.workAuthorCount)
-        formData.append('position', this.editedItem.workAuthorName)
-        formData.append('department', this.editedItem.workNumber)
-        formData.append('faculty', this.editedItem.workNumber)
-        formData.append('newId', this.editedItem.newId)
+        let data = {
+          'name': this.editedItem.workName,
+          'place': this.editedItem.workAuthorCount,
+          'position': this.editedItem.workAuthorName,
+          'department': this.editedItem.workNumber,
+          'faculty': this.editedItem.workNumber,
+          'newId': this.editedItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/teachers/update?id="+this.editedItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/teachers/update?id="+this.editedItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -648,12 +650,14 @@ export default {
     saveD () {
       if (this.editedDIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('name', this.editedDItem.achievementName)
-        formData.append('number', this.editedDItem.achievementNumber)
-        formData.append('newId', this.editedDItem.newId)
+        let data = {
+          'name': this.editedDItem.achievementName,
+          'number': this.editedDItem.achievementNumber,
+          'newId': this.editedDItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/achievements/update?id="+this.editedDItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/achievements/update?id="+this.editedDItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsD[this.editedDIndex], this.editedDItem)
@@ -681,7 +685,7 @@ export default {
         formData.append('faculty', this.editedDItem.faculty)
 
         // files
-        for (let file of this.editedDItem.doc) {
+        for (let file of this.editedDItem.achievementDownload) {
           formData.append("doc", file, file.name);
         }
         axios.post("http://api.nammti.uz/api/achievements/create?userId="+this.userId, formData)

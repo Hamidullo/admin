@@ -1379,7 +1379,7 @@ export default {
   data () {
     return {
       overlay: false,
-      userId: localStorage.getItem("user-hemisId"),
+      userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
       years: [2023,2024],
       mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -2187,17 +2187,19 @@ export default {
     saveS () {
       if (this.editedSIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('name', this.editedSItem.brainName)
-        formData.append('authorCount', this.editedSItem.brainAuthorCount)
-        formData.append('authorName', this.editedSItem.brainAuthorName)
-        formData.append('magName', this.editedSItem.brainMagName)
-        formData.append('country', this.editedSItem.brainMagCountry)
-        formData.append('quotesCount', this.editedSItem.brainQuotesCount)
-        formData.append('url', this.editedSItem.brainLink)
-        formData.append('newId', this.editedSItem.newId)
+        let data = {
+          'name': this.editedSItem.brainName,
+          'authorCount': this.editedSItem.brainAuthorCount,
+          'authorName': this.editedSItem.brainAuthorName,
+          'magName': this.editedSItem.brainMagName,
+          'country': this.editedSItem.brainMagCountry,
+          'quotesCount': this.editedSItem.brainQuotesCount,
+          'url': this.editedSItem.brainLink,
+          'newId': this.editedSItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedSItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedSItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsS[this.editedSIndex], this.editedSItem)
@@ -2258,17 +2260,19 @@ export default {
     saveW () {
       if (this.editedWIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('name', this.editedWItem.brainName)
-        formData.append('authorCount', this.editedWItem.brainAuthorCount)
-        formData.append('authorName', this.editedWItem.brainAuthorName)
-        formData.append('magName', this.editedWItem.brainMagName)
-        formData.append('country', this.editedWItem.brainMagCountry)
-        formData.append('quotesCount', this.editedWItem.brainQuotesCount)
-        formData.append('url', this.editedWItem.brainLink)
-        formData.append('newId', this.editedWItem.newId)
+        let data = {
+          'name': this.editedWItem.brainName,
+          'authorCount': this.editedWItem.brainAuthorCount,
+          'authorName': this.editedWItem.brainAuthorName,
+          'magName': this.editedWItem.brainMagName,
+          'country': this.editedWItem.brainMagCountry,
+          'quotesCount': this.editedWItem.brainQuotesCount,
+          'url': this.editedWItem.brainLink,
+          'newId': this.editedWItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedWItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedWItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsW[this.editedWIndex], this.editedWItem)
@@ -2320,17 +2324,19 @@ export default {
     saveX () {
       if (this.editedXIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('name', this.editedXItem.brainName)
-        formData.append('authorCount', this.editedXItem.brainAuthorCount)
-        formData.append('authorName', this.editedXItem.brainAuthorName)
-        formData.append('magName', this.editedXItem.brainMagName)
-        formData.append('country', this.editedXItem.brainMagCountry)
-        formData.append('quotesCount', this.editedXItem.brainQuotesCount)
-        formData.append('url', this.editedXItem.brainLink)
-        formData.append('newId', this.editedXItem.newId)
+        let data = {
+          'name': this.editedXItem.brainName,
+          'authorCount': this.editedXItem.brainAuthorCount,
+          'authorName': this.editedXItem.brainAuthorName,
+          'magName': this.editedXItem.brainMagName,
+          'country': this.editedXItem.brainMagCountry,
+          'quotesCount': this.editedXItem.brainQuotesCount,
+          'url': this.editedXItem.brainLink,
+          'newId': this.editedXItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedXItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedXItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsX[this.editedXIndex], this.editedXItem)
@@ -2382,17 +2388,19 @@ export default {
     saveR () {
       if (this.editedRIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('name', this.editedRItem.brainName)
-        formData.append('authorCount', this.editedRItem.brainAuthorCount)
-        formData.append('authorName', this.editedRItem.brainAuthorName)
-        formData.append('magName', this.editedRItem.brainMagName)
-        formData.append('country', this.editedRItem.brainMagCountry)
-        formData.append('quotesCount', this.editedRItem.brainQuotesCount)
-        formData.append('url', this.editedRItem.brainLink)
-        formData.append('newId', this.editedRItem.newId)
+        let data = {
+          'name': this.editedRItem.brainName,
+          'authorCount': this.editedRItem.brainAuthorCount,
+          'authorName': this.editedRItem.brainAuthorName,
+          'magName': this.editedRItem.brainMagName,
+          'country': this.editedRItem.brainMagCountry,
+          'quotesCount': this.editedRItem.brainQuotesCount,
+          'url': this.editedRItem.brainLink,
+          'newId': this.editedRItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedRItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedRItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsR[this.editedRIndex], this.editedRItem)
@@ -2444,17 +2452,18 @@ export default {
     saveM () {
       if (this.editedMIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('name', this.editedMItem.brainName)
-        formData.append('authorCount', this.editedMItem.brainAuthorCount)
-        formData.append('authorName', this.editedMItem.brainAuthorName)
-        formData.append('magName', this.editedMItem.brainMagName)
-        formData.append('country', this.editedMItem.brainMagCountry)
-        formData.append('quotesCount', this.editedMItem.brainQuotesCount)
-        formData.append('url', this.editedMItem.brainLink)
-        formData.append('newId', this.editedMItem.newId)
+        let data = {
+          'name': this.editedMItem.brainName,
+          'authorCount': this.editedMItem.brainAuthorCount,
+          'authorName': this.editedMItem.brainAuthorName,
+          'magName': this.editedMItem.brainMagName,
+          'country': this.editedMItem.brainMagCountry,
+          'quotesCount': this.editedMItem.brainQuotesCount,
+          'url': this.editedMItem.brainLink,
+          'newId': this.editedMItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedMItem.id, formData)
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedMItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
@@ -2506,17 +2515,18 @@ export default {
     saveA () {
       if (this.editedAIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('name', this.editedAItem.brainName)
-        formData.append('authorCount', this.editedAItem.brainAuthorCount)
-        formData.append('authorName', this.editedAItem.brainAuthorName)
-        formData.append('magName', this.editedAItem.brainMagName)
-        formData.append('country', this.editedAItem.brainMagCountry)
-        formData.append('quotesCount', this.editedAItem.brainQuotesCount)
-        formData.append('url', this.editedAItem.brainLink)
-        formData.append('newId', this.editedAItem.newId)
+        let data = {
+          'name': this.editedAItem.brainName,
+          'authorCount': this.editedAItem.brainAuthorCount,
+          'authorName': this.editedAItem.brainAuthorName,
+          'magName': this.editedAItem.brainMagName,
+          'country': this.editedAItem.brainMagCountry,
+          'quotesCount': this.editedAItem.brainQuotesCount,
+          'url': this.editedAItem.brainLink,
+          'newId': this.editedAItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedAItem.id, formData)
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedAItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
@@ -2568,17 +2578,18 @@ export default {
     saveD () {
       if (this.editedDIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('name', this.editedDItem.brainName)
-        formData.append('authorCount', this.editedDItem.brainAuthorCount)
-        formData.append('authorName', this.editedDItem.brainAuthorName)
-        formData.append('magName', this.editedDItem.brainMagName)
-        formData.append('country', this.editedDItem.brainMagCountry)
-        formData.append('quotesCount', this.editedDItem.brainQuotesCount)
-        formData.append('url', this.editedDItem.brainLink)
-        formData.append('newId', this.editedDItem.newId)
+        let data = {
+          'name': this.editedDItem.brainName,
+          'authorCount': this.editedDItem.brainAuthorCount,
+          'authorName': this.editedDItem.brainAuthorName,
+          'magName': this.editedDItem.brainMagName,
+          'country': this.editedDItem.brainMagCountry,
+          'quotesCount': this.editedDItem.brainQuotesCount,
+          'url': this.editedDItem.brainLink,
+          'newId': this.editedDItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedDItem.id, formData)
+        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedDItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsD[this.editedDIndex], this.editedDItem)

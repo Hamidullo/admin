@@ -26,12 +26,16 @@ export default {
         fon
     },
   },
-  mounted() {
-    /*let user = localStorage.getItem("user-logged")
-
+  async mounted() {
+    let user = localStorage.getItem("user-logged")
+    let userData = localStorage.getItem("user-role")
     if (!user){
-      this.$router.push({name: "Login"})
-    }*/
+      await this.$router.push({name: "Login"})
+    } else if(userData === 0){
+      await this.$router.push({name: "Dashboard"})
+    } else {
+      await this.$router.push({name: "AdminDash"})
+    }
   }
 }
 </script>

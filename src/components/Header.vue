@@ -13,6 +13,7 @@
     <v-menu
       open-on-hover
       v-model="menu"
+      class="text-white"
       @click="openMenu">
       <template v-slot:activator="{ props }">
        <span v-bind="props" class="mr-10">
@@ -22,7 +23,7 @@
                <v-img :src="avatar" alt="menu avatar"></v-img>
              </v-avatar>
            </v-badge>
-           <span>
+           <span class="text-white">
              {{name}}
            </span>
          </v-chip>

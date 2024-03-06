@@ -87,7 +87,7 @@
       </v-card>
     </v-col>
 
-    <v-col>
+    <v-col cols="6">
       <v-card class="bg-color-department" flat title="Kafedralar bo’yicha reyting">
         <template v-slot:text>
           <v-select
@@ -108,6 +108,7 @@
         ></v-data-table>
       </v-card>
     </v-col>
+
   </v-row>
 
   </v-container>
@@ -121,29 +122,9 @@ export default {
       return {
         avatar: "http://api.nammti.uz/uploads/photos/" + localStorage.getItem("user-avatar"),
         userId: localStorage.getItem("user-userId"),
-        faculties: ['Muxandislik-texnologiyasi', 'Kimyo texnologiya', 'Avtomatika va energetika', 'Iqtisodiyot'],
-        faculty: 'Muxandislik-texnologiyasi',
-        departments: ["Energetika",
-          "Fizika",
-          "O‘zbek tili",
-          "TJAB",
-          "IT",
-          "Menejment ",
-          "Marketing ",
-          "Iqtisodiyot",
-          "Buhgalteriya",
-          "Ijtimoiy fanlar",
-          "Kimyoviy texnologiya",
-          "Kimyo",
-          "Oziq-ovqat",
-          "Materiyalshunoslik",
-          "Chet tillar",
-          "Oliy matematika",
-          "TMJ",
-          "Metrologiya",
-          "Umumtexnika fanlari",
-          "QXMT",
-          "Manzarali bog‘dorchilik",],
+        faculties: [],
+        faculty: 'Avtomatika va energetika',
+        departments: [],
         department: 'Energetika',
 
         search: '',
@@ -189,8 +170,8 @@ export default {
       return localStorage.getItem("user-userId")
     },
 
-    changeDepartment(a){
-      axios
+    async changeDepartment(a){
+      await axios
         .get(`http://api.nammti.uz/api/statistic/department?limit=10&offset=0${a}`)
         .then(response => {
           const data  = response.data
@@ -199,8 +180,8 @@ export default {
           }
         });
     },
-    changeFaculty(a){
-      axios
+    async changeFaculty(a){
+      await axios
         .get(`http://api.nammti.uz/api/statistic/faculty?limit=10&offset=0&faculty=${a}`)
         .then(response => {
           const data  = response.data
@@ -211,9 +192,27 @@ export default {
     },
   },
 
-  mounted() {
-    axios
-      .get(`http://api.nammti.uz/api/statistic/all?&limit=10&offset=0`)
+  async mounted() {
+    await axios
+      .get(`http://api.nammti.uz/api/commons/faculty`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          this.faculties.push(data[dataKey].faculty)
+        }
+      });
+
+    await axios
+      .get(`http://api.nammti.uz/api/commons/department`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          this.departments.push(data[dataKey].department)
+        }
+      });
+
+    await axios
+      .get(`http://api.nammti.uz/api/statistics/all?&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -221,8 +220,8 @@ export default {
         }
       });
 
-    axios
-      .get(`http://api.nammti.uz/api/statistic/faculty?limit=10&offset=0&faculty=${this.faculty}`)
+    await axios
+      .get(`http://api.nammti.uz/api/statistics/faculty?limit=10&offset=0&faculty=${this.faculty}`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -230,8 +229,8 @@ export default {
         }
       });
 
-    axios
-      .get(`http://api.nammti.uz/api/statistic/department?limit=10&offset=0${this.department}`)
+    await axios
+      .get(`http://api.nammti.uz/api/statistics/department?limit=10&offset=0&department=${this.department}`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

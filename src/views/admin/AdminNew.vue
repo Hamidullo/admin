@@ -130,6 +130,10 @@
 </template>
 
 <script>
+
+
+import axios from "axios";
+
 export default {
   data (){
     return{
@@ -158,10 +162,9 @@ export default {
   },
 
   mounted() {
-    const id = $route.params.id
+    const id = this.$route.params.id
     this.overlay = true
-    axios
-      .get(`http://localhost:8080/api/news/one?id=${id}`)
+    axios.get(`http://api.nammti.uz/api/news/one?id=${id}`)
       .then(response => {
         const data  = response.data
         this.overlay = false

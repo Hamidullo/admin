@@ -832,7 +832,7 @@ export default {
   data () {
     return {
       overlay: false,
-      userId: localStorage.getItem("user-hemisId"),
+      userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
       years: [2023,2024],
       mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -1315,13 +1315,15 @@ export default {
     save () {
       if (this.editedIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('projectName', this.editedItem.projectName)
-        formData.append('projectFinancing', this.editedItem.projectFinancing)
-        formData.append('project', this.editedItem.project)
-        formData.append('newId', this.editedItem.newId)
+        let data = {
+          'projectName': this.editedItem.projectName,
+          'projectFinancing': this.editedItem.projectFinancing,
+          'project': this.editedItem.project,
+          'newId': this.editedItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -1376,13 +1378,15 @@ export default {
     saveM () {
       if (this.editedMIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('projectName', this.editedMItem.projectName)
-        formData.append('projectFinancing', this.editedMItem.projectFinancing)
-        formData.append('project', this.editedMItem.project)
-        formData.append('newId', this.editedMItem.newId)
+        let data = {
+          'projectName': this.editedMItem.projectName,
+          'projectFinancing': this.editedMItem.projectFinancing,
+          'project': this.editedMItem.project,
+          'newId': this.editedMItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedMItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedMItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
@@ -1437,13 +1441,15 @@ export default {
     saveY () {
       if (this.editedYIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('projectName', this.editedYItem.projectName)
-        formData.append('projectFinancing', this.editedYItem.projectFinancing)
-        formData.append('project', this.editedYItem.project)
-        formData.append('newId', this.editedYItem.newId)
+        let data = {
+          'projectName': this.editedYItem.projectName,
+          'projectFinancing': this.editedYItem.projectFinancing,
+          'project': this.editedYItem.project,
+          'newId': this.editedYItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedYItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedYItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsY[this.editedYIndex], this.editedYItem)
@@ -1498,13 +1504,15 @@ export default {
     saveN () {
       if (this.editedNIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('projectName', this.editedNItem.projectName)
-        formData.append('projectFinancing', this.editedNItem.projectFinancing)
-        formData.append('project', this.editedNItem.project)
-        formData.append('newId', this.editedNItem.newId)
+        let data = {
+          'projectName': this.editedNItem.projectName,
+          'projectFinancing': this.editedNItem.projectFinancing,
+          'project': this.editedNItem.project,
+          'newId': this.editedNItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedNItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedNItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsN[this.editedNIndex], this.editedNItem)
@@ -1559,13 +1567,15 @@ export default {
     saveA () {
       if (this.editedAIndex > -1) {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('projectName', this.editedAItem.projectName)
-        formData.append('projectFinancing', this.editedAItem.projectFinancing)
-        formData.append('project', this.editedAItem.project)
-        formData.append('newId', this.editedAItem.newId)
+        let data = {
+          'projectName': this.editedAItem.projectName,
+          'projectFinancing': this.editedAItem.projectFinancing,
+          'project': this.editedAItem.project,
+          'newId': this.editedAItem.newId,
+        }
 
-        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedAItem.id, formData)
+
+        axios.put("http://api.nammti.uz/api/works/update?id="+this.editedAItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)

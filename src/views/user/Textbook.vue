@@ -711,7 +711,7 @@ export default {
       snackF: false,
       snackS: false,
       snackD: false,
-      userId: localStorage.getItem("user-hemisId"),
+      userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
       years: [2023,2024],
       mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -1111,14 +1111,17 @@ export default {
       if (valid){
         if (this.editedIndex > -1) {
           this.overlay = true
-          let formData = new FormData();
-          formData.append('workName', this.editedItem.workName)
-          formData.append('workAuthorCount', this.editedItem.workAuthorCount)
-          formData.append('workAuthorName', this.editedItem.workAuthorName)
-          formData.append('workNumber', this.editedItem.workNumber)
-          formData.append('newId', this.editedItem.newId)
 
-          axios.put("http://api.nammti.uz/api/works/update?id="+this.editedItem.id, formData)
+          var data = {
+            'workName': this.editedItem.workName,
+            'workAuthorCount': this.editedItem.workAuthorCount,
+            'workAuthorName': this.editedItem.workAuthorName,
+            'workNumber': this.editedItem.workNumber,
+            'newId': this.editedItem.newId
+          }
+
+
+          axios.put("http://api.nammti.uz/api/works/update?id="+this.editedItem.id, data)
             .then(response => {
               console.log(response.data)
               Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -1175,14 +1178,16 @@ export default {
       if (valid){
         if (this.editedQIndex > -1) {
           this.overlay = true
-          let formData = new FormData();
-          formData.append('workName', this.editedItem.workName)
-          formData.append('workAuthorCount', this.editedItem.workAuthorCount)
-          formData.append('workAuthorName', this.editedItem.workAuthorName)
-          formData.append('workNumber', this.editedItem.workNumber)
-          formData.append('newId', this.editedItem.newId)
+          let data = {
+            'workName': this.editedItem.workName,
+            'workAuthorCount': this.editedItem.workAuthorCount,
+            'workAuthorName': this.editedItem.workAuthorName,
+            'workNumber': this.editedItem.workNumber,
+            'newId': this.editedItem.newId,
+          }
 
-          axios.put("http://api.nammti.uz/api/works/update?id="+this.editedQItem.id, formData)
+
+          axios.put("http://api.nammti.uz/api/works/update?id="+this.editedQItem.id, data)
             .then(response => {
               console.log(response.data)
               Object.assign(this.itemsQ[this.editedQIndex], this.editedQItem)
@@ -1240,14 +1245,16 @@ export default {
       if (valid){
         if (this.editedMIndex > -1) {
           this.overlay = true
-          let formData = new FormData();
-          formData.append('workName', this.editedItem.workName)
-          formData.append('workAuthorCount', this.editedItem.workAuthorCount)
-          formData.append('workAuthorName', this.editedItem.workAuthorName)
-          formData.append('workNumber', this.editedItem.workNumber)
-          formData.append('newId', this.editedItem.newId)
+          let data = {
+            'workName': this.editedItem.workName,
+            'workAuthorCount': this.editedItem.workAuthorCount,
+            'workAuthorName': this.editedItem.workAuthorName,
+            'workNumber': this.editedItem.workNumber,
+            'newId': this.editedItem.newId,
+          }
 
-          axios.put("http://api.nammti.uz/api/works/update?id="+this.editedMItem.id, formData)
+
+          axios.put("http://api.nammti.uz/api/works/update?id="+this.editedMItem.id, data)
             .then(response => {
               console.log(response.data)
               Object.assign(this.items[this.editedIndex], this.editedMItem)
@@ -1305,14 +1312,16 @@ export default {
       if (valid){
         if (this.editedKIndex > -1) {
           this.overlay = true
-          let formData = new FormData();
-          formData.append('workName', this.editedItem.workName)
-          formData.append('workAuthorCount', this.editedItem.workAuthorCount)
-          formData.append('workAuthorName', this.editedItem.workAuthorName)
-          formData.append('workNumber', this.editedItem.workNumber)
-          formData.append('newId', this.editedItem.newId)
+          let data = {
+            'workName': this.editedItem.workName,
+            'workAuthorCount': this.editedItem.workAuthorCount,
+            'workAuthorName': this.editedItem.workAuthorName,
+            'workNumber': this.editedItem.workNumber,
+            'newId': this.editedItem.newId,
+          }
 
-          axios.put("http://api.nammti.uz/api/works/update?id="+this.editedKItem.id, formData)
+
+          axios.put("http://api.nammti.uz/api/works/update?id="+this.editedKItem.id, data)
             .then(response => {
               console.log(response.data)
               Object.assign(this.items[this.editedIndex], this.editedKItem)

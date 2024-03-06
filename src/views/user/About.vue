@@ -294,7 +294,7 @@
                         <v-col
                           cols="12">
                           <v-text-field
-                            v-model="diploma.bach_inst"
+                            v-model="diploma.mast_inst"
                             label="Tamomlagan OTM"
                             required>
                         </v-text-field>
@@ -607,16 +607,17 @@
       },
       saveD () {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('bach_inst', this.diploma.bach_inst)
-        formData.append('bach_year', this.diploma.bach_year)
-        formData.append('bach_direction', this.diploma.bach_direction)
-        formData.append('mast_inst', this.diploma.mast_inst)
-        formData.append('mast_year', this.diploma.mast_year)
-        formData.append('mast_direction', this.diploma.mast_direction)
+        var data  = {
+          'bach_inst': this.diploma.bach_inst,
+          'bach_year': this.diploma.bach_year,
+          'bach_direction': this.diploma.bach_direction,
+          'mast_inst': this.diploma.mast_inst,
+          'mast_year': this.diploma.mast_year,
+          'mast_direction': this.diploma.mast_direction
+        }
 
         console.log(this.getId())
-        axios.put("http://api.nammti.uz/api/users/diploma?userId=" + this.getId(), formData)
+        axios.put("http://api.nammti.uz/api/users/diploma?userId=" + this.getId(), data)
           .then(response => {
             console.log(response.data)
             this.overlay = false
@@ -631,16 +632,18 @@
       },
       saveO () {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('bach_inst', this.diploma.bach_inst)
-        formData.append('bach_year', this.diploma.bach_year)
-        formData.append('bach_direction', this.diploma.bach_direction)
-        formData.append('mast_inst', this.diploma.mast_inst)
-        formData.append('mast_year', this.diploma.mast_year)
-        formData.append('mast_direction', this.diploma.mast_direction)
+        var data  = {
+          'aud_training': this.diploma.aud_training,
+          'aud_lecture': this.diploma.aud_lecture,
+          'aud_practice': this.diploma.aud_practice,
+          'aud_laboratory': this.diploma.aud_laboratory,
+          'aud_seminar': this.diploma.aud_seminar,
+          'aud_cal_palne': this.diploma.aud_cal_palne,
+          'aud_without': this.diploma.aud_without
+        }
 
         console.log(this.getId())
-        axios.put("http://api.nammti.uz/api/users/diploma?userId=" + this.getId(), formData)
+        axios.put("http://api.nammti.uz/api/users/diploma?userId=" + this.getId(), data)
           .then(response => {
             console.log(response.data)
             this.overlay = false
@@ -654,19 +657,42 @@
 
       },
 
+
       getId(){
         let userId = localStorage.getItem("user-userId");
         return userId
       }
     },
-    mounted(){
-      axios
-        .get(`http://api.nammti.uz/api/users/userPersonal?userId=${this.getId()}`)
+    async mounted(){
+      await axios
+        .get(`http://api.nammti.uz/api/users/personal?userId=${this.getId()}`)
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {
             console.log(data[dataKey])
             this.editedItem = data[dataKey]
+
+          }
+        });
+
+      await axios
+        .get(`http://api.nammti.uz/api/users/diploma?userId=${this.getId()}`)
+        .then(response => {
+          const data  = response.data
+          for (const dataKey in data) {
+            console.log(data[dataKey])
+            this.diploma = data[dataKey]
+
+          }
+        });
+
+      await axios
+        .get(`http://api.nammti.uz/api/users/training?userId=${this.getId()}`)
+        .then(response => {
+          const data  = response.data
+          for (const dataKey in data) {
+            console.log(data[dataKey])
+            this.aud = data[dataKey]
 
           }
         });

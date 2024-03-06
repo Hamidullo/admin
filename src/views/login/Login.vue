@@ -69,7 +69,7 @@ export default {
     async login(){
       if (this.hemisId.length > 0 && this.password.length > 0){
         var data = {
-          "hemisId": this.hemisId,
+          "userId": this.hemisId,
           "password": this.password
         }
         UserDataService.get(data).then(response => {
@@ -78,7 +78,7 @@ export default {
           let data = response.data
           if (data.name){
             localStorage.setItem("user-id", response.data.id)
-            localStorage.setItem("user-userId", response.data.hemisId)
+            localStorage.setItem("user-userId", response.data.userId)
             localStorage.setItem("user-name", response.data.name)
             localStorage.setItem("user-avatar", response.data.avatar)
             localStorage.setItem("user-department", response.data.department)
@@ -92,7 +92,7 @@ export default {
             }
           } else {
             localStorage.setItem("user-id", response.data.id)
-            localStorage.setItem("user-hemisId", response.data.hemisId)
+            localStorage.setItem("user-userId", response.data.userId)
             if (response.data.role !== 0){
               this.$router.push({name: "AdminAbout"})
               localStorage.setItem("user-role", response.data.admin)
@@ -115,7 +115,7 @@ export default {
   mounted() {
     let user = localStorage.getItem("user-logged")
     if (user){
-      let userData = localStorage.getItem("user-admin")
+      let userData = localStorage.getItem("user-role")
       if (userData){
         this.$router.push({name: "AdminDash"})
       } else {

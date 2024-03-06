@@ -463,7 +463,7 @@
                           sm="6"
                           md="6">
                           <v-text-field
-                            v-model="editedSItem.articleUrl"
+                            v-model="editedSItem.university"
                             clearable
                             label="«Scopus» qidiruv tizimlardagi manzili (giper xavolasi)"
                             persistent-hint
@@ -648,7 +648,7 @@ export default {
         snackS: false,
         snackD: false,
         position: localStorage.getItem("user-position"),
-        userId: localStorage.getItem("user-hemisId"),
+        userId: localStorage.getItem("user-userId"),
         userName: localStorage.getItem("user-name"),
         years: [2023,2024],
         mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -822,11 +822,11 @@ export default {
 
         search: '',
         headers: [
-          { key: 'type', title: 'Turi', align: 'start', sortable: false, },
-          { key: 'seriesNumber', title: 'Seriyasi' },
-          { key: 'dateGiven', title: 'Raqami' },
-          { key: 'docNumber', title: 'Berilgan yili' },
-          { key: 'specialtyNumber', title: 'Ixtisoslik raqami va nomi' },
+          { key: 'name', title: 'Turi', align: 'start', sortable: false, },
+          { key: 'series', title: 'Seriyasi' },
+          { key: 'number', title: 'Raqami' },
+          { key: 'year', title: 'Berilgan yili' },
+          { key: 'dipType', title: 'Ixtisoslik raqami va nomi' },
           { key: 'departmentName', title: 'Mutaxassisligi nomi' },
           { key: 'news', title: 'Hujjat holati' },
           { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
@@ -838,9 +838,9 @@ export default {
           { key: 'name',title: 'Xorijiy davlat nomi', align: 'start',},
           { key: 'university', title: 'OTM nomi', align: 'start', },
           { key: 'type', title: 'Turi', align: 'start', },
-          { key: 'seriesNumber', title: 'Seriyasi' },
-          { key: 'dateGiven', title: 'Raqami' },
-          { key: 'typeNumber', title: 'Mutaxassisligi nomi', align: 'start', },
+          { key: 'series', title: 'Seriyasi' },
+          { key: 'year', title: 'Raqami' },
+          { key: 'number', title: 'Mutaxassisligi nomi', align: 'start', },
           { key: 'news', title: 'Hujjat holati' },
           { key: 'actions', title: 'Amallar',align: 'start', sortable: false,  },
         ],
@@ -848,12 +848,12 @@ export default {
 
         searchS: '',
         headersS: [
-          { key: 'magazineName', title: 'Jurnal nomi' },
+          { key: 'name', title: 'Jurnal nomi' },
           { key: 'year', title: 'Jurnalning nashr etilgan yil' },
-          { key: 'articleName', title: 'Maqola nomi' },
-          { key: 'articleLanguage', title: 'Maqola chop etilgan til' },
-          { key: 'articleUrl', title: 'Maqolani giper Xavolasi' },
-          { key: 'hIndex', title: 'h-index' },
+          { key: 'dipType', title: 'Maqola nomi' },
+          { key: 'country', title: 'Maqola chop etilgan til' },
+          { key: 'university', title: 'Maqolani giper Xavolasi' },
+          { key: 'number', title: 'h-index' },
           { key: 'news', title: 'Hujjat holati' },
           { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
         ],
@@ -989,18 +989,21 @@ export default {
       if (valid) {
         if (this.editedIndex > -1) {
           this.overlay = true
-          let formData = new FormData();
-          formData.append('country', this.editedItem.country)
-          formData.append('university', this.editedItem.university)
-          formData.append('rating', this.editedItem.rating)
-          formData.append('dipType', this.editedItem.dipType)
-          formData.append('series', this.editedItem.series)
-          formData.append('number', this.editedItem.number)
-          formData.append('departmentName', this.editedItem.departmentName)
-          formData.append('workStartND', this.editedItem.workStartND)
-          formData.append('newId', this.editedItem.newId)
 
-          await axios.post("http://api.nammti.uz/api/academics/update?id="+this.editedItem.id, formData)
+          let data = {
+            'country': this.editedItem.country,
+            'university': this.editedItem.university,
+            'rating': this.editedItem.rating,
+            'dipType': this.editedItem.dipType,
+            'series': this.editedItem.series,
+            'number': this.editedItem.number,
+            'departmentName': this.editedItem.departmentName,
+            'workStartND': this.editedItem.workStartND,
+            'newId': this.editedItem.newId,
+          }
+
+
+          await axios.put("http://api.nammti.uz/api/academics/update?id="+this.editedItem.id, data)
             .then(response => {
               console.log(response.data)
               Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -1070,18 +1073,19 @@ export default {
       if (valid){
         if (this.editedCIndex > -1) {
           this.overlay = true
-          let formData = new FormData();
-          formData.append('country', this.editedCItem.country)
-          formData.append('university', this.editedCItem.university)
-          formData.append('rating', this.editedCItem.rating)
-          formData.append('dipType', this.editedCItem.dipType)
-          formData.append('series', this.editedCItem.series)
-          formData.append('number', this.editedCItem.number)
-          formData.append('departmentName', this.editedCItem.departmentName)
-          formData.append('workStartND', this.editedCItem.workStartND)
-          formData.append('newId', this.editedCItem.newId)
+          let data = {
+            'country': this.editedCItem.country,
+            'university': this.editedCItem.university,
+            'rating': this.editedCItem.rating,
+            'dipType': this.editedCItem.dipType,
+            'series': this.editedCItem.series,
+            'number': this.editedCItem.number,
+            'departmentName': this.editedCItem.departmentName,
+            'workStartND': this.editedCItem.workStartND,
+            'newId': this.editedCItem.newId,
+          }
 
-          await axios.post("http://api.nammti.uz/api/academics/update?id="+this.editedCItem.id, formData)
+          await axios.put("http://api.nammti.uz/api/academics/update?id="+this.editedCItem.id, data)
             .then(response => {
               console.log(response.data)
               Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
@@ -1142,18 +1146,19 @@ export default {
       if (valid){
         if (this.editedSIndex > -1) {
           this.overlay = true
-          let formData = new FormData();
-          formData.append('country', this.editedSItem.country)
-          formData.append('university', this.editedSItem.university)
-          formData.append('rating', this.editedSItem.rating)
-          formData.append('dipType', this.editedSItem.dipType)
-          formData.append('series', this.editedSItem.series)
-          formData.append('number', this.editedSItem.number)
-          formData.append('departmentName', this.editedSItem.departmentName)
-          formData.append('workStartND', this.editedSItem.workStartND)
-          formData.append('newId', this.editedSItem.newId)
+          let data = {
+            'country': this.editedSItem.country,
+            'university': this.editedSItem.university,
+            'rating': this.editedSItem.rating,
+            'dipType': this.editedSItem.dipType,
+            'series': this.editedSItem.series,
+            'number': this.editedSItem.number,
+            'departmentName': this.editedSItem.departmentName,
+            'workStartND': this.editedSItem.workStartND,
+            'newId': this.editedSItem.newId,
+          }
 
-          axios.post("http://api.nammti.uz/api/academics/update?id="+this.editedSItem.id, formData)
+          axios.put("http://api.nammti.uz/api/academics/update?id="+this.editedSItem.id, data)
             .then(response => {
               console.log(response.data)
               Object.assign(this.itemsS[this.editedSIndex], this.editedSItem)
@@ -1271,7 +1276,7 @@ export default {
 
   async mounted() {
     await axios
-      .get(`http://api.nammti.uz/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=21`)
+      .get(`http://api.nammti.uz/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=11`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1288,7 +1293,7 @@ export default {
       });
 
     await axios
-      .get(`http://api.nammti.uz/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=22`)
+      .get(`http://api.nammti.uz/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=12`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1304,7 +1309,7 @@ export default {
       });
 
     await axios
-      .get(`http://api.nammti.uz/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=23`)
+      .get(`http://api.nammti.uz/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=13`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
