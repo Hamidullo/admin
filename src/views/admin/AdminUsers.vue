@@ -253,13 +253,13 @@ export default {
   methods: {
 
     editItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
+      this.editedIndex = this.items.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
+      this.editedIndex = this.items.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
@@ -326,21 +326,24 @@ export default {
       } else
       {
         this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedItem.name)
-        formData.append('faculty', this.editedItem.faculty)
-        formData.append('department', this.editedItem.department)
-        formData.append('position', this.editedItem.position)
-        formData.append('password', this.editedItem.password)
+
+
         if (this.editedItem.roleName === 'User'){
           this.editedItem.role = 0
         } else if (this.editedItem.roleName === 'Admin'){
           this.editedItem.role = 1
         }
-        formData.append('role', this.editedItem.role)
+        let data = {
+          'userId': this.editedItem.userId,
+          'name': this.editedItem.name,
+          'department': this.editedItem.department,
+          'faculty': this.editedItem.faculty,
+          'position': this.editedItem.position,
+          'password': this.editedItem.password,
+          'role': this.editedItem.role,
+        }
 
-        axios.post("http://api.nammti.uz/api/users/create?userId="+this.userId, formData)
+        axios.post("http://api.nammti.uz/api/users/create?userId="+this.userId, data)
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
@@ -368,13 +371,7 @@ export default {
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
-          if (data[dataKey].newSeen === 1){
-            data[dataKey].newSeen = 'Tekshirilmoqda'
-          } else if (data[dataKey].newSeen === 2){
-            data[dataKey].newSeen = 'Tasdiqlandi'
-          } else {
-            data[dataKey].newSeen = 'Rad etildi'
-          }
+
           this.items.push(data[dataKey])
 
         }
