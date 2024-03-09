@@ -722,14 +722,7 @@ export default {
         { key: 'news', title: 'Hujjat holati' },
         {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      items: [{
-        'workName': 'Darslik',
-        'workAuthorCount': '2',
-        'workAuthorName': 'Oxundadaev Abdug‘ani',
-        'year': '2023',
-        'workNumber': 'ds515151',
-        'news': 'Tasdiqlanmoqda',
-      }],
+      items: [],
 
       searchQ: '',
       headersQ: [
@@ -741,14 +734,7 @@ export default {
         { key: 'news', title: 'Hujjat holati' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
-      itemsQ: [{
-        'workName': 'Darslik',
-        'workAuthorCount': '2',
-        'workAuthorName': 'Oxundadaev Abdug‘ani',
-        'year': '2023',
-        'workNumber': 'ds515151',
-        'news': 'Tasdiqlanmoqda',
-      }],
+      itemsQ: [],
 
       searchM: '',
       headersM: [
@@ -760,14 +746,7 @@ export default {
         { key: 'news', title: 'Hujjat holati' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
-      itemsM: [{
-        'workName': 'Darslik',
-        'workAuthorCount': '2',
-        'workAuthorName': 'Oxundadaev Abdug‘ani',
-        'year': '2023',
-        'workNumber': 'ds515151',
-        'news': 'Tasdiqlanmoqda',
-      }],
+      itemsM: [],
 
       searchK: '',
       headersK: [
@@ -779,14 +758,7 @@ export default {
         { key: 'news', title: 'Hujjat holati' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
-      itemsK: [{
-        'workName': 'Darslik',
-        'workAuthorCount': '2',
-        'workAuthorName': 'Oxundadaev Abdug‘ani',
-        'year': '2023',
-        'workNumber': 'ds515151',
-        'news': 'Tasdiqlanmoqda',
-      }],
+      itemsK: [],
 
       dialog: false,
       dialogDelete: false,

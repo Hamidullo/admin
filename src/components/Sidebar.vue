@@ -15,6 +15,7 @@
       <template v-slot:prepend>
         <v-avatar >
           <v-img
+            cover
             :src="avatar"
             alt="avatar">
           </v-img>

@@ -822,32 +822,7 @@ export default {
           { key: 'news', title: 'Hujjat holati' },
           { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
         ],
-        items: [{
-          id: 0,
-          type: 13,
-          typeName: '“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥ 5 dan yuqoriligi',
-          top: '',
-
-          name: 'Himoya',
-          country: 'Malayziya',
-          university: 'MHU',
-          rating: '500',
-          dipType: 'PhD',
-          series: 'AS1251521',
-          number: '154513',
-
-          departmentName: '',
-          workStartND: '',
-          year: 2023,
-          mounth: 5,
-          news: '',
-          userName: localStorage.getItem("user-name"),
-          department: localStorage.getItem("user-department"),
-          faculty: localStorage.getItem("user-faculty"),
-          statId: 0,
-          newId: 0,
-          docDownload: null
-        }],
+        items: [],
 
         searchC: '',
         headersC: [
@@ -860,32 +835,7 @@ export default {
           { key: 'news', title: 'Hujjat holati' },
           { key: 'actions', title: 'Amallar',align: 'start', sortable: false,  },
         ],
-        itemsC: [{
-          id: 0,
-          type: 13,
-          typeName: '“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥ 5 dan yuqoriligi',
-          top: '',
-
-          name: 'Himoya',
-          country: 'Malayziya',
-          university: 'MHU',
-          rating: '500',
-          dipType: 'PhD',
-          series: 'AS1251521',
-          number: '154513',
-
-          departmentName: '',
-          workStartND: '',
-          year: 2023,
-          mounth: 5,
-          news: '',
-          userName: localStorage.getItem("user-name"),
-          department: localStorage.getItem("user-department"),
-          faculty: localStorage.getItem("user-faculty"),
-          statId: 0,
-          newId: 0,
-          docDownload: null
-        }],
+        itemsC: [],
 
         searchS: '',
         headersS: [
@@ -898,32 +848,7 @@ export default {
           { key: 'news', title: 'Hujjat holati' },
           { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
         ],
-        itemsS: [{
-          id: 0,
-          type: 13,
-          typeName: '“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥ 5 dan yuqoriligi',
-          top: '',
-
-          name: 'Himoya',
-          country: 'Malayziya',
-          university: 'MHU',
-          rating: '500',
-          dipType: 'PhD',
-          series: 'AS1251521',
-          number: '154513',
-
-          departmentName: '',
-          workStartND: '',
-          year: 2023,
-          mounth: 5,
-          news: '',
-          userName: localStorage.getItem("user-name"),
-          department: localStorage.getItem("user-department"),
-          faculty: localStorage.getItem("user-faculty"),
-          statId: 0,
-          newId: 0,
-          docDownload: null
-        }],
+        itemsS: [],
       }
     },
 

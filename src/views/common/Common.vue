@@ -2,10 +2,12 @@
   <v-container>
 
     <v-app-bar>
-      <v-app-bar-title align="center" >
-        <h4 class="title">
-          Namangan muhandislik-texnologiya instituti fakultet va kafedralar reytingi!
-        </h4>
+      <img class="logo" :src="nammti" alt="logo"/>
+
+      <v-app-bar-title align="center">
+        <h2 class="title">
+          NAMANGAN MUHANDISLIK-TEXNOLOGIYA INSTITUTI FAKULTET VA KAFEDRALAR REYTINGI
+        </h2>
       </v-app-bar-title>
 
       <v-btn class="mr-5" elevation="4" color="#5865f2" @click="yearChange">
@@ -31,8 +33,7 @@
           <v-data-table
             :headers="headers"
             :items="items"
-            class="bg-color-container"
-            :search="search">
+            class="bg-color-container">
           </v-data-table>
         </v-card>
       </v-col>
@@ -49,6 +50,7 @@
 import PlanetChart from '@/components/PlanetChart.vue'
 import UChart from '@/components/UChart.vue'
 import axios from "axios";
+import nammti from '@/assets/nammti.png'
 
 export default {
   components: {
@@ -57,6 +59,7 @@ export default {
   data() {
     return {
       overlay: false,
+      nammti: nammti,
       scores: [],
 
       headers: [
@@ -65,27 +68,7 @@ export default {
         { key: 'share', title: 'Ulushi', align: 'center' },
         { key: 'score', title: 'Berilgan Bal', align: 'center' }
       ],
-      items: [{
-        'faculty': 'Muxandislik-texnologiyasi',
-        'count': '42',
-        'share': '58',
-        'score': '89'
-      },{
-        'faculty': 'Iqtisodiyot',
-        'count': '40',
-        'share': '55',
-        'score': '79'
-      },{
-        'faculty': 'Avtomatika va energetika',
-        'count': '36',
-        'share': '48',
-        'score': '68'
-      },{
-        'faculty': 'Kimyo texnologiya',
-        'count': '32',
-        'share': '40',
-        'score': '608605656'
-      }],
+      items: [],
 
       years: ['2023', '2024'],
       year: '2023',
@@ -108,7 +91,7 @@ export default {
 
   mounted() {
 
-    /*axios.get("http://api.nammti.uz/api/commons/faculty" )
+    axios.get("http://api.nammti.uz/api/commons/faculty" )
       .then(response => {
 
         this.overlay = false
@@ -123,7 +106,7 @@ export default {
         this.overlay = false
 
         console.error("There was an error!", error);
-      });*/
+      });
   }
 
 }
@@ -139,7 +122,11 @@ export default {
   color: #5865f2 !important;
 }
 .bg-color-container{
-  background-color: #59bce0;
+  background-color: #546E7A;
   color: white;
+}
+.logo{
+  width: 250px;
+  margin-left: 32px;
 }
 </style>

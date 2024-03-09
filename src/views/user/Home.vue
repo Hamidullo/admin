@@ -27,7 +27,7 @@ export default {
     },
   },
   async mounted() {
-    /*let user = localStorage.getItem("user-logged")
+    let user = localStorage.getItem("user-logged")
     let userData = localStorage.getItem("user-role")
     console.log(userData, "home")
     if (!user){
@@ -38,7 +38,7 @@ export default {
       } else {
         await this.$router.push({name: "AdminDash"})
       }
-    }*/
+    }
   }
 }
 </script>

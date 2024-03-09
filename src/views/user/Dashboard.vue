@@ -74,7 +74,7 @@
             v-model="faculty"
             :items="faculties"
             hide-details
-            @change="changeFaculty"
+            @update:modelValue="changeFaculty"
             variant="outlined">
           </v-select>
         </template>
@@ -95,7 +95,7 @@
             v-model="department"
             :items="departments"
             hide-details
-            @change="changeDepartment"
+            @update:modelValue="changeDepartment"
             variant="outlined">
           </v-select>
         </template>
@@ -114,12 +114,9 @@
         <template v-slot:text>
           <v-select
             label="Lavozim"
-            :items="['Prorektorlar',
-            'Fakultet dekanlari',
-            'Kafedra mudirlari',
-            'Fan dokgtori (professor)lar',
-            'Fan nomzodi, PhD (dotsentlar)',
-            'Katta o`qituvchilar','Assistentlar']"
+            :items="positions"
+            v-model="position"
+            @update:modelValue="changePosition"
             hide-details
             variant="outlined">
           </v-select>
@@ -151,6 +148,8 @@ export default {
         faculty: 'Avtomatika va energetika',
         departments: [],
         department: 'Energetika',
+        positions: ['Prorektorlar', 'Fakultet dekanlari', 'Kafedra mudirlari', 'Fan dokgtori (professor)lar', 'Fan nomzodi, PhD (dotsentlar)', 'Katta o`qituvchilar','Assistentlar'],
+        position: 'Katta o`qituvchilar',
 
         search: '',
         headers: [
@@ -159,20 +158,7 @@ export default {
           { key: 'userShare',align: 'center',  title: 'Ulushi' },
           { key: 'userScore',align: 'center',  title: 'Berilgan bal' },
         ],
-        desserts: [
-          {
-            'userName': 'Soliyev Azizbek',
-            'userCount': '6',
-            'userShare': '3.6',
-            'userScore': '5.2',
-          },
-          {
-            'userName': 'Oxundadaev Abdug‘ani',
-            'userCount': '5',
-            'userShare': '3.2',
-            'userScore': '5',
-          }
-        ],
+        desserts: [],
 
         searchC: '',
         headersC: [
@@ -181,18 +167,7 @@ export default {
           { key: 'userShare',align: 'center',  title: 'Ulushi' },
           { key: 'userScore',align: 'center',  title: 'Berilgan bal' },
         ],
-        itemsC: [{
-          'userName': 'Soliyev Azizbek',
-          'userCount': '6',
-          'userShare': '3.6',
-          'userScore': '5.2',
-        },
-          {
-            'userName': 'Oxundadaev Abdug‘ani',
-            'userCount': '5',
-            'userShare': '3.2',
-            'userScore': '5',
-          }],
+        itemsC: [],
 
         searchR: '',
         headersR: [
@@ -201,18 +176,7 @@ export default {
           { key: 'userShare',align: 'center',  title: 'Ulushi' },
           { key: 'userScore',align: 'center',  title: 'Berilgan bal' },
         ],
-        dessertsR: [{
-          'userName': 'Soliyev Azizbek',
-          'userCount': '6',
-          'userShare': '3.6',
-          'userScore': '5.2',
-        },
-          {
-            'userName': 'Oxundadaev Abdug‘ani',
-            'userCount': '5',
-            'userShare': '3.2',
-            'userScore': '5',
-          }],
+        dessertsR: [],
 
         searchT: '',
         headersT: [
@@ -221,18 +185,7 @@ export default {
           { key: 'userShare',align: 'center',  title: 'Ulushi' },
           { key: 'userScore',align: 'center',  title: 'Berilgan bal' },
         ],
-        dessertsT: [{
-          'userName': 'Soliyev Azizbek',
-          'userCount': '6',
-          'userShare': '3.6',
-          'userScore': '5.2',
-        },
-          {
-            'userName': 'Oxundadaev Abdug‘ani',
-            'userCount': '5',
-            'userShare': '3.2',
-            'userScore': '5',
-          }],
+        dessertsT: [],
       }
     },
 
@@ -246,6 +199,7 @@ export default {
         .get(`http://api.nammti.uz/api/statistic/department?limit=10&offset=0${a}`)
         .then(response => {
           const data  = response.data
+          this.dessertsR.clear
           for (const dataKey in data) {
             this.dessertsR.push(data[dataKey])
           }
@@ -260,6 +214,18 @@ export default {
             this.itemsC.push(data[dataKey])
           }
         });
+    },
+    async changePosition(a){
+      console.log(a)
+      /*await axios
+        .get(`http://api.nammti.uz/api/statistic/department?limit=10&offset=0${a}`)
+        .then(response => {
+          const data  = response.data
+          this.dessertsR.clear
+          for (const dataKey in data) {
+            this.dessertsR.push(data[dataKey])
+          }
+        });*/
     },
   },
 

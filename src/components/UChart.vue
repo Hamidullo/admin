@@ -31,7 +31,7 @@ export default {
             labels: fal,
             datasets: [{
               label: 'Institut bo’yicha fakultetlar reyting',
-              data: [60,68,79,89],//scorF,
+              data: scorF,
               backgroundColor: [
                 'rgb(236,19,19)',
                 'rgb(239,213,43)',

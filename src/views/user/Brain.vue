@@ -911,17 +911,6 @@
                           sm="6"
                           md="6">
                           <v-text-field
-                            v-model="editedRItem.brainMagCountry"
-                            :rules="rules"
-                            clearable
-                            label="Jurnal nashr etilgan davlat">
-                          </v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="6">
-                          <v-text-field
                             :rules="rules"
                             v-model="editedRItem.brainLink"
                             clearable
@@ -953,7 +942,9 @@
                           </v-select>
                         </v-col>
                         <v-col
-                          cols="12">
+                          cols="12"
+                          sm="6"
+                          md="6">
                           <v-file-input
                             v-if="!editedRItem.brainUploaded"
                             :rules="rules"
@@ -1246,7 +1237,7 @@
                     <span class="text-h5">{{formATitle}}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-form>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12"

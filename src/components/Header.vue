@@ -20,7 +20,7 @@
          <v-chip link>
            <v-badge dot bottom offset-x="1" offset-y="1" color="green" class="mt-1 me-1">
              <v-avatar size="30">
-               <v-img :src="avatar" alt="menu avatar"></v-img>
+               <v-img cover :src="avatar" alt="menu avatar"></v-img>
              </v-avatar>
            </v-badge>
            <span class="text-white">
@@ -38,6 +38,7 @@
           <template v-slot:prepend>
             <v-avatar >
               <v-img
+                cover
                 :src="avatar"
                 alt="avatar">
               </v-img>
