@@ -22,7 +22,7 @@
                   <span class="text-h5">{{formSTitle}}</span>
                 </v-card-title>
                 <v-card-text>
-                  <v-container>
+                  <v-form ref="form">
                     <v-row>
                       <v-col
                         cols="12"
@@ -31,6 +31,7 @@
                         <v-text-field
                           v-model="editedSItem.brainName"
                           clearable
+                          :rules="rules"
                           label="Nomi"
                           required>
                       </v-text-field>
@@ -42,6 +43,7 @@
                         <v-text-field
                           v-model="editedSItem.brainQuotesCount"
                           clearable
+                          :rules="rules"
                           required
                           label="Iqtiboslar soni">
                       </v-text-field>
@@ -52,6 +54,7 @@
                         md="4">
                         <v-select
                           label="Kvartalni tanlang"
+                          :rules="rules"
                           v-model="editedSItem.quarter"
                           :items="['Q1', 'Q2', 'Q3', 'Q4']">
                         </v-select>
@@ -63,6 +66,7 @@
                         <v-text-field
                           v-model="editedSItem.brainAuthorCount"
                           clearable
+                          :rules="rules"
                           required
                           label="Mualliflar soni">
                       </v-text-field>
@@ -86,6 +90,7 @@
                         <v-text-field
                           v-model="editedSItem.brainMagName"
                           clearable
+                          :rules="rules"
                           label="Nashr etilgan jurnal nomi"
                           required>
                       </v-text-field>
@@ -98,6 +103,7 @@
                           v-model="editedSItem.brainMagCountry"
                           clearable
                           required
+                          :rules="rules"
                           label="Jurnal nashr etilgan davlat">
                       </v-text-field>
                       </v-col>
@@ -108,6 +114,7 @@
                         <v-text-field
                           v-model="editedSItem.brainLink"
                           clearable
+                          :rules="rules"
                           label="Maqola joylashgan havola"
                           persistent-hint
                           required>
@@ -119,6 +126,7 @@
                         md="3">
                         <v-select
                           label="Nashr etilgan yil"
+                          :rules="rules"
                           v-model="editedSItem.year"
                           :items="years">
                         </v-select>
@@ -129,6 +137,7 @@
                         md="3">
                         <v-select
                           label="Nashr etilgan oy"
+                          :rules="rules"
                           v-model="editedSItem.mounth"
                           :items="mounth">
                         </v-select>
@@ -139,12 +148,13 @@
                           v-if="!editedSItem.brainUploaded"
                           v-model="editedSItem.brainUploaded"
                           show-size
+                          :rules="rules"
                           label="Maqola yuklash">
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedSItem)">Maqolani yuklash</v-btn>
                       </v-col>
                     </v-row>
-                  </v-container>
+                  </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -209,7 +219,6 @@
       </v-card>
       </v-col>
 
-
       <v-col cols="12">
         <v-card class="bg-color-container" flat title="“Web of sciense” bazalaridagi maqolalar">
         <template v-slot:append>
@@ -231,7 +240,7 @@
                   <span class="text-h5">{{ formWTitle }}</span>
                 </v-card-title>
                 <v-card-text>
-                  <v-container>
+                  <v-form ref="form">
                     <v-row>
                       <v-col
                         cols="12"
@@ -240,6 +249,7 @@
                         <v-text-field
                           v-model="editedWItem.brainName"
                           clearable
+                          :rules="rules"
                           label="Nomi"
                           required>
                       </v-text-field>
@@ -251,6 +261,7 @@
                         <v-text-field
                           v-model="editedWItem.brainQuotesCount"
                           clearable
+                          :rules="rules"
                           label="Iqtiboslar soni">
                       </v-text-field>
                       </v-col>
@@ -261,6 +272,7 @@
                         <v-text-field
                           v-model="editedWItem.brainAuthorCount"
                           clearable
+                          :rules="rules"
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
@@ -281,6 +293,7 @@
                         <v-text-field
                           v-model="editedWItem.brainMagName"
                           clearable
+                          :rules="rules"
                           label="Nashr etilgan jurnal nomi"
                           required>
                       </v-text-field>
@@ -292,6 +305,7 @@
                         <v-text-field
                           v-model="editedWItem.brainMagCountry"
                           clearable
+                          :rules="rules"
                           label="Jurnal nashr etilgan davlat">
                       </v-text-field>
                       </v-col>
@@ -302,6 +316,7 @@
                         <v-text-field
                           v-model="editedWItem.brainLink"
                           clearable
+                          :rules="rules"
                           label="Maqola joylashgan havola"
                           persistent-hint
                           required>
@@ -314,6 +329,7 @@
                         <v-select
                           label="Nashr etilgan yil"
                           v-model="editedWItem.year"
+                          :rules="rules"
                           :items="years">
                         </v-select>
                       </v-col>
@@ -324,6 +340,7 @@
                         <v-select
                           label="Nashr etilgan oy"
                           v-model="editedWItem.mounth"
+                          :rules="rules"
                           :items="mounth">
                         </v-select>
                       </v-col>
@@ -332,13 +349,14 @@
                         <v-file-input
                           v-if="!editedWItem.brainUploaded"
                           v-model="editedWItem.brainUploaded"
+                          :rules="rules"
                           show-size
                           label="Maqola yuklash">
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedWItem)">Maqolani yuklash</v-btn>
                       </v-col>
                     </v-row>
-                  </v-container>
+                  </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -403,6 +421,7 @@
       </v-card>
       </v-col>
 
+
       <v-col cols="12">
         <v-card class="bg-color-container" flat title="“Scopus” va “Web of sciense” bazalarida indeklanuvchi konferentsiyalar">
           <template v-slot:append>
@@ -421,7 +440,7 @@
                     <span class="text-h5">{{ formDTitle }}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12"
@@ -430,6 +449,7 @@
                           <v-text-field
                             v-model="editedDItem.brainName"
                             clearable
+                            :rules="rules"
                             label="Nomi"
                             required>
                           </v-text-field>
@@ -441,6 +461,7 @@
                           <v-text-field
                             v-model="editedDItem.brainQuotesCount"
                             clearable
+                            :rules="rules"
                             label="Iqtiboslar soni">
                           </v-text-field>
                         </v-col>
@@ -451,6 +472,7 @@
                           <v-text-field
                             v-model="editedDItem.brainAuthorCount"
                             clearable
+                            :rules="rules"
                             label="Mualliflar soni">
                           </v-text-field>
                         </v-col>
@@ -470,6 +492,7 @@
                           md="6">
                           <v-select
                             label="Turi"
+                            :rules="rules"
                             v-model="editedDItem.brainMagCountry"
                             :items="['IAP','E3','AIP','Boshqa']">
                           </v-select>
@@ -481,6 +504,7 @@
                           <v-text-field
                             v-model="editedDItem.brainMagName"
                             clearable
+                            :rules="rules"
                             label="Konferentsiya nomi"
                             required>
                           </v-text-field>
@@ -492,6 +516,7 @@
                           <v-text-field
                             v-model="editedDItem.brainLink"
                             clearable
+                            :rules="rules"
                             label="Maqola joylashgan havola"
                             persistent-hint
                             required>
@@ -503,6 +528,7 @@
                           md="3">
                           <v-select
                             label="Nashr etilgan yil"
+                            :rules="rules"
                             v-model="editedDItem.year"
                             :items="years">
                           </v-select>
@@ -512,6 +538,7 @@
                           sm="6"
                           md="3">
                           <v-select
+                            :rules="rules"
                             label="Nashr etilgan oy"
                             v-model="editedDItem.mounth"
                             :items="mounth">
@@ -520,6 +547,7 @@
                         <v-col
                           cols="12">
                           <v-file-input
+                            :rules="rules"
                             v-if="!editedDItem.brainUploaded"
                             v-model="editedDItem.brainUploaded"
                             show-size
@@ -528,7 +556,7 @@
                           <v-btn size="x-large" v-else @click="downloadDoc(editedDItem)">Maqolani yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -612,7 +640,7 @@
                     <span class="text-h5">{{formXTitle}}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form  ref="form">
                       <v-row>
                         <v-col
                           cols="12"
@@ -620,6 +648,7 @@
                           md="4">
                           <v-text-field
                             clearable
+                            :rules="rules"
                             v-model="editedXItem.brainName"
                             label="Nomi"
                             required>
@@ -632,6 +661,7 @@
                           <v-text-field
                             v-model="editedXItem.brainQuotesCount"
                             clearable
+                            :rules="rules"
                             required
                             label="Iqtiboslar soni">
                           </v-text-field>
@@ -643,6 +673,7 @@
                           <v-text-field
                             v-model="editedXItem.brainAuthorCount"
                             clearable
+                            :rules="rules"
                             required
                             label="Mualliflar soni">
                           </v-text-field>
@@ -664,6 +695,7 @@
                           <v-text-field
                             v-model="editedXItem.brainMagName"
                             clearable
+                            :rules="rules"
                             label="Nashr etilgan jurnal nomi"
                             required>
                           </v-text-field>
@@ -676,6 +708,7 @@
                             v-model="editedXItem.brainMagCountry"
                             clearable
                             required
+                            :rules="rules"
                             label="Jurnal nashr etilgan davlat">
                           </v-text-field>
                         </v-col>
@@ -686,6 +719,7 @@
                           <v-text-field
                             v-model="editedXItem.brainLink"
                             clearable
+                            :rules="rules"
                             label="Maqola joylashgan havola"
                             persistent-hint
                             required>
@@ -698,6 +732,7 @@
                           <v-select
                             label="Nashr etilgan yil"
                             v-model="editedXItem.year"
+                            :rules="rules"
                             :items="years">
                           </v-select>
                         </v-col>
@@ -708,6 +743,7 @@
                           <v-select
                             label="Nashr etilgan oy"
                             v-model="editedXItem.mounth"
+                            :rules="rules"
                             :items="mounth">
                           </v-select>
                         </v-col>
@@ -716,13 +752,14 @@
                           <v-file-input
                             v-if="!editedXItem.brainUploaded"
                             v-model="editedXItem.brainUploaded"
+                            :rules="rules"
                             show-size
                             label="Maqola yuklash">
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedXItem)">Maqolani yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -809,7 +846,7 @@
                     <span class="text-h5">{{formRTitle}}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12"
@@ -817,6 +854,7 @@
                           md="4">
                           <v-text-field
                             v-model="editedRItem.brainName"
+                            :rules="rules"
                             clearable
                             label="Nomi"
                             required>
@@ -828,6 +866,7 @@
                           md="4">
                           <v-text-field
                             v-model="editedRItem.brainQuotesCount"
+                            :rules="rules"
                             clearable
                             required
                             label="Iqtiboslar soni">
@@ -839,6 +878,7 @@
                           md="4">
                           <v-text-field
                             v-model="editedRItem.brainAuthorCount"
+                            :rules="rules"
                             clearable
                             required
                             label="Mualliflar soni">
@@ -860,6 +900,7 @@
                           md="6">
                           <v-text-field
                             v-model="editedRItem.brainMagName"
+                            :rules="rules"
                             clearable
                             label="Nashr etilgan jurnal nomi"
                             required>
@@ -871,6 +912,7 @@
                           md="6">
                           <v-text-field
                             v-model="editedRItem.brainMagCountry"
+                            :rules="rules"
                             clearable
                             label="Jurnal nashr etilgan davlat">
                           </v-text-field>
@@ -880,6 +922,7 @@
                           sm="6"
                           md="6">
                           <v-text-field
+                            :rules="rules"
                             v-model="editedRItem.brainLink"
                             clearable
                             label="Maqola joylashgan havola"
@@ -893,6 +936,7 @@
                           md="3">
                           <v-select
                             label="Nashr etilgan yil"
+                            :rules="rules"
                             v-model="editedRItem.year"
                             :items="years">
                           </v-select>
@@ -903,6 +947,7 @@
                           md="3">
                           <v-select
                             label="Nashr etilgan oy"
+                            :rules="rules"
                             v-model="editedRItem.mounth"
                             :items="mounth">
                           </v-select>
@@ -911,6 +956,7 @@
                           cols="12">
                           <v-file-input
                             v-if="!editedRItem.brainUploaded"
+                            :rules="rules"
                             v-model="editedRItem.brainUploaded"
                             show-size
                             label="Maqola yuklash">
@@ -918,7 +964,7 @@
                           <v-btn size="x-large" v-else @click="downloadDoc(editedRItem)">Maqolani yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -1004,13 +1050,14 @@
                     <span class="text-h5">{{formMTitle}}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12"
                           sm="6"
                           md="4">
                           <v-text-field
+                            :rules="rules"
                             v-model="editedMItem.brainName"
                             clearable
                             label="Nomi"
@@ -1024,6 +1071,7 @@
                           <v-text-field
                             v-model="editedMItem.brainMagName"
                             clearable
+                            :rules="rules"
                             required
                             label="Nashr etilgan anjuman nomi">
                           </v-text-field>
@@ -1035,6 +1083,7 @@
                           <v-text-field
                             v-model="editedMItem.brainAuthorCount"
                             clearable
+                            :rules="rules"
                             required
                             label="Mualliflar soni">
                           </v-text-field>
@@ -1056,6 +1105,7 @@
                           <v-text-field
                             v-model="editedMItem.brainMagCountry"
                             clearable
+                            :rules="rules"
                             required
                             label="Anjuman o'tkazilgan OTM, yoki davlat">
                           </v-text-field>
@@ -1067,6 +1117,7 @@
                           <v-text-field
                             v-model="editedMItem.brainLink"
                             clearable
+                            :rules="rules"
                             label="Maqola joylashgan havola"
                             persistent-hint
                             required>
@@ -1079,6 +1130,7 @@
                           <v-select
                             label="Nashr etilgan yil"
                             v-model="editedMItem.year"
+                            :rules="rules"
                             :items="years">
                           </v-select>
                         </v-col>
@@ -1089,6 +1141,7 @@
                           <v-select
                             label="Nashr etilgan oy"
                             v-model="editedMItem.mounth"
+                            :rules="rules"
                             :items="mounth">
                           </v-select>
                         </v-col>
@@ -1098,6 +1151,7 @@
                           md="6">
                           <v-file-input
                             v-if="!editedMItem.brainUploaded"
+                            :rules="rules"
                             v-model="editedMItem.brainUploaded"
                             show-size
                             label="Maqola yuklash">
@@ -1105,7 +1159,7 @@
                           <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Maqolani yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -1192,13 +1246,14 @@
                     <span class="text-h5">{{formATitle}}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form>
                       <v-row>
                         <v-col
                           cols="12"
                           sm="6"
                           md="4">
                           <v-text-field
+                            :rules="rules"
                             v-model="editedAItem.brainName"
                             clearable
                             label="Nomi"
@@ -1212,6 +1267,7 @@
                           <v-text-field
                             v-model="editedAItem.brainMagName"
                             clearable
+                            :rules="rules"
                             required
                             label="Nashr etilgan anjuman nomi">
                           </v-text-field>
@@ -1223,6 +1279,7 @@
                           <v-text-field
                             v-model="editedAItem.brainAuthorCount"
                             clearable
+                            :rules="rules"
                             required
                             label="Mualliflar soni">
                           </v-text-field>
@@ -1242,6 +1299,7 @@
                           sm="6"
                           md="6">
                           <v-text-field
+                            :rules="rules"
                             v-model="editedAItem.brainMagCountry"
                             clearable
                             required
@@ -1254,6 +1312,7 @@
                           md="6">
                           <v-text-field
                             v-model="editedAItem.brainLink"
+                            :rules="rules"
                             clearable
                             label="Maqola joylashgan havola"
                             persistent-hint
@@ -1266,6 +1325,7 @@
                           md="3">
                           <v-select
                             label="Nashr etilgan yil"
+                            :rules="rules"
                             v-model="editedAItem.year"
                             :items="years">
                           </v-select>
@@ -1276,6 +1336,7 @@
                           md="3">
                           <v-select
                             label="Nashr etilgan oy"
+                            :rules="rules"
                             v-model="editedAItem.mounth"
                             :items="mounth">
                           </v-select>
@@ -1286,6 +1347,7 @@
                           md="6">
                           <v-file-input
                             v-if="!editedAItem.brainUploaded"
+                            :rules="rules"
                             v-model="editedAItem.brainUploaded"
                             show-size
                             label="Maqola yuklash">
@@ -1293,7 +1355,7 @@
                           <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Maqola yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -1369,6 +1431,30 @@
       </v-progress-circular>
     </v-overlay>
 
+    <v-snackbar
+      :timeout="3000"
+      color="red"
+      v-model="snackF"
+      elevation="24">
+      Hujjatni yuklashda hatolik!
+    </v-snackbar>
+
+    <v-snackbar
+      :timeout="3000"
+      color="success"
+      v-model="snackS"
+      elevation="24">
+      Hujjat muvaffaqiyatli yuklandi!
+    </v-snackbar>
+
+    <v-snackbar
+      :timeout="3000"
+      color="success"
+      v-model="snackD"
+      elevation="24">
+      Hujjat o'chirildi!
+    </v-snackbar>
+
   </v-container>
 </template>
 
@@ -1379,6 +1465,15 @@ export default {
   data () {
     return {
       overlay: false,
+      rules: [
+        value => {
+          if (value) return true
+          return 'Qator bo`sh bo`lmasligi kerak.'
+        },
+      ],
+      snackF: false,
+      snackS: false,
+      snackD: false,
       userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
       years: [2023,2024],
@@ -1992,6 +2087,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editSItem.id}`);
           this.itemsS.splice(this.editedSIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -2006,6 +2102,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editWItem.id}`);
           this.itemsW.splice(this.editedWIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -2020,6 +2117,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editXItem.id}`);
           this.itemsX.splice(this.editedXIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -2034,6 +2132,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editRItem.id}`);
           this.itemsR.splice(this.editedRIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -2048,6 +2147,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editMItem.id}`);
           this.itemsM.splice(this.editedMIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -2062,6 +2162,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editAItem.id}`);
           this.itemsA.splice(this.editedAIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -2076,6 +2177,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editDItem.id}`);
           this.itemsD.splice(this.editedDIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -2184,461 +2286,511 @@ export default {
       })
     },
 
-    saveS () {
-      if (this.editedSIndex > -1) {
-        this.overlay = true
-        let data = {
-          'name': this.editedSItem.brainName,
-          'authorCount': this.editedSItem.brainAuthorCount,
-          'authorName': this.editedSItem.brainAuthorName,
-          'magName': this.editedSItem.brainMagName,
-          'country': this.editedSItem.brainMagCountry,
-          'quotesCount': this.editedSItem.brainQuotesCount,
-          'url': this.editedSItem.brainLink,
-          'newId': this.editedSItem.newId,
-        }
+    async saveS () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid){
+        if (this.editedSIndex > -1) {
+          this.overlay = true
+          let data = {
+            'name': this.editedSItem.brainName,
+            'authorCount': this.editedSItem.brainAuthorCount,
+            'authorName': this.editedSItem.brainAuthorName,
+            'magName': this.editedSItem.brainMagName,
+            'country': this.editedSItem.brainMagCountry,
+            'quotesCount': this.editedSItem.brainQuotesCount,
+            'url': this.editedSItem.brainLink,
+            'newId': this.editedSItem.newId,
+          }
 
 
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedSItem.id, data)
-          .then(response => {
-            console.log(response.data)
-            Object.assign(this.itemsS[this.editedSIndex], this.editedSItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
-      } else
-      {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedSItem.brainName)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedSItem.brainType)
-        formData.append('typeName', this.editedSItem.brainTypeName)
-        formData.append('authorCount', this.editedSItem.brainAuthorCount)
-        formData.append('authorName', this.editedSItem.brainAuthorName)
-        formData.append('magName', this.editedSItem.brainMagName)
-        formData.append('country', this.editedSItem.brainMagCountry)
-        formData.append('quotesCount', this.editedSItem.brainQuotesCount)
-        formData.append('url', this.editedSItem.brainLink)
-        formData.append('year', this.editedSItem.year)
-        formData.append('mounth', this.editedSItem.mounth)
-        formData.append('statId', this.editedSItem.statId)
-        formData.append('newId', this.editedSItem.newId)
-        if (this.editedSItem.quarter === 'Q1'){
-          formData.append('quarter', '1')
-        } else if (this.editedSItem.quarter === 'Q2'){
-          formData.append('quarter', '2')
-        } else if (this.editedSItem.quarter === 'Q3'){
-          formData.append('quarter', '3')
-        } else if (this.editedSItem.quarter === 'Q4'){
-          formData.append('quarter', '4')
-        }
+          axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedSItem.id, data)
+            .then(response => {
+              console.log(response.data)
+              Object.assign(this.itemsS[this.editedSIndex], this.editedSItem)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
+        } else
+        {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('userId', this.userId)
+          formData.append('name', this.editedSItem.brainName)
+          formData.append('userName', this.userName)
+          formData.append('type', this.editedSItem.brainType)
+          formData.append('typeName', this.editedSItem.brainTypeName)
+          formData.append('authorCount', this.editedSItem.brainAuthorCount)
+          formData.append('authorName', this.editedSItem.brainAuthorName)
+          formData.append('magName', this.editedSItem.brainMagName)
+          formData.append('country', this.editedSItem.brainMagCountry)
+          formData.append('quotesCount', this.editedSItem.brainQuotesCount)
+          formData.append('url', this.editedSItem.brainLink)
+          formData.append('year', this.editedSItem.year)
+          formData.append('mounth', this.editedSItem.mounth)
+          formData.append('statId', this.editedSItem.statId)
+          formData.append('newId', this.editedSItem.newId)
+          if (this.editedSItem.quarter === 'Q1'){
+            formData.append('quarter', '1')
+          } else if (this.editedSItem.quarter === 'Q2'){
+            formData.append('quarter', '2')
+          } else if (this.editedSItem.quarter === 'Q3'){
+            formData.append('quarter', '3')
+          } else if (this.editedSItem.quarter === 'Q4'){
+            formData.append('quarter', '4')
+          }
 
-        // files
-        for (let file of this.editedSItem.brainUploaded) {
-          formData.append("doc", file, file.name);
+          // files
+          for (let file of this.editedSItem.brainUploaded) {
+            formData.append("doc", file, file.name);
+          }
+          axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
+            .then(response => {
+              console.log(response.data)
+              this.itemsS.push(response.data)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
-        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
-          .then(response => {
-            console.log(response.data)
-            this.itemsS.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
+        this.closeS()
       }
-      this.closeS()
     },
-    saveW () {
-      if (this.editedWIndex > -1) {
-        this.overlay = true
-        let data = {
-          'name': this.editedWItem.brainName,
-          'authorCount': this.editedWItem.brainAuthorCount,
-          'authorName': this.editedWItem.brainAuthorName,
-          'magName': this.editedWItem.brainMagName,
-          'country': this.editedWItem.brainMagCountry,
-          'quotesCount': this.editedWItem.brainQuotesCount,
-          'url': this.editedWItem.brainLink,
-          'newId': this.editedWItem.newId,
+    async saveW () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid){
+        if (this.editedWIndex > -1) {
+          this.overlay = true
+          let data = {
+            'name': this.editedWItem.brainName,
+            'authorCount': this.editedWItem.brainAuthorCount,
+            'authorName': this.editedWItem.brainAuthorName,
+            'magName': this.editedWItem.brainMagName,
+            'country': this.editedWItem.brainMagCountry,
+            'quotesCount': this.editedWItem.brainQuotesCount,
+            'url': this.editedWItem.brainLink,
+            'newId': this.editedWItem.newId,
+          }
+
+
+          axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedWItem.id, data)
+            .then(response => {
+              console.log(response.data)
+              Object.assign(this.itemsW[this.editedWIndex], this.editedWItem)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
+        else {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('userId', this.userId)
+          formData.append('name', this.editedWItem.brainName)
+          formData.append('userName', this.userName)
+          formData.append('type', this.editedWItem.brainType)
+          formData.append('typeName', this.editedWItem.brainTypeName)
+          formData.append('authorCount', this.editedWItem.brainAuthorCount)
+          formData.append('authorName', this.editedWItem.brainAuthorName)
+          formData.append('magName', this.editedWItem.brainMagName)
+          formData.append('country', this.editedWItem.brainMagCountry)
+          formData.append('quotesCount', this.editedWItem.brainQuotesCount)
+          formData.append('url', this.editedWItem.brainLink)
+          formData.append('year', this.editedWItem.year)
+          formData.append('mounth', this.editedWItem.mounth)
+          formData.append('statId', this.editedWItem.statId)
+          formData.append('newId', this.editedWItem.newId)
 
-
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedWItem.id, data)
-          .then(response => {
-            console.log(response.data)
-            Object.assign(this.itemsW[this.editedWIndex], this.editedWItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
-      } else
-      {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedWItem.brainName)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedWItem.brainType)
-        formData.append('typeName', this.editedWItem.brainTypeName)
-        formData.append('authorCount', this.editedWItem.brainAuthorCount)
-        formData.append('authorName', this.editedWItem.brainAuthorName)
-        formData.append('magName', this.editedWItem.brainMagName)
-        formData.append('country', this.editedWItem.brainMagCountry)
-        formData.append('quotesCount', this.editedWItem.brainQuotesCount)
-        formData.append('url', this.editedWItem.brainLink)
-        formData.append('year', this.editedWItem.year)
-        formData.append('mounth', this.editedWItem.mounth)
-        formData.append('statId', this.editedWItem.statId)
-        formData.append('newId', this.editedWItem.newId)
-
-        // files
-        for (let file of this.editedWItem.brainUploaded) {
-          formData.append("doc", file, file.name);
+          // files
+          for (let file of this.editedWItem.brainUploaded) {
+            formData.append("doc", file, file.name);
+          }
+          axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
+            .then(response => {
+              console.log(response.data)
+              this.itemsW.push(response.data)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
-        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
-          .then(response => {
-            console.log(response.data)
-            this.itemsW.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
+        this.closeW()
       }
-      this.closeW()
     },
-    saveX () {
-      if (this.editedXIndex > -1) {
-        this.overlay = true
-        let data = {
-          'name': this.editedXItem.brainName,
-          'authorCount': this.editedXItem.brainAuthorCount,
-          'authorName': this.editedXItem.brainAuthorName,
-          'magName': this.editedXItem.brainMagName,
-          'country': this.editedXItem.brainMagCountry,
-          'quotesCount': this.editedXItem.brainQuotesCount,
-          'url': this.editedXItem.brainLink,
-          'newId': this.editedXItem.newId,
+    async saveX () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid){
+        if (this.editedXIndex > -1) {
+          this.overlay = true
+          let data = {
+            'name': this.editedXItem.brainName,
+            'authorCount': this.editedXItem.brainAuthorCount,
+            'authorName': this.editedXItem.brainAuthorName,
+            'magName': this.editedXItem.brainMagName,
+            'country': this.editedXItem.brainMagCountry,
+            'quotesCount': this.editedXItem.brainQuotesCount,
+            'url': this.editedXItem.brainLink,
+            'newId': this.editedXItem.newId,
+          }
+
+
+          axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedXItem.id, data)
+            .then(response => {
+              console.log(response.data)
+              Object.assign(this.itemsX[this.editedXIndex], this.editedXItem)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
+        else {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('userId', this.userId)
+          formData.append('name', this.editedXItem.brainName)
+          formData.append('userName', this.userName)
+          formData.append('type', this.editedXItem.brainType)
+          formData.append('typeName', this.editedXItem.brainTypeName)
+          formData.append('authorCount', this.editedXItem.brainAuthorCount)
+          formData.append('authorName', this.editedXItem.brainAuthorName)
+          formData.append('magName', this.editedXItem.brainMagName)
+          formData.append('country', this.editedXItem.brainMagCountry)
+          formData.append('quotesCount', this.editedXItem.brainQuotesCount)
+          formData.append('url', this.editedXItem.brainLink)
+          formData.append('year', this.editedXItem.year)
+          formData.append('mounth', this.editedXItem.mounth)
+          formData.append('statId', this.editedXItem.statId)
+          formData.append('newId', this.editedXItem.newId)
 
-
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedXItem.id, data)
-          .then(response => {
-            console.log(response.data)
-            Object.assign(this.itemsX[this.editedXIndex], this.editedXItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
-      } else
-      {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedXItem.brainName)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedXItem.brainType)
-        formData.append('typeName', this.editedXItem.brainTypeName)
-        formData.append('authorCount', this.editedXItem.brainAuthorCount)
-        formData.append('authorName', this.editedXItem.brainAuthorName)
-        formData.append('magName', this.editedXItem.brainMagName)
-        formData.append('country', this.editedXItem.brainMagCountry)
-        formData.append('quotesCount', this.editedXItem.brainQuotesCount)
-        formData.append('url', this.editedXItem.brainLink)
-        formData.append('year', this.editedXItem.year)
-        formData.append('mounth', this.editedXItem.mounth)
-        formData.append('statId', this.editedXItem.statId)
-        formData.append('newId', this.editedXItem.newId)
-
-        // files
-        for (let file of this.editedXItem.brainUploaded) {
-          formData.append("doc", file, file.name);
+          // files
+          for (let file of this.editedXItem.brainUploaded) {
+            formData.append("doc", file, file.name);
+          }
+          axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
+            .then(response => {
+              console.log(response.data)
+              this.itemsX.push(response.data)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
-        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
-          .then(response => {
-            console.log(response.data)
-            this.itemsX.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
+        this.closeX()
       }
-      this.closeX()
     },
-    saveR () {
-      if (this.editedRIndex > -1) {
-        this.overlay = true
-        let data = {
-          'name': this.editedRItem.brainName,
-          'authorCount': this.editedRItem.brainAuthorCount,
-          'authorName': this.editedRItem.brainAuthorName,
-          'magName': this.editedRItem.brainMagName,
-          'country': this.editedRItem.brainMagCountry,
-          'quotesCount': this.editedRItem.brainQuotesCount,
-          'url': this.editedRItem.brainLink,
-          'newId': this.editedRItem.newId,
+    async saveR () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid){
+        if (this.editedRIndex > -1) {
+          this.overlay = true
+          let data = {
+            'name': this.editedRItem.brainName,
+            'authorCount': this.editedRItem.brainAuthorCount,
+            'authorName': this.editedRItem.brainAuthorName,
+            'magName': this.editedRItem.brainMagName,
+            'country': this.editedRItem.brainMagCountry,
+            'quotesCount': this.editedRItem.brainQuotesCount,
+            'url': this.editedRItem.brainLink,
+            'newId': this.editedRItem.newId,
+          }
+
+
+          axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedRItem.id, data)
+            .then(response => {
+              console.log(response.data)
+              Object.assign(this.itemsR[this.editedRIndex], this.editedRItem)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
+        else {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('userId', this.userId)
+          formData.append('name', this.editedRItem.brainName)
+          formData.append('userName', this.userName)
+          formData.append('type', this.editedRItem.brainType)
+          formData.append('typeName', this.editedRItem.brainTypeName)
+          formData.append('authorCount', this.editedRItem.brainAuthorCount)
+          formData.append('authorName', this.editedRItem.brainAuthorName)
+          formData.append('magName', this.editedRItem.brainMagName)
+          formData.append('country', this.editedRItem.brainMagCountry)
+          formData.append('quotesCount', this.editedRItem.brainQuotesCount)
+          formData.append('url', this.editedRItem.brainLink)
+          formData.append('year', this.editedRItem.year)
+          formData.append('mounth', this.editedRItem.mounth)
+          formData.append('statId', this.editedRItem.statId)
+          formData.append('newId', this.editedRItem.newId)
 
-
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedRItem.id, data)
-          .then(response => {
-            console.log(response.data)
-            Object.assign(this.itemsR[this.editedRIndex], this.editedRItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
-      } else
-      {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedRItem.brainName)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedRItem.brainType)
-        formData.append('typeName', this.editedRItem.brainTypeName)
-        formData.append('authorCount', this.editedRItem.brainAuthorCount)
-        formData.append('authorName', this.editedRItem.brainAuthorName)
-        formData.append('magName', this.editedRItem.brainMagName)
-        formData.append('country', this.editedRItem.brainMagCountry)
-        formData.append('quotesCount', this.editedRItem.brainQuotesCount)
-        formData.append('url', this.editedRItem.brainLink)
-        formData.append('year', this.editedRItem.year)
-        formData.append('mounth', this.editedRItem.mounth)
-        formData.append('statId', this.editedRItem.statId)
-        formData.append('newId', this.editedRItem.newId)
-
-        // files
-        for (let file of this.editedRItem.brainUploaded) {
-          formData.append("doc", file, file.name);
+          // files
+          for (let file of this.editedRItem.brainUploaded) {
+            formData.append("doc", file, file.name);
+          }
+          axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
+            .then(response => {
+              console.log(response.data)
+              this.itemsR.push(response.data)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
-        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
-          .then(response => {
-            console.log(response.data)
-            this.itemsR.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
+        this.closeR()
       }
-      this.closeR()
     },
-    saveM () {
-      if (this.editedMIndex > -1) {
-        this.overlay = true
-        let data = {
-          'name': this.editedMItem.brainName,
-          'authorCount': this.editedMItem.brainAuthorCount,
-          'authorName': this.editedMItem.brainAuthorName,
-          'magName': this.editedMItem.brainMagName,
-          'country': this.editedMItem.brainMagCountry,
-          'quotesCount': this.editedMItem.brainQuotesCount,
-          'url': this.editedMItem.brainLink,
-          'newId': this.editedMItem.newId,
-        }
+    async saveM () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid){
+        if (this.editedMIndex > -1) {
+          this.overlay = true
+          let data = {
+            'name': this.editedMItem.brainName,
+            'authorCount': this.editedMItem.brainAuthorCount,
+            'authorName': this.editedMItem.brainAuthorName,
+            'magName': this.editedMItem.brainMagName,
+            'country': this.editedMItem.brainMagCountry,
+            'quotesCount': this.editedMItem.brainQuotesCount,
+            'url': this.editedMItem.brainLink,
+            'newId': this.editedMItem.newId,
+          }
 
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedMItem.id, data)
-          .then(response => {
-            console.log(response.data)
-            Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
-      } else
-      {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedMItem.brainName)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedMItem.brainType)
-        formData.append('typeName', this.editedMItem.brainTypeName)
-        formData.append('authorCount', this.editedMItem.brainAuthorCount)
-        formData.append('authorName', this.editedMItem.brainAuthorName)
-        formData.append('magName', this.editedMItem.brainMagName)
-        formData.append('country', this.editedMItem.brainMagCountry)
-        formData.append('quotesCount', this.editedMItem.brainQuotesCount)
-        formData.append('url', this.editedMItem.brainLink)
-        formData.append('year', this.editedMItem.year)
-        formData.append('mounth', this.editedMItem.mounth)
-        formData.append('statId', this.editedMItem.statId)
-        formData.append('newId', this.editedMItem.newId)
-
-        // files
-        for (let file of this.editedMItem.brainUploaded) {
-          formData.append("doc", file, file.name);
+          axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedMItem.id, data)
+            .then(response => {
+              console.log(response.data)
+              Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
-        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
-          .then(response => {
-            console.log(response.data)
-            this.itemsM.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
+        else {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('userId', this.userId)
+          formData.append('name', this.editedMItem.brainName)
+          formData.append('userName', this.userName)
+          formData.append('type', this.editedMItem.brainType)
+          formData.append('typeName', this.editedMItem.brainTypeName)
+          formData.append('authorCount', this.editedMItem.brainAuthorCount)
+          formData.append('authorName', this.editedMItem.brainAuthorName)
+          formData.append('magName', this.editedMItem.brainMagName)
+          formData.append('country', this.editedMItem.brainMagCountry)
+          formData.append('quotesCount', this.editedMItem.brainQuotesCount)
+          formData.append('url', this.editedMItem.brainLink)
+          formData.append('year', this.editedMItem.year)
+          formData.append('mounth', this.editedMItem.mounth)
+          formData.append('statId', this.editedMItem.statId)
+          formData.append('newId', this.editedMItem.newId)
+
+          // files
+          for (let file of this.editedMItem.brainUploaded) {
+            formData.append("doc", file, file.name);
+          }
+          axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
+            .then(response => {
+              console.log(response.data)
+              this.itemsM.push(response.data)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
+        }
+        this.closeM()
       }
-      this.closeM()
     },
-    saveA () {
-      if (this.editedAIndex > -1) {
-        this.overlay = true
-        let data = {
-          'name': this.editedAItem.brainName,
-          'authorCount': this.editedAItem.brainAuthorCount,
-          'authorName': this.editedAItem.brainAuthorName,
-          'magName': this.editedAItem.brainMagName,
-          'country': this.editedAItem.brainMagCountry,
-          'quotesCount': this.editedAItem.brainQuotesCount,
-          'url': this.editedAItem.brainLink,
-          'newId': this.editedAItem.newId,
-        }
+    async saveA () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid){
+        if (this.editedAIndex > -1) {
+          this.overlay = true
+          let data = {
+            'name': this.editedAItem.brainName,
+            'authorCount': this.editedAItem.brainAuthorCount,
+            'authorName': this.editedAItem.brainAuthorName,
+            'magName': this.editedAItem.brainMagName,
+            'country': this.editedAItem.brainMagCountry,
+            'quotesCount': this.editedAItem.brainQuotesCount,
+            'url': this.editedAItem.brainLink,
+            'newId': this.editedAItem.newId,
+          }
 
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedAItem.id, data)
-          .then(response => {
-            console.log(response.data)
-            Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
-      } else
-      {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('name', this.editedAItem.brainName)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedAItem.brainType)
-        formData.append('typeName', this.editedAItem.brainTypeName)
-        formData.append('authorCount', this.editedAItem.brainAuthorCount)
-        formData.append('authorName', this.editedAItem.brainAuthorName)
-        formData.append('magName', this.editedAItem.brainMagName)
-        formData.append('country', this.editedAItem.brainMagCountry)
-        formData.append('quotesCount', this.editedAItem.brainQuotesCount)
-        formData.append('url', this.editedAItem.brainLink)
-        formData.append('year', this.editedAItem.year)
-        formData.append('mounth', this.editedAItem.mounth)
-        formData.append('statId', this.editedAItem.statId)
-        formData.append('newId', this.editedAItem.newId)
-
-        // files
-        for (let file of this.editedAItem.brainUploaded) {
-          formData.append("doc", file, file.name);
+          axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedAItem.id, data)
+            .then(response => {
+              console.log(response.data)
+              Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
-        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
-          .then(response => {
-            console.log(response.data)
-            this.itemsA.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
+        else {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('userId', this.userId)
+          formData.append('name', this.editedAItem.brainName)
+          formData.append('userName', this.userName)
+          formData.append('type', this.editedAItem.brainType)
+          formData.append('typeName', this.editedAItem.brainTypeName)
+          formData.append('authorCount', this.editedAItem.brainAuthorCount)
+          formData.append('authorName', this.editedAItem.brainAuthorName)
+          formData.append('magName', this.editedAItem.brainMagName)
+          formData.append('country', this.editedAItem.brainMagCountry)
+          formData.append('quotesCount', this.editedAItem.brainQuotesCount)
+          formData.append('url', this.editedAItem.brainLink)
+          formData.append('year', this.editedAItem.year)
+          formData.append('mounth', this.editedAItem.mounth)
+          formData.append('statId', this.editedAItem.statId)
+          formData.append('newId', this.editedAItem.newId)
+
+          // files
+          for (let file of this.editedAItem.brainUploaded) {
+            formData.append("doc", file, file.name);
+          }
+          axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
+            .then(response => {
+              console.log(response.data)
+              this.itemsA.push(response.data)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
+        }
+        this.closeA()
       }
-      this.closeA()
     },
-    saveD () {
-      if (this.editedDIndex > -1) {
-        this.overlay = true
-        let data = {
-          'name': this.editedDItem.brainName,
-          'authorCount': this.editedDItem.brainAuthorCount,
-          'authorName': this.editedDItem.brainAuthorName,
-          'magName': this.editedDItem.brainMagName,
-          'country': this.editedDItem.brainMagCountry,
-          'quotesCount': this.editedDItem.brainQuotesCount,
-          'url': this.editedDItem.brainLink,
-          'newId': this.editedDItem.newId,
+    async saveD () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid){
+        if (this.editedDIndex > -1) {
+          this.overlay = true
+          let data = {
+            'name': this.editedDItem.brainName,
+            'authorCount': this.editedDItem.brainAuthorCount,
+            'authorName': this.editedDItem.brainAuthorName,
+            'magName': this.editedDItem.brainMagName,
+            'country': this.editedDItem.brainMagCountry,
+            'quotesCount': this.editedDItem.brainQuotesCount,
+            'url': this.editedDItem.brainLink,
+            'newId': this.editedDItem.newId,
+          }
+
+          axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedDItem.id, data)
+            .then(response => {
+              console.log(response.data)
+              Object.assign(this.itemsD[this.editedDIndex], this.editedDItem)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
+        else {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('userId', this.userId)
+          formData.append('userName', this.userName)
+          formData.append('type', this.editedDItem.brainType)
+          formData.append('typeName', this.editedDItem.brainTypeName)
 
-        axios.put("http://api.nammti.uz/api/brains/update?id="+this.editedDItem.id, data)
-          .then(response => {
-            console.log(response.data)
-            Object.assign(this.itemsD[this.editedDIndex], this.editedDItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
-      } else
-      {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedDItem.brainType)
-        formData.append('typeName', this.editedDItem.brainTypeName)
+          formData.append('name', this.editedDItem.brainName)
+          formData.append('authorCount', this.editedDItem.brainAuthorCount)
+          formData.append('authorName', this.editedDItem.brainAuthorName)
+          formData.append('magName', this.editedDItem.brainMagName)
+          formData.append('country', this.editedDItem.brainMagCountry)
+          formData.append('quotesCount', this.editedDItem.brainQuotesCount)
+          formData.append('url', this.editedDItem.brainLink)
 
-        formData.append('name', this.editedDItem.brainName)
-        formData.append('authorCount', this.editedDItem.brainAuthorCount)
-        formData.append('authorName', this.editedDItem.brainAuthorName)
-        formData.append('magName', this.editedDItem.brainMagName)
-        formData.append('country', this.editedDItem.brainMagCountry)
-        formData.append('quotesCount', this.editedDItem.brainQuotesCount)
-        formData.append('url', this.editedDItem.brainLink)
+          formData.append('year', this.editedDItem.year)
+          formData.append('mounth', this.editedDItem.mounth)
+          formData.append('statId', this.editedDItem.statId)
+          formData.append('newId', this.editedDItem.newId)
 
-        formData.append('year', this.editedDItem.year)
-        formData.append('mounth', this.editedDItem.mounth)
-        formData.append('statId', this.editedDItem.statId)
-        formData.append('newId', this.editedDItem.newId)
-
-        // files
-        for (let file of this.editedDItem.brainUploaded) {
-          formData.append("doc", file, file.name);
+          // files
+          for (let file of this.editedDItem.brainUploaded) {
+            formData.append("doc", file, file.name);
+          }
+          axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
+            .then(response => {
+              console.log(response.data)
+              this.itemsD.push(response.data)
+              this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
+              console.error("There was an error!", error);
+            });
         }
-        axios.post("http://api.nammti.uz/api/brains/create?userId="+this.userId, formData)
-          .then(response => {
-            console.log(response.data)
-            this.itemsD.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
+        this.closeD()
       }
-      this.closeD()
+
     },
 
     forceFileDownload(response, title) {
@@ -2677,7 +2829,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
           this.itemsS.push(data[dataKey])
@@ -2694,7 +2846,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
           this.itemsW.push(data[dataKey])
@@ -2710,7 +2862,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
 
@@ -2727,7 +2879,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
           this.itemsR.push(data[dataKey])
@@ -2743,7 +2895,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
 
@@ -2760,7 +2912,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
 
@@ -2777,7 +2929,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
 

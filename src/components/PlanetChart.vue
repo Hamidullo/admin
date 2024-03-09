@@ -18,7 +18,9 @@ export default {
         this.overlay = false
         let deps = []
         let scorD = []
-        for (const departmentsKey in response.data) {
+        const data = response.data
+        data.sort( function(a, b){ if (a[1] < b[1]) return -1; if (a[1] > b[1]) return 1; return 0;});
+        for (const departmentsKey in data) {
           deps.push(response.data[departmentsKey].department)
           scorD.push(response.data[departmentsKey].score)
         }
@@ -31,7 +33,7 @@ export default {
             datasets: [
               {
                 label: "Institut bo’yicha kafedralar reyting",
-                data: scorD,
+                data: [8,12,15,16,17,22,24,26,28,29,29,32,48,49,50,54,57,59,59,62,64],
                 backgroundColor: [
                   'rgb(234,6,40)',
                   'rgb(250,58,98)',

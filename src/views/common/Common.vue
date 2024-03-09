@@ -4,7 +4,7 @@
     <v-app-bar>
       <v-app-bar-title align="center" >
         <h4 class="title">
-          Namangan muhandislik-texnologiya instituti fakultet va kafedralar kesimidagi reytingi!
+          Namangan muhandislik-texnologiya instituti fakultet va kafedralar reytingi!
         </h4>
       </v-app-bar-title>
 
@@ -27,7 +27,7 @@
 
     <v-row align="center" justify="center">
       <v-col cols="6">
-        <v-card align="center" class="bg-color-container" flat title="Institut bo’yicha fakultetlar reyting">
+        <v-card align="center" class="bg-color-container" flat title="Institut bo’yicha fakultetlar reytingi">
           <v-data-table
             :headers="headers"
             :items="items"
@@ -57,15 +57,35 @@ export default {
   data() {
     return {
       overlay: false,
+      scores: [],
 
-      search: '',
       headers: [
         { key: 'faculty',  title: 'Fakultet', align: 'start', sortable: false, },
         { key: 'count', title: 'Ilmiy salohiyat', align: 'center' },
         { key: 'share', title: 'Ulushi', align: 'center' },
         { key: 'score', title: 'Berilgan Bal', align: 'center' }
       ],
-      items: [],
+      items: [{
+        'faculty': 'Muxandislik-texnologiyasi',
+        'count': '42',
+        'share': '58',
+        'score': '89'
+      },{
+        'faculty': 'Iqtisodiyot',
+        'count': '40',
+        'share': '55',
+        'score': '79'
+      },{
+        'faculty': 'Avtomatika va energetika',
+        'count': '36',
+        'share': '48',
+        'score': '68'
+      },{
+        'faculty': 'Kimyo texnologiya',
+        'count': '32',
+        'share': '40',
+        'score': '608605656'
+      }],
 
       years: ['2023', '2024'],
       year: '2023',
@@ -88,7 +108,7 @@ export default {
 
   mounted() {
 
-    axios.get("http://api.nammti.uz/api/commons/faculty" )
+    /*axios.get("http://api.nammti.uz/api/commons/faculty" )
       .then(response => {
 
         this.overlay = false
@@ -103,7 +123,7 @@ export default {
         this.overlay = false
 
         console.error("There was an error!", error);
-      });
+      });*/
   }
 
 }

@@ -30,19 +30,10 @@
                         sm="6"
                         md="6">
                         <v-select
-                          v-if="!editedItem.name"
                           v-model="editedItem.name"
-                          label="Unvonni tanlang"
+                          label="Tanlang"
                           :rules="rules"
-                          :items="['Fan doktorlik (DSc) diplomi', 'Fan nomzodi (PhD) diplomi', 'Professor yoki dotsent - ilmiy unvoni',]">
-                        </v-select>
-                        <v-select
-                          v-else
-                          readonly
-                          v-model="editedItem.name"
-                          label="Unvonni tanlang"
-                          :rules="rules"
-                          :items="['Fan doktorlik (DSc) diplomi', 'Fan nomzodi (PhD) diplomi', 'Professor yoki dotsent - ilmiy unvoni',]">
+                          :items="['Fan doktorlik (DSc) diplomi', 'Fan nomzodi (PhD) diplomi','Professor - ilmiy unvoni','Dotsent - ilmiy unvoni']">
                         </v-select>
                       </v-col>
                       <v-col
@@ -650,7 +641,7 @@ export default {
         position: localStorage.getItem("user-position"),
         userId: localStorage.getItem("user-userId"),
         userName: localStorage.getItem("user-name"),
-        years: [2023,2024],
+        years: [2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],
         mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
 
         dialog: false,
@@ -831,7 +822,32 @@ export default {
           { key: 'news', title: 'Hujjat holati' },
           { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
         ],
-        items: [],
+        items: [{
+          id: 0,
+          type: 13,
+          typeName: '“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥ 5 dan yuqoriligi',
+          top: '',
+
+          name: 'Himoya',
+          country: 'Malayziya',
+          university: 'MHU',
+          rating: '500',
+          dipType: 'PhD',
+          series: 'AS1251521',
+          number: '154513',
+
+          departmentName: '',
+          workStartND: '',
+          year: 2023,
+          mounth: 5,
+          news: '',
+          userName: localStorage.getItem("user-name"),
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
+          statId: 0,
+          newId: 0,
+          docDownload: null
+        }],
 
         searchC: '',
         headersC: [
@@ -844,7 +860,32 @@ export default {
           { key: 'news', title: 'Hujjat holati' },
           { key: 'actions', title: 'Amallar',align: 'start', sortable: false,  },
         ],
-        itemsC: [],
+        itemsC: [{
+          id: 0,
+          type: 13,
+          typeName: '“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥ 5 dan yuqoriligi',
+          top: '',
+
+          name: 'Himoya',
+          country: 'Malayziya',
+          university: 'MHU',
+          rating: '500',
+          dipType: 'PhD',
+          series: 'AS1251521',
+          number: '154513',
+
+          departmentName: '',
+          workStartND: '',
+          year: 2023,
+          mounth: 5,
+          news: '',
+          userName: localStorage.getItem("user-name"),
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
+          statId: 0,
+          newId: 0,
+          docDownload: null
+        }],
 
         searchS: '',
         headersS: [
@@ -857,7 +898,32 @@ export default {
           { key: 'news', title: 'Hujjat holati' },
           { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
         ],
-        itemsS: [],
+        itemsS: [{
+          id: 0,
+          type: 13,
+          typeName: '“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥ 5 dan yuqoriligi',
+          top: '',
+
+          name: 'Himoya',
+          country: 'Malayziya',
+          university: 'MHU',
+          rating: '500',
+          dipType: 'PhD',
+          series: 'AS1251521',
+          number: '154513',
+
+          departmentName: '',
+          workStartND: '',
+          year: 2023,
+          mounth: 5,
+          news: '',
+          userName: localStorage.getItem("user-name"),
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
+          statId: 0,
+          newId: 0,
+          docDownload: null
+        }],
       }
     },
 
@@ -1284,7 +1350,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
           this.items.push(data[dataKey])
@@ -1301,7 +1367,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
           this.itemsC.push(data[dataKey])
@@ -1317,7 +1383,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
           this.itemsS.push(data[dataKey])

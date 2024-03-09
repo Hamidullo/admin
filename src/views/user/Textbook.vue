@@ -49,8 +49,7 @@
                         label="Ham mualliflar F.I.SH"
                         v-model="editedItem.workAuthorName"
                         clearable
-                        persistent-hint
-                        :rules="rules">
+                        persistent-hint>
                       </v-text-field>
                     </v-col>
                     <v-col
@@ -214,8 +213,7 @@
                           label="Ham mualliflar F.I.SH"
                           v-model="editedQItem.workAuthorName"
                           clearable
-                          persistent-hint
-                          :rules="rules">
+                          persistent-hint>
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -378,8 +376,7 @@
                             label="Ham mualliflar F.I.SH"
                             v-model="editedMItem.workAuthorName"
                             clearable
-                            persistent-hint
-                            :rules="rules">
+                            persistent-hint>
                           </v-text-field>
                         </v-col>
                         <v-col
@@ -542,8 +539,7 @@
                             label="Ham mualliflar F.I.SH"
                             v-model="editedKItem.workAuthorName"
                             clearable
-                            persistent-hint
-                            :rules="rules">
+                            persistent-hint>
                           </v-text-field>
                         </v-col>
                         <v-col
@@ -726,7 +722,14 @@ export default {
         { key: 'news', title: 'Hujjat holati' },
         {  key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
-      items: [],
+      items: [{
+        'workName': 'Darslik',
+        'workAuthorCount': '2',
+        'workAuthorName': 'Oxundadaev Abdug‘ani',
+        'year': '2023',
+        'workNumber': 'ds515151',
+        'news': 'Tasdiqlanmoqda',
+      }],
 
       searchQ: '',
       headersQ: [
@@ -738,7 +741,14 @@ export default {
         { key: 'news', title: 'Hujjat holati' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
-      itemsQ: [],
+      itemsQ: [{
+        'workName': 'Darslik',
+        'workAuthorCount': '2',
+        'workAuthorName': 'Oxundadaev Abdug‘ani',
+        'year': '2023',
+        'workNumber': 'ds515151',
+        'news': 'Tasdiqlanmoqda',
+      }],
 
       searchM: '',
       headersM: [
@@ -750,7 +760,14 @@ export default {
         { key: 'news', title: 'Hujjat holati' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
-      itemsM: [],
+      itemsM: [{
+        'workName': 'Darslik',
+        'workAuthorCount': '2',
+        'workAuthorName': 'Oxundadaev Abdug‘ani',
+        'year': '2023',
+        'workNumber': 'ds515151',
+        'news': 'Tasdiqlanmoqda',
+      }],
 
       searchK: '',
       headersK: [
@@ -762,7 +779,14 @@ export default {
         { key: 'news', title: 'Hujjat holati' },
         { title: 'Amallar',align: 'start', key: 'actions', sortable: false },
       ],
-      itemsK: [],
+      itemsK: [{
+        'workName': 'Darslik',
+        'workAuthorCount': '2',
+        'workAuthorName': 'Oxundadaev Abdug‘ani',
+        'year': '2023',
+        'workNumber': 'ds515151',
+        'news': 'Tasdiqlanmoqda',
+      }],
 
       dialog: false,
       dialogDelete: false,
@@ -1441,7 +1465,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
           this.items.push(data[dataKey])
@@ -1458,7 +1482,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
           this.itemsQ.push(data[dataKey])
@@ -1474,7 +1498,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
           this.itemsM.push(data[dataKey])
@@ -1490,7 +1514,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
           this.itemsK.push(data[dataKey])

@@ -23,7 +23,7 @@
                   <span class="text-h5">{{formTitle}}</span>
                 </v-card-title>
                 <v-card-text>
-                  <v-container>
+                  <v-form ref="form">
                     <v-row>
                       <v-col
                         cols="12"
@@ -32,6 +32,7 @@
                         <v-text-field
                           v-model="editedItem.internationalName"
                           clearable
+                          :rules="rules"
                           label="Xorijiy OTM yoki ITM nomi"
                           required>
                       </v-text-field>
@@ -41,6 +42,7 @@
                         sm="6"
                         md="6">
                         <v-text-field
+                          :rules="rules"
                           v-model="editedItem.internationalCountry"
                           clearable
                           required
@@ -54,6 +56,7 @@
                         <v-text-field
                           v-model="editedItem.internationalLessonsSize"
                           clearable
+                          :rules="rules"
                           type="number"
                           label="Mashg’ulot xajmi"
                           persistent-hint
@@ -68,6 +71,7 @@
                           v-model="editedItem.internationalLessonsCount"
                           clearable
                           type="number"
+                          :rules="rules"
                           label="Mashg’ulotlar soni"
                           persistent-hint
                           required>
@@ -80,6 +84,7 @@
                         <v-select
                           label="Mashg’ulot olib borilgan yil"
                           v-model="editedItem.year"
+                          :rules="rules"
                           :items="years">
                         </v-select>
                       </v-col>
@@ -90,6 +95,7 @@
                         <v-select
                           label="Mashg’ulot olib borilgan oy"
                           v-model="editedItem.mounth"
+                          :rules="rules"
                           :items="mounth">
                         </v-select>
                       </v-col>
@@ -100,13 +106,14 @@
                         <v-file-input
                           v-if="!editedItem.doc"
                           v-model="editedItem.doc"
+                          :rules="rules"
                           show-size
                           label="Sertifikat yuklash">
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Sertifikatni yuklash</v-btn>
                       </v-col>
                     </v-row>
-                  </v-container>
+                  </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -191,7 +198,7 @@
                   <span class="text-h5">{{ formCTitle }}</span>
                 </v-card-title>
                 <v-card-text>
-                  <v-container>
+                  <v-form ref="form">
                     <v-row>
                       <v-col
                         cols="12"
@@ -200,6 +207,7 @@
                         <v-text-field
                           v-model="editedCItem.internationalName"
                           clearable
+                          :rules="rules"
                           label="Xorijiy OTM yoki ITM nomi"
                           required>
                       </v-text-field>
@@ -212,6 +220,7 @@
                           v-model="editedCItem.internationalCountry"
                           clearable
                           required
+                          :rules="rules"
                           label="Davlati">
                       </v-text-field>
                       </v-col>
@@ -223,6 +232,7 @@
                           v-model="editedCItem.internationalLessonsSize"
                           clearable
                           type="number"
+                          :rules="rules"
                           label="Stajirovka xajmi"
                           persistent-hint
                           required>
@@ -236,6 +246,7 @@
                           v-model="editedCItem.internationalLessonsCount"
                           clearable
                           type="number"
+                          :rules="rules"
                           label="Stajirovka olib borilgan kunlar soni"
                           persistent-hint
                           required>
@@ -248,6 +259,7 @@
                         <v-select
                           label="Stajirovka olib borilgan yil"
                           v-model="editedCItem.year"
+                          :rules="rules"
                           :items="years">
                         </v-select>
                       </v-col>
@@ -258,6 +270,7 @@
                         <v-select
                           label="Stajirovka olib borilgan oy"
                           v-model="editedCItem.mounth"
+                          :rules="rules"
                           :items="mounth">
                         </v-select>
                       </v-col>
@@ -268,13 +281,14 @@
                         <v-file-input
                           v-if="!editedCItem.doc"
                           v-model="editedCItem.doc"
+                          :rules="rules"
                           show-size
                           label="Darslik yuklash">
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedCItem)">Darslikni yuklash</v-btn>
                       </v-col>
                     </v-row>
-                  </v-container>
+                  </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -340,6 +354,41 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-overlay
+      :model-value="overlay"
+      class="align-center justify-center">
+      <v-progress-circular
+        color="primary"
+        indeterminate
+        size="64">
+      </v-progress-circular>
+    </v-overlay>
+
+    <v-snackbar
+      :timeout="3000"
+      color="red"
+      v-model="snackF"
+      elevation="24">
+      Hujjatni yuklashda hatolik!
+    </v-snackbar>
+
+    <v-snackbar
+      :timeout="3000"
+      color="success"
+      v-model="snackS"
+      elevation="24">
+      Hujjat muvaffaqiyatli yuklandi!
+    </v-snackbar>
+
+    <v-snackbar
+      :timeout="3000"
+      color="success"
+      v-model="snackD"
+      elevation="24">
+      Hujjat o'chirildi!
+    </v-snackbar>
+
   </v-container>
 </template>
 
@@ -347,9 +396,18 @@
 import axios from "axios";
 
 export default {
-    data () {
-      return {
+  data () {
+    return {
         overlay: false,
+        rules: [
+          value => {
+            if (value) return true
+            return 'Qator bo`sh bo`lmasligi kerak.'
+          },
+        ],
+        snackF: false,
+        snackS: false,
+        snackD: false,
         userId: localStorage.getItem("user-userId"),
         userName: localStorage.getItem("user-name"),
         years: [2023,2024],
@@ -467,7 +525,7 @@ export default {
         ],
         itemsC: []
       }
-    },
+  },
   methods: {
     editItem (item) {
       this.editedIndex = this.items.indexOf(item)
@@ -498,6 +556,7 @@ export default {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -512,6 +571,7 @@ export default {
           console.log(`Delete item with ID ${this.editCItem.id}`);
           this.itemsC.splice(this.editedCIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -550,125 +610,132 @@ export default {
       })
     },
 
-    save () {
-      if (this.editedIndex > -1) {
-        this.overlay = true
-        let data = {
-          'name': this.editedItem.internationalName,
-          'country': this.editedItem.internationalCountry,
-          'size': this.editedItem.internationalLessonsSize,
-          'count': this.editedItem.internationalLessonsCount,
-          'newId': this.editedItem.newId,
+    async save () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedIndex > -1) {
+          this.overlay = true
+          let data = {
+            'name': this.editedItem.internationalName,
+            'country': this.editedItem.internationalCountry,
+            'size': this.editedItem.internationalLessonsSize,
+            'count': this.editedItem.internationalLessonsCount,
+            'newId': this.editedItem.newId,
+          }
+
+          axios.put("http://api.nammti.uz/api/internationals/update?id="+this.editedItem.id, data)
+            .then(response => {
+              console.log(response.data)
+              Object.assign(this.items[this.editedIndex], this.editedItem)
+              this.overlay = false
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              console.error("There was an error!", error);
+            });
         }
+        else {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('userId', this.userId)
+          formData.append('userName', this.userName)
+          formData.append('type', this.editedItem.internationalType)
+          formData.append('typeName', this.editedItem.internationalTypeName)
 
+          formData.append('name', this.editedItem.internationalName)
+          formData.append('country', this.editedItem.internationalCountry)
+          formData.append('size', this.editedItem.internationalLessonsSize)
+          formData.append('count', this.editedItem.internationalLessonsCount)
 
-        axios.put("http://api.nammti.uz/api/internationals/update?id="+this.editedItem.id, data)
-          .then(response => {
-            console.log(response.data)
-            Object.assign(this.items[this.editedIndex], this.editedItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
-      } else
-      {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedItem.internationalType)
-        formData.append('typeName', this.editedItem.internationalTypeName)
+          formData.append('year', this.editedItem.year)
+          formData.append('mounth', this.editedItem.mounth)
+          formData.append('department', this.editedItem.department)
+          formData.append('faculty', this.editedItem.faculty)
 
-        formData.append('name', this.editedItem.internationalName)
-        formData.append('country', this.editedItem.internationalCountry)
-        formData.append('size', this.editedItem.internationalLessonsSize)
-        formData.append('count', this.editedItem.internationalLessonsCount)
-
-        formData.append('year', this.editedItem.year)
-        formData.append('mounth', this.editedItem.mounth)
-        formData.append('department', this.editedItem.department)
-        formData.append('faculty', this.editedItem.faculty)
-
-        // files
-        for (let file of this.editedItem.doc) {
-          formData.append("doc", file, file.name);
+          // files
+          for (let file of this.editedItem.doc) {
+            formData.append("doc", file, file.name);
+          }
+          axios.post("http://api.nammti.uz/api/internationals/create?userId="+this.userId, formData)
+            .then(response => {
+              console.log(response.data)
+              this.items.push(response.data)
+              this.overlay = false
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              console.error("There was an error!", error);
+            });
         }
-        axios.post("http://api.nammti.uz/api/internationals/create?userId="+this.userId, formData)
-          .then(response => {
-            console.log(response.data)
-            this.items.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
+        this.close()
       }
-      this.close()
+
     },
-    saveC () {
-      if (this.editedCIndex > -1) {
-        this.overlay = true
-        let data = {
-          'name': this.editedCItem.internationalName,
-          'country': this.editedCItem.internationalCountry,
-          'size': this.editedCItem.internationalLessonsSize,
-          'count': this.editedCItem.internationalLessonsCount,
-          'newId': this.editedCItem.newId,
+    async saveC () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedCIndex > -1) {
+          this.overlay = true
+          let data = {
+            'name': this.editedCItem.internationalName,
+            'country': this.editedCItem.internationalCountry,
+            'size': this.editedCItem.internationalLessonsSize,
+            'count': this.editedCItem.internationalLessonsCount,
+            'newId': this.editedCItem.newId,
+          }
+
+
+          axios.put("http://api.nammti.uz/api/internationals/update?id="+this.editedCItem.id, data)
+            .then(response => {
+              console.log(response.data)
+              Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
+              this.overlay = false
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              console.error("There was an error!", error);
+            });
         }
+        else {
+          this.overlay = true
+          let formData = new FormData();
+          formData.append('userId', this.userId)
+          formData.append('userName', this.userName)
+          formData.append('type', this.editedCItem.internationalType)
+          formData.append('typeName', this.editedCItem.internationalTypeName)
 
+          formData.append('name', this.editedCItem.internationalName)
+          formData.append('country', this.editedCItem.internationalCountry)
+          formData.append('size', this.editedCItem.internationalLessonsSize)
+          formData.append('count', this.editedCItem.internationalLessonsCount)
 
-        axios.put("http://api.nammti.uz/api/internationals/update?id="+this.editedCItem.id, data)
-          .then(response => {
-            console.log(response.data)
-            Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
-      } else
-      {
-        this.overlay = true
-        let formData = new FormData();
-        formData.append('userId', this.userId)
-        formData.append('userName', this.userName)
-        formData.append('type', this.editedCItem.internationalType)
-        formData.append('typeName', this.editedCItem.internationalTypeName)
+          formData.append('year', this.editedCItem.year)
+          formData.append('mounth', this.editedCItem.mounth)
+          formData.append('department', this.editedCItem.department)
+          formData.append('faculty', this.editedCItem.faculty)
 
-        formData.append('name', this.editedCItem.internationalName)
-        formData.append('country', this.editedCItem.internationalCountry)
-        formData.append('size', this.editedCItem.internationalLessonsSize)
-        formData.append('count', this.editedCItem.internationalLessonsCount)
-
-        formData.append('year', this.editedCItem.year)
-        formData.append('mounth', this.editedCItem.mounth)
-        formData.append('department', this.editedCItem.department)
-        formData.append('faculty', this.editedCItem.faculty)
-
-        // files
-        for (let file of this.editedCItem.doc) {
-          formData.append("doc", file, file.name);
+          // files
+          for (let file of this.editedCItem.doc) {
+            formData.append("doc", file, file.name);
+          }
+          axios.post("http://api.nammti.uz/api/internationals/create?userId="+this.userId, formData)
+            .then(response => {
+              console.log(response.data)
+              this.itemsC.push(response.data)
+              this.overlay = false
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              console.error("There was an error!", error);
+            });
         }
-        axios.post("http://api.nammti.uz/api/internationals/create?userId="+this.userId, formData)
-          .then(response => {
-            console.log(response.data)
-            this.itemsC.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
-            console.error("There was an error!", error);
-          });
+        this.closeC()
       }
-      this.closeC()
+
     },
 
     forceFileDownload(response, title) {
@@ -735,7 +802,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
           this.items.push(data[dataKey])
@@ -751,7 +818,7 @@ export default {
             data[dataKey].news = 'Tekshirilmoqda'
           } else if (data[dataKey].news === 2){
             data[dataKey].news = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].news === 3){
             data[dataKey].news = 'Rad etildi'
           }
           this.itemsC.push(data[dataKey])

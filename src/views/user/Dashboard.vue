@@ -12,7 +12,7 @@
         <template v-slot:append>
           <v-icon icon="mdi-check" color="success"></v-icon>
         </template>
-        <v-card-text>Siz 12 ni o'rindasiz</v-card-text>
+        <v-card-text>Siz * ni o'rindasiz</v-card-text>
       </v-card>
     </v-col>
 
@@ -21,7 +21,7 @@
         subtitle="reytingidagi o'rningiz"
         prepend-avatar="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
         :append-avatar="avatar">
-        <v-card-text>Siz 6 ni o'rindasiz.</v-card-text>
+        <v-card-text>Siz * ni o'rindasiz.</v-card-text>
       </v-card>
     </v-col>
 
@@ -41,7 +41,7 @@
             ></v-img>
           </v-avatar>
         </template>
-        <v-card-text>Siz 2 ni o'rindasiz.</v-card-text>
+        <v-card-text>Siz * ni o'rindasiz.</v-card-text>
       </v-card>
     </v-col>
 
@@ -109,6 +109,31 @@
       </v-card>
     </v-col>
 
+    <v-col cols="6">
+      <v-card class="bg-color-department" flat title="Lavozimlar bo'yicha reyting">
+        <template v-slot:text>
+          <v-select
+            label="Lavozim"
+            :items="['Prorektorlar',
+            'Fakultet dekanlari',
+            'Kafedra mudirlari',
+            'Fan dokgtori (professor)lar',
+            'Fan nomzodi, PhD (dotsentlar)',
+            'Katta o`qituvchilar','Assistentlar']"
+            hide-details
+            variant="outlined">
+          </v-select>
+        </template>
+
+        <v-data-table
+          class="bg-color-department"
+          :headers="headersR"
+          :items="dessertsR"
+          :search="searchR"
+        ></v-data-table>
+      </v-card>
+    </v-col>
+
   </v-row>
 
   </v-container>
@@ -134,7 +159,20 @@ export default {
           { key: 'userShare',align: 'center',  title: 'Ulushi' },
           { key: 'userScore',align: 'center',  title: 'Berilgan bal' },
         ],
-        desserts: [],
+        desserts: [
+          {
+            'userName': 'Soliyev Azizbek',
+            'userCount': '6',
+            'userShare': '3.6',
+            'userScore': '5.2',
+          },
+          {
+            'userName': 'Oxundadaev Abdug‘ani',
+            'userCount': '5',
+            'userShare': '3.2',
+            'userScore': '5',
+          }
+        ],
 
         searchC: '',
         headersC: [
@@ -143,7 +181,18 @@ export default {
           { key: 'userShare',align: 'center',  title: 'Ulushi' },
           { key: 'userScore',align: 'center',  title: 'Berilgan bal' },
         ],
-        itemsC: [],
+        itemsC: [{
+          'userName': 'Soliyev Azizbek',
+          'userCount': '6',
+          'userShare': '3.6',
+          'userScore': '5.2',
+        },
+          {
+            'userName': 'Oxundadaev Abdug‘ani',
+            'userCount': '5',
+            'userShare': '3.2',
+            'userScore': '5',
+          }],
 
         searchR: '',
         headersR: [
@@ -152,7 +201,18 @@ export default {
           { key: 'userShare',align: 'center',  title: 'Ulushi' },
           { key: 'userScore',align: 'center',  title: 'Berilgan bal' },
         ],
-        dessertsR: [],
+        dessertsR: [{
+          'userName': 'Soliyev Azizbek',
+          'userCount': '6',
+          'userShare': '3.6',
+          'userScore': '5.2',
+        },
+          {
+            'userName': 'Oxundadaev Abdug‘ani',
+            'userCount': '5',
+            'userShare': '3.2',
+            'userScore': '5',
+          }],
 
         searchT: '',
         headersT: [
@@ -161,7 +221,18 @@ export default {
           { key: 'userShare',align: 'center',  title: 'Ulushi' },
           { key: 'userScore',align: 'center',  title: 'Berilgan bal' },
         ],
-        dessertsT: [],
+        dessertsT: [{
+          'userName': 'Soliyev Azizbek',
+          'userCount': '6',
+          'userShare': '3.6',
+          'userScore': '5.2',
+        },
+          {
+            'userName': 'Oxundadaev Abdug‘ani',
+            'userCount': '5',
+            'userShare': '3.2',
+            'userScore': '5',
+          }],
       }
     },
 
@@ -215,6 +286,7 @@ export default {
       .get(`http://api.nammti.uz/api/statistics/all?&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
+        console.log(data)
         for (const dataKey in data) {
           this.desserts.push(data[dataKey])
         }
@@ -224,6 +296,7 @@ export default {
       .get(`http://api.nammti.uz/api/statistics/faculty?limit=10&offset=0&faculty=${this.faculty}`)
       .then(response => {
         const data  = response.data
+        console.log(data)
         for (const dataKey in data) {
           this.itemsC.push(data[dataKey])
         }
@@ -233,6 +306,7 @@ export default {
       .get(`http://api.nammti.uz/api/statistics/department?limit=10&offset=0&department=${this.department}`)
       .then(response => {
         const data  = response.data
+        console.log(data)
         for (const dataKey in data) {
           this.dessertsR.push(data[dataKey])
         }

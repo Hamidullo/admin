@@ -108,7 +108,7 @@
                       md="8">
                       <v-text-field
                         v-model="editedItem.place"
-                        label="Tug’ilgan joyi"
+                        label="Yashash manzili:"
                         persistent-hint
                         required>
                     </v-text-field>
@@ -117,31 +117,37 @@
                       cols="12"
                       sm="6"
                       md="4">
-                      <v-text-field
-                        v-model="editedItem.faculty"
+                      <v-select
                         label="Fakultet"
-                        required>
-                    </v-text-field>
+                        v-model="editedItem.faculty"
+                        :items="faculties"
+                        hide-details
+                        variant="outlined">
+                      </v-select>
                     </v-col>
                     <v-col
                       cols="12"
                       sm="6"
                       md="4">
-                      <v-text-field
+                      <v-select
+                        label="Kafedra"
                         v-model="editedItem.department"
-                        label="Kafedra">
-                    </v-text-field>
+                        :items="departments"
+                        hide-details
+                        variant="outlined">
+                      </v-select>
                     </v-col>
                     <v-col
                       cols="12"
                       sm="6"
                       md="4">
-                      <v-text-field
+                      <v-select
+                        label="lavozim"
                         v-model="editedItem.position"
-                        label="Lavozim"
-                        persistent-hint
-                        required>
-                    </v-text-field>
+                        :items="positions"
+                        hide-details
+                        variant="outlined">
+                      </v-select>
                     </v-col>
                     <v-col
                       cols="12"
@@ -500,6 +506,23 @@
         size="64"
       ></v-progress-circular>
     </v-overlay>
+
+    <v-snackbar
+      :timeout="3000"
+      color="red"
+      v-model="snackF"
+      elevation="24">
+      Hujjatni yuklashda hatolik!
+    </v-snackbar>
+
+    <v-snackbar
+      :timeout="3000"
+      color="success"
+      v-model="snackS"
+      elevation="24">
+      Hujjat muvaffaqiyatli yuklandi!
+    </v-snackbar>
+
   </v-container>
 </template>
 
@@ -512,18 +535,29 @@
     },
     data: () => ({
       overlay: false,
+      snackF: false,
+      snackS: false,
+      snackD: false,
+      positions: ['Prorektorlar',
+        'Fakultet dekanlari',
+        'Kafedra mudirlari',
+        'Fan dokgtori (professor)lar',
+        'Fan nomzodi, PhD (dotsentlar)',
+        'Katta o`qituvchilar','Assistentlar'],
       photo: "http://api.nammti.uz/uploads/photos/",
+      faculties: [],
+      departments: [],
       messages: [
-        { from: 'Tel:',  message: `+998901234567`,   color: 'deep-purple-lighten-1',},
-        {from: 'Email:', message: 'test@mail.com',  color: 'green',},
-        {from: 'Telegram:', message: '@admin',  color: 'blue',},
+        { from: 'Tel:',  message: ``,   color: 'deep-purple-lighten-1',},
+        {from: 'Email:', message: '',  color: 'green',},
+        {from: 'Telegram:', message: '',  color: 'blue',},
       ],
       dialog: false,
       editedItem: {
         id: 0,
         name: localStorage.getItem("user-name"),
         avatar: localStorage.getItem("user-avatar"),
-        userId: localStorage.getItem("user-hemisId"),
+        userId: localStorage.getItem("user-userId"),
         department: localStorage.getItem("user-department"),
         faculty: localStorage.getItem("user-faculty"),
         position: '',
@@ -578,6 +612,7 @@
         formData.append('name', this.editedItem.name)
         formData.append('year', this.editedItem.year)
         formData.append('place', this.editedItem.place)
+
         formData.append('department', this.editedItem.department)
         formData.append('faculty', this.editedItem.faculty)
         formData.append('position', this.editedItem.position)
@@ -590,16 +625,24 @@
           for (let file of this.editedItem.newAvatar) {
             formData.append("avatar", file, file.name);
           }
+        } else {
+          formData.append('avatar', this.editedItem.avatar)
         }
         console.log(this.getId())
         axios.put("http://api.nammti.uz/api/users/personal?userId=" + this.getId(), formData)
           .then(response => {
             console.log(response.data)
             this.overlay = false
+            this.messages[0].message = response.data.tel
+            this.messages[1].message = response.data.email
+            this.messages[2].message = response.data.telegram
+
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
         this.close()
@@ -621,10 +664,12 @@
           .then(response => {
             console.log(response.data)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
         this.closeD()
@@ -647,10 +692,12 @@
           .then(response => {
             console.log(response.data)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
         this.closeO()
@@ -668,9 +715,14 @@
         .get(`http://api.nammti.uz/api/users/personal?userId=${this.getId()}`)
         .then(response => {
           const data  = response.data
+          console.log(data)
           for (const dataKey in data) {
-            console.log(data[dataKey])
+
             this.editedItem = data[dataKey]
+            this.messages[0].message = data[dataKey].tel
+            this.messages[1].message = data[dataKey].email
+            this.messages[2].message = data[dataKey].telegram
+            localStorage.setItem("user-avatar",data[dataKey].avatar)
 
           }
         });
@@ -680,7 +732,7 @@
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {
-            console.log(data[dataKey])
+
             this.diploma = data[dataKey]
 
           }
@@ -691,9 +743,28 @@
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {
-            console.log(data[dataKey])
+
             this.aud = data[dataKey]
 
+          }
+        });
+
+      await axios
+        .get(`http://api.nammti.uz/api/commons/faculty`)
+        .then(response => {
+          const data  = response.data
+          for (const dataKey in data) {
+            console.log(data[dataKey])
+            this.faculties.push(data[dataKey].faculty)
+          }
+        });
+
+      await axios
+        .get(`http://api.nammti.uz/api/commons/department`)
+        .then(response => {
+          const data  = response.data
+          for (const dataKey in data) {
+            this.departments.push(data[dataKey].department)
           }
         });
     }
