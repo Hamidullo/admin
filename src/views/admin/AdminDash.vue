@@ -3,7 +3,7 @@
 
     <v-row>
       <v-col cols="6">
-        <v-card flat title="Institut bo’yicha fakultetlar reyting">
+        <v-card flat title="Institut bo’yicha fakultetlar reytingi">
           <template v-slot:text>
             <v-text-field
               v-model="search"
@@ -61,7 +61,7 @@
       </v-col>
 
       <v-col cols="6">
-        <v-card flat title="Fakultetlar bo’yicha reyting">
+        <v-card flat title="Fakultetlar bo’yicha reytingi">
           <template v-slot:text>
             <v-select
               label="Fakultet"
@@ -81,7 +81,7 @@
       </v-col>
 
       <v-col >
-        <v-card flat title="Kafedralar bo’yicha reyting">
+        <v-card flat title="Kafedralar bo’yicha reytingi">
           <template v-slot:text>
             <v-select
               label="Kafedra"
@@ -142,7 +142,7 @@ export default {
           ],
           datasets: [
             {
-              label: "Institut bo’yicha kafedralar reyting",
+              label: "Institut bo’yicha kafedralar reytingi",
               data: [5, 10, 19, 22, 79, 82, 27, 14, 65, 56, 5, 10, 19, 22, 79, 82, 27, 14, 65, 56, 7],
               backgroundColor: [
                 'rgb(54, 162, 235)',
@@ -206,7 +206,7 @@ export default {
             'Iqtisodiyot'
           ],
           datasets: [{
-            label: 'Institut bo’yicha fakultetlar reyting',
+            label: 'Institut bo’yicha fakultetlar reytingi',
             data: [159, 237, 262, 305],
             backgroundColor: [
               'rgb(255, 99, 132)',

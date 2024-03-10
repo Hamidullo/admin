@@ -5,9 +5,9 @@
       <img class="logo" :src="nammti" alt="logo"/>
 
       <v-app-bar-title align="center">
-        <h2 class="title">
+        <h3 class="title">
           NAMANGAN MUHANDISLIK-TEXNOLOGIYA INSTITUTI FAKULTET VA KAFEDRALAR REYTINGI
-        </h2>
+        </h3>
       </v-app-bar-title>
 
       <v-btn class="mr-5" elevation="4" color="#5865f2" @click="yearChange">
@@ -91,7 +91,7 @@ export default {
 
   mounted() {
 
-    axios.get("http://api.nammti.uz/api/commons/faculty" )
+    axios.get("http://api.nammti.uz/api/commons/faculty/" )
       .then(response => {
 
         this.overlay = false

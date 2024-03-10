@@ -23,13 +23,14 @@
                   <span class="text-h5">{{formTitle}}</span>
                 </v-card-title>
                 <v-card-text>
-                  <v-container>
+                  <v-form ref="form">
                     <v-row>
                       <v-col
                         cols="12">
                         <v-text-field
                           v-model="editedItem.inventionName"
                           clearable
+                          :rules="rules"
                           label="Patent nomi"
                           required>
                       </v-text-field>
@@ -41,6 +42,7 @@
                         <v-text-field
                           v-model="editedItem.inventionNumber"
                           clearable
+                          :rules="rules"
                           required
                           label="Patent raqami">
                       </v-text-field>
@@ -52,6 +54,7 @@
                         <v-text-field
                           v-model="editedItem.inventionAuthorsCount"
                           clearable
+                          :rules="rules"
                           required
                           label="Mualliflar soni">
                       </v-text-field>
@@ -73,6 +76,7 @@
                         md="3">
                         <v-select
                           label="Nashr etilgan yil"
+                          :rules="rules"
                           v-model="editedItem.year"
                           :items="years">
                         </v-select>
@@ -83,6 +87,7 @@
                         md="3">
                         <v-select
                           label="Nashr etilgan oy"
+                          :rules="rules"
                           v-model="editedItem.mounth"
                           :items="mounth">
                         </v-select>
@@ -92,6 +97,7 @@
                         sm="6"
                         md="6">
                         <v-file-input
+                        :rules="rules"
                           v-if="!editedItem.inventionDownload"
                           v-model="editedItem.inventionDownload"
                           show-size
@@ -100,7 +106,7 @@
                         <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">patentni yuklash</v-btn>
                       </v-col>
                     </v-row>
-                  </v-container>
+                  </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -186,13 +192,14 @@
                   <span class="text-h5">{{formMTitle}}</span>
                 </v-card-title>
                 <v-card-text>
-                  <v-container>
+                  <v-form ref="form">
                     <v-row>
                       <v-col
                         cols="12">
                         <v-text-field
                           v-model="editedMItem.inventionName"
                           clearable
+                          :rules="rules"
                           label="Patent nomi"
                           required>
                       </v-text-field>
@@ -204,6 +211,7 @@
                         <v-text-field
                           v-model="editedMItem.inventionNumber"
                           clearable
+                          :rules="rules"
                           required
                           label="Patent raqami">
                       </v-text-field>
@@ -216,6 +224,7 @@
                           v-model="editedMItem.inventionAuthorsCount"
                           clearable
                           required
+                          :rules="rules"
                           label="Mualliflar soni">
                       </v-text-field>
                       </v-col>
@@ -235,6 +244,7 @@
                         md="3">
                         <v-select
                           label="Nashr etilgan yil"
+                          :rules="rules"
                           v-model="editedMItem.year"
                           :items="years">
                         </v-select>
@@ -245,6 +255,7 @@
                         md="3">
                         <v-select
                           label="Nashr etilgan oy"
+                          :rules="rules"
                           v-model="editedMItem.mounth"
                           :items="mounth">
                         </v-select>
@@ -254,6 +265,7 @@
                         sm="6"
                         md="6">
                         <v-file-input
+                          :rules="rules"
                           v-if="!editedMItem.inventionDownload"
                           v-model="editedMItem.inventionDownload"
                           show-size
@@ -262,7 +274,7 @@
                         <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Patentni yuklash</v-btn>
                       </v-col>
                     </v-row>
-                  </v-container>
+                  </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -348,11 +360,12 @@
                     <span class="text-h5">{{ formYTitle}}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12">
                           <v-text-field
+                          :rules="rules"
                             v-model="editedYItem.inventionName"
                             clearable
                             label="Patent nomi"
@@ -364,6 +377,7 @@
                           sm="6"
                           md="6">
                           <v-text-field
+                          :rules="rules"
                             v-model="editedYItem.inventionNumber"
                             clearable
                             required
@@ -377,6 +391,7 @@
                           <v-text-field
                             v-model="editedYItem.inventionAuthorsCount"
                             clearable
+                            :rules="rules"
                             required
                             label="Mualliflar soni">
                           </v-text-field>
@@ -398,6 +413,7 @@
                           <v-select
                             label="Nashr etilgan yil"
                             v-model="editedYItem.year"
+                            :rules="rules"
                             :items="years">
                           </v-select>
                         </v-col>
@@ -408,6 +424,7 @@
                           <v-select
                             label="Nashr etilgan oy"
                             v-model="editedYItem.mounth"
+                            :rules="rules"
                             :items="mounth">
                           </v-select>
                         </v-col>
@@ -418,13 +435,14 @@
                           <v-file-input
                             v-if="!editedYItem.inventionDownload"
                             v-model="editedYItem.inventionDownload"
+                            :rules="rules"
                             show-size
                             label="Patent yuklash">
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedYItem)">Patentni yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -510,13 +528,14 @@
                     <span class="text-h5">{{ formNTitle }}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12">
                           <v-text-field
                             clearable
                             v-model="editedNItem.inventionName"
+                            :rules="rules"
                             label="Patent nomi"
                             required>
                           </v-text-field>
@@ -529,6 +548,7 @@
                             clearable
                             required
                             v-model="editedNItem.inventionNumber"
+                            :rules="rules"
                             label="Patent raqami">
                           </v-text-field>
                         </v-col>
@@ -540,6 +560,7 @@
                             clearable
                             required
                             v-model="editedNItem.inventionAuthorsCount"
+                            :rules="rules"
                             label="Mualliflar soni">
                           </v-text-field>
                         </v-col>
@@ -559,6 +580,7 @@
                           md="3">
                           <v-select
                             label="Nashr etilgan yil"
+                            :rules="rules"
                             v-model="editedNItem.year"
                             :items="years">
                           </v-select>
@@ -569,6 +591,7 @@
                           md="3">
                           <v-select
                             label="Nashr etilgan oy"
+                            :rules="rules"
                             v-model="editedNItem.mounth"
                             :items="mounth">
                           </v-select>
@@ -579,6 +602,7 @@
                           md="6">
                           <v-file-input
                             v-if="!editedNItem.inventionDownload"
+                            :rules="rules"
                             v-model="editedNItem.inventionDownload"
                             show-size
                             label="Patent yuklash">
@@ -586,7 +610,7 @@
                           <v-btn size="x-large" v-else @click="downloadDoc(editedNItem)">Patentni yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -672,13 +696,14 @@
                     <span class="text-h5">{{ formATitle }}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12">
                           <v-text-field
                             clearable
                             v-model="editedAItem.inventionName"
+                            :rules="rules"
                             label="Guvoxnoma nomi"
                             required>
                           </v-text-field>
@@ -691,6 +716,7 @@
                             clearable
                             required
                             v-model="editedAItem.inventionNumber"
+                            :rules="rules"
                             label="Guvoxnoma raqami">
                           </v-text-field>
                         </v-col>
@@ -702,6 +728,7 @@
                             clearable
                             required
                             v-model="editedAItem.inventionAuthorsCount"
+                            :rules="rules"
                             label="Mualliflar soni">
                           </v-text-field>
                         </v-col>
@@ -721,6 +748,7 @@
                           md="3">
                           <v-select
                             label="Nashr etilgan yil"
+                            :rules="rules"
                             v-model="editedAItem.year"
                             :items="years">
                           </v-select>
@@ -731,6 +759,7 @@
                           md="3">
                           <v-select
                             label="Nashr etilgan oy"
+                            :rules="rules"
                             v-model="editedAItem.mounth"
                             :items="mounth">
                           </v-select>
@@ -741,6 +770,7 @@
                           md="6">
                           <v-file-input
                             v-if="!editedAItem.inventionDownload"
+                            :rules="rules"
                             v-model="editedAItem.inventionDownload"
                             show-size
                             label="Guvohnoma yuklash">
@@ -748,7 +778,7 @@
                           <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Guvohnomani yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -834,13 +864,14 @@
                     <span class="text-h5">{{ formGTitle }}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12">
                           <v-text-field
                             v-model="editedGItem.inventionName"
                             clearable
+                            :rules="rules"
                             label="Guvoxnoma nomi"
                             required>
                           </v-text-field>
@@ -853,6 +884,7 @@
                             v-model="editedGItem.inventionNumber"
                             clearable
                             required
+                            :rules="rules"
                             label="Guvoxnoma raqami">
                           </v-text-field>
                         </v-col>
@@ -864,6 +896,7 @@
                             v-model="editedGItem.inventionAuthorsCount"
                             clearable
                             required
+                            :rules="rules"
                             label="Mualliflar soni">
                           </v-text-field>
                         </v-col>
@@ -883,6 +916,7 @@
                           md="3">
                           <v-select
                             label="Nashr etilgan yil"
+                            :rules="rules"
                             v-model="editedItem.year"
                             :items="years">
                           </v-select>
@@ -893,6 +927,7 @@
                           md="3">
                           <v-select
                             label="Nashr etilgan oy"
+                            :rules="rules"
                             v-model="editedItem.mounth"
                             :items="mounth">
                           </v-select>
@@ -903,6 +938,7 @@
                           md="6">
                           <v-file-input
                             v-if="!editedGItem.inventionDownload"
+                            :rules="rules"
                             v-model="editedGItem.inventionDownload"
                             show-size
                             label="Guvohnoma yuklash">
@@ -910,7 +946,7 @@
                           <v-btn size="x-large" v-else @click="downloadDoc(editedGItem)">Guvohnomani yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -986,6 +1022,30 @@
       </v-progress-circular>
     </v-overlay>
 
+    <v-snackbar
+      :timeout="3000"
+      color="red"
+      v-model="snackF"
+      elevation="24">
+      Hujjatni yuklashda hatolik!
+    </v-snackbar>
+
+    <v-snackbar
+      :timeout="3000"
+      color="success"
+      v-model="snackS"
+      elevation="24">
+      Hujjat muvaffaqiyatli yuklandi!
+    </v-snackbar>
+
+    <v-snackbar
+      :timeout="3000"
+      color="success"
+      v-model="snackD"
+      elevation="24">
+      Hujjat o'chirildi!
+    </v-snackbar>
+
   </v-container>
 </template>
 
@@ -996,6 +1056,15 @@ export default {
   data () {
     return {
       overlay: false,
+      rules: [
+          value => {
+            if (value) return true
+            return 'Qator bo`sh bo`lmasligi kerak.'
+          },
+        ],
+        snackF: false,
+        snackS: false,
+        snackD: false,
       userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
       years: [2023,2024],
@@ -1409,6 +1478,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -1423,6 +1493,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editMItem.id}`);
           this.itemsM.splice(this.editedMIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -1437,6 +1508,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editYItem.id}`);
           this.itemsY.splice(this.editedYIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -1451,6 +1523,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editNItem.id}`);
           this.itemsN.splice(this.editedNIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -1465,6 +1538,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editAItem.id}`);
           this.itemsA.splice(this.editedAIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -1479,6 +1553,7 @@ export default {
           console.log(`Delete item with ID ${this.editGItem.id}`);
           this.itemsG.splice(this.editedGIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -1573,8 +1648,10 @@ export default {
       })
     },
 
-    save () {
-      if (this.editedIndex > -1) {
+    async save () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedIndex > -1) {
         this.overlay = true
         let data = {
           'inventionName': this.editedItem.inventionName,
@@ -1589,13 +1666,15 @@ export default {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
-      } else
+        } else
       {
         this.overlay = true
         let formData = new FormData();
@@ -1623,17 +1702,23 @@ export default {
             console.log(response.data)
             this.items.push(response.data)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
-      }
-      this.close()
+        }
+        this.$refs.form.resetValidation()
+        this.close()
+      } 
     },
-    saveM () {
-      if (this.editedMIndex > -1) {
+    async saveM () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedMIndex > -1) {
         this.overlay = true
 
         let data = {
@@ -1650,13 +1735,15 @@ export default {
             console.log(response.data)
             Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
-      } else
+        } else
       {
         this.overlay = true
         let formData = new FormData();
@@ -1684,17 +1771,23 @@ export default {
             console.log(response.data)
             this.itemsM.push(response.data)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
-      }
+        }
+      this.$refs.form.resetValidation()
       this.closeM()
+      }
     },
-    saveY () {
-      if (this.editedYIndex > -1) {
+    async saveY () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedYIndex > -1) {
         this.overlay = true
         let data = {
           'inventionName': this.editedYItem.inventionName,
@@ -1710,10 +1803,12 @@ export default {
             console.log(response.data)
             Object.assign(this.itemsY[this.editedYIndex], this.editedYItem)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
       } else
@@ -1744,17 +1839,23 @@ export default {
             console.log(response.data)
             this.itemsY.push(response.data)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
       }
+      this.$refs.form.resetValidation()
       this.closeY()
+      }
     },
-    saveN () {
-      if (this.editedNIndex > -1) {
+    async saveN () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedNIndex > -1) {
         this.overlay = true
         let data = {
           'inventionName': this.editedNItem.inventionName,
@@ -1770,10 +1871,12 @@ export default {
             console.log(response.data)
             Object.assign(this.itemsN[this.editedNIndex], this.editedNItem)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
       } else
@@ -1804,17 +1907,23 @@ export default {
             console.log(response.data)
             this.itemsN.push(response.data)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
       }
+      this.$refs.form.resetValidation()
       this.closeN()
+      }
     },
-    saveA () {
-      if (this.editedAIndex > -1) {
+    async saveA () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedAIndex > -1) {
         this.overlay = true
         let data = {
           'inventionName': this.editedAItem.inventionName,
@@ -1830,10 +1939,12 @@ export default {
             console.log(response.data)
             Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
       } else
@@ -1864,17 +1975,23 @@ export default {
             console.log(response.data)
             this.itemsA.push(response.data)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
       }
+      this.$refs.form.resetValidation()
       this.closeA()
+      }
     },
-    saveG () {
-      if (this.editedGIndex > -1) {
+    async saveG () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedGIndex > -1) {
         this.overlay = true
         let data = {
           'inventionName': this.editedGItem.inventionName,
@@ -1890,10 +2007,12 @@ export default {
             console.log(response.data)
             Object.assign(this.itemsG[this.editedGIndex], this.editedGItem)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
       } else
@@ -1924,14 +2043,18 @@ export default {
             console.log(response.data)
             this.itemsG.push(response.data)
             this.overlay = false
+            this.snackS = true;
           })
           .catch(error => {
             this.errorMessage = error.message;
             this.overlay = false
+            this.snackF = true;
             console.error("There was an error!", error);
           });
       }
+      this.$refs.form.resetValidation()
       this.closeG()
+      }
     },
 
     forceFileDownload(response, title) {

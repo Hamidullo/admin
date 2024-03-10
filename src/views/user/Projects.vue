@@ -23,7 +23,7 @@
                   <span class="text-h5">{{ formTitle }}</span>
                 </v-card-title>
                 <v-card-text>
-                  <v-container>
+                  <v-form ref="form">
                     <v-row>
                       <v-col
                         cols="12"
@@ -32,6 +32,7 @@
                         <v-text-field
                           v-model="editedItem.projectName"
                           clearable
+                          :rules="rules"
                           label="Loyiha nomi"
                           required>
                       </v-text-field>
@@ -42,6 +43,7 @@
                         md="6">
                         <v-select
                           label="Loyiha turi"
+                          :rules="rules"
                           v-model="editedItem.project"
                           :items="['Fundamental','Amaliy','Innovatsion']">
                         </v-select>
@@ -53,6 +55,7 @@
                         <v-text-field
                           v-model="editedItem.projectFinancing"
                           clearable
+                          :rules="rules"
                           label="Loyihani moliyalashtirish xajmi"
                           required>
                       </v-text-field>
@@ -62,6 +65,7 @@
                         sm="6"
                         md="3">
                         <v-select
+                        :rules="rules"
                           label="Loyiha bajarilgan yil"
                           v-model="editedItem.year"
                           :items="years">
@@ -73,6 +77,7 @@
                         md="3">
                         <v-select
                           label="Loyiha bajarilgan oy"
+                          :rules="rules"
                           v-model="editedItem.mounth"
                           :items="mounth">
                         </v-select>
@@ -83,6 +88,7 @@
                         md="6">
                         <v-select
                           label="Lavozimni tanlang"
+                          :rules="rules"
                           v-model="editedItem.projectPosition"
                           required
                           :items="['Raxbar', 'Opponent']">
@@ -93,6 +99,7 @@
                         sm="6"
                         md="6">
                         <v-file-input
+                        :rules="rules"
                           v-if="!editedItem.projectDoc"
                           v-model="editedItem.projectDoc"
                           show-size
@@ -101,7 +108,7 @@
                         <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Chekni yuklash</v-btn>
                       </v-col>
                     </v-row>
-                  </v-container>
+                  </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -187,13 +194,14 @@
                   <span class="text-h5">{{ formMTitle }}</span>
                 </v-card-title>
                 <v-card-text>
-                  <v-container>
+                  <v-form ref="form">
                     <v-row>
                       <v-col
                         cols="12"
                         sm="6"
                         md="6">
                         <v-text-field
+                        :rules="rules"
                           v-model="editedMItem.projectName"
                           clearable
                           label="Loyiha nomi"
@@ -206,6 +214,7 @@
                         md="6">
                         <v-select
                           label="Loyiha turi"
+                          :rules="rules"
                           v-model="editedMItem.project"
                           :items="['Fundamental','Amaliy','Innovatsion']">
                         </v-select>
@@ -217,6 +226,7 @@
                         <v-text-field
                           v-model="editedMItem.projectFinancing"
                           clearable
+                          :rules="rules"
                           label="Loyihani moliyalashtirish xajmi"
                           required>
                       </v-text-field>
@@ -228,6 +238,7 @@
                         <v-select
                           label="Loyiha bajarilgan yil"
                           v-model="editedMItem.year"
+                          :rules="rules"
                           :items="years">
                         </v-select>
                       </v-col>
@@ -237,6 +248,7 @@
                         md="3">
                         <v-select
                           label="Loyiha bajarilgan oy"
+                          :rules="rules"
                           v-model="editedMItem.mounth"
                           :items="mounth">
                         </v-select>
@@ -249,6 +261,7 @@
                           label="Lavozimni tanlang"
                           v-model="editedMItem.projectPosition"
                           required
+                          :rules="rules"
                           :items="['Raxbar', 'Opponent']">
                         </v-select>
                       </v-col>
@@ -258,6 +271,7 @@
                         md="6">
                         <v-file-input
                           v-if="!editedMItem.projectDoc"
+                          :rules="rules"
                           v-model="editedMItem.projectDoc"
                           show-size
                           label="Chek yuklash">
@@ -265,7 +279,7 @@
                         <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Chek yuklash</v-btn>
                       </v-col>
                     </v-row>
-                  </v-container>
+                  </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -351,13 +365,14 @@
                     <span class="text-h5">{{ formYTitle }}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12"
                           sm="6"
                           md="6">
                           <v-text-field
+                          :rules="rules"
                             v-model="editedYItem.projectName"
                             clearable
                             label="Loyiha nomi"
@@ -370,6 +385,7 @@
                           md="6">
                           <v-select
                             label="Loyiha turi"
+                            :rules="rules"
                             v-model="editedYItem.project"
                             :items="['Fundamental','Amaliy','Innovatsion','Tijoratlashtirish']">
                           </v-select>
@@ -381,6 +397,7 @@
                           <v-text-field
                             v-model="editedYItem.projectFinancing"
                             clearable
+                            :rules="rules"
                             label="Loyihani moliyalashtirish xajmi"
                             required>
                           </v-text-field>
@@ -391,6 +408,7 @@
                           md="3">
                           <v-select
                             label="Loyiha bajarilgan yil"
+                            :rules="rules"
                             v-model="editedYItem.year"
                             :items="years">
                           </v-select>
@@ -401,6 +419,7 @@
                           md="3">
                           <v-select
                             label="Loyiha bajarilgan oy"
+                            :rules="rules"
                             v-model="editedYItem.mounth"
                             :items="mounth">
                           </v-select>
@@ -411,6 +430,7 @@
                           md="6">
                           <v-select
                             label="Lavozimni tanlang"
+                            :rules="rules"
                             v-model="editedYItem.projectPosition"
                             required
                             :items="['Raxbar', 'Opponent']">
@@ -422,6 +442,7 @@
                           md="6">
                           <v-file-input
                             v-if="!editedYItem.projectDoc"
+                            :rules="rules"
                             v-model="editedYItem.projectDoc"
                             show-size
                             label="Chek yuklash">
@@ -429,7 +450,7 @@
                           <v-btn size="x-large" v-else @click="downloadDoc(editedYItem)">Chek yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -515,13 +536,14 @@
                     <span class="text-h5">{{ formNTitle }}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12"
                           sm="6"
                           md="6">
                           <v-text-field
+                          :rules="rules"
                             v-model="editedNItem.projectName"
                             clearable
                             label="Loyiha nomi"
@@ -533,6 +555,7 @@
                           sm="6"
                           md="6">
                           <v-text-field
+                          :rules="rules"
                             v-model="editedNItem.project"
                             clearable
                             required
@@ -544,6 +567,7 @@
                           sm="6"
                           md="6">
                           <v-text-field
+                          :rules="rules"
                             v-model="editedNItem.projectFinancing"
                             clearable
                             label="Loyihani moliyalashtirish xajmi"
@@ -555,6 +579,7 @@
                           sm="6"
                           md="3">
                           <v-select
+                          :rules="rules"
                             label="Loyiha bajarilgan yil"
                             v-model="editedNItem.year"
                             :items="years">
@@ -565,6 +590,7 @@
                           sm="6"
                           md="3">
                           <v-select
+                          :rules="rules"
                             label="Loyiha bajarilgan oy"
                             v-model="editedNItem.mounth"
                             :items="mounth">
@@ -575,6 +601,7 @@
                           sm="6"
                           md="6">
                           <v-select
+                          :rules="rules"
                             label="Lavozimni tanlang"
                             v-model="editedNItem.projectPosition"
                             required
@@ -586,6 +613,7 @@
                           sm="6"
                           md="6">
                           <v-file-input
+                          :rules="rules"
                             v-if="!editedNItem.projectDoc"
                             v-model="editedNItem.projectDoc"
                             show-size
@@ -594,7 +622,7 @@
                           <v-btn size="x-large" v-else @click="downloadDoc(editedNItem)">Darslikni yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -680,7 +708,7 @@
                     <span class="text-h5">{{ formATitle }}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12"
@@ -689,6 +717,7 @@
                           <v-text-field
                             v-model="editedAItem.projectName"
                             clearable
+                            :rules="rules"
                             label="Shatnoma nomi"
                             required>
                           </v-text-field>
@@ -699,6 +728,7 @@
                           md="6">
                           <v-select
                             label="Shatnoma xajmi"
+                            :rules="rules"
                             v-model="editedAItem.projectFinancing"
                             required
                             :items="['Fan doktori 5-mln', 'Fan nomzodi 4-mln', 'Darajasiz PO` 3-mln' ]">
@@ -711,6 +741,7 @@
                           <v-text-field
                             v-model="editedAItem.project"
                             clearable
+                            :rules="rules"
                             label="Shartnoma tuzulgan tashkilot"
                             required>
                           </v-text-field>
@@ -721,6 +752,7 @@
                           md="3">
                           <v-select
                             label="Loyiha bajarilgan yil"
+                            :rules="rules"
                             v-model="editedAItem.year"
                             :items="years">
                           </v-select>
@@ -731,6 +763,7 @@
                           md="3">
                           <v-select
                             label="Loyiha bajarilgan oy"
+                            :rules="rules"
                             v-model="editedAItem.mounth"
                             :items="mounth">
                           </v-select>
@@ -739,6 +772,7 @@
                           cols="12">
                           <v-file-input
                             v-if="!editedAItem.projectDoc"
+                            :rules="rules"
                             v-model="editedAItem.projectDoc"
                             show-size
                             label="Chek yuklash">
@@ -746,7 +780,7 @@
                           <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Chekni yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -822,6 +856,30 @@
       </v-progress-circular>
     </v-overlay>
 
+    <v-snackbar
+      :timeout="3000"
+      color="red"
+      v-model="snackF"
+      elevation="24">
+      Hujjatni yuklashda hatolik!
+    </v-snackbar>
+
+    <v-snackbar
+      :timeout="3000"
+      color="success"
+      v-model="snackS"
+      elevation="24">
+      Hujjat muvaffaqiyatli yuklandi!
+    </v-snackbar>
+
+    <v-snackbar
+      :timeout="3000"
+      color="success"
+      v-model="snackD"
+      elevation="24">
+      Hujjat o'chirildi!
+    </v-snackbar>
+
   </v-container>
 </template>
 
@@ -832,6 +890,15 @@ export default {
   data () {
     return {
       overlay: false,
+      rules: [
+          value => {
+            if (value) return true
+            return 'Qator bo`sh bo`lmasligi kerak.'
+          },
+        ],
+        snackF: false,
+        snackS: false,
+        snackD: false,
       userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
       years: [2023,2024],
@@ -1176,6 +1243,7 @@ export default {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -1190,6 +1258,7 @@ export default {
           console.log(`Delete item with ID ${this.editMItem.id}`);
           this.itemsM.splice(this.editedMIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -1204,6 +1273,7 @@ export default {
           console.log(`Deleteditem with ID ${this.editYItem.id}`);
           this.itemsY.splice(this.editedYIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -1218,6 +1288,7 @@ export default {
           console.log(`Delete item with ID ${this.editNItem.id}`);
           this.itemsN.splice(this.editedNIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -1232,6 +1303,7 @@ export default {
           console.log(`Delete item with ID ${this.editAItem.id}`);
           this.itemsA.splice(this.editedAIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -1312,8 +1384,10 @@ export default {
       })
     },
 
-    save () {
-      if (this.editedIndex > -1) {
+    async save () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedIndex > -1) {
         this.overlay = true
         let data = {
           'projectName': this.editedItem.projectName,
@@ -1327,11 +1401,12 @@ export default {
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+            this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       } else
@@ -1365,18 +1440,24 @@ export default {
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+            this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       }
+      this.$refs.form.resetValidation()
       this.close()
+      }
+      
     },
-    saveM () {
-      if (this.editedMIndex > -1) {
+    async saveM () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedMIndex > -1) {
         this.overlay = true
         let data = {
           'projectName': this.editedMItem.projectName,
@@ -1390,11 +1471,12 @@ export default {
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+            this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       } else
@@ -1428,18 +1510,24 @@ export default {
           .then(response => {
             console.log(response.data)
             this.itemsM.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+            this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       }
+      this.$refs.form.resetValidation()
       this.closeM()
+      }
+      
     },
-    saveY () {
-      if (this.editedYIndex > -1) {
+    async saveY () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedYIndex > -1) {
         this.overlay = true
         let data = {
           'projectName': this.editedYItem.projectName,
@@ -1453,11 +1541,12 @@ export default {
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsY[this.editedYIndex], this.editedYItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+            this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       } else
@@ -1491,18 +1580,24 @@ export default {
           .then(response => {
             console.log(response.data)
             this.itemsY.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+            this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       }
+      this.$refs.form.resetValidation()
       this.closeY()
+      }
+      
     },
-    saveN () {
-      if (this.editedNIndex > -1) {
+    async saveN () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedNIndex > -1) {
         this.overlay = true
         let data = {
           'projectName': this.editedNItem.projectName,
@@ -1516,11 +1611,12 @@ export default {
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsN[this.editedNIndex], this.editedNItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+            this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       } else
@@ -1554,18 +1650,24 @@ export default {
           .then(response => {
             console.log(response.data)
             this.itemsN.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+            this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       }
+      this.$refs.form.resetValidation()
       this.closeN()
+      }
+      
     },
-    saveA () {
-      if (this.editedAIndex > -1) {
+    async saveA () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedAIndex > -1) {
         this.overlay = true
         let data = {
           'projectName': this.editedAItem.projectName,
@@ -1579,11 +1681,12 @@ export default {
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+            this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       } else
@@ -1617,15 +1720,19 @@ export default {
           .then(response => {
             console.log(response.data)
             this.itemsA.push(response.data)
-            this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+            this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       }
+      this.$refs.form.resetValidation()
       this.closeA()
+      }
+      
     },
 
     forceFileDownload(response, title) {

@@ -12,7 +12,7 @@
         <template v-slot:append>
           <v-icon icon="mdi-check" color="success"></v-icon>
         </template>
-        <v-card-text>Siz * ni o'rindasiz</v-card-text>
+        <v-card-text>Siz {{ instP }} ni o'rindasiz</v-card-text>
       </v-card>
     </v-col>
 
@@ -21,7 +21,7 @@
         subtitle="reytingidagi o'rningiz"
         prepend-avatar="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
         :append-avatar="avatar">
-        <v-card-text>Siz * ni o'rindasiz.</v-card-text>
+        <v-card-text>Siz {{ facP }} ni o'rindasiz.</v-card-text>
       </v-card>
     </v-col>
 
@@ -41,12 +41,12 @@
             ></v-img>
           </v-avatar>
         </template>
-        <v-card-text>Siz * ni o'rindasiz.</v-card-text>
+        <v-card-text>Siz {{ depP }} ni o'rindasiz.</v-card-text>
       </v-card>
     </v-col>
 
     <v-col cols="6">
-      <v-card class="bg-color-university" flat title="Institut bo’yicha reyting">
+      <v-card class="bg-color-university" flat title="Institut bo’yicha reytingi">
         <template v-slot:text>
           <v-text-field
             v-model="search"
@@ -67,7 +67,7 @@
     </v-col>
 
     <v-col cols="6">
-      <v-card class="bg-color-faculty" flat title="Fakultetlar bo’yicha reyting">
+      <v-card class="bg-color-faculty" flat title="Fakultetlar bo’yicha reytingi">
         <template v-slot:text>
           <v-select
             label="Fakultet"
@@ -88,7 +88,7 @@
     </v-col>
 
     <v-col cols="6">
-      <v-card class="bg-color-department" flat title="Kafedralar bo’yicha reyting">
+      <v-card class="bg-color-department" flat title="Kafedralar bo’yicha reytingi">
         <template v-slot:text>
           <v-select
             label="Kafedra"
@@ -110,7 +110,7 @@
     </v-col>
 
     <v-col cols="6">
-      <v-card class="bg-color-department" flat title="Lavozimlar bo'yicha reyting">
+      <v-card class="bg-color-department" flat title="Lavozimlar bo'yicha reytingi">
         <template v-slot:text>
           <v-select
             label="Lavozim"
@@ -144,10 +144,13 @@ export default {
       return {
         avatar: "http://api.nammti.uz/uploads/photos/" + localStorage.getItem("user-avatar"),
         userId: localStorage.getItem("user-userId"),
+        instP: 0,
+        facP: 0,
+        depP: 0,
         faculties: [],
-        faculty: 'Avtomatika va energetika',
+        faculty: localStorage.getItem("user-faculty"),
         departments: [],
-        department: 'Energetika',
+        department: localStorage.getItem("user-department"),
         positions: ['Prorektorlar', 'Fakultet dekanlari', 'Kafedra mudirlari', 'Fan dokgtori (professor)lar', 'Fan nomzodi, PhD (dotsentlar)', 'Katta o`qituvchilar','Assistentlar'],
         position: 'Katta o`qituvchilar',
 
@@ -196,10 +199,11 @@ export default {
 
     async changeDepartment(a){
       await axios
-        .get(`http://api.nammti.uz/api/statistic/department?limit=10&offset=0${a}`)
+        .get(`http://api.nammti.uz/api/statistics/department?limit=10&offset=0&department${a}`)
         .then(response => {
           const data  = response.data
           this.dessertsR.clear
+          console.log(this.dessertsR);
           for (const dataKey in data) {
             this.dessertsR.push(data[dataKey])
           }
@@ -207,9 +211,10 @@ export default {
     },
     async changeFaculty(a){
       await axios
-        .get(`http://api.nammti.uz/api/statistic/faculty?limit=10&offset=0&faculty=${a}`)
+        .get(`http://api.nammti.uz/api/statistics/faculty?limit=10&offset=0&faculty=${a}`)
         .then(response => {
           const data  = response.data
+          this.itemsC.clear
           for (const dataKey in data) {
             this.itemsC.push(data[dataKey])
           }
@@ -252,29 +257,46 @@ export default {
       .get(`http://api.nammti.uz/api/statistics/all?&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
-        console.log(data)
+        console.log(data);
+        let s = 0
         for (const dataKey in data) {
           this.desserts.push(data[dataKey])
+          s++
+          if(data[dataKey].userId === this.userId){
+              this.instP = s
+          } 
+          
         }
       });
 
+      console.log(this.faculty);
     await axios
       .get(`http://api.nammti.uz/api/statistics/faculty?limit=10&offset=0&faculty=${this.faculty}`)
       .then(response => {
         const data  = response.data
-        console.log(data)
+        console.log(data);
+        let s = 0
         for (const dataKey in data) {
           this.itemsC.push(data[dataKey])
+          s++
+          if(data[dataKey].userId === this.userId){
+              this.facP = s
+          } 
         }
       });
-
+      console.log(this.department);
     await axios
       .get(`http://api.nammti.uz/api/statistics/department?limit=10&offset=0&department=${this.department}`)
       .then(response => {
         const data  = response.data
-        console.log(data)
+        console.log(data);
+        let s = 0
         for (const dataKey in data) {
           this.dessertsR.push(data[dataKey])
+          s++
+          if(data[dataKey].userId === this.userId){
+              this.depP = s
+          } 
         }
       });
 

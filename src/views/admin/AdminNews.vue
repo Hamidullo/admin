@@ -154,7 +154,7 @@ export default {
       dialog: false,
       dialogDelete: false,
       headers: [
-        { title: 'F.I.SH', align: 'start', sortable: false, key: 'newName',},
+        { title: 'F.I.SH', align: 'start', sortable: false, key: 'userName',},
         { title: 'Hujjat turi',align: 'center', key: 'newTypeName' },
         { title: 'Mualliflar soni',align: 'center', key: 'newAuthCount' },
         { title: 'Ham mualliflar',align: 'center', key: 'newAuthName' },
@@ -166,6 +166,7 @@ export default {
       editedItem: {
         id: 0,
         userId: 0,
+        userName: 0,
         newTypeName: '',
         userName: '',
         newName: '',
@@ -183,6 +184,7 @@ export default {
       defaultItem: {
         id: 0,
         userId: 0,
+        userName: 0,
         newTypeName: '',
         userName: '',
         newName: '',

@@ -23,7 +23,7 @@
                   <span class="text-h5">{{formTitle}}</span>
                 </v-card-title>
                 <v-card-text>
-                  <v-container>
+                  <v-form ref="form">
                     <v-row>
                       <v-col
                         cols="12"
@@ -32,6 +32,7 @@
                         <v-text-field
                           v-model="editedItem.name"
                           clearable
+                          :rules="rules"
                           label="Tayyorlagan shogird F.I.SH"
                           required>
                       </v-text-field>
@@ -44,6 +45,7 @@
                           v-model="editedItem.place"
                           clearable
                           required
+                          :rules="rules"
                           label="Shogird ish joyi">
                         </v-text-field>
                       </v-col>
@@ -55,6 +57,7 @@
                           v-model="editedItem.position"
                           clearable
                           required
+                          :rules="rules"
                           label="Shogird lavozimi">
                       </v-text-field>
                       </v-col>
@@ -66,6 +69,7 @@
                           v-model="editedItem.department"
                           clearable
                           required
+                          :rules="rules"
                           label="Shogird kafedrasi">
                       </v-text-field>
                       </v-col>
@@ -76,6 +80,7 @@
                         <v-text-field
                           v-model="editedItem.faculty"
                           clearable
+                          :rules="rules"
                           label="Shogird fakulteti"
                           persistent-hint
                           required>
@@ -88,6 +93,7 @@
                         <v-select
                           label="Shogird yutug'ini tanlang"
                           required
+                          :rules="rules"
                           v-model="editedItem.typeName"
                           :items="['Fan doktori', 'Falsafa doktori', 'Stipendiant', 'Olimpiada g’olibi', 'Sport ustalari ']">
                         </v-select>
@@ -99,6 +105,7 @@
                         <v-select
                           label="Shogird tayorlangan yil"
                           v-model="editedItem.year"
+                          :rules="rules"
                           :items="years">
                         </v-select>
                       </v-col>
@@ -108,6 +115,7 @@
                         md="3">
                         <v-select
                           label="Shogird tayorlangan oy"
+                          :rules="rules"
                           v-model="editedItem.mounth"
                           :items="mounth">
                         </v-select>
@@ -118,6 +126,7 @@
                         md="6">
                         <v-file-input
                           v-if="!editedItem.student"
+                          :rules="rules"
                           v-model="editedItem.student"
                           show-size
                           label="Hujjat yuklash">
@@ -126,7 +135,7 @@
                       </v-col>
 
                     </v-row>
-                  </v-container>
+                  </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -208,7 +217,7 @@
                     <span class="text-h5">{{ formDTitle }}</span>
                   </v-card-title>
                   <v-card-text>
-                    <v-container>
+                    <v-form ref="form">
                       <v-row>
                         <v-col
                           cols="12"
@@ -218,6 +227,7 @@
                             v-model="editedDItem.achievementName"
                             clearable
                             required
+                            :rules="rules"
                             label="Davlat mukofoti">
                           </v-text-field>
                         </v-col>
@@ -227,6 +237,7 @@
                           md="3">
                           <v-select
                             label="Davlat mukofoti berilgan yil"
+                            :rules="rules"
                             v-model="editedDItem.year"
                             :items="years">
                           </v-select>
@@ -237,6 +248,7 @@
                           md="3">
                           <v-select
                             label="Davlat mukofoti berilgan oy"
+                            :rules="rules"
                             v-model="editedDItem.mounth"
                             :items="mounth">
                           </v-select>
@@ -247,6 +259,7 @@
                           md="6">
                           <v-text-field
                             v-model="editedDItem.achievementNumber"
+                            :rules="rules"
                             clearable
                             label="Seriya raqami"
                             persistent-hint
@@ -259,6 +272,7 @@
                           md="6">
                           <v-file-input
                             v-if="!editedDItem.achievementDownload"
+                            :rules="rules"
                             v-model="editedDItem.achievementDownload"
                             show-size
                             label="Sertifikat yuklash">
@@ -266,7 +280,7 @@
                           <v-btn size="x-large" v-else @click="downloadADoc(editedDItem)">Sertifikatni yuklash</v-btn>
                         </v-col>
                       </v-row>
-                    </v-container>
+                    </v-form>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -343,6 +357,30 @@
       </v-progress-circular>
     </v-overlay>
 
+    <v-snackbar
+    :timeout="3000"
+    color="red"
+    v-model="snackF"
+    elevation="24">
+    Hujjatni yuklashda hatolik!
+  </v-snackbar>
+
+  <v-snackbar
+    :timeout="3000"
+    color="success"
+    v-model="snackS"
+    elevation="24">
+    Hujjat muvaffaqiyatli yuklandi!
+  </v-snackbar>
+
+  <v-snackbar
+    :timeout="3000"
+    color="success"
+    v-model="snackD"
+    elevation="24">
+    Hujjat o'chirildi!
+  </v-snackbar>
+
   </v-container>
 </template>
 
@@ -353,6 +391,15 @@ export default {
   data () {
       return {
         overlay: false,
+        rules: [
+          value => {
+            if (value) return true
+            return 'Qator bo`sh bo`lmasligi kerak.'
+          },
+        ],
+        snackF: false,
+        snackS: false,
+        snackD: false,
         userId: localStorage.getItem("user-userId"),
         userName: localStorage.getItem("user-name"),
         years: [2023,2024],
@@ -552,6 +599,7 @@ export default {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -566,6 +614,7 @@ export default {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.itemsD.splice(this.editedDIndex, 1)
           this.overlay = false
+          this.snackD = true
         })
         .catch(error => {
           console.error(error);
@@ -574,8 +623,10 @@ export default {
       this.closeDDelete()
     },
 
-    save () {
-      if (this.editedIndex > -1) {
+    async save () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedIndex > -1) {
         this.overlay = true
         let data = {
           'name': this.editedItem.workName,
@@ -592,10 +643,12 @@ export default {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
             this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       } else
@@ -638,17 +691,24 @@ export default {
             console.log(response.data)
             this.items.push(response.data)
             this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       }
+      this.$refs.form.resetValidation()
       this.close()
+      }
+      
     },
-    saveD () {
-      if (this.editedDIndex > -1) {
+    async saveD () {
+      const { valid } = await this.$refs.form.validate()
+      if (valid) {
+        if (this.editedDIndex > -1) {
         this.overlay = true
         let data = {
           'name': this.editedDItem.achievementName,
@@ -662,10 +722,12 @@ export default {
             console.log(response.data)
             Object.assign(this.itemsD[this.editedDIndex], this.editedDItem)
             this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       } else
@@ -693,14 +755,19 @@ export default {
             console.log(response.data)
             this.itemsD.push(response.data)
             this.overlay = false
-          })
-          .catch(error => {
-            this.errorMessage = error.message;
-            this.overlay = false
+              this.snackS = true;
+            })
+            .catch(error => {
+              this.errorMessage = error.message;
+              this.overlay = false
+              this.snackF = true;
             console.error("There was an error!", error);
           });
       }
+      this.$refs.form.resetValidation()
       this.closeD()
+      }
+      
     },
 
     forceFileDownload(response, title) {

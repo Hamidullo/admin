@@ -1081,10 +1081,12 @@ export default {
               console.log(response.data)
               Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
               this.overlay = false
+              this.snackS = true;
             })
             .catch(error => {
               this.errorMessage = error.message;
               this.overlay = false
+              this.snackF = true;
               console.error("There was an error!", error);
             });
         }

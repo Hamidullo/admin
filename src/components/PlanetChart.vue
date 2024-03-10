@@ -12,7 +12,7 @@ export default {
   name: 'PlanetChart',
   mounted() {
 
-    axios.get("http://api.nammti.uz/api/commons/department" )
+    axios.get("http://api.nammti.uz/api/commons/department/" )
       .then(response => {
 
         this.overlay = false
@@ -32,7 +32,7 @@ export default {
             labels:  deps,
             datasets: [
               {
-                label: "Institut bo’yicha kafedralar reyting",
+                label: "Institut bo’yicha kafedralar reytingi",
                 data: scorD,
                 backgroundColor: [
                   'rgb(234,6,40)',

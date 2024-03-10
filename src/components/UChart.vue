@@ -11,7 +11,7 @@ import axios from "axios";
 export default {
   name: 'UChart',
   mounted() {
-    axios.get("http://api.nammti.uz/api/commons/faculty" )
+    axios.get("http://api.nammti.uz/api/commons/faculty/" )
       .then(response => {
 
         this.overlay = false
@@ -30,7 +30,7 @@ export default {
           data: {
             labels: fal,
             datasets: [{
-              label: 'Institut bo’yicha fakultetlar reyting',
+              label: 'Institut bo’yicha fakultetlar reytingi',
               data: scorF,
               backgroundColor: [
                 'rgb(236,19,19)',

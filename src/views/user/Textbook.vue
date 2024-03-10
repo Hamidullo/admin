@@ -1175,11 +1175,11 @@ export default {
         if (this.editedQIndex > -1) {
           this.overlay = true
           let data = {
-            'workName': this.editedItem.workName,
-            'workAuthorCount': this.editedItem.workAuthorCount,
-            'workAuthorName': this.editedItem.workAuthorName,
-            'workNumber': this.editedItem.workNumber,
-            'newId': this.editedItem.newId,
+            'workName': this.editedQItem.workName,
+            'workAuthorCount': this.editedQItem.workAuthorCount,
+            'workAuthorName': this.editedQItem.workAuthorName,
+            'workNumber': this.editedQItem.workNumber,
+            'newId': this.editedQItem.newId,
           }
 
 
@@ -1207,9 +1207,9 @@ export default {
           formData.append('authorCount', this.editedQItem.workAuthorCount)
           formData.append('authorName', this.editedQItem.workAuthorName)
           formData.append('number', this.editedQItem.workNumber)
-          formData.append('typeName', this.editedItem.workTypeName)
-          formData.append('year', this.editedItem.year)
-          formData.append('mounth', this.editedItem.mounth)
+          formData.append('typeName', this.editedQItem.workTypeName)
+          formData.append('year', this.editedQItem.year)
+          formData.append('mounth', this.editedQItem.mounth)
           formData.append('department', this.editedQItem.department)
           formData.append('faculty', this.editedQItem.faculty)
 
@@ -1242,11 +1242,11 @@ export default {
         if (this.editedMIndex > -1) {
           this.overlay = true
           let data = {
-            'workName': this.editedItem.workName,
-            'workAuthorCount': this.editedItem.workAuthorCount,
-            'workAuthorName': this.editedItem.workAuthorName,
-            'workNumber': this.editedItem.workNumber,
-            'newId': this.editedItem.newId,
+            'workName': this.editedMItem.workName,
+            'workAuthorCount': this.editedMItem.workAuthorCount,
+            'workAuthorName': this.editedMItem.workAuthorName,
+            'workNumber': this.editedMItem.workNumber,
+            'newId': this.editedMItem.newId,
           }
 
 
@@ -1274,9 +1274,9 @@ export default {
           formData.append('authorCount', this.editedMItem.workAuthorCount)
           formData.append('authorName', this.editedMItem.workAuthorName)
           formData.append('number', this.editedMItem.workNumber)
-          formData.append('typeName', this.editedItem.workTypeName)
-          formData.append('year', this.editedItem.year)
-          formData.append('mounth', this.editedItem.mounth)
+          formData.append('typeName', this.editedMItem.workTypeName)
+          formData.append('year', this.editedMItem.year)
+          formData.append('mounth', this.editedMItem.mounth)
           formData.append('department', this.editedMItem.department)
           formData.append('faculty', this.editedMItem.faculty)
 
@@ -1309,11 +1309,11 @@ export default {
         if (this.editedKIndex > -1) {
           this.overlay = true
           let data = {
-            'workName': this.editedItem.workName,
-            'workAuthorCount': this.editedItem.workAuthorCount,
-            'workAuthorName': this.editedItem.workAuthorName,
-            'workNumber': this.editedItem.workNumber,
-            'newId': this.editedItem.newId,
+            'workName': this.editedKItem.workName,
+            'workAuthorCount': this.editedKItem.workAuthorCount,
+            'workAuthorName': this.editedKItem.workAuthorName,
+            'workNumber': this.editedKItem.workNumber,
+            'newId': this.editedKItem.newId,
           }
 
 
@@ -1341,9 +1341,9 @@ export default {
           formData.append('authorCount', this.editedKItem.workAuthorCount)
           formData.append('authorName', this.editedKItem.workAuthorName)
           formData.append('number', this.editedKItem.workNumber)
-          formData.append('typeName', this.editedItem.workTypeName)
-          formData.append('year', this.editedItem.year)
-          formData.append('mounth', this.editedItem.mounth)
+          formData.append('typeName', this.editedKItem.workTypeName)
+          formData.append('year', this.editedKItem.year)
+          formData.append('mounth', this.editedKItem.mounth)
           formData.append('department', this.editedKItem.department)
           formData.append('faculty', this.editedKItem.faculty)
 
@@ -1449,6 +1449,7 @@ export default {
       .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=22`)
       .then(response => {
         const data  = response.data
+        console.log(data);
         for (const dataKey in data) {
           if (data[dataKey].news === 1){
             data[dataKey].news = 'Tekshirilmoqda'
@@ -1465,6 +1466,7 @@ export default {
       .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=23`)
       .then(response => {
         const data  = response.data
+        console.log(data);
         for (const dataKey in data) {
           if (data[dataKey].news === 1){
             data[dataKey].news = 'Tekshirilmoqda'
@@ -1481,6 +1483,7 @@ export default {
       .get(`http://api.nammti.uz/api/works/type?userId=${this.userId}&limit=10&offset=0&type=24`)
       .then(response => {
         const data  = response.data
+        console.log(data);
         for (const dataKey in data) {
           if (data[dataKey].news === 1){
             data[dataKey].news = 'Tekshirilmoqda'
