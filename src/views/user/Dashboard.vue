@@ -110,7 +110,7 @@
     </v-col>
 
     <v-col cols="6">
-      <v-card class="bg-color-department" flat title="Lavozimlar bo'yicha reytingi">
+      <v-card class="bg-color-position" flat title="Lavozimlar bo'yicha reytingi">
         <template v-slot:text>
           <v-select
             label="Lavozim"
@@ -123,7 +123,7 @@
         </template>
 
         <v-data-table
-          class="bg-color-department"
+          class="bg-color-position"
           :headers="headersR"
           :items="dessertsR"
           :search="searchR"
@@ -199,10 +199,10 @@ export default {
 
     async changeDepartment(a){
       await axios
-        .get(`http://api.nammti.uz/api/statistics/department?limit=10&offset=0&department${a}`)
+        .get(`http://api.nammti.uz/api/statistics/department?limit=10&offset=0&department=${a}`)
         .then(response => {
           const data  = response.data
-          this.dessertsR.clear
+          this.dessertsR.splice(0,this.dessertsR.length)
           console.log(this.dessertsR);
           for (const dataKey in data) {
             this.dessertsR.push(data[dataKey])
@@ -214,7 +214,7 @@ export default {
         .get(`http://api.nammti.uz/api/statistics/faculty?limit=10&offset=0&faculty=${a}`)
         .then(response => {
           const data  = response.data
-          this.itemsC.clear
+          this.itemsC.splice(0,this.itemsC.length)
           for (const dataKey in data) {
             this.itemsC.push(data[dataKey])
           }
@@ -322,6 +322,10 @@ export default {
 }
 .bg-color-department{
   background-color: #f1799d;
+  color: white;
+}
+.bg-color-position{
+  background-color: #5222ee;
   color: white;
 }
 </style>
