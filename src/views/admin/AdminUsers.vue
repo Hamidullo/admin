@@ -58,31 +58,34 @@
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
+                        <v-select
+                          label="lavozim"
                           v-model="editedItem.position"
-                          clearable
-                          label="Lavozimi">
-                        </v-text-field>
+                          :items="positions"
+                          hide-details>
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
+                        <v-select
+                          label="Kafedra"
                           v-model="editedItem.department"
-                          clearable
-                          label="Kafedrasi">
-                        </v-text-field>
+                          :items="departments"
+                          hide-details>
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
                         sm="6"
                         md="6">
-                        <v-text-field
+                        <v-select
+                          label="Fakultet"
                           v-model="editedItem.faculty"
-                          clearable
-                          label="Fakulteti">
-                        </v-text-field>
+                          :items="faculties"
+                          hide-details>
+                        </v-select>
                       </v-col>
                       <v-col
                         cols="12"
@@ -196,7 +199,15 @@ export default {
     return{
       isUserAdmin: true,
       overlay: false,
-      userId: localStorage.getItem("user-hemisId"),
+      positions: ['Prorektorlar',
+        'Fakultet dekanlari',
+        'Kafedra mudirlari',
+        'Fan dokgtori (professor)lar',
+        'Fan nomzodi, PhD (dotsentlar)',
+        'Katta o`qituvchilar','Assistentlar'],
+      faculties: [],
+      departments: [],
+      userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
 
       dialog: false,
@@ -342,8 +353,9 @@ export default {
           'password': this.editedItem.password,
           'role': this.editedItem.role,
         }
+        console.log(data)
 
-        axios.post("http://api.nammti.uz/api/users/create?userId="+this.userId, data)
+        axios.post("http://api.nammti.uz/api/users/create?userId="+this.editedItem.userId, data)
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
@@ -359,14 +371,14 @@ export default {
     },
   },
 
-  mounted() {
+  async mounted() {
 
     let userData = localStorage.getItem("user-role")
     if(userData !== 2){
       this.isUserAdmin = true
     }
 
-    axios
+    await axios
       .get(`http://api.nammti.uz/api/users/admin?userId=${this.userId}&limit=20&offset=0`)
       .then(response => {
         const data  = response.data
@@ -374,6 +386,25 @@ export default {
 
           this.items.push(data[dataKey])
 
+        }
+      });
+
+    await axios
+      .get(`http://api.nammti.uz/api/commons/faculty`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          console.log(data[dataKey])
+          this.faculties.push(data[dataKey].faculty)
+        }
+      });
+
+    await axios
+      .get(`http://api.nammti.uz/api/commons/department`)
+      .then(response => {
+        const data  = response.data
+        for (const dataKey in data) {
+          this.departments.push(data[dataKey].department)
         }
       });
   }
