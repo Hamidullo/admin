@@ -289,7 +289,7 @@
                         <v-select
                           label="Diplom berilgan yil"
                           :rules="rules"
-                          v-model="editedItem.year"
+                          v-model="editedCItem.year"
                           :items="years">
                         </v-select>
                       </v-col>
@@ -300,7 +300,7 @@
                         <v-select
                           label="Diplom berilgan oy"
                           :rules="rules"
-                          v-model="editedItem.mounth"
+                          v-model="editedCItem.mounth"
                           :items="mounth">
                         </v-select>
                       </v-col>
@@ -491,7 +491,7 @@
                           md="3">
                           <v-select
                             label="Jurnal nashr etilgan yil"
-                            v-model="editedItem.year"
+                            v-model="editedSItem.year"
                             :rules="rules"
                             :items="years">
                           </v-select>
@@ -502,7 +502,7 @@
                           md="3">
                           <v-select
                             label="Jurnal nashr etilgan oy"
-                            v-model="editedItem.mounth"
+                            v-model="editedSItem.mounth"
                             :rules="rules"
                             :items="mounth">
                           </v-select>
@@ -826,7 +826,7 @@ export default {
 
         searchC: '',
         headersC: [
-          { key: 'name',title: 'Xorijiy davlat nomi', align: 'start',},
+          { key: 'country',title: 'Xorijiy davlat nomi', align: 'start',},
           { key: 'university', title: 'OTM nomi', align: 'start', },
           { key: 'type', title: 'Turi', align: 'start', },
           { key: 'series', title: 'Seriyasi' },
