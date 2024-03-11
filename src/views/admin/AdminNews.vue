@@ -166,7 +166,6 @@ export default {
       editedItem: {
         id: 0,
         userId: 0,
-        userName: 0,
         newTypeName: '',
         userName: '',
         newName: '',
@@ -184,7 +183,6 @@ export default {
       defaultItem: {
         id: 0,
         userId: 0,
-        userName: 0,
         newTypeName: '',
         userName: '',
         newName: '',
@@ -315,7 +313,7 @@ export default {
     },
     downloadDoc(item) {
       console.log("Download start")
-      this.downloadWithAxios("http://api.nammti.uz/api/"+ item.tableName +"/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      this.downloadWithAxios("http://api.nammti.uz/api/"+ item.tableName +"/download?userId="+item.userId+"&file="+item.newFileUploaded,item.name)
     },
   },
 
@@ -330,7 +328,7 @@ export default {
             data[dataKey].newSeen = 'Tekshirilmoqda'
           } else if (data[dataKey].newSeen === 2){
             data[dataKey].newSeen = 'Tasdiqlandi'
-          } else {
+          } else if (data[dataKey].newSeen === 3){
             data[dataKey].newSeen = 'Rad etildi'
           }
           this.items.push(data[dataKey])
