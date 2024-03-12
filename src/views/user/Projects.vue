@@ -718,7 +718,7 @@
                             v-model="editedAItem.projectName"
                             clearable
                             :rules="rules"
-                            label="Shatnoma nomi"
+                            label="Shartnoma nomi"
                             required>
                           </v-text-field>
                         </v-col>
@@ -727,7 +727,7 @@
                           sm="6"
                           md="6">
                           <v-select
-                            label="Shatnoma xajmi"
+                            label="Shartnoma xajmi"
                             :rules="rules"
                             v-model="editedAItem.projectFinancing"
                             required
@@ -1452,7 +1452,7 @@ export default {
       this.$refs.form.resetValidation()
       this.close()
       }
-      
+
     },
     async saveM () {
       const { valid } = await this.$refs.form.validate()
@@ -1522,7 +1522,7 @@ export default {
       this.$refs.form.resetValidation()
       this.closeM()
       }
-      
+
     },
     async saveY () {
       const { valid } = await this.$refs.form.validate()
@@ -1592,7 +1592,7 @@ export default {
       this.$refs.form.resetValidation()
       this.closeY()
       }
-      
+
     },
     async saveN () {
       const { valid } = await this.$refs.form.validate()
@@ -1662,7 +1662,7 @@ export default {
       this.$refs.form.resetValidation()
       this.closeN()
       }
-      
+
     },
     async saveA () {
       const { valid } = await this.$refs.form.validate()
@@ -1732,7 +1732,7 @@ export default {
       this.$refs.form.resetValidation()
       this.closeA()
       }
-      
+
     },
 
     forceFileDownload(response, title) {
@@ -1759,8 +1759,9 @@ export default {
         .catch(() => console.log('error occured'))
     },
     downloadDoc(item) {
-      console.log("Download start")
-      this.downloadWithAxios("http://api.nammti.uz/api/projects/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      /*let url = "http://api.nammti.uz/api/academics/download?userId="+item.userId+"&file="+item.projectDoc
+      window.location.href = url;*/
+      this.downloadWithAxios("http://api.nammti.uz/api/projects/download?userId="+item.userId+"&file="+item.projectDoc,item.projectDoc)
     },
 
   },

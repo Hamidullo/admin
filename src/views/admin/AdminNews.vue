@@ -332,7 +332,10 @@ export default {
     downloadDoc(item) {
       console.log("Download start")
       if (item.newFileUploaded){
-        this.downloadWithAxios("http://api.nammti.uz/api/"+ item.tableName +"/download?userId="+item.userId+"&file="+item.newFileUploaded,item.name)
+        /*let url = "http://api.nammti.uz/api/academics/download?userId="+item.userId+"&file="+item.newFileUploaded
+        console.log(url)
+        window.location.href = url;*/
+        this.downloadWithAxios("http://api.nammti.uz/api/"+ item.tableName +"/download?userId="+item.userId+"&file="+item.newFileUploaded,item.newFileUploaded)
       } else {
         this.snackF = true
       }

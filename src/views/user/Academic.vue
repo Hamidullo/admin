@@ -117,8 +117,8 @@
                         <v-file-input
                           show-size
                           :rules="rules"
-                          v-if="!editedItem.docDownload"
-                          v-model="editedItem.docDownload"
+                          v-if="!editedItem.doc"
+                          v-model="editedItem.doc"
                           label="Diplom yuklash">
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Diplom yuklash</v-btn>
@@ -666,7 +666,7 @@ export default {
           userName: localStorage.getItem("user-name"),
           department: localStorage.getItem("user-department"),
           faculty: localStorage.getItem("user-faculty"),
-          docDownload: null
+          doc: null
         },
         defaultItem: {
           id: 0,
@@ -691,7 +691,7 @@ export default {
           userName: localStorage.getItem("user-name"),
           department: localStorage.getItem("user-department"),
           faculty: localStorage.getItem("user-faculty"),
-          docDownload: null
+          doc: null
         },
 
         dialogC: false,
@@ -721,7 +721,7 @@ export default {
           faculty: localStorage.getItem("user-faculty"),
           statId: 0,
           newId: 0,
-          docDownload: null
+          doc: null
         },
         defaultCItem: {
           id: 0,
@@ -747,7 +747,7 @@ export default {
           faculty: localStorage.getItem("user-faculty"),
           statId: 0,
           newId: 0,
-          docDownload: null
+          doc: null
         },
 
         dialogS: false,
@@ -777,7 +777,7 @@ export default {
           faculty: localStorage.getItem("user-faculty"),
           statId: 0,
           newId: 0,
-          docDownload: null
+          doc: null
         },
         defaultSItem: {
           id: 0,
@@ -803,7 +803,7 @@ export default {
           faculty: localStorage.getItem("user-faculty"),
           statId: 0,
           newId: 0,
-          docDownload: null
+          doc: null
         },
 
         search: '',
@@ -1225,7 +1225,9 @@ export default {
         .catch(() => console.log('error occured'))
     },
     downloadDoc(item) {
-      this.downloadWithAxios("http://api.nammti.uz/api/academics/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      /*let url = "http://api.nammti.uz/api/academics/download?userId="+item.userId+"&file="+item.doc
+      window.location.href = url;*/
+      this.downloadWithAxios("http://api.nammti.uz/api/academics/download?userId="+item.userId+"&file="+item.doc,item.doc)
     },
   },
 
@@ -1267,6 +1269,7 @@ export default {
       .get(`http://api.nammti.uz/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=11`)
       .then(response => {
         const data  = response.data
+        console.log(data)
         for (const dataKey in data) {
           if (data[dataKey].news === 1){
             data[dataKey].news = 'Tekshirilmoqda'

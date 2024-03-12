@@ -2805,7 +2805,9 @@ export default {
         .catch(() => console.log('error occured'))
     },
     downloadDoc(item) {
-      this.downloadWithAxios("http://api.nammti.uz/api/works/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      /*let url = "http://api.nammti.uz/api/academics/download?userId="+item.userId+"&file="+item.brainUploaded
+      window.location.href = url;*/
+      this.downloadWithAxios("http://api.nammti.uz/api/works/download?userId="+item.userId+"&file="+item.brainUploaded,item.brainUploaded)
     },
 
   },

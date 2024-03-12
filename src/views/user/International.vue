@@ -104,8 +104,8 @@
                         sm="6"
                         md="6">
                         <v-file-input
-                          v-if="!editedItem.doc"
-                          v-model="editedItem.doc"
+                          v-if="!editedItem.internationalCertificate"
+                          v-model="editedItem.internationalCertificate"
                           :rules="rules"
                           show-size
                           label="Sertifikat yuklash">
@@ -279,8 +279,8 @@
                         sm="6"
                         md="6">
                         <v-file-input
-                          v-if="!editedCItem.doc"
-                          v-model="editedCItem.doc"
+                          v-if="!editedCItem.internationalCertificate"
+                          v-model="editedCItem.internationalCertificate"
                           :rules="rules"
                           show-size
                           label="Darslik yuklash">
@@ -434,7 +434,7 @@ export default {
           statId: 0,
           newId: 0,
           news: '',
-          doc: null,
+          internationalCertificate: null,
         },
         defaultItem: {
           id: 0,
@@ -454,7 +454,7 @@ export default {
           statId: 0,
           newId: 0,
           news: '',
-          doc: null,
+          internationalCertificate: null,
         },
 
         dialogC: false,
@@ -478,7 +478,7 @@ export default {
           statId: 0,
           newId: 0,
           news: '',
-          doc: null,
+          internationalCertificate: null,
         },
         defaultCItem: {
           id: 0,
@@ -498,7 +498,7 @@ export default {
           statId: 0,
           newId: 0,
           news: '',
-          doc: null,
+          internationalCertificate: null,
         },
 
         search: '',
@@ -770,8 +770,9 @@ export default {
         .catch(() => console.log('error occured'))
     },
     downloadDoc(item) {
-      console.log("Download start")
-      this.downloadWithAxios("http://api.nammti.uz/api/internationals/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      /*let url = "http://api.nammti.uz/api/academics/download?userId="+item.userId+"&file="+item.internationalCertificate
+      window.location.href = url;*/
+      this.downloadWithAxios("http://api.nammti.uz/api/internationals/download?userId="+item.userId+"&file="+item.internationalCertificate,item.internationalCertificate)
     },
 
   },

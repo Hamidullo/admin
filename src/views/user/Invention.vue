@@ -1713,7 +1713,7 @@ export default {
         }
         this.$refs.form.resetValidation()
         this.close()
-      } 
+      }
     },
     async saveM () {
       const { valid } = await this.$refs.form.validate()
@@ -2081,8 +2081,9 @@ export default {
         .catch(() => console.log('error occured'))
     },
     downloadDoc(item) {
-      console.log("Download start")
-      this.downloadWithAxios("http://api.nammti.uz/api/inventions/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      /*let url = "http://api.nammti.uz/api/academics/download?userId="+item.userId+"&file="+item.inventionDownload
+      window.location.href = url;*/
+      this.downloadWithAxios("http://api.nammti.uz/api/inventions/download?userId="+item.userId+"&file="+item.inventionDownload,item.inventionDownload)
     },
   },
 

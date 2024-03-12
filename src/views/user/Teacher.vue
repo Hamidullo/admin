@@ -703,7 +703,7 @@ export default {
       this.$refs.form.resetValidation()
       this.close()
       }
-      
+
     },
     async saveD () {
       const { valid } = await this.$refs.form.validate()
@@ -767,7 +767,7 @@ export default {
       this.$refs.form.resetValidation()
       this.closeD()
       }
-      
+
     },
 
     forceFileDownload(response, title) {
@@ -790,10 +790,14 @@ export default {
         .catch(() => console.log('error occured'))
     },
     downloadTDoc(item) {
-      this.downloadWithAxios("http://api.nammti.uz/api/teachers/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      /*let url = "http://api.nammti.uz/api/academics/download?userId="+item.userId+"&file="+item.student
+      window.location.href = url;*/
+      this.downloadWithAxios("http://api.nammti.uz/api/teachers/download?userId="+item.userId+"&file="+item.student,item.student)
     },
     downloadADoc(item) {
-      this.downloadWithAxios("http://api.nammti.uz/api/achievements/download?userId="+item.userId+"&file="+item.workDownload,item.name)
+      /*let url = "http://api.nammti.uz/api/academics/download?userId="+item.userId+"&file="+item.achievementDownload
+      window.location.href = url;*/
+      this.downloadWithAxios("http://api.nammti.uz/api/achievements/download?userId="+item.userId+"&file="+item.achievementDownload,item.achievementDownload)
     },
   },
 
