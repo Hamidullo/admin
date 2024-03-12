@@ -197,7 +197,7 @@ import axios from "axios";
 export default {
   data() {
     return{
-      isUserAdmin: true,
+      isUserAdmin: false,
       overlay: false,
       positions: ['Prorektorlar',
         'Fakultet dekanlari',
@@ -374,7 +374,7 @@ export default {
   async mounted() {
 
     let userData = localStorage.getItem("user-role")
-    if(userData !== 2){
+    if(userData === 2){
       this.isUserAdmin = true
     }
 

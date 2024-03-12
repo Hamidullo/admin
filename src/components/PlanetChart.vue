@@ -19,7 +19,7 @@ export default {
         let deps = []
         let scorD = []
         const data = response.data
-        data.sort( function(a, b){ if (a[1] < b[1]) return -1; if (a[1] > b[1]) return 1; return 0;});
+        data.sort( (a, b) => a.score - b.score);
         for (const departmentsKey in data) {
           deps.push(response.data[departmentsKey].department)
           scorD.push(response.data[departmentsKey].score)
