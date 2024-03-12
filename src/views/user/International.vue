@@ -656,7 +656,7 @@ export default {
           formData.append('faculty', this.editedItem.faculty)
 
           // files
-          for (let file of this.editedItem.doc) {
+          for (let file of this.editedItem.internationalCertificate) {
             formData.append("doc", file, file.name);
           }
           axios.post("http://api.nammti.uz/api/internationals/create?userId="+this.userId, formData)
@@ -723,7 +723,7 @@ export default {
           formData.append('faculty', this.editedCItem.faculty)
 
           // files
-          for (let file of this.editedCItem.doc) {
+          for (let file of this.editedCItem.internationalCertificate) {
             formData.append("doc", file, file.name);
           }
           axios.post("http://api.nammti.uz/api/internationals/create?userId="+this.userId, formData)

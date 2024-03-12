@@ -1173,7 +1173,7 @@ export default {
         { key: 'projectName', title: 'Shartnoma nomi', align: 'start', sortable: false,},
         { key: 'year', title: 'Shartnoma bajarilgan yil' },
         { key: 'projectFinancing', title: 'Shartnoma  xajmi' },
-        { key: 'projectPosition', title: 'Shartnoma tuzilgan tashkilot' },
+        { key: 'project', title: 'Shartnoma tuzilgan tashkilot' },
         { key: 'news', title: 'Hujjat holati' },
         { key: 'actions', title: 'Amallar',align: 'start', sortable: false },
       ],
