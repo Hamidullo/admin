@@ -25,8 +25,17 @@
                         sm="6"
                         md="4">
                         <v-text-field
-                          v-model="editedItem.newName"
+                          v-model="editedItem.userName"
                           label="F.I.Sh">
+                        </v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="4">
+                        <v-text-field
+                          v-model="editedItem.newName"
+                          label="Hujjat nomi">
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -137,6 +146,14 @@
         size="64">
       </v-progress-circular>
     </v-overlay>
+
+    <v-snackbar
+      :timeout="3000"
+      color="red"
+      v-model="snackF"
+      elevation="24">
+      Hujjat yuklanmagan!
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -147,6 +164,7 @@ export default {
   data() {
     return{
       overlay: false,
+      snackF: false,
       userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
 
@@ -313,7 +331,12 @@ export default {
     },
     downloadDoc(item) {
       console.log("Download start")
-      this.downloadWithAxios("http://api.nammti.uz/api/"+ item.tableName +"/download?userId="+item.userId+"&file="+item.newFileUploaded,item.name)
+      if (item.newFileUploaded){
+        this.downloadWithAxios("http://api.nammti.uz/api/"+ item.tableName +"/download?userId="+item.userId+"&file="+item.newFileUploaded,item.name)
+      } else {
+        this.snackF = true
+      }
+
     },
   },
 
