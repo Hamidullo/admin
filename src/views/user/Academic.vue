@@ -89,8 +89,7 @@
                           v-model="editedItem.dipType"
                           clearable
                           label="Ixtisoslik raqami va nomi"
-                          persistent-hint
-                          :rules="rules">
+                          persistent-hint>
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -101,8 +100,7 @@
                           v-model="editedItem.departmentName"
                           clearable
                           label="Mutaxassisligi nomi"
-                          persistent-hint
-                          :rules="rules">
+                          persistent-hint>
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -111,8 +109,7 @@
                           v-model="editedItem.workStartND"
                           clearable
                           label="Ishga qabul qilinganligi to‘g‘risidagi buyruq raqami va sanasi"
-                          persistent-hint
-                          :rules="rules">
+                          persistent-hint>
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -312,8 +309,7 @@
                           v-model="editedCItem.departmentName"
                           clearable
                           label="Mutaxassisligi raqami va nomi"
-                          persistent-hint
-                          :rules="rules">
+                          persistent-hint>
                         </v-text-field>
                       </v-col>
                       <v-col
@@ -322,8 +318,7 @@
                           v-model="editedCItem.workStartND"
                           clearable
                           label="Ishga qabul qilinganligi to‘g‘risidagi buyruq raqami va sanasi"
-                          persistent-hint
-                          :rules="rules">
+                          persistent-hint>
                         </v-text-field>
                       </v-col>
                       <v-col
