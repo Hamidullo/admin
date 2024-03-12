@@ -2326,6 +2326,9 @@ export default {
           formData.append('mounth', this.editedSItem.mounth)
           formData.append('statId', this.editedSItem.statId)
           formData.append('newId', this.editedSItem.newId)
+          formData.append('department', this.editedSItem.department)
+          formData.append('faculty', this.editedSItem.faculty)
+
           if (this.editedSItem.quarter === 'Q1'){
             formData.append('quarter', '1')
           } else if (this.editedSItem.quarter === 'Q2'){
@@ -2406,6 +2409,8 @@ export default {
           formData.append('mounth', this.editedWItem.mounth)
           formData.append('statId', this.editedWItem.statId)
           formData.append('newId', this.editedWItem.newId)
+          formData.append('department', this.editedWItem.department)
+          formData.append('faculty', this.editedWItem.faculty)
 
           // files
           for (let file of this.editedWItem.brainUploaded) {
@@ -2477,6 +2482,8 @@ export default {
           formData.append('mounth', this.editedXItem.mounth)
           formData.append('statId', this.editedXItem.statId)
           formData.append('newId', this.editedXItem.newId)
+          formData.append('department', this.editedXItem.department)
+          formData.append('faculty', this.editedXItem.faculty)
 
           // files
           for (let file of this.editedXItem.brainUploaded) {
@@ -2548,6 +2555,8 @@ export default {
           formData.append('mounth', this.editedRItem.mounth)
           formData.append('statId', this.editedRItem.statId)
           formData.append('newId', this.editedRItem.newId)
+          formData.append('department', this.editedRItem.department)
+          formData.append('faculty', this.editedRItem.faculty)
 
           // files
           for (let file of this.editedRItem.brainUploaded) {
@@ -2618,6 +2627,8 @@ export default {
           formData.append('mounth', this.editedMItem.mounth)
           formData.append('statId', this.editedMItem.statId)
           formData.append('newId', this.editedMItem.newId)
+          formData.append('department', this.editedMItem.department)
+          formData.append('faculty', this.editedMItem.faculty)
 
           // files
           for (let file of this.editedMItem.brainUploaded) {
@@ -2688,6 +2699,8 @@ export default {
           formData.append('mounth', this.editedAItem.mounth)
           formData.append('statId', this.editedAItem.statId)
           formData.append('newId', this.editedAItem.newId)
+          formData.append('department', this.editedAItem.department)
+          formData.append('faculty', this.editedAItem.faculty)
 
           // files
           for (let file of this.editedAItem.brainUploaded) {
@@ -2760,6 +2773,8 @@ export default {
           formData.append('mounth', this.editedDItem.mounth)
           formData.append('statId', this.editedDItem.statId)
           formData.append('newId', this.editedDItem.newId)
+          formData.append('department', this.editedDItem.department)
+          formData.append('faculty', this.editedDItem.faculty)
 
           // files
           for (let file of this.editedDItem.brainUploaded) {

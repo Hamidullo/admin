@@ -374,7 +374,7 @@ export default {
   async mounted() {
 
     let userData = localStorage.getItem("user-role")
-    if(userData === 2){
+    if(userData == 2){
       this.isUserAdmin = true
     }
 
