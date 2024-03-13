@@ -599,10 +599,10 @@
         this.dialog = false
       },
       closeD () {
-        this.dialog = false
+        this.dialogD = false
       },
       closeO () {
-        this.dialog = false
+        this.dialogO = false
       },
 
       save () {
@@ -629,7 +629,7 @@
           formData.append('avatar', this.editedItem.avatar)
         }
         console.log(this.getId())
-        axios.put("http://api.nammti.uz/api/users/personal?userId=" + this.getId(), formData)
+        axios.put("http://api.nammti.uz/api/users/personal?userId=" + this.editedItem.userId, formData)
           .then(response => {
             console.log(response.data)
             this.overlay = false
@@ -660,7 +660,7 @@
         }
 
         console.log(this.getId())
-        axios.put("http://api.nammti.uz/api/users/diploma?userId=" + this.getId(), data)
+        axios.put("http://api.nammti.uz/api/users/diploma?userId=" + this.editedItem.userId, data)
           .then(response => {
             console.log(response.data)
             this.overlay = false
@@ -688,7 +688,7 @@
         }
 
         console.log(this.getId())
-        axios.put("http://api.nammti.uz/api/users/diploma?userId=" + this.getId(), data)
+        axios.put("http://api.nammti.uz/api/users/diploma?userId=" + this.editedItem.userId, data)
           .then(response => {
             console.log(response.data)
             this.overlay = false

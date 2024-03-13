@@ -1032,7 +1032,7 @@ export default {
           }
 
           // files
-          for (let file of this.editedItem.docDownload) {
+          for (let file of this.editedItem.doc) {
             formData.append("doc", file, file.name);
           }
           await axios.post("http://api.nammti.uz/api/academics/create?userId="+this.userId, formData)
@@ -1107,7 +1107,7 @@ export default {
           formData.append('faculty', this.editedCItem.faculty)
 
           // files
-          for (let file of this.editedCItem.docDownload) {
+          for (let file of this.editedCItem.doc) {
             formData.append("doc", file, file.name);
           }
           await axios.post("http://api.nammti.uz/api/academics/create?userId="+this.userId, formData)
@@ -1182,7 +1182,7 @@ export default {
           formData.append('faculty', this.editedSItem.faculty)
 
           // files
-          for (let file of this.editedSItem.docDownload) {
+          for (let file of this.editedSItem.doc) {
             formData.append("doc", file, file.name);
           }
           axios.post("http://api.nammti.uz/api/academics/create?userId="+this.userId, formData)
