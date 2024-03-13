@@ -17,7 +17,9 @@ export default {
         this.overlay = false
         let fal = []
         let scorF = []
-        for (const departmentsKey in response.data) {
+        const data = response.data
+        data.sort( (a, b) => a.score - b.score);
+        for (const departmentsKey in data) {
           fal.push(response.data[departmentsKey].faculty)
           scorF.push(response.data[departmentsKey].score)
         }

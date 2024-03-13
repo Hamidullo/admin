@@ -416,8 +416,8 @@ export default {
           typeName: '',
           place: '',
           position: '',
-          department: '',
-          faculty: '',
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
 
           year: 0,
           mounth: 0,
@@ -437,8 +437,8 @@ export default {
           typeName: '',
           place: '',
           position: '',
-          department: '',
-          faculty: '',
+          department: localStorage.getItem("user-department"),
+          faculty: localStorage.getItem("user-faculty"),
 
           year: 0,
           mounth: 0,
