@@ -142,7 +142,7 @@ import axios from "axios";
 export default {
     data () {
       return {
-        avatar: "http://api.nammti.uz/uploads/photos/" + localStorage.getItem("user-avatar"),
+        avatar: "http://172.16.10.3:3002/uploads/photos/" + localStorage.getItem("user-avatar"),
         userId: localStorage.getItem("user-userId"),
         instP: 0,
         facP: 0,
@@ -199,7 +199,7 @@ export default {
 
     async changeDepartment(a){
       await axios
-        .get(`http://api.nammti.uz/api/statistics/department?limit=10&offset=0&department=${a}`)
+        .get(`http://172.16.10.3:3002/api/statistics/department?limit=10&offset=0&department=${a}`)
         .then(response => {
           const data  = response.data
           this.dessertsR.splice(0,this.dessertsR.length)
@@ -211,7 +211,7 @@ export default {
     },
     async changeFaculty(a){
       await axios
-        .get(`http://api.nammti.uz/api/statistics/faculty?limit=10&offset=0&faculty=${a}`)
+        .get(`http://172.16.10.3:3002/api/statistics/faculty?limit=10&offset=0&faculty=${a}`)
         .then(response => {
           const data  = response.data
           this.itemsC.splice(0,this.itemsC.length)
@@ -236,7 +236,7 @@ export default {
 
   async mounted() {
     await axios
-      .get(`http://api.nammti.uz/api/commons/faculty`)
+      .get(`http://172.16.10.3:3002/api/commons/faculty`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -245,7 +245,7 @@ export default {
       });
 
     await axios
-      .get(`http://api.nammti.uz/api/commons/department`)
+      .get(`http://172.16.10.3:3002/api/commons/department`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -254,7 +254,7 @@ export default {
       });
 
     await axios
-      .get(`http://api.nammti.uz/api/statistics/all?&limit=10&offset=0`)
+      .get(`http://172.16.10.3:3002/api/statistics/all?&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
         console.log(data);
@@ -264,14 +264,14 @@ export default {
           s++
           if(data[dataKey].userId === this.userId){
               this.instP = s
-          } 
-          
+          }
+
         }
       });
 
       console.log(this.faculty);
     await axios
-      .get(`http://api.nammti.uz/api/statistics/faculty?limit=10&offset=0&faculty=${this.faculty}`)
+      .get(`http://172.16.10.3:3002/api/statistics/faculty?limit=10&offset=0&faculty=${this.faculty}`)
       .then(response => {
         const data  = response.data
         console.log(data);
@@ -281,12 +281,12 @@ export default {
           s++
           if(data[dataKey].userId === this.userId){
               this.facP = s
-          } 
+          }
         }
       });
       console.log(this.department);
     await axios
-      .get(`http://api.nammti.uz/api/statistics/department?limit=10&offset=0&department=${this.department}`)
+      .get(`http://172.16.10.3:3002/api/statistics/department?limit=10&offset=0&department=${this.department}`)
       .then(response => {
         const data  = response.data
         console.log(data);
@@ -296,7 +296,7 @@ export default {
           s++
           if(data[dataKey].userId === this.userId){
               this.depP = s
-          } 
+          }
         }
       });
 

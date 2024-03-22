@@ -12,7 +12,7 @@ export default {
   name: 'PlanetChart',
   mounted() {
 
-    axios.get("http://api.nammti.uz/api/commons/department/" )
+    axios.get("http://172.16.10.3:3002/api/commons/department/" )
       .then(response => {
 
         this.overlay = false

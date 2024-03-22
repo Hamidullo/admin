@@ -11,7 +11,7 @@ import axios from "axios";
 export default {
   name: 'UChart',
   mounted() {
-    axios.get("http://api.nammti.uz/api/commons/faculty/" )
+    axios.get("http://172.16.10.3:3002/api/commons/faculty/" )
       .then(response => {
 
         this.overlay = false

@@ -91,7 +91,7 @@ export default {
 
   mounted() {
 
-    axios.get("http://api.nammti.uz/api/commons/faculty/" )
+    axios.get("http://localhost:3002/api/commons/faculty/" )
       .then(response => {
 
         this.overlay = false

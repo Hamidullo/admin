@@ -282,7 +282,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://api.nammti.uz/api/users/delete?userId=${this.editedItem.userId}`)
+      axios.delete(`http://172.16.10.3:3002/api/users/delete?userId=${this.editedItem.userId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.userId}`);
           this.items.splice(this.editedIndex, 1)
@@ -323,7 +323,7 @@ export default {
         }
 
 
-        axios.put("http://api.nammti.uz/api/users/admin?userId="+this.editedItem.userId, data)
+        axios.put("http://172.16.10.3:3002/api/users/admin?userId="+this.editedItem.userId, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -355,7 +355,7 @@ export default {
         }
         console.log(data)
 
-        axios.post("http://api.nammti.uz/api/users/create?userId="+this.editedItem.userId, data)
+        axios.post("http://172.16.10.3:3002/api/users/create?userId="+this.editedItem.userId, data)
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
@@ -379,7 +379,7 @@ export default {
     }
 
     await axios
-      .get(`http://api.nammti.uz/api/users/admin?userId=${this.userId}&limit=20&offset=0`)
+      .get(`http://172.16.10.3:3002/api/users/admin?userId=${this.userId}&limit=20&offset=0`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -390,7 +390,7 @@ export default {
       });
 
     await axios
-      .get(`http://api.nammti.uz/api/commons/faculty`)
+      .get(`http://172.16.10.3:3002/api/commons/faculty`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -400,7 +400,7 @@ export default {
       });
 
     await axios
-      .get(`http://api.nammti.uz/api/commons/department`)
+      .get(`http://172.16.10.3:3002/api/commons/department`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

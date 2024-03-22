@@ -551,7 +551,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://api.nammti.uz/api/internationals/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+      axios.delete(`http://172.16.10.3:3002/api/internationals/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
@@ -566,7 +566,7 @@ export default {
     },
     deleteCItemConfirm () {
       this.overlay = true
-      axios.delete(`http://api.nammti.uz/api/internationals/delete?id=${this.editedCItem.id}&newId=${this.editedCItem.newId}`)
+      axios.delete(`http://172.16.10.3:3002/api/internationals/delete?id=${this.editedCItem.id}&newId=${this.editedCItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editCItem.id}`);
           this.itemsC.splice(this.editedCIndex, 1)
@@ -623,7 +623,7 @@ export default {
             'newId': this.editedItem.newId,
           }
 
-          axios.put("http://api.nammti.uz/api/internationals/update?id="+this.editedItem.id, data)
+          axios.put("http://172.16.10.3:3002/api/internationals/update?id="+this.editedItem.id, data)
             .then(response => {
               console.log(response.data)
               Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -659,7 +659,7 @@ export default {
           for (let file of this.editedItem.internationalCertificate) {
             formData.append("doc", file, file.name);
           }
-          axios.post("http://api.nammti.uz/api/internationals/create?userId="+this.userId, formData)
+          axios.post("http://172.16.10.3:3002/api/internationals/create?userId="+this.userId, formData)
             .then(response => {
               console.log(response.data)
               this.items.push(response.data)
@@ -690,7 +690,7 @@ export default {
           }
 
 
-          axios.put("http://api.nammti.uz/api/internationals/update?id="+this.editedCItem.id, data)
+          axios.put("http://172.16.10.3:3002/api/internationals/update?id="+this.editedCItem.id, data)
             .then(response => {
               console.log(response.data)
               Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
@@ -726,7 +726,7 @@ export default {
           for (let file of this.editedCItem.internationalCertificate) {
             formData.append("doc", file, file.name);
           }
-          axios.post("http://api.nammti.uz/api/internationals/create?userId="+this.userId, formData)
+          axios.post("http://172.16.10.3:3002/api/internationals/create?userId="+this.userId, formData)
             .then(response => {
               console.log(response.data)
               this.itemsC.push(response.data)
@@ -772,7 +772,7 @@ export default {
     downloadDoc(item) {
       /*let url = "http://api.nammti.uz/api/academics/download?userId="+item.userId+"&file="+item.internationalCertificate
       window.location.href = url;*/
-      this.downloadWithAxios("http://api.nammti.uz/api/internationals/download?userId="+item.userId+"&file="+item.internationalCertificate,item.internationalCertificate)
+      this.downloadWithAxios("http://172.16.10.3:3002/api/internationals/download?userId="+item.userId+"&file="+item.internationalCertificate,item.internationalCertificate)
     },
 
   },
@@ -803,7 +803,7 @@ export default {
 
   mounted() {
     axios
-      .get(`http://api.nammti.uz/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=61`)
+      .get(`http://172.16.10.3:3002/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=61`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -819,7 +819,7 @@ export default {
       });
 
     axios
-      .get(`http://api.nammti.uz/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=62`)
+      .get(`http://172.16.10.3:3002/api/internationals/type?userId=${this.userId}&limit=10&offset=0&type=62`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

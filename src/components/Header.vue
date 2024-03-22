@@ -65,7 +65,7 @@ export default {
   data() {
     return{
       name: localStorage.getItem("user-name"),
-      avatar: "http://api.nammti.uz/uploads/photos/" + localStorage.getItem("user-avatar"),
+      avatar: "http://172.16.10.3:3002/uploads/photos/" + localStorage.getItem("user-avatar"),
       position: localStorage.getItem("user-position"),
       menus: [
         { icon: 'mdi-account', title: 'Profile',  rout: 'About'},
