@@ -62,7 +62,7 @@ export default {
     return{
       drawer: true,
       rail: true,
-      avatar: "http://172.16.10.3:3002/uploads/photos/" + localStorage.getItem("user-avatar"),
+      avatar: "http://172.16.10.5:3002/uploads/photos/" + localStorage.getItem("user-avatar"),
       name: localStorage.getItem("user-name"),
       model: 1,
       menus: [

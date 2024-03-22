@@ -1473,7 +1473,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.3:3002/api/inventions/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+      axios.delete(`http://172.16.10.5:3002/api/inventions/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
@@ -1488,7 +1488,7 @@ export default {
     },
     deleteMItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.3:3002/api/inventions/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
+      axios.delete(`http://172.16.10.5:3002/api/inventions/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editMItem.id}`);
           this.itemsM.splice(this.editedMIndex, 1)
@@ -1503,7 +1503,7 @@ export default {
     },
     deleteYItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.3:3002/api/inventions/delete?id=${this.editedYItem.id}&newId=${this.editedYItem.newId}`)
+      axios.delete(`http://172.16.10.5:3002/api/inventions/delete?id=${this.editedYItem.id}&newId=${this.editedYItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editYItem.id}`);
           this.itemsY.splice(this.editedYIndex, 1)
@@ -1518,7 +1518,7 @@ export default {
     },
     deleteNItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.3:3002/api/inventions/delete?id=${this.editedNItem.id}&newId=${this.editedNItem.newId}`)
+      axios.delete(`http://172.16.10.5:3002/api/inventions/delete?id=${this.editedNItem.id}&newId=${this.editedNItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editNItem.id}`);
           this.itemsN.splice(this.editedNIndex, 1)
@@ -1533,7 +1533,7 @@ export default {
     },
     deleteAItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.3:3002/api/inventions/delete?id=${this.editedAItem.id}&newId=${this.editedAItem.newId}`)
+      axios.delete(`http://172.16.10.5:3002/api/inventions/delete?id=${this.editedAItem.id}&newId=${this.editedAItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editAItem.id}`);
           this.itemsA.splice(this.editedAIndex, 1)
@@ -1548,7 +1548,7 @@ export default {
     },
     deleteGItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.3:3002/api/inventions/delete?id=${this.editedGItem.id}&newId=${this.editedGItem.newId}`)
+      axios.delete(`http://172.16.10.5:3002/api/inventions/delete?id=${this.editedGItem.id}&newId=${this.editedGItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editGItem.id}`);
           this.itemsG.splice(this.editedGIndex, 1)
@@ -1661,7 +1661,7 @@ export default {
           'newId': this.editedItem.newId,
         }
 
-        axios.put("http://172.16.10.3:3002/api/inventions/update?id="+this.editedItem.id, data)
+        axios.put("http://172.16.10.5:3002/api/inventions/update?id="+this.editedItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -1697,7 +1697,7 @@ export default {
         for (let file of this.editedItem.inventionDownload) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.3:3002/api/inventions/create?userId="+this.userId, formData)
+        axios.post("http://172.16.10.5:3002/api/inventions/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
@@ -1730,7 +1730,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.3:3002/api/inventions/update?id="+this.editedMItem.id, data)
+        axios.put("http://172.16.10.5:3002/api/inventions/update?id="+this.editedMItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
@@ -1766,7 +1766,7 @@ export default {
         for (let file of this.editedMItem.inventionDownload) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.3:3002/api/inventions/create?userId="+this.userId, formData)
+        axios.post("http://172.16.10.5:3002/api/inventions/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsM.push(response.data)
@@ -1798,7 +1798,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.3:3002/api/inventions/update?id="+this.editedYItem.id, data)
+        axios.put("http://172.16.10.5:3002/api/inventions/update?id="+this.editedYItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsY[this.editedYIndex], this.editedYItem)
@@ -1834,7 +1834,7 @@ export default {
         for (let file of this.editedYItem.inventionDownload) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.3:3002/api/inventions/create?userId="+this.userId, formData)
+        axios.post("http://172.16.10.5:3002/api/inventions/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsY.push(response.data)
@@ -1866,7 +1866,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.3:3002/api/inventions/update?id="+this.editedNItem.id, data)
+        axios.put("http://172.16.10.5:3002/api/inventions/update?id="+this.editedNItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsN[this.editedNIndex], this.editedNItem)
@@ -1902,7 +1902,7 @@ export default {
         for (let file of this.editedNItem.inventionDownload) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.3:3002/api/inventions/create?userId="+this.userId, formData)
+        axios.post("http://172.16.10.5:3002/api/inventions/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsN.push(response.data)
@@ -1934,7 +1934,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.3:3002/api/inventions/update?id="+this.editedAItem.id, data)
+        axios.put("http://172.16.10.5:3002/api/inventions/update?id="+this.editedAItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
@@ -1970,7 +1970,7 @@ export default {
         for (let file of this.editedAItem.inventionDownload) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.3:3002/api/inventions/create?userId="+this.userId, formData)
+        axios.post("http://172.16.10.5:3002/api/inventions/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsA.push(response.data)
@@ -2002,7 +2002,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.3:3002/api/inventions/update?id="+this.editedGItem.id, data)
+        axios.put("http://172.16.10.5:3002/api/inventions/update?id="+this.editedGItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsG[this.editedGIndex], this.editedGItem)
@@ -2038,7 +2038,7 @@ export default {
         for (let file of this.editedGItem.inventionDownload) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.3:3002/api/inventions/create?userId="+this.userId, formData)
+        axios.post("http://172.16.10.5:3002/api/inventions/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsG.push(response.data)
@@ -2081,9 +2081,9 @@ export default {
         .catch(() => console.log('error occured'))
     },
     downloadDoc(item) {
-      /*let url = "http://172.16.10.3:3002/api/academics/download?userId="+item.userId+"&file="+item.inventionDownload
+      /*let url = "http://172.16.10.5:3002/api/academics/download?userId="+item.userId+"&file="+item.inventionDownload
       window.location.href = url;*/
-      this.downloadWithAxios("http://172.16.10.3:3002/api/inventions/download?userId="+item.userId+"&file="+item.inventionDownload,item.inventionDownload)
+      this.downloadWithAxios("http://172.16.10.5:3002/api/inventions/download?userId="+item.userId+"&file="+item.inventionDownload,item.inventionDownload)
     },
   },
 
@@ -2149,7 +2149,7 @@ export default {
 
   mounted() {
     axios
-      .get(`http://172.16.10.3:3002/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=51`)
+      .get(`http://172.16.10.5:3002/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=51`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -2166,7 +2166,7 @@ export default {
       });
 
     axios
-      .get(`http://172.16.10.3:3002/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=52`)
+      .get(`http://172.16.10.5:3002/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=52`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -2182,7 +2182,7 @@ export default {
       });
 
     axios
-      .get(`http://172.16.10.3:3002/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=53`)
+      .get(`http://172.16.10.5:3002/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=53`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -2198,7 +2198,7 @@ export default {
       });
 
     axios
-      .get(`http://172.16.10.3:3002/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=54`)
+      .get(`http://172.16.10.5:3002/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=54`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -2214,7 +2214,7 @@ export default {
       });
 
     axios
-      .get(`http://172.16.10.3:3002/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=55`)
+      .get(`http://172.16.10.5:3002/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=55`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -2230,7 +2230,7 @@ export default {
       });
 
     axios
-      .get(`http://172.16.10.3:3002/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=56`)
+      .get(`http://172.16.10.5:3002/api/inventions/type?userId=${this.userId}&limit=10&offset=0&type=56`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

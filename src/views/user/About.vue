@@ -544,7 +544,7 @@
         'Fan dokgtori (professor)lar',
         'Fan nomzodi, PhD (dotsentlar)',
         'Katta o`qituvchilar','Assistentlar'],
-      photo: "http://api.nammti.uz/uploads/photos/",
+      photo: "http://172.16.10.5:3002/uploads/photos/",
       faculties: [],
       departments: [],
       messages: [
@@ -629,7 +629,7 @@
           formData.append('avatar', this.editedItem.avatar)
         }
         console.log(this.getId())
-        axios.put("http://172.16.10.3:3002/api/users/personal?userId=" + this.editedItem.userId, formData)
+        axios.put("http://172.16.10.5:3002/api/users/personal?userId=" + this.editedItem.userId, formData)
           .then(response => {
             console.log(response.data)
             this.overlay = false
@@ -660,7 +660,7 @@
         }
 
         console.log(this.getId())
-        axios.put("http://172.16.10.3:3002/api/users/diploma?userId=" + this.editedItem.userId, data)
+        axios.put("http://172.16.10.5:3002/api/users/diploma?userId=" + this.editedItem.userId, data)
           .then(response => {
             console.log(response.data)
             this.overlay = false
@@ -688,7 +688,7 @@
         }
 
         console.log(this.getId())
-        axios.put("http://172.16.10.3:3002/api/users/diploma?userId=" + this.editedItem.userId, data)
+        axios.put("http://172.16.10.5:3002/api/users/diploma?userId=" + this.editedItem.userId, data)
           .then(response => {
             console.log(response.data)
             this.overlay = false
@@ -712,7 +712,7 @@
     },
     async mounted(){
       await axios
-        .get(`http://172.16.10.3:3002/api/users/personal?userId=${this.getId()}`)
+        .get(`http://172.16.10.5:3002/api/users/personal?userId=${this.getId()}`)
         .then(response => {
           const data  = response.data
           console.log(data)
@@ -728,7 +728,7 @@
         });
 
       await axios
-        .get(`http://172.16.10.3:3002/api/users/diploma?userId=${this.getId()}`)
+        .get(`http://172.16.10.5:3002/api/users/diploma?userId=${this.getId()}`)
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {
@@ -739,7 +739,7 @@
         });
 
       await axios
-        .get(`http://172.16.10.3:3002/api/users/training?userId=${this.getId()}`)
+        .get(`http://172.16.10.5:3002/api/users/training?userId=${this.getId()}`)
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {
@@ -750,7 +750,7 @@
         });
 
       await axios
-        .get(`http://172.16.10.3:3002/api/commons/faculty`)
+        .get(`http://172.16.10.5:3002/api/commons/faculty`)
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {
@@ -760,7 +760,7 @@
         });
 
       await axios
-        .get(`http://172.16.10.3:3002/api/commons/department`)
+        .get(`http://172.16.10.5:3002/api/commons/department`)
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {
