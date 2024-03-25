@@ -7,11 +7,12 @@
 <script>
 import Chart from 'chart.js'
 import axios from "axios";
+import url from "@/utils/url";
 
 export default {
   name: 'UChart',
   mounted() {
-    axios.get("http://172.16.10.5:3002/api/commons/faculty" )
+    axios.get(url.baseURL + "/api/commons/faculty" )
       .then(response => {
 
         this.overlay = false
@@ -21,7 +22,7 @@ export default {
         data.sort( (a, b) => a.score - b.score);
         for (const departmentsKey in data) {
           fal.push(response.data[departmentsKey].faculty)
-          scorF.push(response.data[departmentsKey].score)
+          scorF.push(parseFloat(response.data[departmentsKey].score).toFixed(2))
         }
         console.log(fal)
         console.log(scorF)

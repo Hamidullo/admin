@@ -885,6 +885,7 @@
 
 <script>
 import axios from "axios";
+import url from "@/utils/url";
 
 export default {
   data () {
@@ -1238,7 +1239,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.5:3002/api/projects/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+      axios.delete(url.baseURL +`/api/projects/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
@@ -1253,7 +1254,7 @@ export default {
     },
     deleteMItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.5:3002/api/projects/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
+      axios.delete(url.baseURL +`/api/projects/delete?id=${this.editedMItem.id}&newId=${this.editedMItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editMItem.id}`);
           this.itemsM.splice(this.editedMIndex, 1)
@@ -1268,7 +1269,7 @@ export default {
     },
     deleteYItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.5:3002/api/projects/delete?id=${this.editedYItem.id}&newId=${this.editedYItem.newId}`)
+      axios.delete(url.baseURL +`/api/projects/delete?id=${this.editedYItem.id}&newId=${this.editedYItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editYItem.id}`);
           this.itemsY.splice(this.editedYIndex, 1)
@@ -1283,7 +1284,7 @@ export default {
     },
     deleteNItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.5:3002/api/projects/delete?id=${this.editedNItem.id}&newId=${this.editedNItem.newId}`)
+      axios.delete(url.baseURL +`/api/projects/delete?id=${this.editedNItem.id}&newId=${this.editedNItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editNItem.id}`);
           this.itemsN.splice(this.editedNIndex, 1)
@@ -1298,7 +1299,7 @@ export default {
     },
     deleteAItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.5:3002/api/projects/delete?id=${this.editedAItem.id}&newId=${this.editedAItem.newId}`)
+      axios.delete(url.baseURL +`/api/projects/delete?id=${this.editedAItem.id}&newId=${this.editedAItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editAItem.id}`);
           this.itemsA.splice(this.editedAIndex, 1)
@@ -1397,7 +1398,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.5:3002/api/works/update?id="+this.editedItem.id, data)
+        axios.put(url.baseURL +"/api/works/update?id="+this.editedItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -1436,7 +1437,7 @@ export default {
         for (let file of this.editedItem.projectDoc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.5:3002/api/projects/create?userId="+this.userId, formData)
+        axios.post(url.baseURL +"/api/projects/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
@@ -1467,7 +1468,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.5:3002/api/works/update?id="+this.editedMItem.id, data)
+        axios.put(url.baseURL +"/api/works/update?id="+this.editedMItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsM[this.editedMIndex], this.editedMItem)
@@ -1506,7 +1507,7 @@ export default {
         for (let file of this.editedMItem.projectDoc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.5:3002/api/projects/create?userId="+this.userId, formData)
+        axios.post(url.baseURL +"/api/projects/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsM.push(response.data)
@@ -1537,7 +1538,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.5:3002/api/works/update?id="+this.editedYItem.id, data)
+        axios.put(url.baseURL +"/api/works/update?id="+this.editedYItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsY[this.editedYIndex], this.editedYItem)
@@ -1576,7 +1577,7 @@ export default {
         for (let file of this.editedYItem.projectDoc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.5:3002/api/projects/create?userId="+this.userId, formData)
+        axios.post(url.baseURL +"/api/projects/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsY.push(response.data)
@@ -1607,7 +1608,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.5:3002/api/works/update?id="+this.editedNItem.id, data)
+        axios.put(url.baseURL +"/api/works/update?id="+this.editedNItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsN[this.editedNIndex], this.editedNItem)
@@ -1646,7 +1647,7 @@ export default {
         for (let file of this.editedNItem.projectDoc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.5:3002/api/projects/create?userId="+this.userId, formData)
+        axios.post(url.baseURL +"/api/projects/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsN.push(response.data)
@@ -1677,7 +1678,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.5:3002/api/works/update?id="+this.editedAItem.id, data)
+        axios.put(url.baseURL +"/api/works/update?id="+this.editedAItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsA[this.editedAIndex], this.editedAItem)
@@ -1716,7 +1717,7 @@ export default {
         for (let file of this.editedAItem.projectDoc) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.5:3002/api/projects/create?userId="+this.userId, formData)
+        axios.post(url.baseURL +"/api/projects/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsA.push(response.data)
@@ -1761,7 +1762,7 @@ export default {
     downloadDoc(item) {
       /*let url = "http://172.16.10.5:3002/api/academics/download?userId="+item.userId+"&file="+item.projectDoc
       window.location.href = url;*/
-      this.downloadWithAxios("http://172.16.10.5:3002/api/projects/download?userId="+item.userId+"&file="+item.projectDoc,item.projectDoc)
+      this.downloadWithAxios(url.baseURL +"/api/projects/download?userId="+item.userId+"&file="+item.projectDoc,item.projectDoc)
     },
 
   },
@@ -1819,7 +1820,7 @@ export default {
 
   mounted() {
     axios
-      .get(`http://172.16.10.5:3002/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=41`)
+      .get(url.baseURL +`/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=41`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1836,7 +1837,7 @@ export default {
       });
 
     axios
-      .get(`http://172.16.10.5:3002/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=42`)
+      .get(url.baseURL +`/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=42`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1852,7 +1853,7 @@ export default {
       });
 
     axios
-      .get(`http://172.16.10.5:3002/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=43`)
+      .get(url.baseURL +`/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=43`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1868,7 +1869,7 @@ export default {
       });
 
     axios
-      .get(`http://172.16.10.5:3002/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=44`)
+      .get(url.baseURL +`/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=44`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1884,7 +1885,7 @@ export default {
       });
 
     axios
-      .get(`http://172.16.10.5:3002/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=45`)
+      .get(url.baseURL +`/api/projects/type?userId=${this.userId}&limit=10&offset=0&type=45`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

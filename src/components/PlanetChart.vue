@@ -1,5 +1,6 @@
 <template>
   <div style="height: 400px;">
+    <h3 align="center">Institut bo’yicha kafedralar reytingi</h3>
     <canvas id="planet-chart"></canvas>
   </div>
 </template>
@@ -7,12 +8,13 @@
 <script>
 import Chart from 'chart.js'
 import axios from "axios";
+import url from "@/utils/url";
 
 export default {
   name: 'PlanetChart',
   mounted() {
 
-    axios.get("http://172.16.10.5:3002/api/commons/department" )
+    axios.get(url.baseURL + "/api/commons/department" )
       .then(response => {
 
         this.overlay = false
@@ -22,7 +24,7 @@ export default {
         data.sort( (a, b) => a.score - b.score);
         for (const departmentsKey in data) {
           deps.push(response.data[departmentsKey].department)
-          scorD.push(response.data[departmentsKey].score)
+          scorD.push(parseFloat(response.data[departmentsKey].score).toFixed(2))// parseFloat(response.data[departmentsKey].score).toFixed(2)
         }
 
         const ctx = document.getElementById('planet-chart');
@@ -32,7 +34,8 @@ export default {
             labels:  deps,
             datasets: [
               {
-                label: "Institut bo’yicha kafedralar reytingi",
+                /*label: "Institut bo’yicha kafedralar reytingi",*/
+                label: "Minimal ball",
                 data: scorD,
                 backgroundColor: [
                   'rgb(234,6,40)',

@@ -619,6 +619,7 @@
 
 <script>
 import axios from "axios";
+import url from "@/utils/url";
 
 export default {
   data () {
@@ -882,7 +883,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.5:3002/api/academics/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+      axios.delete(url.baseURL + `/api/academics/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
@@ -897,7 +898,7 @@ export default {
     },
     deleteCItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.5:3002/api/academics/delete?id=${this.editedCItem.id}&newId=${this.editedCItem.newId}`)
+      axios.delete(url.baseURL + `/api/academics/delete?id=${this.editedCItem.id}&newId=${this.editedCItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editCItem.id}`);
           this.itemsC.splice(this.editedCIndex, 1)
@@ -912,7 +913,7 @@ export default {
     },
     deleteSItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.5:3002/api/academics/delete?id=${this.editedSItem.id}&newId=${this.editedSItem.newId}`)
+      axios.delete(url.baseURL + `/api/academics/delete?id=${this.editedSItem.id}&newId=${this.editedSItem.newId}`)
         .then(response => {
           console.log(`Deleteditem with ID ${this.editSItem.id}`);
           this.itemsS.splice(this.editedSIndex, 1)
@@ -989,7 +990,7 @@ export default {
           }
 
 
-          await axios.put("http://172.16.10.5:3002/api/academics/update?id="+this.editedItem.id, data)
+          await axios.put(url.baseURL + "/api/academics/update?id="+this.editedItem.id, data)
             .then(response => {
               console.log(response.data)
               Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -1035,7 +1036,7 @@ export default {
           for (let file of this.editedItem.doc) {
             formData.append("doc", file, file.name);
           }
-          await axios.post("http://172.16.10.5:3002/api/academics/create?userId="+this.userId, formData)
+          await axios.post(url.baseURL + "/api/academics/create?userId="+this.userId, formData)
             .then(response => {
               console.log(response.data)
               this.items.push(response.data)
@@ -1071,7 +1072,7 @@ export default {
             'newId': this.editedCItem.newId,
           }
 
-          await axios.put("http://172.16.10.5:3002/api/academics/update?id="+this.editedCItem.id, data)
+          await axios.put(url.baseURL + "/api/academics/update?id="+this.editedCItem.id, data)
             .then(response => {
               console.log(response.data)
               Object.assign(this.itemsC[this.editedCIndex], this.editedCItem)
@@ -1110,7 +1111,7 @@ export default {
           for (let file of this.editedCItem.doc) {
             formData.append("doc", file, file.name);
           }
-          await axios.post("http://172.16.10.5:3002/api/academics/create?userId="+this.userId, formData)
+          await axios.post(url.baseURL + "/api/academics/create?userId="+this.userId, formData)
             .then(response => {
               console.log(response.data)
               this.itemsC.push(response.data)
@@ -1146,7 +1147,7 @@ export default {
             'newId': this.editedSItem.newId,
           }
 
-          axios.put("http://172.16.10.5:3002/api/academics/update?id="+this.editedSItem.id, data)
+          axios.put(url.baseURL + "/api/academics/update?id="+this.editedSItem.id, data)
             .then(response => {
               console.log(response.data)
               Object.assign(this.itemsS[this.editedSIndex], this.editedSItem)
@@ -1185,7 +1186,7 @@ export default {
           for (let file of this.editedSItem.doc) {
             formData.append("doc", file, file.name);
           }
-          axios.post("http://172.16.10.5:3002/api/academics/create?userId="+this.userId, formData)
+          axios.post(url.baseURL + "/api/academics/create?userId="+this.userId, formData)
             .then(response => {
               console.log(response.data)
               this.itemsS.push(response.data)
@@ -1227,7 +1228,7 @@ export default {
     downloadDoc(item) {
       /*let url = "http://api.nammti.uz/api/academics/download?userId="+item.userId+"&file="+item.doc
       window.location.href = url;*/
-      this.downloadWithAxios("http://172.16.10.5:3002/api/academics/download?userId="+item.userId+"&file="+item.doc,item.doc)
+      this.downloadWithAxios(url.baseURL + "/api/academics/download?userId="+item.userId+"&file="+item.doc,item.doc)
     },
   },
 
@@ -1266,7 +1267,7 @@ export default {
 
   async mounted() {
     await axios
-      .get(`http://172.16.10.5:3002/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=11`)
+      .get(url.baseURL + `/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=11`)
       .then(response => {
         const data  = response.data
         console.log(data)
@@ -1284,7 +1285,7 @@ export default {
       });
 
     await axios
-      .get(`http://172.16.10.5:3002/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=12`)
+      .get(url.baseURL + `/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=12`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -1300,7 +1301,7 @@ export default {
       });
 
     await axios
-      .get(`http://172.16.10.5:3002/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=13`)
+      .get(url.baseURL + `/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=13`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

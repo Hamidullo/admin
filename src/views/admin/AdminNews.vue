@@ -159,6 +159,7 @@
 
 <script>
 import axios from "axios";
+import url from "@/utils/url";
 
 export default {
   data() {
@@ -248,7 +249,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.5:3002/api/news/delete?id=${this.editedItem.id}&newId=${this.editedItem.docId}`)
+      axios.delete(url.baseURL + `/api/news/delete?id=${this.editedItem.id}&docId=${this.editedItem.docId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
@@ -292,7 +293,7 @@ export default {
       }
 
 
-      axios.put("http://172.16.10.5:3002/api/news/confirm?id="+this.editedItem.id, data)
+      axios.put(url.baseURL + "/api/news/confirm?id="+this.editedItem.id, data)
         .then(response => {
           console.log(response.data)
           this.items.splice(this.editedIndex, 1)
@@ -332,10 +333,10 @@ export default {
     downloadDoc(item) {
       console.log("Download start")
       if (item.newFileUploaded){
-        /*let url = "http://172.16.10.5:3002/api/academics/download?userId="+item.userId+"&file="+item.newFileUploaded
+        /*let url = url.baseURL + "/api/academics/download?userId="+item.userId+"&file="+item.newFileUploaded
         console.log(url)
         window.location.href = url;*/
-        this.downloadWithAxios("http://172.16.10.5:3002/api/"+ item.tableName +"/download?userId="+item.userId+"&file="+item.newFileUploaded,item.newFileUploaded)
+        this.downloadWithAxios(url.baseURL + "/api/"+ item.tableName +"/download?userId="+item.userId+"&file="+item.newFileUploaded,item.newFileUploaded)
       } else {
         this.snackF = true
       }
@@ -345,7 +346,7 @@ export default {
 
   mounted() {
     axios
-      .get(`http://172.16.10.5:3002/api/news/typeAdmin?userId=${this.userId}&limit=10&offset=0`)
+      .get(url.baseURL + `/api/news/typeAdmin?userId=${this.userId}&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
         console.log(data)

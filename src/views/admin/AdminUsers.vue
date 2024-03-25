@@ -193,6 +193,7 @@
 
 <script>
 import axios from "axios";
+import url from "@/utils/url";
 
 export default {
   data() {
@@ -202,7 +203,7 @@ export default {
       positions: ['Prorektorlar',
         'Fakultet dekanlari',
         'Kafedra mudirlari',
-        'Fan dokgtori (professor)lar',
+        'Fan doktori (professor)lar',
         'Fan nomzodi, PhD (dotsentlar)',
         'Katta o`qituvchilar','Assistentlar'],
       faculties: [],
@@ -282,7 +283,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.5:3002/api/users/delete?userId=${this.editedItem.userId}`)
+      axios.delete(url.baseURL +`/api/users/delete?userId=${this.editedItem.userId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.userId}`);
           this.items.splice(this.editedIndex, 1)
@@ -323,7 +324,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.5:3002/api/users/admin?userId="+this.editedItem.userId, data)
+        axios.put(url.baseURL +"/api/users/admin?userId="+this.editedItem.userId, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -355,7 +356,7 @@ export default {
         }
         console.log(data)
 
-        axios.post("http://172.16.10.5:3002/api/users/create?userId="+this.editedItem.userId, data)
+        axios.post(url.baseURL +"/api/users/create?userId="+this.editedItem.userId, data)
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
@@ -379,7 +380,7 @@ export default {
     }
 
     await axios
-      .get(`http://172.16.10.5:3002/api/users/admin?userId=${this.userId}&limit=20&offset=0`)
+      .get(url.baseURL +`/api/users/admin?userId=${this.userId}&limit=20&offset=0`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -390,7 +391,7 @@ export default {
       });
 
     await axios
-      .get(`http://172.16.10.5:3002/api/commons/faculty`)
+      .get(url.baseURL +`/api/commons/faculty`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -400,7 +401,7 @@ export default {
       });
 
     await axios
-      .get(`http://172.16.10.5:3002/api/commons/department`)
+      .get(url.baseURL +`/api/commons/department`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

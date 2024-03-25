@@ -138,11 +138,12 @@
 
 <script>
 import axios from "axios";
+import url from "@/utils/url";
 
 export default {
     data () {
       return {
-        avatar: "http://172.16.10.5:3002/uploads/photos/" + localStorage.getItem("user-avatar"),
+        avatar: url.baseURL + "/uploads/photos/" + localStorage.getItem("user-avatar"),
         userId: localStorage.getItem("user-userId"),
         instP: 0,
         facP: 0,
@@ -151,7 +152,7 @@ export default {
         faculty: localStorage.getItem("user-faculty"),
         departments: [],
         department: localStorage.getItem("user-department"),
-        positions: ['Prorektorlar', 'Fakultet dekanlari', 'Kafedra mudirlari', 'Fan dokgtori (professor)lar', 'Fan nomzodi, PhD (dotsentlar)', 'Katta o`qituvchilar','Assistentlar'],
+        positions: ['Prorektorlar', 'Fakultet dekanlari', 'Kafedra mudirlari', 'Fan doktori (professor)lar', 'Fan nomzodi, PhD (dotsentlar)', 'Katta o`qituvchilar','Assistentlar'],
         position: 'Katta o`qituvchilar',
 
         search: '',
@@ -199,23 +200,27 @@ export default {
 
     async changeDepartment(a){
       await axios
-        .get(`http://172.16.10.5:3002/api/statistics/department?limit=10&offset=0&department=${a}`)
+        .get(url.baseURL + `/api/statistics/department?limit=10&offset=0&department=${a}`)
         .then(response => {
           const data  = response.data
           this.dessertsR.splice(0,this.dessertsR.length)
           console.log(this.dessertsR);
           for (const dataKey in data) {
+            data[dataKey].userScore = parseFloat(data[dataKey].userScore).toFixed(2)
+            data[dataKey].userShare = parseFloat(data[dataKey].userShare).toFixed(2)
             this.dessertsR.push(data[dataKey])
           }
         });
     },
     async changeFaculty(a){
       await axios
-        .get(`http://172.16.10.5:3002/api/statistics/faculty?limit=10&offset=0&faculty=${a}`)
+        .get(url.baseURL + `/api/statistics/faculty?limit=10&offset=0&faculty=${a}`)
         .then(response => {
           const data  = response.data
           this.itemsC.splice(0,this.itemsC.length)
           for (const dataKey in data) {
+            data[dataKey].userScore = parseFloat(data[dataKey].userScore).toFixed(2)
+            data[dataKey].userShare = parseFloat(data[dataKey].userShare).toFixed(2)
             this.itemsC.push(data[dataKey])
           }
         });
@@ -223,7 +228,7 @@ export default {
     async changePosition(a){
       console.log(a)
       /*await axios
-        .get(`http://api.nammti.uz/api/statistic/department?limit=10&offset=0${a}`)
+        .get(url.baseURL + `/api/statistic/department?limit=10&offset=0${a}`)
         .then(response => {
           const data  = response.data
           this.dessertsR.clear
@@ -236,30 +241,36 @@ export default {
 
   async mounted() {
     await axios
-      .get(`http://172.16.10.5:3002/api/commons/faculty`)
+      .get(url.baseURL + `/api/commons/faculty`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
+          data[dataKey].userScore = parseFloat(data[dataKey].userScore).toFixed(2)
+          data[dataKey].userShare = parseFloat(data[dataKey].userShare).toFixed(2)
           this.faculties.push(data[dataKey].faculty)
         }
       });
 
     await axios
-      .get(`http://172.16.10.5:3002/api/commons/department`)
+      .get(url.baseURL + `/api/commons/department`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
+          data[dataKey].userScore = parseFloat(data[dataKey].userScore).toFixed(2)
+          data[dataKey].userShare = parseFloat(data[dataKey].userShare).toFixed(2)
           this.departments.push(data[dataKey].department)
         }
       });
 
     await axios
-      .get(`http://172.16.10.5:3002/api/statistics/all?&limit=10&offset=0`)
+      .get(url.baseURL + `/api/statistics/all?&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
         console.log(data);
         let s = 0
         for (const dataKey in data) {
+          data[dataKey].userScore = parseFloat(data[dataKey].userScore).toFixed(2)
+          data[dataKey].userShare = parseFloat(data[dataKey].userShare).toFixed(2)
           this.desserts.push(data[dataKey])
           s++
           if(data[dataKey].userId === this.userId){
@@ -271,12 +282,14 @@ export default {
 
       console.log(this.faculty);
     await axios
-      .get(`http://172.16.10.5:3002/api/statistics/faculty?limit=10&offset=0&faculty=${this.faculty}`)
+      .get(url.baseURL + `/api/statistics/faculty?limit=10&offset=0&faculty=${this.faculty}`)
       .then(response => {
         const data  = response.data
         console.log(data);
         let s = 0
         for (const dataKey in data) {
+          data[dataKey].userScore = parseFloat(data[dataKey].userScore).toFixed(2)
+          data[dataKey].userShare = parseFloat(data[dataKey].userShare).toFixed(2)
           this.itemsC.push(data[dataKey])
           s++
           if(data[dataKey].userId === this.userId){
@@ -286,12 +299,14 @@ export default {
       });
       console.log(this.department);
     await axios
-      .get(`http://172.16.10.5:3002/api/statistics/department?limit=10&offset=0&department=${this.department}`)
+      .get(url.baseURL + `/api/statistics/department?limit=10&offset=0&department=${this.department}`)
       .then(response => {
         const data  = response.data
         console.log(data);
         let s = 0
         for (const dataKey in data) {
+          data[dataKey].userScore = parseFloat(data[dataKey].userScore).toFixed(2)
+          data[dataKey].userShare = parseFloat(data[dataKey].userShare).toFixed(2)
           this.dessertsR.push(data[dataKey])
           s++
           if(data[dataKey].userId === this.userId){

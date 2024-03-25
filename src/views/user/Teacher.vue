@@ -386,6 +386,7 @@
 
 <script>
 import axios from "axios";
+import url from "@/utils/url";
 
 export default {
   data () {
@@ -594,7 +595,7 @@ export default {
 
     deleteItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.5:3002/api/teachers/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
+      axios.delete(url.baseURL +`/api/teachers/delete?id=${this.editedItem.id}&newId=${this.editedItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.items.splice(this.editedIndex, 1)
@@ -609,7 +610,7 @@ export default {
     },
     deleteDItemConfirm () {
       this.overlay = true
-      axios.delete(`http://172.16.10.5:3002/api/achievements/delete?id=${this.editedDItem.id}&newId=${this.editedDItem.newId}`)
+      axios.delete(url.baseURL +`/api/achievements/delete?id=${this.editedDItem.id}&newId=${this.editedDItem.newId}`)
         .then(response => {
           console.log(`Delete item with ID ${this.editItem.id}`);
           this.itemsD.splice(this.editedDIndex, 1)
@@ -638,7 +639,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.5:3002/api/teachers/update?id="+this.editedItem.id, data)
+        axios.put(url.baseURL +"/api/teachers/update?id="+this.editedItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.items[this.editedIndex], this.editedItem)
@@ -686,7 +687,7 @@ export default {
         for (let file of this.editedItem.student) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.5:3002/api/teachers/create?userId="+this.userId, formData)
+        axios.post(url.baseURL +"/api/teachers/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.items.push(response.data)
@@ -717,7 +718,7 @@ export default {
         }
 
 
-        axios.put("http://172.16.10.5:3002/api/achievements/update?id="+this.editedDItem.id, data)
+        axios.put(url.baseURL +"/api/achievements/update?id="+this.editedDItem.id, data)
           .then(response => {
             console.log(response.data)
             Object.assign(this.itemsD[this.editedDIndex], this.editedDItem)
@@ -750,7 +751,7 @@ export default {
         for (let file of this.editedDItem.achievementDownload) {
           formData.append("doc", file, file.name);
         }
-        axios.post("http://172.16.10.5:3002/api/achievements/create?userId="+this.userId, formData)
+        axios.post(url.baseURL +"/api/achievements/create?userId="+this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.itemsD.push(response.data)
@@ -790,20 +791,20 @@ export default {
         .catch(() => console.log('error occured'))
     },
     downloadTDoc(item) {
-      /*let url = "http://172.16.10.5:3002/api/academics/download?userId="+item.userId+"&file="+item.student
+      /*let url = url.baseURL +"/api/academics/download?userId="+item.userId+"&file="+item.student
       window.location.href = url;*/
-      this.downloadWithAxios("http://172.16.10.5:3002/api/teachers/download?userId="+item.userId+"&file="+item.student,item.student)
+      this.downloadWithAxios(url.baseURL +"/api/teachers/download?userId="+item.userId+"&file="+item.student,item.student)
     },
     downloadADoc(item) {
-      /*let url = "http://172.16.10.5:3002/api/academics/download?userId="+item.userId+"&file="+item.achievementDownload
+      /*let url = url.baseURL +"/api/academics/download?userId="+item.userId+"&file="+item.achievementDownload
       window.location.href = url;*/
-      this.downloadWithAxios("http://172.16.10.5:3002/api/achievements/download?userId="+item.userId+"&file="+item.achievementDownload,item.achievementDownload)
+      this.downloadWithAxios(url.baseURL +"/api/achievements/download?userId="+item.userId+"&file="+item.achievementDownload,item.achievementDownload)
     },
   },
 
   mounted() {
     axios
-      .get(`http://172.16.10.5:3002/api/teachers/teacher?userId=${this.userId}&limit=10&offset=0`)
+      .get(url.baseURL +`/api/teachers/teacher?userId=${this.userId}&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {
@@ -820,7 +821,7 @@ export default {
       });
 
     axios
-      .get(`http://172.16.10.5:3002/api/achievements/achievement?userId=${this.userId}&limit=10&offset=0`)
+      .get(url.baseURL +`/api/achievements/achievement?userId=${this.userId}&limit=10&offset=0`)
       .then(response => {
         const data  = response.data
         for (const dataKey in data) {

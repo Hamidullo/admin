@@ -56,13 +56,15 @@
 
 <script>
 
+import url from "@/utils/url";
+
 export default {
 
   data() {
     return{
       drawer: true,
       rail: true,
-      avatar: "http://172.16.10.5:3002/uploads/photos/" + localStorage.getItem("user-avatar"),
+      avatar: url.baseURL + "/uploads/photos/" + localStorage.getItem("user-avatar"),
       name: localStorage.getItem("user-name"),
       model: 1,
       menus: [

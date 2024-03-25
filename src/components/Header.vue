@@ -61,11 +61,13 @@
 
 <script>
 
+import url from "@/utils/url";
+
 export default {
   data() {
     return{
       name: localStorage.getItem("user-name"),
-      avatar: "http://172.16.10.5:3002/uploads/photos/" + localStorage.getItem("user-avatar"),
+      avatar: url.baseURL + "/uploads/photos/" + localStorage.getItem("user-avatar"),
       position: localStorage.getItem("user-position"),
       menus: [
         { icon: 'mdi-account', title: 'Profile',  rout: 'About'},

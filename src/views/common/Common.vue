@@ -51,6 +51,7 @@ import PlanetChart from '@/components/PlanetChart.vue'
 import UChart from '@/components/UChart.vue'
 import axios from "axios";
 import nammti from '@/assets/nammti.png'
+import url from "@/utils/url";
 
 export default {
   components: {
@@ -91,12 +92,14 @@ export default {
 
   mounted() {
 
-    axios.get("http://172.16.10.5:3002/api/commons/faculty" )
+    axios.get(url.baseURL + "/api/commons/faculty" )
       .then(response => {
 
         this.overlay = false
 
         for (const departmentsKey in response.data) {
+          response.data[departmentsKey].score = parseFloat(response.data[departmentsKey].score).toFixed(2)
+          response.data[departmentsKey].share = parseFloat(response.data[departmentsKey].share).toFixed(2)
           this.items.push(response.data[departmentsKey])
         }
 

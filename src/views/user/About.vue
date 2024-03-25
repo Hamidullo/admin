@@ -329,7 +329,7 @@
                     <v-btn
                       class="bg-red"
                       variant="text"
-                      @click="dialogD = false">
+                      @click="closeD">
                       Yopish
                     </v-btn>
                     <v-btn
@@ -474,7 +474,7 @@
                     <v-btn
                       class="bg-red"
                       variant="text"
-                      @click="dialogO = false">
+                      @click="closeO">
                       Yopish
                     </v-btn>
                     <v-btn
@@ -529,6 +529,7 @@
 <script>
   import MyDialog from '@/components/MyDialog.vue';
   import axios from "axios";
+  import url from "@/utils/url";
   export default {
     components:{
       MyDialog
@@ -538,10 +539,11 @@
       snackF: false,
       snackS: false,
       snackD: false,
+      userId: localStorage.getItem("user-userId"),
       positions: ['Prorektorlar',
         'Fakultet dekanlari',
         'Kafedra mudirlari',
-        'Fan dokgtori (professor)lar',
+        'Fan doktori (professor)lar',
         'Fan nomzodi, PhD (dotsentlar)',
         'Katta o`qituvchilar','Assistentlar'],
       photo: "http://172.16.10.5:3002/uploads/photos/",
@@ -629,7 +631,7 @@
           formData.append('avatar', this.editedItem.avatar)
         }
         console.log(this.getId())
-        axios.put("http://172.16.10.5:3002/api/users/personal?userId=" + this.editedItem.userId, formData)
+        axios.put(url.baseURL + "/api/users/personal?userId=" + this.userId, formData)
           .then(response => {
             console.log(response.data)
             this.overlay = false
@@ -660,7 +662,7 @@
         }
 
         console.log(this.getId())
-        axios.put("http://172.16.10.5:3002/api/users/diploma?userId=" + this.editedItem.userId, data)
+        axios.put(url.baseURL + "/api/users/diploma?userId=" + this.userId, data)
           .then(response => {
             console.log(response.data)
             this.overlay = false
@@ -678,17 +680,17 @@
       saveO () {
         this.overlay = true
         var data  = {
-          'aud_training': this.diploma.aud_training,
-          'aud_lecture': this.diploma.aud_lecture,
-          'aud_practice': this.diploma.aud_practice,
-          'aud_laboratory': this.diploma.aud_laboratory,
-          'aud_seminar': this.diploma.aud_seminar,
-          'aud_cal_palne': this.diploma.aud_cal_palne,
-          'aud_without': this.diploma.aud_without
+          'aud_training': this.aud.aud_training,
+          'aud_lecture': this.aud.aud_lecture,
+          'aud_practice': this.aud.aud_practice,
+          'aud_laboratory': this.aud.aud_laboratory,
+          'aud_seminar': this.aud.aud_seminar,
+          'aud_cal_palne': this.aud.aud_cal_palne,
+          'aud_without': this.aud.aud_without
         }
 
         console.log(this.getId())
-        axios.put("http://172.16.10.5:3002/api/users/diploma?userId=" + this.editedItem.userId, data)
+        axios.put(url.baseURL + "/api/users/training?userId=" + this.userId, data)
           .then(response => {
             console.log(response.data)
             this.overlay = false
@@ -712,7 +714,7 @@
     },
     async mounted(){
       await axios
-        .get(`http://172.16.10.5:3002/api/users/personal?userId=${this.getId()}`)
+        .get(url.baseURL + `/api/users/personal?userId=${this.getId()}`)
         .then(response => {
           const data  = response.data
           console.log(data)
@@ -728,7 +730,7 @@
         });
 
       await axios
-        .get(`http://172.16.10.5:3002/api/users/diploma?userId=${this.getId()}`)
+        .get(url.baseURL + `/api/users/diploma?userId=${this.getId()}`)
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {
@@ -739,7 +741,7 @@
         });
 
       await axios
-        .get(`http://172.16.10.5:3002/api/users/training?userId=${this.getId()}`)
+        .get(url.baseURL + `/api/users/training?userId=${this.getId()}`)
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {
@@ -750,7 +752,7 @@
         });
 
       await axios
-        .get(`http://172.16.10.5:3002/api/commons/faculty`)
+        .get(url.baseURL + `/api/commons/faculty`)
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {
@@ -760,7 +762,7 @@
         });
 
       await axios
-        .get(`http://172.16.10.5:3002/api/commons/department`)
+        .get(url.baseURL + `/api/commons/department`)
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {
