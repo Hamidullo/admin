@@ -64,10 +64,10 @@ export default {
       scores: [],
 
       headers: [
-        { key: 'faculty',  title: 'Fakultet', align: 'start', sortable: false, },
+        { key: 'faculty',  title: 'Fakultetlar', align: 'start', sortable: false, },
         { key: 'count', title: 'Ilmiy salohiyat', align: 'center' },
         { key: 'share', title: 'Ulushi', align: 'center' },
-        { key: 'score', title: 'Berilgan Bal', align: 'center' }
+        { key: 'score', title: 'Berilgan Ball', align: 'center' }
       ],
       items: [],
 
