@@ -29,7 +29,7 @@
 
     <v-row align="center" justify="center">
       <v-col cols="6">
-        <v-card align="center" class="bg-color-container" flat title="Institut bo’yicha fakultetlar reytingi">
+        <v-card align="center" class="bg-color-container" flat title="Institut bo’yicha Fakultetlar reytingi">
           <v-data-table
             :headers="headers"
             :items="items"

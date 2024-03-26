@@ -1,6 +1,6 @@
 <template>
   <div style="height: 400px;">
-    <h3 align="center">Institut bo’yicha kafedralar reytingi</h3>
+    <h3 align="center">Institut bo’yicha Kafedralar reytingi</h3>
     <canvas id="planet-chart"></canvas>
   </div>
 </template>
