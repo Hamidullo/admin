@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://172.16.10.5:3002/api",
+  baseURL: "https://api.nammti.uz/api", //GHYe]ZlITnWS
   headers: {
     "Content-type": "application/json"
   }

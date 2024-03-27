@@ -546,7 +546,7 @@
         'Fan doktori (professor)lar',
         'Fan nomzodi, PhD (dotsentlar)',
         'Katta o`qituvchilar','Assistentlar'],
-      photo: "http://172.16.10.5:3002/uploads/photos/",
+      photo: url.baseURL +"/uploads/photos/",
       faculties: [],
       departments: [],
       messages: [
