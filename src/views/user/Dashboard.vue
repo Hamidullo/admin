@@ -154,7 +154,7 @@ export default {
         departments: [],
         department: localStorage.getItem("user-department"),
         positions: ['Prorektorlar', 'Fakultet dekanlari', 'Kafedra mudirlari', 'Fan doktori (professor)lar', 'Fan nomzodi, PhD (dotsentlar)', 'Katta o`qituvchilar','Assistentlar'],
-        position: 'Katta o`qituvchilar',
+        position: 'Fakultet dekanlari',
 
         search: '',
         headers: [
