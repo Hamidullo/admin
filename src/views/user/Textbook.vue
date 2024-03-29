@@ -710,6 +710,7 @@ export default {
       snackD: false,
       userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
+      userPosition: localStorage.getItem("user-position"),
       years: [2023,2024],
       mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
 
@@ -1147,6 +1148,7 @@ export default {
           formData.append('mounth', this.editedItem.mounth)
           formData.append('department', this.editedItem.department)
           formData.append('faculty', this.editedItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedItem.workDownload) {
@@ -1213,6 +1215,7 @@ export default {
           formData.append('mounth', this.editedQItem.mounth)
           formData.append('department', this.editedQItem.department)
           formData.append('faculty', this.editedQItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedQItem.workDownload) {
@@ -1280,6 +1283,7 @@ export default {
           formData.append('mounth', this.editedMItem.mounth)
           formData.append('department', this.editedMItem.department)
           formData.append('faculty', this.editedMItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedMItem.workDownload) {
@@ -1347,6 +1351,7 @@ export default {
           formData.append('mounth', this.editedKItem.mounth)
           formData.append('department', this.editedKItem.department)
           formData.append('faculty', this.editedKItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedKItem.workDownload) {

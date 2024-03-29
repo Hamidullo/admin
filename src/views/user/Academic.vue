@@ -634,7 +634,7 @@ export default {
         snackF: false,
         snackS: false,
         snackD: false,
-        position: localStorage.getItem("user-position"),
+        userPosition: localStorage.getItem("user-position"),
         userId: localStorage.getItem("user-userId"),
         userName: localStorage.getItem("user-name"),
         years: [2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],
@@ -1024,6 +1024,8 @@ export default {
           formData.append('mounth', this.editedItem.mounth)
           formData.append('department', this.editedItem.department)
           formData.append('faculty', this.editedItem.faculty)
+          formData.append('position', this.userPosition)
+
           if (this.editedItem.name === 'Fan doktorlik (DSc) diplomi'){
             this.editedItem.top = '1'
           } else if (this.editedItem.name === 'Fan nomzodi (PhD) diplomi'){
@@ -1106,6 +1108,7 @@ export default {
           formData.append('mounth', this.editedCItem.mounth)
           formData.append('department', this.editedCItem.department)
           formData.append('faculty', this.editedCItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedCItem.doc) {
@@ -1181,6 +1184,7 @@ export default {
           formData.append('mounth', this.editedSItem.mounth)
           formData.append('department', this.editedSItem.department)
           formData.append('faculty', this.editedSItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedSItem.doc) {

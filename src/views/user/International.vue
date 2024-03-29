@@ -411,6 +411,7 @@ export default {
         snackD: false,
         userId: localStorage.getItem("user-userId"),
         userName: localStorage.getItem("user-name"),
+        userPosition: localStorage.getItem("user-position"),
         years: [2023,2024],
         mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
 
@@ -655,6 +656,7 @@ export default {
           formData.append('mounth', this.editedItem.mounth)
           formData.append('department', this.editedItem.department)
           formData.append('faculty', this.editedItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedItem.internationalCertificate) {
@@ -722,6 +724,7 @@ export default {
           formData.append('mounth', this.editedCItem.mounth)
           formData.append('department', this.editedCItem.department)
           formData.append('faculty', this.editedCItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedCItem.internationalCertificate) {

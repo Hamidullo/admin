@@ -1468,6 +1468,7 @@ export default {
       snackD: false,
       userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
+      userPosition: localStorage.getItem("user-position"),
       years: [2023,2024],
       mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
 
@@ -2329,6 +2330,7 @@ export default {
           formData.append('newId', this.editedSItem.newId)
           formData.append('department', this.editedSItem.department)
           formData.append('faculty', this.editedSItem.faculty)
+          formData.append('position', this.userPosition)
 
           if (this.editedSItem.quarter === 'Q1'){
             formData.append('quarter', '1')
@@ -2412,6 +2414,7 @@ export default {
           formData.append('newId', this.editedWItem.newId)
           formData.append('department', this.editedWItem.department)
           formData.append('faculty', this.editedWItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedWItem.brainUploaded) {
@@ -2485,6 +2488,7 @@ export default {
           formData.append('newId', this.editedXItem.newId)
           formData.append('department', this.editedXItem.department)
           formData.append('faculty', this.editedXItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedXItem.brainUploaded) {
@@ -2558,6 +2562,7 @@ export default {
           formData.append('newId', this.editedRItem.newId)
           formData.append('department', this.editedRItem.department)
           formData.append('faculty', this.editedRItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedRItem.brainUploaded) {
@@ -2630,6 +2635,7 @@ export default {
           formData.append('newId', this.editedMItem.newId)
           formData.append('department', this.editedMItem.department)
           formData.append('faculty', this.editedMItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedMItem.brainUploaded) {
@@ -2702,6 +2708,7 @@ export default {
           formData.append('newId', this.editedAItem.newId)
           formData.append('department', this.editedAItem.department)
           formData.append('faculty', this.editedAItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedAItem.brainUploaded) {
@@ -2776,6 +2783,7 @@ export default {
           formData.append('newId', this.editedDItem.newId)
           formData.append('department', this.editedDItem.department)
           formData.append('faculty', this.editedDItem.faculty)
+          formData.append('position', this.userPosition)
 
           // files
           for (let file of this.editedDItem.brainUploaded) {

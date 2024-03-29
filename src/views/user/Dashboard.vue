@@ -124,9 +124,9 @@
 
         <v-data-table
           class="bg-color-position"
-          :headers="headersR"
-          :items="dessertsR"
-          :search="searchR"
+          :headers="headersT"
+          :items="dessertsT"
+          :search="searchT"
         ></v-data-table>
       </v-card>
     </v-col>
@@ -148,6 +148,7 @@ export default {
         instP: 0,
         facP: 0,
         depP: 0,
+        PosP: 0,
         faculties: [],
         faculty: localStorage.getItem("user-faculty"),
         departments: [],
@@ -227,15 +228,15 @@ export default {
     },
     async changePosition(a){
       console.log(a)
-      /*await axios
-        .get(url.baseURL + `/api/statistic/department?limit=10&offset=0${a}`)
+      await axios
+        .get(url.baseURL + `/api/statistic/position?limit=10&offset=0&position=${a}`)
         .then(response => {
           const data  = response.data
-          this.dessertsR.clear
+          this.dessertsT.clear
           for (const dataKey in data) {
-            this.dessertsR.push(data[dataKey])
+            this.dessertsT.push(data[dataKey])
           }
-        });*/
+        });
     },
   },
 
@@ -311,6 +312,23 @@ export default {
           s++
           if(data[dataKey].userId === this.userId){
               this.depP = s
+          }
+        }
+      });
+      console.log(this.position);
+    await axios
+      .get(url.baseURL + `/api/statistics/position?limit=10&offset=0&position=${this.position}`)
+      .then(response => {
+        const data  = response.data
+        console.log(data);
+        let s = 0
+        for (const dataKey in data) {
+          data[dataKey].userScore = parseFloat(data[dataKey].userScore).toFixed(2)
+          data[dataKey].userShare = parseFloat(data[dataKey].userShare).toFixed(2)
+          this.dessertsT.push(data[dataKey])
+          s++
+          if(data[dataKey].userId === this.userId){
+              this.PosP = s
           }
         }
       });

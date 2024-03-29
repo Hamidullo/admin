@@ -902,6 +902,7 @@ export default {
         snackD: false,
       userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
+      userPosition: localStorage.getItem("user-position"),
       years: [2023,2024],
       mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
 
@@ -1432,6 +1433,7 @@ export default {
         formData.append('mounth', this.editedItem.mounth)
         formData.append('department', this.editedItem.department)
         formData.append('faculty', this.editedItem.faculty)
+        formData.append('position', this.userPosition)
 
         // files
         for (let file of this.editedItem.projectDoc) {
@@ -1502,6 +1504,7 @@ export default {
         formData.append('mounth', this.editedMItem.mounth)
         formData.append('department', this.editedMItem.department)
         formData.append('faculty', this.editedMItem.faculty)
+        formData.append('position', this.userPosition)
 
         // files
         for (let file of this.editedMItem.projectDoc) {
@@ -1572,6 +1575,7 @@ export default {
         formData.append('mounth', this.editedYItem.mounth)
         formData.append('department', this.editedYItem.department)
         formData.append('faculty', this.editedYItem.faculty)
+        formData.append('position', this.userPosition)
 
         // files
         for (let file of this.editedYItem.projectDoc) {
@@ -1642,6 +1646,7 @@ export default {
         formData.append('mounth', this.editedNItem.mounth)
         formData.append('department', this.editedNItem.department)
         formData.append('faculty', this.editedNItem.faculty)
+        formData.append('position', this.userPosition)
 
         // files
         for (let file of this.editedNItem.projectDoc) {
@@ -1712,6 +1717,7 @@ export default {
         formData.append('mounth', this.editedAItem.mounth)
         formData.append('department', this.editedAItem.department)
         formData.append('faculty', this.editedAItem.faculty)
+        formData.append('position', this.userPosition)
 
         // files
         for (let file of this.editedAItem.projectDoc) {

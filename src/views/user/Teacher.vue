@@ -403,6 +403,7 @@ export default {
         snackD: false,
         userId: localStorage.getItem("user-userId"),
         userName: localStorage.getItem("user-name"),
+        userPosition: localStorage.getItem("user-position"),
         years: [2023,2024],
         mounth: [1,2,3,4,5,6,7,8,9,10,11,12],
 
@@ -679,6 +680,7 @@ export default {
         formData.append('position', this.editedItem.position)
         formData.append('department', this.editedItem.department)
         formData.append('faculty', this.editedItem.faculty)
+        formData.append('position', this.userPosition)
 
         formData.append('year', this.editedItem.year)
         formData.append('mounth', this.editedItem.mounth)
@@ -746,6 +748,7 @@ export default {
         formData.append('mounth', this.editedDItem.mounth)
         formData.append('department', this.editedDItem.department)
         formData.append('faculty', this.editedDItem.faculty)
+        formData.append('position', this.userPosition)
 
         // files
         for (let file of this.editedDItem.achievementDownload) {
