@@ -200,6 +200,7 @@ export default {
     },
 
     async changeDepartment(a){
+      console.log(a)
       await axios
         .get(url.baseURL + `/api/statistics/department?limit=10&offset=0&department=${a}`)
         .then(response => {
@@ -229,11 +230,14 @@ export default {
     async changePosition(a){
       console.log(a)
       await axios
-        .get(url.baseURL + `/api/statistic/position?limit=10&offset=0&position=${a}`)
+        .get(url.baseURL + `/api/statistics/position?limit=10&offset=0&position=${a}`)
         .then(response => {
           const data  = response.data
-          this.dessertsT.clear
+          console.log(data)
+          this.dessertsT.splice(0,this.dessertsT.length)
           for (const dataKey in data) {
+            data[dataKey].userScore = parseFloat(data[dataKey].userScore).toFixed(2)
+            data[dataKey].userShare = parseFloat(data[dataKey].userShare).toFixed(2)
             this.dessertsT.push(data[dataKey])
           }
         });
@@ -316,6 +320,7 @@ export default {
         }
       });
       console.log(this.position);
+    console.log(url.baseURL + `/api/statistics/position?limit=10&offset=0&position=${this.position}`)
     await axios
       .get(url.baseURL + `/api/statistics/position?limit=10&offset=0&position=${this.position}`)
       .then(response => {

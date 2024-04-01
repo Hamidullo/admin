@@ -1435,10 +1435,12 @@ export default {
   },
 
   async mounted() {
+
     await axios
       .get(url.baseURL +`/api/works/type?userId=${this.userId}&limit=10&offset=0&type=21`)
       .then(response => {
         const data  = response.data
+        console.log(data);
         for (const dataKey in data) {
           if (data[dataKey].news === 1){
             data[dataKey].news = 'Tekshirilmoqda'
