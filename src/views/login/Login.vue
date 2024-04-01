@@ -76,7 +76,7 @@ export default {
           this.snackS = true;
           localStorage.setItem("user-logged", true)
           let data = response.data
-          console.log(data)
+
           if (data.name){
             localStorage.setItem("user-id", response.data.id)
             localStorage.setItem("user-userId", response.data.userId)

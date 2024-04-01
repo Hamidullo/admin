@@ -105,15 +105,6 @@
                       </v-col>
                       <v-col
                         cols="12">
-                        <v-text-field
-                          v-model="editedItem.workStartND"
-                          clearable
-                          label="Ishga qabul qilinganligi to‘g‘risidagi buyruq raqami va sanasi"
-                          persistent-hint>
-                        </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
                         <v-file-input
                           show-size
                           :rules="rules"
@@ -314,20 +305,11 @@
                       </v-col>
                       <v-col
                         cols="12">
-                        <v-text-field
-                          v-model="editedCItem.workStartND"
-                          clearable
-                          label="Ishga qabul qilinganligi to‘g‘risidagi buyruq raqami va sanasi"
-                          persistent-hint>
-                        </v-text-field>
-                      </v-col>
-                      <v-col
-                        cols="12">
                         <v-file-input
                           show-size
                           :rules="rules"
-                          v-if="!editedCItem.docDownload"
-                          v-model="editedCItem.docDownload"
+                          v-if="!editedCItem.doc"
+                          v-model="editedCItem.doc"
                           label="Diplom yuklash">
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedCItem)">Diplom yuklash</v-btn>
@@ -507,8 +489,8 @@
                           <v-file-input
                             show-size
                             :rules="rules"
-                            v-if="!editedSItem.docDownload"
-                            v-model="editedSItem.docDownload"
+                            v-if="!editedSItem.doc"
+                            v-model="editedSItem.doc"
                             label="Diplom yuklash">
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedSItem)">Diplomni yuklash</v-btn>

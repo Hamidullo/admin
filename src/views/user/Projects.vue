@@ -619,7 +619,7 @@
                             show-size
                             label="Darslik yuklash">
                           </v-file-input>
-                          <v-btn size="x-large" v-else @click="downloadDoc(editedNItem)">Darslikni yuklash</v-btn>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedNItem)">Chekni yuklash</v-btn>
                         </v-col>
                       </v-row>
                     </v-form>
@@ -777,7 +777,7 @@
                             show-size
                             label="Chek yuklash">
                           </v-file-input>
-                          <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Chekni yuklash</v-btn>
+                          <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Buyruqni yuklash</v-btn>
                         </v-col>
                       </v-row>
                     </v-form>
