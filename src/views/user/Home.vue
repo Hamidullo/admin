@@ -29,7 +29,7 @@ export default {
   async mounted() {
     let user = localStorage.getItem("user-logged")
     let userData = localStorage.getItem("user-role")
-    console.log(userData, "home")
+
     if (!user){
       await this.$router.push({name: "Login"})
     } else {

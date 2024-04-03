@@ -334,8 +334,8 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-              <v-dialog class="bg-blue-grey-darken-1" v-model="dialogCDelete" width="auto">
-                <v-card>
+              <v-dialog v-model="dialogCDelete" width="auto">
+                <v-card class="bg-blue-grey-darken-4">
                   <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">“TOP-1000” ro‘yxatiga kiruvchi xorijiy oliy ta’lim tashkilotlarida himoya qilgan o'chirishni hohlaysizmi?</v-card-title>
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -516,7 +516,7 @@
                 </v-card>
               </v-dialog>
               <v-dialog v-model="dialogSDelete" width="auto">
-                <v-card>
+                <v-card class="bg-blue-grey-darken-4">
                   <v-card-title class="text-h5 text-center px-4 pt-4 mx-4 my-4">“Scopus” bo‘yicha Xirsh indeksi (h-indeks) ≥ 5 dan yuqoriligi o'chirishni hohlaysizmi?</v-card-title>
                   <v-card-actions>
                     <v-spacer></v-spacer>

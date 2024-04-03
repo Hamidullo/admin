@@ -1,11 +1,12 @@
 <template>
-  <v-container>
+  <v-container class="container" fluid>
 
     <div>
-      <v-img class="mx-auto mb-12" style="margin-top: 180px" max-width="450" max-height="90"
-             src="../../assets/nammti.png"></v-img>
+      <v-card class="mx-auto pa-8 pb-8" elevation="8" max-width="448" rounded="lg">
 
-      <v-card class="mx-auto pa-12 pb-8" elevation="8" max-width="448" rounded="lg">
+        <v-img class="mx-auto mb-6" max-width="450" max-height="90"
+               src="../../assets/nammti.png"></v-img>
+
         <div class="text-subtitle-1 text-medium-emphasis">Login</div>
 
         <v-text-field density="compact" placeholder="Hemis id" prepend-inner-icon="mdi-card-account-details" v-model="hemisId" type="number"
@@ -107,8 +108,6 @@ export default {
           this.snackF = true;
         });
 
-      } else {
-
       }
 
     }
@@ -120,17 +119,22 @@ export default {
       if (userData === "0"){
         this.$router.push({name: "Dashboard"})
       } else {
-
         this.$router.push({name: "AdminDash"})
       }
-
     }
   }
 
 }
 </script>
 
-
 <style scoped>
-
+.container{
+  width: 100%;
+  height: 100%;
+  background: url("https://images.inc.com/uploaded_files/image/1920x1080/getty_820889114_396686.jpg") no-repeat center center fixed;
+  background-size: cover;
+  align-content: center;
+}
 </style>
+
+

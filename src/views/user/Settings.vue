@@ -53,7 +53,7 @@
        title="Change Paswword"
        prepend-icon="mdi-lock"
        append-icon="mdi-open-in-new"
-       @click="changePassword"
+       @click="change"
        target="_blank"
        rel="noopener">
       </v-card>
@@ -93,6 +93,9 @@
       logout(){
         localStorage.clear()
         this.$router.push({name: "Login"})
+      },
+      change(){
+        this.$router.push({name: "Change"})
       }
     }
 

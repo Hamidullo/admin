@@ -17,6 +17,10 @@ class UserDataService {
     return http.put(`/users/${id}`, data);
   }
 
+  updatePassword(id, data) {
+    return http.put(`/users/change?userId=${id}`, data);
+  }
+
   delete(id) {
     return http.delete(`/users/delete/${id}`);
   }

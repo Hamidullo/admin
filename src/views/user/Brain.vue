@@ -2841,6 +2841,7 @@ export default {
       .get(url.baseURL +`/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=31`)
       .then(response => {
         const data  = response.data
+        console.log(data)
         for (const dataKey in data) {
           if (data[dataKey].news === 1){
             data[dataKey].news = 'Tekshirilmoqda'
