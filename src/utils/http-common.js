@@ -1,7 +1,8 @@
 import axios from "axios";
+import url from "@/utils/url";
 
 export default axios.create({
-  baseURL: "https://api.nammti.uz/api", //GHYe]ZlITnWS
+  baseURL: url.baseURL+"/api", //GHYe]ZlITnWS
   headers: {
     "Content-type": "application/json"
   }

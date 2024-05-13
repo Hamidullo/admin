@@ -713,8 +713,9 @@
       }
     },
     async mounted(){
+      console.log(url.baseURL + `/api/users/personal?userId=${this.userId}`)
       await axios
-        .get(url.baseURL + `/api/users/personal?userId=${this.getId()}`)
+        .get(url.baseURL + `/api/users/personal?userId=${this.userId}`)
         .then(response => {
           const data  = response.data
           console.log(data)
@@ -730,7 +731,7 @@
         });
 
       await axios
-        .get(url.baseURL + `/api/users/diploma?userId=${this.getId()}`)
+        .get(url.baseURL + `/api/users/diploma?userId=${this.userId}`)
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {
@@ -741,7 +742,7 @@
         });
 
       await axios
-        .get(url.baseURL + `/api/users/training?userId=${this.getId()}`)
+        .get(url.baseURL + `/api/users/training?userId=${this.userId}`)
         .then(response => {
           const data  = response.data
           for (const dataKey in data) {

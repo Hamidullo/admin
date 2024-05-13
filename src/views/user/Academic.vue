@@ -1255,6 +1255,7 @@ export default {
     await axios
       .get(url.baseURL + `/api/academics/type?userId=${this.userId}&limit=10&offset=0&type=11`)
       .then(response => {
+
         const data  = response.data
         console.log(data)
         for (const dataKey in data) {

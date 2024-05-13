@@ -917,6 +917,7 @@ export default {
         projectName: '',
         projectFinancing: '',
         projectPosition: '',
+        projectPositionName: '',
         project: '',
 
         year: 0,
@@ -937,6 +938,7 @@ export default {
         projectName: '',
         projectFinancing: '',
         projectPosition: '',
+        projectPositionName: '',
         project: '',
 
         year: 0,
@@ -973,6 +975,7 @@ export default {
         projectName: '',
         projectFinancing: '',
         projectPosition: '',
+        projectPositionName: '',
         project: '',
 
         year: 0,
@@ -993,6 +996,7 @@ export default {
         projectName: '',
         projectFinancing: '',
         projectPosition: '',
+        projectPositionName: '',
         project: '',
 
         year: 0,
@@ -1028,6 +1032,7 @@ export default {
         projectName: '',
         projectFinancing: '',
         projectPosition: '',
+        projectPositionName: '',
         project: '',
 
         year: 0,
@@ -1048,6 +1053,7 @@ export default {
         projectName: '',
         projectFinancing: '',
         projectPosition: '',
+        projectPositionName: '',
         project: '',
 
         year: 0,
@@ -1083,6 +1089,7 @@ export default {
         projectName: '',
         projectFinancing: '',
         projectPosition: '',
+        projectPositionName: '',
         project: '',
 
         year: 0,
@@ -1103,6 +1110,7 @@ export default {
         projectName: '',
         projectFinancing: '',
         projectPosition: '',
+        projectPositionName: '',
         project: '',
 
         year: 0,
@@ -1138,6 +1146,7 @@ export default {
         projectName: '',
         projectFinancing: '',
         projectPosition: '',
+        projectPositionName: '',
         project: '',
 
         year: 0,
@@ -1158,6 +1167,7 @@ export default {
         projectName: '',
         projectFinancing: '',
         projectPosition: '',
+        projectPositionName: '',
         project: '',
 
         year: 0,
@@ -1416,9 +1426,9 @@ export default {
         this.overlay = true
         let formData = new FormData();
         if (this.editedItem.projectPosition === 'Raxbar'){
-          this.editedItem.position = 1
+          this.editedItem.projectPositionName = 1
         } else {
-          this.editedItem.position = 2
+          this.editedItem.projectPositionName = 2
         }
         formData.append('userId', this.userId)
         formData.append('name', this.editedItem.projectName)
@@ -1428,12 +1438,12 @@ export default {
         formData.append('financing', this.editedItem.projectFinancing)
         formData.append('project', this.editedItem.project)
         formData.append('positionName', this.editedItem.projectPosition)
-        formData.append('position', this.editedItem.position)
+        formData.append('projectPositionName', this.editedItem.projectPositionName)
+        formData.append('position', this.userPosition)
         formData.append('year', this.editedItem.year)
         formData.append('mounth', this.editedItem.mounth)
         formData.append('department', this.editedItem.department)
         formData.append('faculty', this.editedItem.faculty)
-        formData.append('position', this.userPosition)
 
         // files
         for (let file of this.editedItem.projectDoc) {
@@ -1487,9 +1497,9 @@ export default {
         this.overlay = true
         let formData = new FormData();
         if (this.editedMItem.projectPosition === 'Raxbar'){
-          this.editedMItem.position = 1
+          this.editedMItem.projectPositionName = 1
         } else {
-          this.editedMItem.position = 2
+          this.editedMItem.projectPositionName = 2
         }
         formData.append('userId', this.userId)
         formData.append('name', this.editedMItem.projectName)
@@ -1499,12 +1509,12 @@ export default {
         formData.append('financing', this.editedMItem.projectFinancing)
         formData.append('project', this.editedMItem.project)
         formData.append('positionName', this.editedMItem.projectPosition)
-        formData.append('position', this.editedMItem.position)
+        formData.append('projectPositionName', this.editedMItem.projectPositionName)
+        formData.append('position', this.userPosition)
         formData.append('year', this.editedMItem.year)
         formData.append('mounth', this.editedMItem.mounth)
         formData.append('department', this.editedMItem.department)
         formData.append('faculty', this.editedMItem.faculty)
-        formData.append('position', this.userPosition)
 
         // files
         for (let file of this.editedMItem.projectDoc) {
@@ -1558,9 +1568,9 @@ export default {
         this.overlay = true
         let formData = new FormData();
         if (this.editedYItem.projectPosition === 'Raxbar'){
-          this.editedYItem.position = 1
+          this.editedYItem.projectPositionName = 1
         } else {
-          this.editedYItem.position = 2
+          this.editedYItem.projectPositionName = 2
         }
         formData.append('userId', this.userId)
         formData.append('name', this.editedYItem.projectName)
@@ -1570,12 +1580,12 @@ export default {
         formData.append('financing', this.editedYItem.projectFinancing)
         formData.append('project', this.editedYItem.project)
         formData.append('positionName', this.editedYItem.projectPosition)
-        formData.append('position', this.editedYItem.position)
+        formData.append('projectPositionName', this.editedYItem.projectPositionName)
+        formData.append('position', this.userPosition)
         formData.append('year', this.editedYItem.year)
         formData.append('mounth', this.editedYItem.mounth)
         formData.append('department', this.editedYItem.department)
         formData.append('faculty', this.editedYItem.faculty)
-        formData.append('position', this.userPosition)
 
         // files
         for (let file of this.editedYItem.projectDoc) {
@@ -1629,9 +1639,9 @@ export default {
         this.overlay = true
         let formData = new FormData();
         if (this.editedNItem.projectPosition === 'Raxbar'){
-          this.editedNItem.position = 1
+          this.editedNItem.projectPositionName = 1
         } else {
-          this.editedNItem.position = 2
+          this.editedNItem.projectPositionName = 2
         }
         formData.append('userId', this.userId)
         formData.append('name', this.editedNItem.projectName)
@@ -1641,12 +1651,12 @@ export default {
         formData.append('financing', this.editedNItem.projectFinancing)
         formData.append('project', this.editedNItem.project)
         formData.append('positionName', this.editedNItem.projectPosition)
-        formData.append('position', this.editedNItem.position)
+        formData.append('projectPositionName', this.editedNItem.projectPositionName)
+        formData.append('position', this.userPosition)
         formData.append('year', this.editedNItem.year)
         formData.append('mounth', this.editedNItem.mounth)
         formData.append('department', this.editedNItem.department)
         formData.append('faculty', this.editedNItem.faculty)
-        formData.append('position', this.userPosition)
 
         // files
         for (let file of this.editedNItem.projectDoc) {
@@ -1700,9 +1710,9 @@ export default {
         this.overlay = true
         let formData = new FormData();
         if (this.editedAItem.projectPosition === 'Raxbar'){
-          this.editedAItem.position = 1
+          this.editedAItem.projectPositionName = 1
         } else {
-          this.editedAItem.position = 2
+          this.editedAItem.projectPositionName = 2
         }
         formData.append('userId', this.userId)
         formData.append('name', this.editedAItem.projectName)
@@ -1712,12 +1722,12 @@ export default {
         formData.append('financing', this.editedAItem.projectFinancing)
         formData.append('project', this.editedAItem.project)
         formData.append('positionName', this.editedAItem.projectPosition)
-        formData.append('position', this.editedAItem.position)
+        formData.append('projectPositionName', this.editedAItem.projectPositionName)
+        formData.append('position', this.userPosition)
         formData.append('year', this.editedAItem.year)
         formData.append('mounth', this.editedAItem.mounth)
         formData.append('department', this.editedAItem.department)
         formData.append('faculty', this.editedAItem.faculty)
-        formData.append('position', this.userPosition)
 
         // files
         for (let file of this.editedAItem.projectDoc) {

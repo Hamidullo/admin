@@ -417,7 +417,7 @@ export default {
           type: 0,
           typeName: '',
           place: '',
-          position: '',
+          tecposition: '',
           department: localStorage.getItem("user-department"),
           faculty: localStorage.getItem("user-faculty"),
 
@@ -438,7 +438,7 @@ export default {
           type: 0,
           typeName: '',
           place: '',
-          position: '',
+          tecposition: '',
           department: localStorage.getItem("user-department"),
           faculty: localStorage.getItem("user-faculty"),
 
@@ -677,7 +677,7 @@ export default {
         formData.append('type', this.editedItem.type)
         formData.append('typeName', this.editedItem.typeName)
         formData.append('place', this.editedItem.place)
-        formData.append('position', this.editedItem.position)
+        formData.append('tecposition', this.editedItem.tecposition)
         formData.append('department', this.editedItem.department)
         formData.append('faculty', this.editedItem.faculty)
         formData.append('position', this.userPosition)
