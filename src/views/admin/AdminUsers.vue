@@ -164,6 +164,205 @@
       </v-data-table>
     </v-card>
 
+    <v-card v-if="isUserAdmin" class="px-6 py-6 mt-4">
+      <template v-slot:title>
+        Excel ga eksport
+      </template>
+
+      <v-label class="align-start font-weight-bold text-black">
+        1 - SIFAT(SALOHIYAT) KO‘RSATKICHI
+      </v-label>
+      <v-row class="mt-1">
+        <v-col  cols="3">
+          <v-btn class="w-100">
+            1.1
+          </v-btn>
+        </v-col>
+        <v-col  cols="3">
+          <v-btn class="w-100">
+            1.2
+          </v-btn>
+        </v-col>
+        <v-col  cols="3">
+          <v-btn class="w-100">
+            1.3
+          </v-btn>
+        </v-col>
+        <v-col  cols="3">
+          <v-btn class="w-100">
+            1.4
+          </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-label class="align-start font-weight-bold text-black mt-5">
+        2 - O’QUV-USLUBIY ISHLAR
+      </v-label>
+      <v-row class="mt-1">
+        <v-col  cols="3">
+          <v-btn class="w-100">
+            2.1
+          </v-btn>
+        </v-col>
+        <v-col  cols="3">
+          <v-btn class="w-100">
+            2.2
+          </v-btn>
+        </v-col>
+        <v-col  cols="3">
+          <v-btn class="w-100">
+            2.3
+          </v-btn>
+        </v-col>
+        <v-col  cols="3">
+          <v-btn class="w-100">
+            2.4
+          </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-label class="align-start font-weight-bold text-black mt-5">
+        3 - ILMIY ISHLAR
+      </v-label>
+      <v-row class="mt-1">
+        <v-col  cols="3">
+          <v-btn class="w-100">
+            3.1
+          </v-btn>
+        </v-col>
+        <v-col  cols="3">
+          <v-btn class="w-100">
+            3.2
+          </v-btn>
+        </v-col>
+        <v-col  cols="3">
+          <v-btn class="w-100">
+            3.3
+          </v-btn>
+        </v-col>
+        <v-col  cols="3">
+          <v-btn class="w-100">
+            3.4
+          </v-btn>
+        </v-col>
+        <v-col  cols="4">
+          <v-btn class="w-100">
+            3.5
+          </v-btn>
+        </v-col>
+        <v-col  cols="4">
+          <v-btn class="w-100">
+            3.6
+          </v-btn>
+        </v-col>
+        <v-col  cols="4">
+          <v-btn class="w-100">
+            3.7
+          </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-label class="align-start font-weight-bold text-black mt-5">
+        4 - LOYIHALAR VA TIJORATLASHTIRISH
+      </v-label>
+      <v-row class="mt-1">
+        <v-col  cols="2.5">
+          <v-btn class="w-100">
+            4.1
+          </v-btn>
+        </v-col>
+        <v-col  cols="2.5">
+          <v-btn class="w-100">
+            4.2
+          </v-btn>
+        </v-col>
+        <v-col  cols="2.5">
+          <v-btn class="w-100">
+            4.3
+          </v-btn>
+        </v-col>
+        <v-col  cols="2.5">
+          <v-btn class="w-100">
+            4.4
+          </v-btn>
+        </v-col>
+        <v-col  cols="2.5">
+          <v-btn class="w-100">
+            4.5
+          </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-label class="align-start font-weight-bold text-black mt-5">
+        5 - IXTIROCHILIK VA RATSIONALIZATORLIK
+      </v-label>
+      <v-row class="mt-1">
+        <v-col  cols="2">
+          <v-btn class="w-100">
+            5.1
+          </v-btn>
+        </v-col>
+        <v-col  cols="2">
+          <v-btn class="w-100">
+            5.2
+          </v-btn>
+        </v-col>
+        <v-col  cols="2">
+          <v-btn class="w-100">
+            5.3
+          </v-btn>
+        </v-col>
+        <v-col  cols="2">
+          <v-btn class="w-100">
+            5.4
+          </v-btn>
+        </v-col>
+        <v-col  cols="2">
+          <v-btn class="w-100">
+            5.5
+          </v-btn>
+        </v-col>
+        <v-col  cols="2">
+          <v-btn class="w-100">
+            5.6
+          </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-label class="align-start font-weight-bold text-black mt-5">
+        6 - XALQARO XAMKORLIK MASALALARI
+      </v-label>
+      <v-row class="mt-1">
+        <v-col  cols="6">
+          <v-btn class="w-100">
+            6.1
+          </v-btn>
+        </v-col>
+        <v-col  cols="6">
+          <v-btn class="w-100">
+            6.2
+          </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-label class="align-start font-weight-bold text-black mt-5">
+        7 - USTOZ-SHOGIRD TIZIMI
+      </v-label>
+      <v-row class="mt-1">
+        <v-col  cols="6">
+          <v-btn class="w-100">
+            7.1
+          </v-btn>
+        </v-col>
+        <v-col  cols="6">
+          <v-btn class="w-100">
+            7.2
+          </v-btn>
+        </v-col>
+      </v-row>
+
+    </v-card>
+
     <v-card
       v-else
       class="mx-auto"

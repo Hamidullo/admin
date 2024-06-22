@@ -554,7 +554,7 @@
         {from: 'Email:', message: '',  color: 'green',},
         {from: 'Telegram:', message: '',  color: 'blue',},
       ],
-      dialog: false,
+
       editedItem: {
         id: 0,
         name: localStorage.getItem("user-name"),
@@ -590,6 +590,7 @@
         aud_doc: '',
       },
 
+      dialog: false,
       dialogD: false,
       dialogO: false,
 

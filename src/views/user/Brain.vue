@@ -2859,6 +2859,7 @@ export default {
       .get(url.baseURL +`/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=32`)
       .then(response => {
         const data  = response.data
+        console.log(data)
         for (const dataKey in data) {
           if (data[dataKey].news === 1){
             data[dataKey].news = 'Tekshirilmoqda'
@@ -2875,6 +2876,7 @@ export default {
       .get(url.baseURL +`/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=33`)
       .then(response => {
         const data  = response.data
+        console.log(data)
         for (const dataKey in data) {
           if (data[dataKey].news === 1){
             data[dataKey].news = 'Tekshirilmoqda'
@@ -2892,6 +2894,7 @@ export default {
       .get(url.baseURL +`/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=34`)
       .then(response => {
         const data  = response.data
+        console.log(data)
         for (const dataKey in data) {
           if (data[dataKey].news === 1){
             data[dataKey].news = 'Tekshirilmoqda'
@@ -2908,6 +2911,7 @@ export default {
       .get(url.baseURL +`/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=35`)
       .then(response => {
         const data  = response.data
+        console.log(data)
         for (const dataKey in data) {
           if (data[dataKey].news === 1){
             data[dataKey].news = 'Tekshirilmoqda'
@@ -2925,6 +2929,7 @@ export default {
       .get(url.baseURL +`/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=36`)
       .then(response => {
         const data  = response.data
+        console.log(data)
         for (const dataKey in data) {
           if (data[dataKey].news === 1){
             data[dataKey].news = 'Tekshirilmoqda'
@@ -2942,6 +2947,7 @@ export default {
       .get(url.baseURL +`/api/brains/type?userId=${this.userId}&limit=10&offset=0&type=37`)
       .then(response => {
         const data  = response.data
+        console.log(data)
         for (const dataKey in data) {
           if (data[dataKey].news === 1){
             data[dataKey].news = 'Tekshirilmoqda'
