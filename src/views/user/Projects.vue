@@ -107,6 +107,12 @@
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Chekni yuklash</v-btn>
                       </v-col>
+                      <v-col
+                        cols="12">
+                        <v-label v-if="editedItem.description">
+                          Rad etilganligini sababi: {{editedItem.description}}
+                        </v-label>
+                      </v-col>
                     </v-row>
                   </v-form>
                 </v-card-text>
@@ -278,6 +284,12 @@
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Chek yuklash</v-btn>
                       </v-col>
+                      <v-col
+                        cols="12">
+                        <v-label v-if="editedMItem.description">
+                          Rad etilganligini sababi: {{editedMItem.description}}
+                        </v-label>
+                      </v-col>
                     </v-row>
                   </v-form>
                 </v-card-text>
@@ -448,6 +460,12 @@
                             label="Chek yuklash">
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedYItem)">Chek yuklash</v-btn>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedYItem.description">
+                            Rad etilganligini sababi: {{editedYItem.description}}
+                          </v-label>
                         </v-col>
                       </v-row>
                     </v-form>
@@ -621,6 +639,12 @@
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedNItem)">Chekni yuklash</v-btn>
                         </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedNItem.description">
+                            Rad etilganligini sababi: {{editedNItem.description}}
+                          </v-label>
+                        </v-col>
                       </v-row>
                     </v-form>
                   </v-card-text>
@@ -779,6 +803,12 @@
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Buyruqni yuklash</v-btn>
                         </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedAItem.description">
+                            Rad etilganligini sababi: {{editedAItem.description}}
+                          </v-label>
+                        </v-col>
                       </v-row>
                     </v-form>
                   </v-card-text>
@@ -897,9 +927,9 @@ export default {
             return 'Qator bo`sh bo`lmasligi kerak.'
           },
         ],
-        snackF: false,
-        snackS: false,
-        snackD: false,
+      snackF: false,
+      snackS: false,
+      snackD: false,
       userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
       userPosition: localStorage.getItem("user-position"),
@@ -919,6 +949,7 @@ export default {
         projectPosition: '',
         projectPositionName: '',
         project: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -940,6 +971,7 @@ export default {
         projectPosition: '',
         projectPositionName: '',
         project: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -977,6 +1009,7 @@ export default {
         projectPosition: '',
         projectPositionName: '',
         project: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -998,6 +1031,7 @@ export default {
         projectPosition: '',
         projectPositionName: '',
         project: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1034,6 +1068,7 @@ export default {
         projectPosition: '',
         projectPositionName: '',
         project: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1055,6 +1090,7 @@ export default {
         projectPosition: '',
         projectPositionName: '',
         project: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1091,6 +1127,7 @@ export default {
         projectPosition: '',
         projectPositionName: '',
         project: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1112,6 +1149,7 @@ export default {
         projectPosition: '',
         projectPositionName: '',
         project: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1148,6 +1186,7 @@ export default {
         projectPosition: '',
         projectPositionName: '',
         project: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1169,6 +1208,7 @@ export default {
         projectPosition: '',
         projectPositionName: '',
         project: '',
+        description: '',
 
         year: 0,
         mounth: 0,

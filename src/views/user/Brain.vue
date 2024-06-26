@@ -153,6 +153,12 @@
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedSItem)">Maqolani yuklash</v-btn>
                       </v-col>
+                      <v-col
+                        cols="12">
+                        <v-label v-if="editedSItem.description">
+                          Rad etilganligini sababi: {{editedSItem.description}}
+                        </v-label>
+                      </v-col>
                     </v-row>
                   </v-form>
                 </v-card-text>
@@ -355,6 +361,12 @@
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedWItem)">Maqolani yuklash</v-btn>
                       </v-col>
+                      <v-col
+                        cols="12">
+                        <v-label v-if="editedWItem.description">
+                          Rad etilganligini sababi: {{editedWItem.description}}
+                        </v-label>
+                      </v-col>
                     </v-row>
                   </v-form>
                 </v-card-text>
@@ -554,6 +566,12 @@
                             label="Maqola yuklash">
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedDItem)">Maqolani yuklash</v-btn>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedDItem.description">
+                            Rad etilganligini sababi: {{editedDItem.description}}
+                          </v-label>
                         </v-col>
                       </v-row>
                     </v-form>
@@ -758,6 +776,12 @@
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedXItem)">Maqolani yuklash</v-btn>
                         </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedXItem.description">
+                            Rad etilganligini sababi: {{editedXItem.description}}
+                          </v-label>
+                        </v-col>
                       </v-row>
                     </v-form>
                   </v-card-text>
@@ -954,6 +978,12 @@
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedRItem)">Maqolani yuklash</v-btn>
                         </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedRItem.description">
+                            Rad etilganligini sababi: {{editedRItem.description}}
+                          </v-label>
+                        </v-col>
                       </v-row>
                     </v-form>
                   </v-card-text>
@@ -1148,6 +1178,12 @@
                             label="Maqola yuklash">
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Maqolani yuklash</v-btn>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedMItem.description">
+                            Rad etilganligini sababi: {{editedMItem.description}}
+                          </v-label>
                         </v-col>
                       </v-row>
                     </v-form>
@@ -1345,6 +1381,12 @@
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Maqola yuklash</v-btn>
                         </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedAItem.description">
+                            Rad etilganligini sababi: {{editedAItem.description}}
+                          </v-label>
+                        </v-col>
                       </v-row>
                     </v-form>
                   </v-card-text>
@@ -1500,6 +1542,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1524,6 +1567,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1565,6 +1609,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1589,6 +1634,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1630,6 +1676,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1654,6 +1701,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1695,6 +1743,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1719,6 +1768,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1760,6 +1810,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1784,6 +1835,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1825,6 +1877,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1849,6 +1902,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1890,6 +1944,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),
@@ -1914,6 +1969,7 @@ export default {
         brainMagName: '',
         brainMagCountry: '',
         brainLink: '',
+        description: '',
 
         userName: localStorage.getItem("user-name"),
         department: localStorage.getItem("user-department"),

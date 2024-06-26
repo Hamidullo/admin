@@ -81,6 +81,14 @@
                           :items="['Rad etish', 'Tasdiqlash']">
                         </v-select>
                       </v-col>
+                      <v-col
+                        cols="12"
+                        md="8">
+                        <v-text-field
+                          v-model="editedItem.description"
+                          label="Izoh">
+                        </v-text-field>
+                      </v-col>
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -190,6 +198,7 @@ export default {
         newName: '',
         newAuthCount: 0,
         newAuthName: '',
+        description: '',
         news: '',
         docId: 0,
         tableName: '',
@@ -207,6 +216,7 @@ export default {
         newName: '',
         newAuthCount: 0,
         newAuthName: '',
+        description: '',
         news: '',
         docId: 0,
         tableName: '',
@@ -290,6 +300,7 @@ export default {
         'confirm': this.editedItem.newConfirmation,
         'confirmUserId': this.userId,
         'confirmName': this.userName,
+        'description': this.editedItem.description,
       }
 
 

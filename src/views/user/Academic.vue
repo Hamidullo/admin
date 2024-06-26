@@ -114,6 +114,12 @@
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Diplom yuklash</v-btn>
                       </v-col>
+                      <v-col
+                        cols="12">
+                        <v-label v-if="editedItem.description">
+                          Rad etilganligini sababi: {{editedItem.description}}
+                        </v-label>
+                      </v-col>
                     </v-row>
                   </v-form>
                 </v-card-text>
@@ -314,6 +320,12 @@
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedCItem)">Diplom yuklash</v-btn>
                       </v-col>
+                      <v-col
+                        cols="12">
+                        <v-label v-if="editedCItem.description">
+                          Rad etilganligini sababi: {{editedCItem.description}}
+                        </v-label>
+                      </v-col>
                     </v-row>
                   </v-form>
                 </v-card-text>
@@ -495,6 +507,12 @@
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedSItem)">Diplomni yuklash</v-btn>
                         </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedSItem.description">
+                            Rad etilganligini sababi: {{editedSItem.description}}
+                          </v-label>
+                        </v-col>
                       </v-row>
                     </v-form>
                   </v-card-text>
@@ -619,7 +637,8 @@ export default {
         userPosition: localStorage.getItem("user-position"),
         userId: localStorage.getItem("user-userId"),
         userName: localStorage.getItem("user-name"),
-        years: [1980,
+        years: [
+          1980,
           1981,
           1982,
           1983,
@@ -663,6 +682,7 @@ export default {
           dipType: '',
           series: '',
           number: '',
+          description: '',
 
           departmentName: '',
           workStartND: '',
@@ -690,6 +710,7 @@ export default {
           dipNumber: '',
           departmentName: '',
           workStartND: '',
+          description: '',
 
           year: 0,
           mounth: 0,
@@ -718,6 +739,7 @@ export default {
           dipType: '',
           series: '',
           number: '',
+          description: '',
 
           departmentName: '',
           workStartND: '',
@@ -744,6 +766,7 @@ export default {
           dipType: '',
           series: '',
           number: '',
+          description: '',
 
           departmentName: '',
           workStartND: '',
@@ -774,6 +797,7 @@ export default {
           dipType: '',
           series: '',
           number: '',
+          description: '',
 
           departmentName: '',
           workStartND: '',
@@ -800,6 +824,7 @@ export default {
           dipType: '',
           series: '',
           number: '',
+          description: '',
 
           departmentName: '',
           workStartND: '',
@@ -1062,7 +1087,6 @@ export default {
         this.$refs.form.resetValidation()
         this.close()
       }
-
     },
     async saveC () {
       const { valid } = await this.$refs.form.validate()

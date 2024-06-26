@@ -105,6 +105,12 @@
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">patentni yuklash</v-btn>
                       </v-col>
+                      <v-col
+                        cols="12">
+                        <v-label v-if="editedItem.description">
+                          Rad etilganligini sababi: {{editedItem.description}}
+                        </v-label>
+                      </v-col>
                     </v-row>
                   </v-form>
                 </v-card-text>
@@ -272,6 +278,12 @@
                           label="Patent yuklash">
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Patentni yuklash</v-btn>
+                      </v-col>
+                      <v-col
+                        cols="12">
+                        <v-label v-if="editedMItem.description">
+                          Rad etilganligini sababi: {{editedMItem.description}}
+                        </v-label>
                       </v-col>
                     </v-row>
                   </v-form>
@@ -441,6 +453,12 @@
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedYItem)">Patentni yuklash</v-btn>
                         </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedYItem.description">
+                            Rad etilganligini sababi: {{editedYItem.description}}
+                          </v-label>
+                        </v-col>
                       </v-row>
                     </v-form>
                   </v-card-text>
@@ -608,6 +626,12 @@
                             label="Patent yuklash">
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedNItem)">Patentni yuklash</v-btn>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedNItem.description">
+                            Rad etilganligini sababi: {{editedNItem.description}}
+                          </v-label>
                         </v-col>
                       </v-row>
                     </v-form>
@@ -777,6 +801,12 @@
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedAItem)">Guvohnomani yuklash</v-btn>
                         </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedAItem.description">
+                            Rad etilganligini sababi: {{editedAItem.description}}
+                          </v-label>
+                        </v-col>
                       </v-row>
                     </v-form>
                   </v-card-text>
@@ -945,6 +975,12 @@
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedGItem)">Guvohnomani yuklash</v-btn>
                         </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedGItem.description">
+                            Rad etilganligini sababi: {{editedGItem.description}}
+                          </v-label>
+                        </v-col>
                       </v-row>
                     </v-form>
                   </v-card-text>
@@ -1063,9 +1099,9 @@ export default {
             return 'Qator bo`sh bo`lmasligi kerak.'
           },
         ],
-        snackF: false,
-        snackS: false,
-        snackD: false,
+      snackF: false,
+      snackS: false,
+      snackD: false,
       userId: localStorage.getItem("user-userId"),
       userName: localStorage.getItem("user-name"),
       userPosition: localStorage.getItem("user-position"),
@@ -1084,6 +1120,7 @@ export default {
         inventionAuthorsCount: 0,
         inventionAuthorNames: '',
         inventionNumber: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1104,6 +1141,7 @@ export default {
         inventionAuthorsCount: 0,
         inventionAuthorNames: '',
         inventionNumber: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1128,6 +1166,7 @@ export default {
         inventionAuthorsCount: 0,
         inventionAuthorNames: '',
         inventionNumber: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1148,6 +1187,7 @@ export default {
         inventionAuthorsCount: 0,
         inventionAuthorNames: '',
         inventionNumber: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1172,6 +1212,7 @@ export default {
         inventionAuthorsCount: 0,
         inventionAuthorNames: '',
         inventionNumber: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1192,6 +1233,7 @@ export default {
         inventionAuthorsCount: 0,
         inventionAuthorNames: '',
         inventionNumber: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1216,6 +1258,7 @@ export default {
         inventionAuthorsCount: 0,
         inventionAuthorNames: '',
         inventionNumber: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1236,6 +1279,7 @@ export default {
         inventionAuthorsCount: 0,
         inventionAuthorNames: '',
         inventionNumber: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1260,6 +1304,7 @@ export default {
         inventionAuthorsCount: 0,
         inventionAuthorNames: '',
         inventionNumber: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1280,6 +1325,7 @@ export default {
         inventionAuthorsCount: 0,
         inventionAuthorNames: '',
         inventionNumber: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1304,6 +1350,7 @@ export default {
         inventionAuthorsCount: 0,
         inventionAuthorNames: '',
         inventionNumber: '',
+        description: '',
 
         year: 0,
         mounth: 0,
@@ -1324,6 +1371,7 @@ export default {
         inventionAuthorsCount: 0,
         inventionAuthorNames: '',
         inventionNumber: '',
+        description: '',
 
         year: 0,
         mounth: 0,

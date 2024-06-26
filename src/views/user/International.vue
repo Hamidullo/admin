@@ -112,6 +112,12 @@
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Sertifikatni yuklash</v-btn>
                       </v-col>
+                      <v-col
+                        cols="12">
+                        <v-label v-if="editedItem.description">
+                          Rad etilganligini sababi: {{editedItem.description}}
+                        </v-label>
+                      </v-col>
                     </v-row>
                   </v-form>
                 </v-card-text>
@@ -287,6 +293,12 @@
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedCItem)">Darslikni yuklash</v-btn>
                       </v-col>
+                      <v-col
+                        cols="12">
+                        <v-label v-if="editedCItem.description">
+                          Rad etilganligini sababi: {{editedCItem.description}}
+                        </v-label>
+                      </v-col>
                     </v-row>
                   </v-form>
                 </v-card-text>
@@ -427,6 +439,7 @@ export default {
           internationalCountry: '',
           internationalLessonsCount: '',
           internationalLessonsSize: '',
+          description: '',
 
           year: 0,
           mounth: 0,
@@ -447,6 +460,7 @@ export default {
           internationalCountry: '',
           internationalLessonsCount: '',
           internationalLessonsSize: '',
+          description: '',
 
           year: 0,
           mounth: 0,
@@ -471,6 +485,7 @@ export default {
           internationalCountry: '',
           internationalLessonsCount: '',
           internationalLessonsSize: '',
+          description: '',
 
           year: 0,
           mounth: 0,
@@ -491,6 +506,7 @@ export default {
           internationalCountry: '',
           internationalLessonsCount: '',
           internationalLessonsSize: '',
+          description: '',
 
           year: 0,
           mounth: 0,

@@ -133,7 +133,12 @@
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadTDoc(editedItem)">Hujjatni yuklash</v-btn>
                       </v-col>
-
+                      <v-col
+                        cols="12">
+                        <v-label v-if="editedItem.description">
+                          Rad etilganligini sababi: {{editedItem.description}}
+                        </v-label>
+                      </v-col>
                     </v-row>
                   </v-form>
                 </v-card-text>
@@ -279,6 +284,12 @@
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadADoc(editedDItem)">Sertifikatni yuklash</v-btn>
                         </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedDItem.description">
+                            Rad etilganligini sababi: {{editedDItem.description}}
+                          </v-label>
+                        </v-col>
                       </v-row>
                     </v-form>
                   </v-card-text>
@@ -420,6 +431,7 @@ export default {
           tecposition: '',
           department: localStorage.getItem("user-department"),
           faculty: localStorage.getItem("user-faculty"),
+          description: '',
 
           year: 0,
           mounth: 0,
@@ -433,6 +445,7 @@ export default {
         defaultItem: {
           id: 0,
           userName: localStorage.getItem("user-name"),
+          description: '',
 
           name: '',
           type: 0,
@@ -474,6 +487,7 @@ export default {
           achievementName: '',
           achievementSpecies: '',
           achievementNumber: '',
+          description: '',
 
           year: 0,
           mounth: 0,
@@ -493,6 +507,7 @@ export default {
           achievementName: '',
           achievementSpecies: '',
           achievementNumber: '',
+          description: '',
 
           year: 0,
           mounth: 0,

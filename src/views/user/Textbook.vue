@@ -96,6 +96,12 @@
                       </v-file-input>
                       <v-btn size="x-large" v-else @click="downloadDoc(editedItem)">Darslikni yuklash</v-btn>
                     </v-col>
+                    <v-col
+                      cols="12">
+                      <v-label v-if="editedItem.description">
+                        Rad etilganligini sababi: {{editedItem.description}}
+                      </v-label>
+                    </v-col>
                   </v-row>
                 </v-form>
               </v-card-text>
@@ -260,6 +266,12 @@
                         </v-file-input>
                         <v-btn size="x-large" v-else @click="downloadDoc(editedQItem)">O'quv qo'llanmani yuklash</v-btn>
                       </v-col>
+                      <v-col
+                        cols="12">
+                        <v-label v-if="editedQItem.description">
+                          Rad etilganligini sababi: {{editedQItem.description}}
+                        </v-label>
+                      </v-col>
                     </v-row>
                   </v-form>
                 </v-card-text>
@@ -423,6 +435,12 @@
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedMItem)">Monografiyani yuklash</v-btn>
                         </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedMItem.description">
+                            Rad etilganligini sababi: {{editedMItem.description}}
+                          </v-label>
+                        </v-col>
                       </v-row>
                     </v-form>
                   </v-card-text>
@@ -585,6 +603,12 @@
                             label="Uslubiy ko'rsatma yuklash">
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedKItem)">Uslubiy ko'rsatmani yuklash</v-btn>
+                        </v-col>
+                        <v-col
+                          cols="12">
+                          <v-label v-if="editedKItem.description">
+                            Rad etilganligini sababi: {{editedKItem.description}}
+                          </v-label>
                         </v-col>
                       </v-row>
                     </v-form>
@@ -773,6 +797,7 @@ export default {
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
+        description: '',
         year: 0,
         mounth: 0,
         userName: localStorage.getItem("user-name"),
@@ -791,6 +816,7 @@ export default {
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
+        description: '',
         year: 0,
         mounth: 0,
         news: '',
@@ -811,6 +837,7 @@ export default {
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
+        description: '',
         year: 0,
         mounth: 0,
         news: '',
@@ -829,6 +856,7 @@ export default {
         workAuthorCount: 0,
         workAuthorName: '',
         workNumber: '',
+        description: '',
         year: 0,
         mounth: 0,
         news: '',
@@ -852,6 +880,7 @@ export default {
         workAuthorName: '',
         workNumber: '',
         workYear: '',
+        description: '',
         year: 0,
         mounth: 0,
         news: '',
@@ -871,6 +900,7 @@ export default {
         workAuthorName: '',
         workNumber: '',
         workYear: '',
+        description: '',
         year: 0,
         mounth: 0,
         news: '',
@@ -894,6 +924,7 @@ export default {
         workAuthorName: '',
         workNumber: '',
         workYear: '',
+        description: '',
         year: 0,
         mounth: 0,
         news: '',
@@ -913,6 +944,7 @@ export default {
         workAuthorName: '',
         workNumber: '',
         workYear: '',
+        description: '',
         year: 0,
         mounth: 0,
         news: '',
