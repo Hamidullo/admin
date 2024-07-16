@@ -127,6 +127,7 @@
                         <v-file-input
                           v-if="!editedItem.student"
                           :rules="rules"
+                          accept=".docx, .doc, .png"
                           v-model="editedItem.student"
                           show-size
                           label="Hujjat yuklash">
@@ -278,6 +279,7 @@
                           <v-file-input
                             v-if="!editedDItem.achievementDownload"
                             :rules="rules"
+                            accept=".docx, .doc, .png"
                             v-model="editedDItem.achievementDownload"
                             show-size
                             label="Sertifikat yuklash">
@@ -405,8 +407,15 @@ export default {
         overlay: false,
         rules: [
           value => {
-            if (value) return true
-            return 'Qator bo`sh bo`lmasligi kerak.'
+            if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+            else if (value.length === 0) return 'Qator bo`sh bo`lmasligi kerak.'
+            return true
+          },
+        ],
+        rule: [
+          value => {
+            if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+            return true
           },
         ],
         snackF: false,

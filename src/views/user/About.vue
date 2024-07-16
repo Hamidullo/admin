@@ -183,7 +183,9 @@
                       cols="12">
                       <v-file-input
                         v-model="editedItem.newAvatar"
+                        accept="image/png, image/jpeg, image/bmp"
                         show-size
+                        :rules="rules"
                         label="Rasmni tanlang">
                       </v-file-input>
                     </v-col>
@@ -539,6 +541,11 @@
       snackF: false,
       snackS: false,
       snackD: false,
+      rules: [
+        value => {
+          return !value || !value.length || value[0].size < 2000000 || 'Avatar size should be less than 2 MB!'
+        },
+      ],
       userId: localStorage.getItem("user-userId"),
       positions: ['Prorektorlar',
         'Fakultet dekanlari',

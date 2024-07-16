@@ -105,6 +105,7 @@
                         md="6">
                         <v-file-input
                           v-if="!editedItem.internationalCertificate"
+                          accept=".docx, .doc, .png"
                           v-model="editedItem.internationalCertificate"
                           :rules="rules"
                           show-size
@@ -286,6 +287,7 @@
                         md="6">
                         <v-file-input
                           v-if="!editedCItem.internationalCertificate"
+                          accept=".docx, .doc, .png"
                           v-model="editedCItem.internationalCertificate"
                           :rules="rules"
                           show-size
@@ -414,10 +416,17 @@ export default {
         overlay: false,
         rules: [
           value => {
-            if (value) return true
-            return 'Qator bo`sh bo`lmasligi kerak.'
+            if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+            else if (value.length === 0) return 'Qator bo`sh bo`lmasligi kerak.'
+            return true
           },
         ],
+      rule: [
+        value => {
+          if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+          return true
+        },
+      ],
         snackF: false,
         snackS: false,
         snackD: false,

@@ -65,6 +65,7 @@
                         <v-text-field
                           v-model="editedItem.inventionAuthorNames"
                           clearable
+                          :rules="rule"
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
                           required>
@@ -99,6 +100,7 @@
                         <v-file-input
                         :rules="rules"
                           v-if="!editedItem.inventionDownload"
+                        accept=".docx, .doc, .png"
                           v-model="editedItem.inventionDownload"
                           show-size
                           label="Patent yuklash">
@@ -239,6 +241,7 @@
                         <v-text-field
                           v-model="editedMItem.inventionAuthorNames"
                           clearable
+                          :rules="rule"
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
                           required>
@@ -273,6 +276,7 @@
                         <v-file-input
                           :rules="rules"
                           v-if="!editedMItem.inventionDownload"
+                          accept=".docx, .doc, .png"
                           v-model="editedMItem.inventionDownload"
                           show-size
                           label="Patent yuklash">
@@ -389,7 +393,7 @@
                           sm="6"
                           md="6">
                           <v-text-field
-                          :rules="rules"
+                            :rules="rules"
                             v-model="editedYItem.inventionNumber"
                             clearable
                             required
@@ -414,6 +418,7 @@
                             v-model="editedYItem.inventionAuthorNames"
                             clearable
                             label="Ham mualliflar F.I.SH"
+                            :rules="rule"
                             persistent-hint
                             required>
                           </v-text-field>
@@ -446,6 +451,7 @@
                           md="6">
                           <v-file-input
                             v-if="!editedYItem.inventionDownload"
+                            accept=".docx, .doc, .png"
                             v-model="editedYItem.inventionDownload"
                             :rules="rules"
                             show-size
@@ -588,6 +594,7 @@
                             clearable
                             v-model="editedNItem.inventionAuthorNames"
                             label="Ham mualliflar F.I.SH"
+                            :rules="rule"
                             persistent-hint
                             required>
                           </v-text-field>
@@ -621,6 +628,7 @@
                           <v-file-input
                             v-if="!editedNItem.inventionDownload"
                             :rules="rules"
+                            accept=".docx, .doc, .png"
                             v-model="editedNItem.inventionDownload"
                             show-size
                             label="Patent yuklash">
@@ -762,6 +770,7 @@
                             clearable
                             v-model="editedAItem.inventionAuthorNames"
                             label="Ham mualliflar F.I.SH"
+                            :rules="rule"
                             persistent-hint
                             required>
                           </v-text-field>
@@ -795,6 +804,7 @@
                           <v-file-input
                             v-if="!editedAItem.inventionDownload"
                             :rules="rules"
+                            accept=".docx, .doc, .png"
                             v-model="editedAItem.inventionDownload"
                             show-size
                             label="Guvohnoma yuklash">
@@ -934,6 +944,7 @@
                           cols="12">
                           <v-text-field
                             v-model="editedGItem.inventionAuthorNames"
+                            :rules="rule"
                             clearable
                             label="Ham mualliflar F.I.SH"
                             persistent-hint
@@ -969,6 +980,7 @@
                           <v-file-input
                             v-if="!editedGItem.inventionDownload"
                             :rules="rules"
+                            accept=".docx, .doc, .png"
                             v-model="editedGItem.inventionDownload"
                             show-size
                             label="Guvohnoma yuklash">
@@ -1095,10 +1107,17 @@ export default {
       overlay: false,
       rules: [
           value => {
-            if (value) return true
-            return 'Qator bo`sh bo`lmasligi kerak.'
+            if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+            else if (value.length === 0) return 'Qator bo`sh bo`lmasligi kerak.'
+            return true
           },
         ],
+      rule: [
+        value => {
+          if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+          return true
+        },
+      ],
       snackF: false,
       snackS: false,
       snackD: false,

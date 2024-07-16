@@ -109,6 +109,7 @@
                           show-size
                           :rules="rules"
                           v-if="!editedItem.doc"
+                          accept=".docx, .doc, .png"
                           v-model="editedItem.doc"
                           label="Diplom yuklash">
                         </v-file-input>
@@ -314,6 +315,7 @@
                         <v-file-input
                           show-size
                           :rules="rules"
+                          accept=".docx, .doc, .png"
                           v-if="!editedCItem.doc"
                           v-model="editedCItem.doc"
                           label="Diplom yuklash">
@@ -501,16 +503,18 @@
                           <v-file-input
                             show-size
                             :rules="rules"
+                            accept=".docx, .doc, .png"
                             v-if="!editedSItem.doc"
                             v-model="editedSItem.doc"
                             label="Diplom yuklash">
+
                           </v-file-input>
                           <v-btn size="x-large" v-else @click="downloadDoc(editedSItem)">Diplomni yuklash</v-btn>
                         </v-col>
                         <v-col
                           cols="12">
                           <v-label v-if="editedSItem.description">
-                            Rad etilganligini sababi: {{editedSItem.description}}
+                            Izoh: {{editedSItem.description}}
                           </v-label>
                         </v-col>
                       </v-row>
@@ -627,8 +631,15 @@ export default {
         overlay: false,
         rules: [
           value => {
-            if (value) return true
-            return 'Qator bo`sh bo`lmasligi kerak.'
+            if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+            else if (value.length === 0) return 'Qator bo`sh bo`lmasligi kerak.'
+            return true
+          },
+        ],
+        rule: [
+          value => {
+            if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+            return true
           },
         ],
         snackF: false,

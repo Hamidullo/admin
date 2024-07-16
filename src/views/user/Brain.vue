@@ -78,6 +78,7 @@
                         <v-text-field
                           v-model="editedSItem.brainAuthorName"
                           clearable
+                          :rules="rule"
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
                           required>
@@ -146,6 +147,7 @@
                         cols="12">
                         <v-file-input
                           v-if="!editedSItem.brainUploaded"
+                          accept=".docx, .doc, .png"
                           v-model="editedSItem.brainUploaded"
                           show-size
                           :rules="rules"
@@ -287,6 +289,7 @@
                         <v-text-field
                           v-model="editedWItem.brainAuthorName"
                           clearable
+                          :rules="rule"
                           label="Ham mualliflar F.I.SH"
                           persistent-hint
                           required>
@@ -354,6 +357,7 @@
                         cols="12">
                         <v-file-input
                           v-if="!editedWItem.brainUploaded"
+                          accept=".docx, .doc, .png"
                           v-model="editedWItem.brainUploaded"
                           :rules="rules"
                           show-size
@@ -493,6 +497,7 @@
                           <v-text-field
                             v-model="editedDItem.brainAuthorName"
                             clearable
+                            :rules="rule"
                             label="Ham mualliflar F.I.SH"
                             persistent-hint
                             required>
@@ -561,6 +566,7 @@
                           <v-file-input
                             :rules="rules"
                             v-if="!editedDItem.brainUploaded"
+                            accept=".docx, .doc, .png"
                             v-model="editedDItem.brainUploaded"
                             show-size
                             label="Maqola yuklash">
@@ -701,6 +707,7 @@
                           <v-text-field
                             v-model="editedXItem.brainAuthorName"
                             clearable
+                            :rules="rule"
                             label="Ham mualliflar F.I.SH"
                             persistent-hint
                             required>
@@ -769,6 +776,7 @@
                           cols="12">
                           <v-file-input
                             v-if="!editedXItem.brainUploaded"
+                            accept=".docx, .doc, .png"
                             v-model="editedXItem.brainUploaded"
                             :rules="rules"
                             show-size
@@ -913,6 +921,7 @@
                           <v-text-field
                             v-model="editedRItem.brainAuthorName"
                             clearable
+                            :rules="rule"
                             label="Ham mualliflar F.I.SH"
                             persistent-hint
                             required>
@@ -972,6 +981,7 @@
                           <v-file-input
                             v-if="!editedRItem.brainUploaded"
                             :rules="rules"
+                            accept=".docx, .doc, .png"
                             v-model="editedRItem.brainUploaded"
                             show-size
                             label="Maqola yuklash">
@@ -1114,6 +1124,7 @@
                           <v-text-field
                             v-model="editedMItem.brainAuthorName"
                             clearable
+                            :rules="rule"
                             label="Ham mualliflar F.I.SH"
                             persistent-hint
                             required>
@@ -1173,6 +1184,7 @@
                           <v-file-input
                             v-if="!editedMItem.brainUploaded"
                             :rules="rules"
+                            accept=".docx, .doc, .png"
                             v-model="editedMItem.brainUploaded"
                             show-size
                             label="Maqola yuklash">
@@ -1316,6 +1328,7 @@
                           <v-text-field
                             v-model="editedAItem.brainAuthorName"
                             clearable
+                            :rules="rule"
                             label="Ham mualliflar F.I.SH"
                             persistent-hint
                             required>
@@ -1375,6 +1388,7 @@
                           <v-file-input
                             v-if="!editedAItem.brainUploaded"
                             :rules="rules"
+                            accept=".docx, .doc, .png"
                             v-model="editedAItem.brainUploaded"
                             show-size
                             label="Maqola yuklash">
@@ -1501,8 +1515,15 @@ export default {
       overlay: false,
       rules: [
         value => {
-          if (value) return true
-          return 'Qator bo`sh bo`lmasligi kerak.'
+          if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+          else if (value.length === 0) return 'Qator bo`sh bo`lmasligi kerak.'
+          return true
+        },
+      ],
+      rule: [
+        value => {
+          if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+          return true
         },
       ],
       snackF: false,

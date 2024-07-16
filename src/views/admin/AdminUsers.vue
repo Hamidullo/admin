@@ -174,23 +174,18 @@
       </v-label>
       <v-row class="mt-1">
         <v-col  cols="3">
-          <v-btn class="w-100">
+          <v-btn @click="download11" class="w-100">
             1.1
           </v-btn>
         </v-col>
         <v-col  cols="3">
-          <v-btn class="w-100">
+          <v-btn @click="download12"  class="w-100">
             1.2
           </v-btn>
         </v-col>
         <v-col  cols="3">
-          <v-btn class="w-100">
+          <v-btn @click="download13"  class="w-100">
             1.3
-          </v-btn>
-        </v-col>
-        <v-col  cols="3">
-          <v-btn class="w-100">
-            1.4
           </v-btn>
         </v-col>
       </v-row>
@@ -200,21 +195,21 @@
       </v-label>
       <v-row class="mt-1">
         <v-col  cols="3">
-          <v-btn class="w-100">
+          <v-btn @click="download21"  class="w-100">
             2.1
           </v-btn>
         </v-col>
         <v-col  cols="3">
-          <v-btn class="w-100">
+          <v-btn @click="download22"  class="w-100">
             2.2
           </v-btn>
         </v-col>
-        <v-col  cols="3">
+        <v-col @click="download23"   cols="3">
           <v-btn class="w-100">
             2.3
           </v-btn>
         </v-col>
-        <v-col  cols="3">
+        <v-col  @click="download24"  cols="3">
           <v-btn class="w-100">
             2.4
           </v-btn>
@@ -226,37 +221,37 @@
       </v-label>
       <v-row class="mt-1">
         <v-col  cols="3">
-          <v-btn class="w-100">
+          <v-btn @click="download31"  class="w-100">
             3.1
           </v-btn>
         </v-col>
         <v-col  cols="3">
-          <v-btn class="w-100">
+          <v-btn @click="download32"  class="w-100">
             3.2
           </v-btn>
         </v-col>
         <v-col  cols="3">
-          <v-btn class="w-100">
+          <v-btn @click="download33" class="w-100">
             3.3
           </v-btn>
         </v-col>
         <v-col  cols="3">
-          <v-btn class="w-100">
+          <v-btn @click="download34" class="w-100">
             3.4
           </v-btn>
         </v-col>
         <v-col  cols="4">
-          <v-btn class="w-100">
+          <v-btn @click="download35" class="w-100">
             3.5
           </v-btn>
         </v-col>
         <v-col  cols="4">
-          <v-btn class="w-100">
+          <v-btn @click="download36" class="w-100">
             3.6
           </v-btn>
         </v-col>
         <v-col  cols="4">
-          <v-btn class="w-100">
+          <v-btn @click="download37" class="w-100">
             3.7
           </v-btn>
         </v-col>
@@ -267,26 +262,26 @@
       </v-label>
       <v-row class="mt-1">
         <v-col  cols="2.5">
-          <v-btn class="w-100">
+          <v-btn @click="download41" class="w-100">
             4.1
           </v-btn>
         </v-col>
-        <v-col  cols="2.5">
+        <v-col   @click="download42" cols="2.5">
           <v-btn class="w-100">
             4.2
           </v-btn>
         </v-col>
-        <v-col  cols="2.5">
+        <v-col  @click="download43"  cols="2.5">
           <v-btn class="w-100">
             4.3
           </v-btn>
         </v-col>
-        <v-col  cols="2.5">
+        <v-col  @click="download44"  cols="2.5">
           <v-btn class="w-100">
             4.4
           </v-btn>
         </v-col>
-        <v-col  cols="2.5">
+        <v-col  @click="download45"  cols="2.5">
           <v-btn class="w-100">
             4.5
           </v-btn>
@@ -298,32 +293,32 @@
       </v-label>
       <v-row class="mt-1">
         <v-col  cols="2">
-          <v-btn class="w-100">
+          <v-btn  @click="download51" class="w-100">
             5.1
           </v-btn>
         </v-col>
         <v-col  cols="2">
-          <v-btn class="w-100">
+          <v-btn  @click="download52" class="w-100">
             5.2
           </v-btn>
         </v-col>
         <v-col  cols="2">
-          <v-btn class="w-100">
+          <v-btn  @click="download53" class="w-100">
             5.3
           </v-btn>
         </v-col>
         <v-col  cols="2">
-          <v-btn class="w-100">
+          <v-btn  @click="download54" class="w-100">
             5.4
           </v-btn>
         </v-col>
         <v-col  cols="2">
-          <v-btn class="w-100">
+          <v-btn  @click="download55" class="w-100">
             5.5
           </v-btn>
         </v-col>
         <v-col  cols="2">
-          <v-btn class="w-100">
+          <v-btn  @click="download56" class="w-100">
             5.6
           </v-btn>
         </v-col>
@@ -334,12 +329,12 @@
       </v-label>
       <v-row class="mt-1">
         <v-col  cols="6">
-          <v-btn class="w-100">
+          <v-btn  @click="download61" class="w-100">
             6.1
           </v-btn>
         </v-col>
         <v-col  cols="6">
-          <v-btn class="w-100">
+          <v-btn  @click="download62" class="w-100">
             6.2
           </v-btn>
         </v-col>
@@ -350,12 +345,12 @@
       </v-label>
       <v-row class="mt-1">
         <v-col  cols="6">
-          <v-btn class="w-100">
+          <v-btn  @click="download71" class="w-100">
             7.1
           </v-btn>
         </v-col>
         <v-col  cols="6">
-          <v-btn class="w-100">
+          <v-btn  @click="download81"  class="w-100">
             7.2
           </v-btn>
         </v-col>
@@ -568,6 +563,126 @@ export default {
           });
       }
       this.close()
+    },
+
+    download11() {
+      var url = url.baseURL + "/api/exports/academics1";
+      window.open(url, 'download');
+    },
+    download12() {
+      var url = url.baseURL + "/api/exports/academics2";
+      window.open(url, 'download');
+    },
+    download13() {
+      var url = url.baseURL + "/api/exports/academics3";
+      window.open(url, 'download');
+    },
+
+    download21() {
+      var url = url.baseURL + "/api/exports/work1";
+      window.open(url, 'download');
+    },
+    download22() {
+      var url = url.baseURL + "/api/exports/work2";
+      window.open(url, 'download');
+    },
+    download23() {
+      var url = url.baseURL + "/api/exports/work3";
+      window.open(url, 'download');
+    },
+    download24() {
+      var url = url.baseURL + "/api/exports/work4";
+      window.open(url, 'download');
+    },
+
+    download31() {
+      var url = url.baseURL + "/api/exports/brains1";
+      window.open(url, 'download');
+    },
+    download32() {
+      var url = url.baseURL + "/api/exports/brains2";
+      window.open(url, 'download');
+    },
+    download33() {
+      var url = url.baseURL + "/api/exports/brains3";
+      window.open(url, 'download');
+    },
+    download34() {
+      var url = url.baseURL + "/api/exports/brains4";
+      window.open(url, 'download');
+    },
+    download35() {
+      var url = url.baseURL + "/api/exports/brains5";
+      window.open(url, 'download');
+    },
+    download36() {
+      var url = url.baseURL + "/api/exports/brains6";
+      window.open(url, 'download');
+    },
+    download37() {
+      var url = url.baseURL + "/api/exports/brains7";
+      window.open(url, 'download');
+    },
+
+    download41() {
+      var url = url.baseURL + "/api/exports/projects1";
+      window.open(url, 'download');
+    },
+    download42() {
+      var url = url.baseURL + "/api/exports/projects2";
+      window.open(url, 'download');
+    },
+    download43() {
+      var url = url.baseURL + "/api/exports/projects3";
+      window.open(url, 'download');
+    },
+    download44() {
+      var url = url.baseURL + "/api/exports/projects4";
+      window.open(url, 'download');
+    },
+
+    download51() {
+      var url = url.baseURL + "/api/exports/inventions1";
+      window.open(url, 'download');
+    },
+    download52() {
+      var url = url.baseURL + "/api/exports/inventions2";
+      window.open(url, 'download');
+    },
+    download53() {
+      var url = url.baseURL + "/api/exports/inventions3";
+      window.open(url, 'download');
+    },
+    download54() {
+      var url = url.baseURL + "/api/exports/inventions4";
+      window.open(url, 'download');
+    },
+    download55() {
+      var url = url.baseURL + "/api/exports/inventions5";
+      window.open(url, 'download');
+    },
+    download56() {
+      var url = url.baseURL + "/api/exports/inventions6";
+      window.open(url, 'download');
+    },
+
+    download61() {
+      var url = url.baseURL + "/api/exports/internationals1";
+      window.open(url, 'download');
+    },
+    download62() {
+      var url = url.baseURL + "/api/exports/internationals2";
+      window.open(url, 'download');
+    },
+
+    download81() {
+      var url = url.baseURL + "/api/exports/achievements";
+      window.open(url, 'download');
+    },
+
+    download71() {
+      var url = url.baseURL + "/api/exports/teachers";
+      window.open(url, 'download');
     },
   },
 

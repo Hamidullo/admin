@@ -101,6 +101,7 @@
                         <v-file-input
                         :rules="rules"
                           v-if="!editedItem.projectDoc"
+                        accept=".docx, .doc, .png"
                           v-model="editedItem.projectDoc"
                           show-size
                           label="Chek yuklash">
@@ -278,6 +279,7 @@
                         <v-file-input
                           v-if="!editedMItem.projectDoc"
                           :rules="rules"
+                          accept=".docx, .doc, .png"
                           v-model="editedMItem.projectDoc"
                           show-size
                           label="Chek yuklash">
@@ -455,6 +457,7 @@
                           <v-file-input
                             v-if="!editedYItem.projectDoc"
                             :rules="rules"
+                            accept=".docx, .doc, .png"
                             v-model="editedYItem.projectDoc"
                             show-size
                             label="Chek yuklash">
@@ -633,6 +636,7 @@
                           <v-file-input
                           :rules="rules"
                             v-if="!editedNItem.projectDoc"
+                          accept=".docx, .doc, .png"
                             v-model="editedNItem.projectDoc"
                             show-size
                             label="Darslik yuklash">
@@ -797,6 +801,7 @@
                           <v-file-input
                             v-if="!editedAItem.projectDoc"
                             :rules="rules"
+                            accept=".docx, .doc, .png"
                             v-model="editedAItem.projectDoc"
                             show-size
                             label="Chek yuklash">
@@ -923,10 +928,17 @@ export default {
       overlay: false,
       rules: [
           value => {
-            if (value) return true
-            return 'Qator bo`sh bo`lmasligi kerak.'
+            if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+            else if (value.length === 0) return 'Qator bo`sh bo`lmasligi kerak.'
+            return true
           },
         ],
+      rule: [
+        value => {
+          if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+          return true
+        },
+      ],
       snackF: false,
       snackS: false,
       snackD: false,

@@ -48,6 +48,7 @@
                       <v-text-field
                         label="Ham mualliflar F.I.SH"
                         v-model="editedItem.workAuthorName"
+                        :rules="rule"
                         clearable
                         persistent-hint>
                       </v-text-field>
@@ -89,6 +90,7 @@
                       cols="12">
                       <v-file-input
                         v-if="!editedItem.workDownload"
+                        accept=".docx, .doc, .png"
                         v-model="editedItem.workDownload"
                         show-size
                         :rules="rules"
@@ -218,6 +220,7 @@
                         <v-text-field
                           label="Ham mualliflar F.I.SH"
                           v-model="editedQItem.workAuthorName"
+                          :rules="rule"
                           clearable
                           persistent-hint>
                         </v-text-field>
@@ -259,6 +262,7 @@
                         cols="12">
                         <v-file-input
                           v-if="!editedQItem.workDownload"
+                          accept=".docx, .doc, .png"
                           v-model="editedQItem.workDownload"
                           :rules="rules"
                           show-size
@@ -387,6 +391,7 @@
                           <v-text-field
                             label="Ham mualliflar F.I.SH"
                             v-model="editedMItem.workAuthorName"
+                            :rules="rule"
                             clearable
                             persistent-hint>
                           </v-text-field>
@@ -428,6 +433,7 @@
                           cols="12">
                           <v-file-input
                             v-if="!editedMItem.workDownload"
+                            accept=".docx, .doc, .png"
                             v-model="editedMItem.workDownload"
                             show-size
                             :rules="rules"
@@ -556,6 +562,7 @@
                           <v-text-field
                             label="Ham mualliflar F.I.SH"
                             v-model="editedKItem.workAuthorName"
+                            :rules="rule"
                             clearable
                             persistent-hint>
                           </v-text-field>
@@ -599,6 +606,7 @@
                             show-size
                             :rules="rules"
                             v-if="!editedKItem.workDownload"
+                            accept=".docx, .doc, .png"
                             v-model="editedKItem.workDownload"
                             label="Uslubiy ko'rsatma yuklash">
                           </v-file-input>
@@ -725,8 +733,15 @@ export default {
       overlay: false,
       rules: [
         value => {
-          if (value) return true
-          return 'Qator bo`sh bo`lmasligi kerak.'
+          if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+          else if (value.length === 0) return 'Qator bo`sh bo`lmasligi kerak.'
+          return true
+        },
+      ],
+      rule: [
+        value => {
+          if (value.length > 255) return 'Qatorda simvollar soni juda ko`p'
+          return true
         },
       ],
       snackF: false,
