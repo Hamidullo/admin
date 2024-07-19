@@ -566,123 +566,123 @@ export default {
     },
 
     download11() {
-      var url = url.baseURL + "/api/exports/academics1";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/academics1";
+      window.open(urld, 'download');
     },
     download12() {
-      var url = url.baseURL + "/api/exports/academics2";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/academics2";
+      window.open(urld, 'download');
     },
     download13() {
-      var url = url.baseURL + "/api/exports/academics3";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/academics3";
+      window.open(urld, 'download');
     },
 
     download21() {
-      var url = url.baseURL + "/api/exports/work1";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/work1";
+      window.open(urld, 'download');
     },
     download22() {
-      var url = url.baseURL + "/api/exports/work2";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/work2";
+      window.open(urld, 'download');
     },
     download23() {
-      var url = url.baseURL + "/api/exports/work3";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/work3";
+      window.open(urld, 'download');
     },
     download24() {
-      var url = url.baseURL + "/api/exports/work4";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/work4";
+      window.open(urld, 'download');
     },
 
     download31() {
-      var url = url.baseURL + "/api/exports/brains1";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/brains1";
+      window.open(urld, 'download');
     },
     download32() {
-      var url = url.baseURL + "/api/exports/brains2";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/brains2";
+      window.open(urld, 'download');
     },
     download33() {
-      var url = url.baseURL + "/api/exports/brains3";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/brains3";
+      window.open(urld, 'download');
     },
     download34() {
-      var url = url.baseURL + "/api/exports/brains4";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/brains4";
+      window.open(urld, 'download');
     },
     download35() {
-      var url = url.baseURL + "/api/exports/brains5";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/brains5";
+      window.open(urld, 'download');
     },
     download36() {
-      var url = url.baseURL + "/api/exports/brains6";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/brains6";
+      window.open(urld, 'download');
     },
     download37() {
-      var url = url.baseURL + "/api/exports/brains7";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/brains7";
+      window.open(urld, 'download');
     },
 
     download41() {
-      var url = url.baseURL + "/api/exports/projects1";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/projects1";
+      window.open(urld, 'download');
     },
     download42() {
-      var url = url.baseURL + "/api/exports/projects2";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/projects2";
+      window.open(urld, 'download');
     },
     download43() {
-      var url = url.baseURL + "/api/exports/projects3";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/projects3";
+      window.open(urld, 'download');
     },
     download44() {
-      var url = url.baseURL + "/api/exports/projects4";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/projects4";
+      window.open(urld, 'download');
     },
 
     download51() {
-      var url = url.baseURL + "/api/exports/inventions1";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/inventions1";
+      window.open(urld, 'download');
     },
     download52() {
-      var url = url.baseURL + "/api/exports/inventions2";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/inventions2";
+      window.open(urld, 'download');
     },
     download53() {
-      var url = url.baseURL + "/api/exports/inventions3";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/inventions3";
+      window.open(urld, 'download');
     },
     download54() {
-      var url = url.baseURL + "/api/exports/inventions4";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/inventions4";
+      window.open(urld, 'download');
     },
     download55() {
-      var url = url.baseURL + "/api/exports/inventions5";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/inventions5";
+      window.open(urld, 'download');
     },
     download56() {
-      var url = url.baseURL + "/api/exports/inventions6";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/inventions6";
+      window.open(urld, 'download');
     },
 
     download61() {
-      var url = url.baseURL + "/api/exports/internationals1";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/internationals1";
+      window.open(urld, 'download');
     },
     download62() {
-      var url = url.baseURL + "/api/exports/internationals2";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/internationals2";
+      window.open(urld, 'download');
     },
 
     download81() {
-      var url = url.baseURL + "/api/exports/achievements";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/achievements";
+      window.open(urld, 'download');
     },
 
     download71() {
-      var url = url.baseURL + "/api/exports/teachers";
-      window.open(url, 'download');
+      var urld = url.baseURL + "/api/exports/teachers";
+      window.open(urld, 'download');
     },
   },
 
